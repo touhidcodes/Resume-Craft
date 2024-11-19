@@ -5,7 +5,11 @@ type TLayoutProps = {
 };
 
 const Layout = ({ children }: TLayoutProps) => {
-  return <section className="max-w-[1170px] mx-auto py-28">{children}</section>;
+  return (
+    <section className="py-[60px] lg:py-[90px]">
+      <div className="max-w-[1170px] mx-auto px-5 xl:px-0">{children}</div>
+    </section>
+  );
 };
 
 export default Layout;

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   return (
     <>
-      <h1>Nav</h1>
+      <div className="h-20">Nav</div>
       <Outlet />
 
       <h1>footer</h1>
