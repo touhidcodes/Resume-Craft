@@ -35,13 +35,13 @@ const Header = () => {
                 <span className="bg-green-100 text-green-600 inline-block text-3xl px-2 py-1">
                   39%
                 </span>
-                <h4>more likely to get hired</h4>
+                <h4 className="text-muted">more likely to get hired</h4>
               </div>
               <div className="space-y-3 border-l pl-4">
                 <span className="bg-yellow-100 text-yellow-600 inline-block text-3xl px-2 py-1">
                   8%
                 </span>
-                <h4>better pay with your next job</h4>
+                <h4 className="text-muted">better pay with your next job</h4>
               </div>
             </div>
           </div>
@@ -105,13 +105,13 @@ const Header = () => {
             <span className="bg-green-100 text-green-600 inline-block text-3xl px-2 py-1">
               39%
             </span>
-            <h4>more likely to get hired</h4>
+            <h4 className="text-muted">more likely to get hired</h4>
           </div>
           <div className="space-y-3 border-l pl-4">
             <span className="bg-yellow-100 text-yellow-600 inline-block text-3xl px-2 py-1">
               8%
             </span>
-            <h4>better pay with your next job</h4>
+            <h4 className="text-muted">better pay with your next job</h4>
           </div>
         </div>
       </div>
