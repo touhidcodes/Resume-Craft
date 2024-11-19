@@ -45,7 +45,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative md:mx-16 lg:mx-0">
             <img
               src={headerImg}
               alt="header image"
@@ -54,7 +54,7 @@ const Header = () => {
             <img
               src={imgOne}
               alt="header image"
-              className="absolute h-[440px] w-[312px] left-[20px] sm:left-[80px] md:left-[159px] top-[30px] "
+              className="absolute h-[440px] w-[312px] left-[10px] sm:left-[80px] md:left-[159px] top-[30px] "
             />
             <img
               src={imgEight}

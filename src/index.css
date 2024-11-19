@@ -6,4 +6,9 @@
   .text-muted {
     @apply text-neutral-500 font-medium;
   }
+
+  .scrollbar::-webkit-scrollbar {
+    display: none;
+    appearance: none;
+  }
 }
