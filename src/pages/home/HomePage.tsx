@@ -1,7 +1,9 @@
+import Header from "../../component/sections/Header";
+
 const HomePage = () => {
   return (
-    <div className="max-w-container mx-auto">
-      <h1> Home page </h1>
+    <div>
+      <Header />
     </div>
   );
 };
