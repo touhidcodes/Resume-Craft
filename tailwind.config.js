@@ -3,6 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+<<<<<<< HEAD
       colors: {
         primary: "#1976d2",
       },
@@ -24,5 +25,12 @@ export default {
     },
   },
 
+=======
+      maxWidth: {
+        container: "1170px",
+      },
+    },
+  },
+>>>>>>> dev
   plugins: [],
 };
