@@ -3,6 +3,7 @@ import App from "../App";
 import HomePage from "../pages/home/HomePage";
 import Login from "../pages/login/Login";
 import Singup from "../pages/singup/Singup";
+import About from "../pages/about/about";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Singup />,
+  },
+  {
+    path: "/about",
+    element: <About />,
   },
 ]);
 

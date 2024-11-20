@@ -4,10 +4,12 @@ import featureImage3 from "../../assets/images/seen.png";
 import teamImage from "../../assets/images/t.jpeg";
 import teamImage2 from "../../assets/images/t2.jpeg";
 import teamImage3 from "../../assets/images/t3.jpeg";
+import AboutUsSlider from "../../component/slider/AboutSlider";
 
 const About = () => {
   return (
     <div>
+      <AboutUsSlider />
       <div className="bg-gray-100 py-16">
         {/* Hero Section */}
         <section className="container mx-auto px-6 text-center md:text-left mb-16">
