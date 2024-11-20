@@ -1,13 +1,17 @@
 import About from "./components/About/About";
 import AboutUsSlider from "./components/AboutSlider/AboutSlider";
 
-const App = () => {
+import "./App.css";
+import MainLayout from "./component/layout/MainLayout";
+
+function App() {
   return (
-    <div>
+    <>
+      <MainLayout />
       <AboutUsSlider></AboutUsSlider>
       <About></About>
-    </div>
+    </>
   );
-};
+}
 
 export default App;

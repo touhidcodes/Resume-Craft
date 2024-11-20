@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
     "@mui/material": "^6.1.7",
     "@mui/styled-engine-sc": "^6.1.7",
     "@reduxjs/toolkit": "^2.3.0",
@@ -23,7 +24,8 @@
     "react-router-dom": "^6.28.0",
     "react-slick": "^0.30.2",
     "styled-components": "^6.1.13",
-    "swiper": "^11.1.15"
+    "swiper": "^11.1.15",
+    "sonner": "^1.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
