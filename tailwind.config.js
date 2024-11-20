@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}, './node_modules/swiper/**/*.js'",
+  ],
   theme: {
     extend: {
-<<<<<<< HEAD
       colors: {
         primary: "#1976d2",
       },
@@ -13,6 +15,9 @@ export default {
         md: "768px",
         lg: "1024px",
         xl: "1440px",
+      },
+      maxWidth: {
+        container: "1170px",
       },
     },
     keyframes: {
@@ -25,12 +30,5 @@ export default {
     },
   },
 
-=======
-      maxWidth: {
-        container: "1170px",
-      },
-    },
-  },
->>>>>>> dev
   plugins: [],
 };
