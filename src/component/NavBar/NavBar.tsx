@@ -25,17 +25,20 @@ const NavBar = () => {
   }, []);
   return (
     <nav
-      className={`bg-[#f8f8f8]  border-b  fixed w-full transition-all duration-300 ${
-        isScrolled ? "border-b border-gray-300 bg-red-200" : "border-none"
+      className={`bg-[#F7F9FC] font-roboto  border-b  z-[999]  top-0 fixed w-full transition-all duration-300 ${
+        isScrolled ? "border-b border-gray-300 bg-[#ffff]" : "border-none"
       }`}
     >
-      <div className="max-w-[1300px] flex  items-center justify-between mx-auto">
+      <div className="max-w-[1300px] flex  items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
-          <img
-            src="https://besnik-space.fra1.cdn.digitaloceanspaces.com/ezytor/theme/N8lApmzhKXbK5HA7kTpU1702703250.svg"
-            alt="logo"
-            className="md:cursor-pointer h-9"
-          />
+          <Link to="/">
+            {" "}
+            <img
+              src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+              alt="logo"
+              className="md:cursor-pointer h-[50px] w-[50px] bg-cover  object-contain"
+            />
+          </Link>
           <div
             className="text-3xl md:hidden cursor-pointer"
             onClick={() => setOpen(!open)}
@@ -53,35 +56,30 @@ const NavBar = () => {
                 <p className="py-3 px-2  rounded-[9px] hover:bg-[#EFEFEF]">
                   <Link
                     to="/Resume Create"
-                    className="block  text-black  rounded text-[18px] leaidng-[30px] font-semibold"
+                    className="  text-black  rounded text-[18px] leaidng-[30px] font-semibold flex flex-col"
                   >
                     Resume builder
+                    <small className="text-gray-500 font-normal">
+                      Create and format resumes with Ai editor
+                    </small>
                   </Link>
-                  <small className="text-gray-500">
-                    Create and format resumes with Ai editor
-                  </small>
                 </p>
                 <p className="py-3 px-2  rounded-[9px] hover:bg-[#EFEFEF]">
                   <Link
                     to="/Resume Create"
-                    className="block  text-black  rounded text-[18px] leaidng-[30px] font-semibold"
+                    className="text-black  rounded text-[18px] leaidng-[30px] font-semibold flex flex-col "
                   >
                     Resume samples
+                    <small className="text-gray-500 font-normal">
+                      Build job tailored resumes with samples
+                    </small>
                   </Link>
-                  <small className="text-gray-500">
-                    Build job tailored resumes with samples
-                  </small>
                 </p>
               </div>
             </li>
             <li>
-              <Link to="/AboutUs" className="py-7 px-3 inline-block">
+              <Link to="/about" className="py-7 px-3 inline-block">
                 About us
-              </Link>
-            </li>
-            <li>
-              <Link to="/contac" className="py-7 px-3 inline-block">
-                Contact
               </Link>
             </li>
 
@@ -91,7 +89,7 @@ const NavBar = () => {
           <div className="md:flex gap-x-2 hidden ">
             <Link to="/login">
               <button className=" border-[#6644D3] text-[#6644D3] hover:bg-[#6644D3] hover:text-white  px-6 w-36  py-2 border rounded-[9px] font-semibold">
-                LOG IN{" "}
+                Log in{" "}
               </button>
             </Link>
           </div>
@@ -113,15 +111,10 @@ const NavBar = () => {
               Resume Create
             </Link>
           </li>
+
           <li>
             {" "}
-            <Link to="/contac" className="py-3 px-3 inline-block">
-              Contact Us
-            </Link>
-          </li>
-          <li>
-            {" "}
-            <Link to="/AboutUs" className="py-3 px-3 inline-block">
+            <Link to="/about" className="py-3 px-3 inline-block">
               About us
             </Link>
           </li>
