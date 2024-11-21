@@ -25,11 +25,13 @@ const NavBar = () => {
   }, []);
   return (
     <nav
-      className={`bg-[#F7F9FC] font-roboto  border-b  z-[999]  top-0 fixed w-full transition-all duration-300 ${
-        isScrolled ? "border-b border-gray-300 bg-[#ffff]" : "border-none"
+      className={`z-[999] sticky top-0  w-full transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-gray-300 bg-white"
+          : "border-none bg-[#F7F9FC]"
       }`}
     >
-      <div className="max-w-[1300px] flex  items-center justify-between mx-auto px-2">
+      <div className="max-w-[1300px] flex items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <Link to="/">
             {" "}
@@ -80,6 +82,11 @@ const NavBar = () => {
             <li>
               <Link to="/about" className="py-7 px-3 inline-block">
                 About us
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard" className="py-7 px-3 inline-block">
+                Dashboard
               </Link>
             </li>
 
