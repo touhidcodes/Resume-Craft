@@ -16,6 +16,10 @@ export default {
       maxWidth: {
         container: "1170px",
       },
+
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"]
+      }
     },
     keyframes: {
       scroll: {

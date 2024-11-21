@@ -8,7 +8,7 @@ import WhyChooseUs from "../../component/sections/WhyChooseUs";
 
 const HomePage = () => {
   return (
-    <>
+    <div className="font-roboto">
       <Header />
       <SampleResume />
       <Features />
@@ -16,7 +16,7 @@ const HomePage = () => {
       <WhyChooseUs />
       <ResumeBuilderBanner />
       <FAQ />
-    </>
+    </div>
   );
 };
 

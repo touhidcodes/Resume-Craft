@@ -27,7 +27,7 @@ const ResumeBuilderBanner = () => {
             />
           </div>
           <div className="lg:col-span-5">
-            <h2 className="text-3xl lg:text-5xl font-bold">
+            <h2 className="text-3xl lg:text-[46px] leading-[58px] font-bold">
               Try our professional Resume builder now!
             </h2>
             <p className="mt-7">

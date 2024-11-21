@@ -11,7 +11,7 @@ import headerImg from "../../assets/header-img/header-img.webp";
 
 const Header = () => {
   return (
-    <div className="bg-[#F7F9FC] min-h-[calc(100svh_-_80px)] flex flex-col justify-center items-center">
+    <div className="bg-[#F7F9FC] flex h-[600px] flex-col justify-center items-center ">
       <div className="max-w-[1170px] mx-auto px-5 xl:px-0 sm:py-10 md:py-0 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-5">
           <div>

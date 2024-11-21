@@ -1,4 +1,4 @@
-import { Divider, Icon } from "@mui/material";
+import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -34,14 +34,16 @@ const Singup = () => {
 
   return (
     <section className="py-[60px]">
-      <div className="max-w-[1240px] mx-auto px-5 ">
+      <div className="max-w-[1240px] mx-auto px-5  font-roboto">
         <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">
-            <img
-              src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
-              className="img-fluid rounded-top mb-2 w-[45px] h-[45px] ml-2"
-              alt=""
-            />
+            <Link to="/">
+              <img
+                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                className="rounded-top mb-2 w-[45px] h-[45px] ml-2"
+                alt=""
+              />
+            </Link>
 
             <h2 className="text-[30px] xl:text-4xl font-bold mb-4 text-[#0B0D58] text-center">
               {" "}
