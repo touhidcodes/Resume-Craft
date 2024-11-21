@@ -25,11 +25,13 @@ const NavBar = () => {
   }, []);
   return (
     <nav
-      className={`bg-[#f8f8f8]  border-b  fixed w-full transition-all duration-300 ${
-        isScrolled ? "border-b border-gray-300 bg-red-200" : "border-none"
+      className={`border-b sticky top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-gray-300 backdrop-blur"
+          : "border-none bg-white"
       }`}
     >
-      <div className="max-w-[1300px] flex  items-center justify-between mx-auto">
+      <div className="max-w-container px-5 xl:px-0 flex items-center justify-between mx-auto">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <img
             src="https://besnik-space.fra1.cdn.digitaloceanspaces.com/ezytor/theme/N8lApmzhKXbK5HA7kTpU1702703250.svg"
