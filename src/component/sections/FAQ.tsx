@@ -58,7 +58,6 @@ const FAQ = () => {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
-          s
         >
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography sx={{ fontSize: "18px" }}>
