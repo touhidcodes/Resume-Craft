@@ -10,7 +10,7 @@ const About = () => {
   return (
     <div>
       <AboutUsSlider />
-      <div className="bg-gray-100 py-16">
+      <div className="bg-gray-100 py-16 font-roboto">
         {/* Hero Section */}
         <section className="container mx-auto px-6 text-center md:text-left mb-16">
           <h1 className="text-4xl md:text-6xl font-bold text-center text-[#003366] leading-snug mb-4">
@@ -67,7 +67,7 @@ const About = () => {
         </section>
       </div>
 
-      <div className="bg-gradient-to-b from-blue-50 to-gray-100 py-16 px-6 md:px-12 lg:px-24">
+      <div className="bg-gradient-to-b from-blue-50 to-gray-100 py-16 lg:py-[90px] px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           {/* Heading */}
           <div className="text-center mb-12">
@@ -117,7 +117,7 @@ const About = () => {
       <div className="bg-gray-50 text-gray-800">
         {/* Our Team Section */}
 
-        <section className="py-16 my-10 ">
+        <section className="py-[60px] lg:py-[90px]  ">
           <div className="container mx-auto px-6 md:px-12 lg:px-20">
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#003366] text-center mb-12">
               Meet Our Team
@@ -179,7 +179,7 @@ const About = () => {
           </div>
         </section>
 
-        <section className="relative bg-gradient-to-br from-indigo-600 to-purple-500 text-white py-16 md:py-20 lg:py-24">
+        <section className="relative bg-gradient-to-br from-indigo-600 to-purple-500 text-white py-16 md:py-20 lg:py-[90px]">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Empowering Careers, One Resume at a Time

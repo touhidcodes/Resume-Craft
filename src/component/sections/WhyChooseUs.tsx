@@ -30,7 +30,7 @@ const data = [
 const WhyChooseUs = () => {
   return (
     <Layout>
-      <h1 className="text-3xl md:text-5xl font-bold text-center">
+      <h1 className="text-3xl md:text-[48px] leading-[58px] font-bold text-center max-w-[550px] mx-auto">
         Why build my resume with Resume Craft?
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
