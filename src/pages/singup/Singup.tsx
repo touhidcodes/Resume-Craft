@@ -29,7 +29,7 @@ const Singup = () => {
   const onSubmit = async (data: FieldValues) => {
     const res = await login(data);
     console.log(res);
-    const toastId = toast.success("Logging in");
+    toast.success("Logging in");
   };
 
   return (

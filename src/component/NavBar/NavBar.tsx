@@ -32,12 +32,16 @@ const NavBar = () => {
       <div className="max-w-[1300px] flex  items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <Link to="/">
-            {" "}
-            <img
-              src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
-              alt="logo"
-              className="md:cursor-pointer h-[50px] w-[50px] bg-cover  object-contain"
-            />
+            <div className=" flex items-center justify-center">
+              <img
+                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                alt="logo"
+                className="md:cursor-pointer h-[50px] w-[50px] bg-cover  object-contain"
+              />
+              <h1 className="ml-5 text-3xl font-medium">
+                Resume <span className="text-[#45C4F3]">Craft</span>
+              </h1>
+            </div>
           </Link>
           <div
             className="text-3xl md:hidden cursor-pointer"
