@@ -1,4 +1,4 @@
-import { Divider, Icon } from "@mui/material";
+import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const Login = () => {
   const onSubmit = async (data: FieldValues) => {
     const res = await login(data);
     console.log(res);
-    const toastId = toast.success("Logging in");
+    toast.success("Logging in");
   };
 
   return (
