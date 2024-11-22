@@ -48,8 +48,10 @@ const TrustedCompanies = () => {
           <div className="h-full w-32 bg-white to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_right,black,transparent)]"></div>
           <div className="h-full w-32 bg-white to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_left,black,transparent)]"></div>
         </div>
-        <Companies />
-        <Companies />
+        <div className="flex items-center gap-x-16">
+          <Companies />
+          <Companies />
+        </div>
       </div>
     </Layout>
   );
@@ -57,7 +59,7 @@ const TrustedCompanies = () => {
 
 const Companies = () => {
   return (
-    <div className="flex items-center gap-x-10 md:gap-x-16 flex-nowrap min-w-fit pr-16 overflow-x-auto animate-scroll scrollbar">
+    <div className="flex items-center gap-x-16 flex-nowrap min-w-fit overflow-x-auto animate-scroll scrollbar">
       {trustedCompanies.map((company, index) => (
         <div key={index * company.id} className="shrink-0">
           <img
