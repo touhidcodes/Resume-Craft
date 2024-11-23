@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import "./index.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import AuthProvider from "./providor/authProvidor.tsx";
 
 const theme = createTheme({
   breakpoints: {
@@ -22,12 +23,14 @@ const theme = createTheme({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-        <Toaster />
-      </Provider>
-      <CssBaseline />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+          <Toaster />
+        </Provider>
+        <CssBaseline />
+      </ThemeProvider>
+    </AuthProvider>
   </StrictMode>
 );

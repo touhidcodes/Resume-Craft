@@ -5,7 +5,7 @@ import { Close, KeyboardArrowDown } from "@mui/icons-material";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  let role = "admin";
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -89,7 +89,10 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/dashboard" className="py-7 px-3 inline-block">
+              <Link
+                to={`/${role}/dashboard`}
+                className="py-7 px-3 inline-block"
+              >
                 Dashboard
               </Link>
             </li>

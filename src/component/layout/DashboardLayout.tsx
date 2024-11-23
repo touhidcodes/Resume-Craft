@@ -17,8 +17,9 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import SideBar from "./SideBar";
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -160,10 +161,13 @@ const DashboardLayout = () => {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <SideBar open={open} />
+        <Divider />
         <List>
-          {["Dashboard", "All Template", "Add Template", "User Management"].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+          {["All mail", "Trash", "Spam"].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <Link to={`/login`}>
+                {" "}
                 <ListItemButton
                   sx={[
                     {
@@ -209,59 +213,7 @@ const DashboardLayout = () => {
                     ]}
                   />
                 </ListItemButton>
-              </ListItem>
-            )
-          )}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: "initial",
-                      }
-                    : {
-                        justifyContent: "center",
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: "center",
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: "auto",
-                        },
-                  ]}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
+              </Link>
             </ListItem>
           ))}
         </List>
