@@ -9,6 +9,13 @@
     @apply text-neutral-500 font-medium;
   }
 
+  .scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
   .scrollbar::-webkit-scrollbar {
     display: none;
     appearance: none;
