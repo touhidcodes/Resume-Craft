@@ -18,7 +18,7 @@ const Singup = () => {
     "Link resume with Indeed",
   ]);
   const [visible, setVisible] = useState(false);
-  const { googleSignIn}:any  = useContext(AuthContext);
+  const { googleSignIn }: any = useContext(AuthContext);
   const [login] = useLoginMutation();
   const {
     register,
@@ -40,7 +40,7 @@ const Singup = () => {
   const onSubmit = async (data: FieldValues) => {
     const res = await login(data);
     console.log(res);
-    // const toastId = toast.success("Logging in");
+    toast.success("Logging in");
   };
 
   return (

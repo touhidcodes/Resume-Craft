@@ -1,12 +1,17 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { app } from "../firebaseConfig";
-const auth = getAuth(app);
-export const AuthContext = createContext<unknown>(null);
+import { AuthContextType } from "../types";
 
-const googleProvider = new GoogleAuthProvider();
+const auth = getAuth(app);
+
+export const AuthContext = createContext<AuthContextType | null>(null);
+
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [loaidng, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
   const authinfo = {

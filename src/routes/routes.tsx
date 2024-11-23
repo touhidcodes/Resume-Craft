@@ -4,6 +4,12 @@ import App from "../App";
 import Login from "../pages/login/Login";
 import Singup from "../pages/singup/Singup";
 import About from "../pages/about/about";
+import DashboardLayout from "../component/layout/DashboardLayout";
+import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
+import UserDashboard from "../pages/dashboard/user/UserDashboard";
+import { routerGenerator } from "../utils/routesGeneroter";
+import { adminPath } from "./adminroute";
+import { userPath } from "./userroute";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +33,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Singup />,
+  },
+  {
+    path: "admin",
+    element: <DashboardLayout />,
+    children: routerGenerator(adminPath),
+  },
+  {
+    path: "user",
+    element: <DashboardLayout />,
+    children: routerGenerator(userPath),
   },
 ]);
 

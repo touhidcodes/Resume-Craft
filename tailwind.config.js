@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
       colors: {
         primary: "#1976d2",
       },
@@ -18,8 +21,8 @@ export default {
       },
 
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"]
-      }
+        roboto: ["Roboto", "sans-serif"],
+      },
     },
     keyframes: {
       scroll: {

@@ -5,7 +5,7 @@ import { Close, KeyboardArrowDown } from "@mui/icons-material";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  let role = "admin";
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -25,19 +25,25 @@ const NavBar = () => {
   }, []);
   return (
     <nav
-      className={`bg-[#F7F9FC] font-roboto  border-b  z-[999]  top-0 fixed w-full transition-all duration-300 ${
-        isScrolled ? "border-b border-gray-300 bg-[#ffff]" : "border-none"
+      className={`z-[999] sticky top-0  w-full transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-gray-300 bg-white"
+          : "border-none bg-[#F7F9FC]"
       }`}
     >
-      <div className="max-w-[1300px] flex  items-center justify-between mx-auto px-2">
+      <div className="max-w-[1300px] flex items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <Link to="/">
-            {" "}
-            <img
-              src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
-              alt="logo"
-              className="md:cursor-pointer h-[50px] w-[50px] bg-cover  object-contain"
-            />
+            <div className=" flex items-center justify-center">
+              <img
+                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                alt="logo"
+                className="md:cursor-pointer size-12 bg-cover  object-contain"
+              />
+              <h1 className="ml-5 text-2xl font-medium md:hidden lg:block">
+                Resume <span className="text-[#45C4F3]">Craft</span>
+              </h1>
+            </div>
           </Link>
           <div
             className="text-3xl md:hidden cursor-pointer"
@@ -80,6 +86,14 @@ const NavBar = () => {
             <li>
               <Link to="/about" className="py-7 px-3 inline-block">
                 About us
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={`/${role}/dashboard`}
+                className="py-7 px-3 inline-block"
+              >
+                Dashboard
               </Link>
             </li>
 
