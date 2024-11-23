@@ -1,10 +1,11 @@
 import { Divider } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { AuthContext } from "../../providor/authProvidor";
 
 const Singup = () => {
   const [statics] = useState([
@@ -17,7 +18,7 @@ const Singup = () => {
     "Link resume with Indeed",
   ]);
   const [visible, setVisible] = useState(false);
-
+  const { googleSignIn}:any  = useContext(AuthContext);
   const [login] = useLoginMutation();
   const {
     register,
@@ -26,10 +27,20 @@ const Singup = () => {
     formState: { errors },
   } = useForm();
 
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result: any) => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      console.log(userInfo);
+    });
+  };
+
   const onSubmit = async (data: FieldValues) => {
     const res = await login(data);
     console.log(res);
-    const toastId = toast.success("Logging in");
+    // const toastId = toast.success("Logging in");
   };
 
   return (
@@ -53,7 +64,10 @@ const Singup = () => {
               You may use Socail logins for more-fuild experience
             </p>
             <div className="flex justify-center  mb-5">
-              <button className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]">
+              <button
+                onClick={handleGoogleSignIn}
+                className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
+              >
                 <span>
                   <svg
                     width="20"
