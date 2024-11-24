@@ -1,17 +1,8 @@
 import { Button } from "@mui/material";
 import resumeTemplate from "../../../assets/resume-template-img/resume-templates.jpg";
-import { MouseEvent, useState } from "react";
 import ResumeActionButton from "./ResumeActionButton";
 
 const UserResumes = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <div>
       <div className="flex items-center justify-between">

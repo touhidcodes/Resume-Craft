@@ -12,6 +12,8 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import SideBar from "./SideBar";
+import { Button } from "@mui/material";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const drawerWidth = 220;
 
@@ -134,9 +136,17 @@ const DashboardLayout = () => {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap component="div">
-            Resume Craft
-          </Typography> */}
+          <div className="w-full flex items-center justify-between">
+            <Typography variant="h6" noWrap fontSize={17}>
+              My Dashboard
+            </Typography>
+            <div className="hidden sm:flex items-center gap-x-8">
+              <NotificationsNoneIcon fontSize="medium" />
+              <Button variant="contained" size="small">
+                Create New
+              </Button>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
