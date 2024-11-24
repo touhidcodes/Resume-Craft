@@ -20,6 +20,11 @@ const theme = createTheme({
       xl: 1440,
     },
   },
+  palette: {
+    primary: {
+      main: "#1222FE",
+    },
+  },
 });
 
 createRoot(document.getElementById("root")!).render(
