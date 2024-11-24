@@ -4,6 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Close, KeyboardArrowDown } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
+import { Button } from "@mui/material";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -98,36 +99,19 @@ const NavBar = () => {
                 About us
               </Link>
             </li>
-            <li>
-              {user ? (
-                <Link
-                  to={`/${role}/dashboard`}
-                  className="py-7 px-3 inline-block"
-                >
-                  Dashboard
-                </Link>
-              ) : (
-                ""
-              )}
-            </li>
 
             {/* <NavLinks /> */}
           </ul>
           <div className="w-[1px] h-6 bg-[#EEEEEE]"></div>
           <div className="md:flex gap-x-2 hidden ">
             {user ? (
-              <button
-                onClick={handeLogout}
-                className=" border-[#6644D3] text-[#6644D3] hover:bg-[#6644D3] hover:text-white  px-6 w-36  py-2 border rounded-[9px] font-semibold"
-              >
-                Log Out{" "}
-              </button>
+              <Button variant="contained" size="large">
+                <Link to={`/${role}/dashboard`}>Dashboard</Link>
+              </Button>
             ) : (
-              <Link to="/login">
-                <button className=" border-[#6644D3] text-[#6644D3] hover:bg-[#6644D3] hover:text-white  px-6 w-36  py-2 border rounded-[9px] font-semibold">
-                  Log in{" "}
-                </button>
-              </Link>
+              <Button variant="contained" size="large">
+                <Link to="/login">Login</Link>
+              </Button>
             )}
           </div>
         </div>

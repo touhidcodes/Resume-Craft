@@ -9,6 +9,10 @@
     @apply text-neutral-500 font-medium;
   }
 
+  .custom-border {
+    @apply border border-x-neutral-200;
+  }
+
   .scrollbar {
     -ms-overflow-style: none;
     /* IE and Edge */
