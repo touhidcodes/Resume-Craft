@@ -1,10 +1,13 @@
 import { Divider } from "@mui/material";
 import { useContext, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useLoginMutation } from "../../redux/features/auth/authApi";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  useLoginMutation,
+  useSingupMutation,
+} from "../../redux/features/auth/authApi";
+import { Password, Visibility, VisibilityOff } from "@mui/icons-material";
 import { AuthContext } from "../../providor/authProvidor";
 
 const Singup = () => {
@@ -19,7 +22,8 @@ const Singup = () => {
   ]);
   const [visible, setVisible] = useState(false);
   const { googleSignIn }: any = useContext(AuthContext);
-  const [login] = useLoginMutation();
+  const [singup] = useSingupMutation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -38,9 +42,24 @@ const Singup = () => {
   };
 
   const onSubmit = async (data: FieldValues) => {
-    const res = await login(data);
-    console.log(res);
-    toast.success("Logging in");
+    const toastId = toast.loading("singup");
+
+    try {
+      const userData = {
+        userName: "cheaksss",
+        email: data?.email,
+        password: data?.password,
+      };
+      console.log(userData);
+      const res = await singup(userData).unwrap();
+      console.log(res);
+
+      toast.success("singup successfully", { id: toastId, duration: 2000 });
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   return (

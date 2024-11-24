@@ -2,11 +2,20 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close, KeyboardArrowDown } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
+
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  let role = "admin";
+  const user = useAppSelector(userCurrentUser);
+  const dispatch = useAppDispatch();
+  let role = user?.role;
+
+  const handeLogout = () => {
+    dispatch(logout());
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -90,23 +99,36 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to={`/${role}/dashboard`}
-                className="py-7 px-3 inline-block"
-              >
-                Dashboard
-              </Link>
+              {user ? (
+                <Link
+                  to={`/${role}/dashboard`}
+                  className="py-7 px-3 inline-block"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                ""
+              )}
             </li>
 
             {/* <NavLinks /> */}
           </ul>
           <div className="w-[1px] h-6 bg-[#EEEEEE]"></div>
           <div className="md:flex gap-x-2 hidden ">
-            <Link to="/login">
-              <Button variant="contained" size="large">
-                Login
-              </Button>
-            </Link>
+            {user ? (
+              <button
+                onClick={handeLogout}
+                className=" border-[#6644D3] text-[#6644D3] hover:bg-[#6644D3] hover:text-white  px-6 w-36  py-2 border rounded-[9px] font-semibold"
+              >
+                Log Out{" "}
+              </button>
+            ) : (
+              <Link to="/login">
+                <button className=" border-[#6644D3] text-[#6644D3] hover:bg-[#6644D3] hover:text-white  px-6 w-36  py-2 border rounded-[9px] font-semibold">
+                  Log in{" "}
+                </button>
+              </Link>
+            )}
           </div>
         </div>
         {/* Mobile nav */}
@@ -117,7 +139,7 @@ const NavBar = () => {
       `}
         >
           <img
-            src="https://besnik-space.fra1.cdn.digitaloceanspaces.com/ezytor/theme/N8lApmzhKXbK5HA7kTpU1702703250.svg"
+            src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
             alt="logo"
             className="md:cursor-pointer h-9"
           />

@@ -10,6 +10,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import { adminPath } from "../../routes/adminroute";
 import { userPath } from "../../routes/userroute";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
+import { userCurrentUser } from "../../redux/features/auth/authSlice";
 
 type Open = {
   open: boolean;
@@ -17,13 +19,13 @@ type Open = {
 
 const SideBar = ({ open }: Open) => {
   const userRole = {
-    ADMIN: "admin",
-    USER: " user",
+    ADMIN: "ADMIN",
+    USER: "USER",
   };
 
-  let user = "admin";
+  let user = useAppSelector(userCurrentUser);
   let sidebarItem;
-  switch (user) {
+  switch (user.role) {
     case userRole.ADMIN:
       sidebarItem = adminPath;
       break;
