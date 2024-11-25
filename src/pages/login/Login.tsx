@@ -1,11 +1,13 @@
 import { Divider } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useLoginMutation } from "../../redux/features/auth/authApi";
+import {
+  useGoogleSignInWithPopupMutation,
+  useLoginMutation,
+} from "../../redux/features/auth/authApi";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { AuthContext } from "../../providor/authProvidor";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
@@ -19,20 +21,26 @@ const Login = () => {
     "Free resume audits",
     "Link resume with Indeed",
   ]);
-  const { googleSignIn }: any = useContext(AuthContext);
+
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const handleGoogleSignIn = () => {
-    googleSignIn().then((result: any) => {
-      const userInfo = {
-        email: result.user?.email,
-        name: result.user?.displayName,
-      };
-      console.log(userInfo);
-    });
+  const [googleSign] = useGoogleSignInWithPopupMutation();
+
+  const handleGoogleSignIn = async () => {
+    const res = await googleSign(null);
+    console.log(res);
+
+    // googleSignIn().then((result: any) => {
+    //   const userInfo = {
+    //     email: result.user?.email,
+    //     name: result.user?.displayName,
+    //   };
+    //   console.log(userInfo);
+    // });
   };
+
   const [login] = useLoginMutation();
   const {
     register,

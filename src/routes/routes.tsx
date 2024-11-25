@@ -8,7 +8,7 @@ import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGeneroter";
 import { adminPath } from "./adminroute";
 import { userPath } from "./userroute";
-import Templateone from "../pages/Resume/Temple1/Templateone";
+import ResumeBuilderLayout from "../component/layout/ResumeBuilderLayout";
 
 const router = createBrowserRouter([
   {
@@ -23,15 +23,15 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+      {
+        path: "/resume-builder/*",
+        element: <ResumeBuilderLayout />,
+      },
     ],
   },
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/resume",
-    element: <Templateone></Templateone>,
   },
   {
     path: "/register",
