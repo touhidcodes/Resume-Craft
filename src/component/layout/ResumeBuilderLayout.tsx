@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import ResumeBuilderNavbar from "../NavBar/ResumeBuilderNavbar";
 import ResumeBuilderSidebar from "./ResumeBuilderSidebar";
+import CustomTemplate from "../../pages/Resume/Temple1/CustomTemplate";
 
 const Template1 = () => {
   return <div className="text-3xl mt-10">Template 1</div>;
@@ -9,17 +10,14 @@ const Template2 = () => {
   return <div className="text-3xl mt-10">Template 2</div>;
 };
 
-const CustomResume = () => {
-  return <div className="text-3xl mt-10">Custom Resume</div>;
-};
-
 const ResumeBuilderLayout = () => {
   return (
     <div className="max-w-[1170px] w-full mx-auto min-h-svh py-10 flex gap-5">
       <div className="flex-1">
+        <h1 className="text-3xl font-bold mb-10 text-center">My Resume</h1>
         <ResumeBuilderNavbar />
         <Routes>
-          <Route path="/custom" Component={CustomResume} />
+          <Route path="/custom" Component={CustomTemplate} />
           {[
             {
               id: `template-${Date.now()}`,

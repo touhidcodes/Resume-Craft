@@ -42,6 +42,7 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: routerGenerator(adminPath),
   },
+
   {
     path: "user",
     element: <DashboardLayout />,
