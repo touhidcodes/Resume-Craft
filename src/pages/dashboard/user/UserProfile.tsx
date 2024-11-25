@@ -1,5 +1,10 @@
+
 const UserProfile = () => {
-  return <div>This is user profile</div>;
+  return (
+    <div>
+      <h1>User Dashboard</h1>
+    </div>
+  );
 };
 
 export default UserProfile;
