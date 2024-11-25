@@ -8,6 +8,7 @@ import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGeneroter";
 import { adminPath } from "./adminroute";
 import { userPath } from "./userroute";
+import Templateone from "../pages/Resume/Temple1/Templateone";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/resume",
+    element: <Templateone></Templateone>,
+  },
+  {
     path: "/register",
     element: <Singup />,
   },
@@ -37,6 +42,7 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: routerGenerator(adminPath),
   },
+
   {
     path: "user",
     element: <DashboardLayout />,
