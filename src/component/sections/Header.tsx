@@ -26,7 +26,7 @@ const Header = () => {
               Only 2% of resumes win. Yours will be one of them. Let’s build you
               a resume that works.
             </h3>
-            <Button size="large" variant="contained">
+            <Button size="large" variant="contained" color="primary">
               Create My Resume
             </Button>
 
