@@ -32,10 +32,9 @@ const authApi = baseApi.injectEndpoints({
       queryFn: async () => {
         try {
           const userCredential = await signInWithPopup(auth, googleProvider);
-          console.log(userCredential);
           return { data: userCredential.user };
         } catch (error) {
-          return { error: error.message };
+          return { error: error?.message };
         }
       },
     }),

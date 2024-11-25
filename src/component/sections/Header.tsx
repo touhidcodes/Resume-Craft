@@ -27,7 +27,11 @@ const Header = () => {
               Only 2% of resumes win. Yours will be one of them. Let’s build you
               a resume that works.
             </h3>
-            <ChooseResumeTemplate size="large" label="Create New Resume" />
+            <ChooseResumeTemplate
+              variant="contained"
+              size="large"
+              label="Create New Resume"
+            />
 
             <div className="mt-20 hidden lg:flex items-start gap-x-8">
               <div className="space-y-3 border-l pl-4">

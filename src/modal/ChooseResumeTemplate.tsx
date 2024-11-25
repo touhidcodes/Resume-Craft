@@ -10,10 +10,14 @@ import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
 import ResumeTemplate from "../component/shared/ResumeTemplate";
 import AddIcon from "@mui/icons-material/Add";
+import { Link, useNavigate } from "react-router-dom";
 
 type TChooseResumeTemplateProps = {
-  size: "small" | "large" | "medium";
   label: string;
+  color?: "primary" | "secondary";
+  size: "small" | "large" | "medium";
+  variant: "text" | "outlined" | "contained";
+  startIcon?: JSX.Element;
 };
 
 const Transition = forwardRef(function Transition(
@@ -25,7 +29,14 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ChooseResumeTemplate = ({ size, label }: TChooseResumeTemplateProps) => {
+const ChooseResumeTemplate = ({
+  size,
+  label,
+  color = "primary",
+  variant = "contained",
+  startIcon: StartIcon,
+}: TChooseResumeTemplateProps) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -36,13 +47,19 @@ const ChooseResumeTemplate = ({ size, label }: TChooseResumeTemplateProps) => {
     setOpen(false);
   };
 
+  const handleNavigate = (path: string) => {
+    handleClose();
+    navigate(path);
+  };
+
   return (
     <>
       <Button
         onClick={handleClickOpen}
         size={size}
-        variant="contained"
-        color="primary"
+        variant={variant}
+        color={color}
+        startIcon={StartIcon}
       >
         {label}
       </Button>
@@ -90,12 +107,19 @@ const ChooseResumeTemplate = ({ size, label }: TChooseResumeTemplateProps) => {
 
         {/* Main Content */}
         <div className="max-w-[1170px] w-full mx-auto px-4 pt-6 pb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-3">
-          <div className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200 flex flex-col justify-center items-center text-muted">
+          <div
+            onClick={() => handleNavigate("/resume-builder/custom")}
+            className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200 flex flex-col justify-center items-center text-muted"
+          >
             <AddIcon sx={{ fontSize: 50 }} />
             <h5>Create New</h5>
           </div>
-          {[...Array(9)].map((template, index) => (
-            <ResumeTemplate key={index} />
+          {[...Array(9)].map((_, index) => (
+            <ResumeTemplate
+              key={index}
+              index={index}
+              handleNavigate={handleNavigate}
+            />
           ))}
         </div>
       </Dialog>
