@@ -111,7 +111,7 @@ const AboutUsSlider: React.FC = () => {
             <div
               className="flex flex-col md:flex-row text-start items-start 
               md:items-center
-              w-full max-w-[240px] md:max-w-[1077px] h-[440px] md:h-[440px] 
+             max-w-[240px] md:max-w-[1077px] h-[440px] md:h-[440px] 
               p-4 md:p-6 rounded-lg shadow-lg mx-auto"
               style={{ backgroundColor: colors[index % colors.length] }}
             >

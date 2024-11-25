@@ -5,6 +5,7 @@ import teamImage from "../../assets/images/t.jpeg";
 import teamImage2 from "../../assets/images/t2.jpeg";
 import teamImage3 from "../../assets/images/t3.jpeg";
 import AboutUsSlider from "../../component/slider/AboutSlider";
+import { Button } from "@mui/material";
 
 const About = () => {
   return (
@@ -118,12 +119,57 @@ const About = () => {
         {/* Our Team Section */}
 
         <section className="py-[60px] lg:py-[90px]  ">
-          <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className=" w-full mx-auto px-6 md:px-12 lg:px-20">
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#003366] text-center mb-12">
               Meet Our Team
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {/* Team Member Card */}
+              <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
+                <img
+                  src={teamImage}
+                  alt="Team Member"
+                  className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
+                />
+                <h3 className="text-2xl font-semibold text-[#003366]">
+                  John Doe
+                </h3>
+                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
+                <p className="text-base	font-normal	">
+                  With years of experience in leadership, John brings vision and
+                  passion to our team.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
+                <img
+                  src={teamImage}
+                  alt="Team Member"
+                  className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
+                />
+                <h3 className="text-2xl font-semibold text-[#003366]">
+                  John Doe
+                </h3>
+                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
+                <p className="text-base	font-normal	">
+                  With years of experience in leadership, John brings vision and
+                  passion to our team.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
+                <img
+                  src={teamImage}
+                  alt="Team Member"
+                  className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
+                />
+                <h3 className="text-2xl font-semibold text-[#003366]">
+                  John Doe
+                </h3>
+                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
+                <p className="text-base	font-normal	">
+                  With years of experience in leadership, John brings vision and
+                  passion to our team.
+                </p>
+              </div>
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
                 <img
                   src={teamImage}
@@ -179,7 +225,9 @@ const About = () => {
           </div>
         </section>
 
-        <section className="relative bg-gradient-to-br from-indigo-600 to-purple-500 text-white py-16 md:py-20 lg:py-[90px]">
+        <hr />
+
+        <section className="relative my-10 py-16 md:py-20 lg:py-[90px]">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Empowering Careers, One Resume at a Time
@@ -188,9 +236,13 @@ const About = () => {
               Discover the easiest way to build professional resumes and unlock
               opportunities for your dream career.
             </p>
-            <button className="mt-4 px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg shadow-md hover:bg-gray-100">
+            {/* <button className="mt-4 px-6 py-3 bg-[#ffffff] text-indigo-600 font-semibold rounded-lg shadow-md hover:bg-gray-100">
               Start Building Now
-            </button>
+            </button> */}
+
+            <Button variant="contained" size="large">
+              Start Building Now
+            </Button>
           </div>
         </section>
       </div>
