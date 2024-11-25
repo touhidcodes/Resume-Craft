@@ -1,11 +1,14 @@
-import { Divider, Icon } from "@mui/material";
-import { useState } from "react";
+import { Divider } from "@mui/material";
+import { useContext, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
+import { AuthContext } from "../../providor/authProvidor";
+import { verifyToken } from "../../utils/verifyToken";
+import { setUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks";
 const Login = () => {
   const [statics] = useState([
     "Alawys free",
@@ -16,8 +19,20 @@ const Login = () => {
     "Free resume audits",
     "Link resume with Indeed",
   ]);
+  const { googleSignIn }: any = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
-
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result: any) => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      console.log(userInfo);
+    });
+  };
   const [login] = useLoginMutation();
   const {
     register,
@@ -27,21 +42,34 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data: FieldValues) => {
-    const res = await login(data);
-    console.log(res);
-    const toastId = toast.success("Logging in");
-  };
+    const toastId = toast.loading("Logging in");
 
+    try {
+      const res = await login(data).unwrap();
+      console.log(res);
+      const user = verifyToken(res.data.accessToken);
+      console.log(user);
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      toast.success("login successfully", { id: toastId, duration: 2000 });
+      navigate(location?.state ? location.state.from.pathname : "/");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something wrong", { id: toastId, duration: 2000 });
+    }
+  };
   return (
     <section className="py-[60px]">
-      <div className="max-w-[1240px] mx-auto px-5 ">
+      <div className="max-w-[1240px] mx-auto px-5  font-roboto">
         <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">
-            <img
-              src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
-              className="img-fluid rounded-top mb-2 w-[45px] h-[45px] ml-2"
-              alt=""
-            />
+            <Link to="/">
+              {" "}
+              <img
+                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                className="img-fluid rounded-top mb-2 w-[45px] h-[45px] ml-2"
+                alt=""
+              />
+            </Link>
 
             <h2 className="text-[30px] xl:text-4xl font-bold mb-4 text-[#0B0D58] text-center">
               {" "}
@@ -51,7 +79,10 @@ const Login = () => {
               You may use Socail logins for more-fuild experience
             </p>
             <div className="flex justify-center  mb-5">
-              <button className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]">
+              <button
+                onClick={handleGoogleSignIn}
+                className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
+              >
                 <span>
                   <svg
                     width="20"

@@ -1,8 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
 import HomePage from "../pages/home/HomePage";
+import App from "../App";
 import Login from "../pages/login/Login";
 import Singup from "../pages/singup/Singup";
+import About from "../pages/about/about";
+import DashboardLayout from "../component/layout/DashboardLayout";
+import { routerGenerator } from "../utils/routesGeneroter";
+import { adminPath } from "./adminroute";
+import { userPath } from "./userroute";
+import Templateone from "../pages/Resume/Temple1/Templateone";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +19,10 @@ const router = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
+      {
+        path: "/about",
+        element: <About />,
+      },
     ],
   },
   {
@@ -20,8 +30,23 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/resume",
+    element: <Templateone></Templateone>,
+  },
+  {
     path: "/register",
     element: <Singup />,
+  },
+  {
+    path: "admin",
+    element: <DashboardLayout />,
+    children: routerGenerator(adminPath),
+  },
+
+  {
+    path: "user",
+    element: <DashboardLayout />,
+    children: routerGenerator(userPath),
   },
 ]);
 
