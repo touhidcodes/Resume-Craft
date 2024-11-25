@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 @layer base {
+  .container {
+    @apply w-[1170px] mx-auto;
+  }
+
   .text-muted {
     @apply text-neutral-500 font-medium;
   }

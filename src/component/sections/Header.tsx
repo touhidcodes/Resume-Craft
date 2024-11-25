@@ -8,6 +8,7 @@ import imgSix from "../../assets/header-img/header-img-6.webp";
 import imgSeven from "../../assets/header-img/header-img-7.webp";
 import imgEight from "../../assets/header-img/header-img-8.webp";
 import headerImg from "../../assets/header-img/header-img.webp";
+import ChooseResumeTemplate from "../../modal/ChooseResumeTemplate";
 
 const Header = () => {
   return (
@@ -26,9 +27,7 @@ const Header = () => {
               Only 2% of resumes win. Yours will be one of them. Let’s build you
               a resume that works.
             </h3>
-            <Button size="large" variant="contained" color="primary">
-              Create My Resume
-            </Button>
+            <ChooseResumeTemplate size="large" label="Create New Resume" />
 
             <div className="mt-20 hidden lg:flex items-start gap-x-8">
               <div className="space-y-3 border-l pl-4">

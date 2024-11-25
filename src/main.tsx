@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import "./index.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import AuthProvider from "./providor/authProvidor.tsx";
 import { PersistGate } from "redux-persist/integration/react";
 
 const theme = createTheme({
@@ -29,16 +28,14 @@ const theme = createTheme({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <RouterProvider router={router} />
-            <Toaster />
-          </PersistGate>
-        </Provider>
-        <CssBaseline />
-      </ThemeProvider>
-    </AuthProvider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+          <Toaster />
+        </PersistGate>
+      </Provider>
+      <CssBaseline />
+    </ThemeProvider>
   </StrictMode>
 );

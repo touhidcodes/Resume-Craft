@@ -1,4 +1,11 @@
+// import { baseApi } from "../../api/baseApi";
+
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { baseApi } from "../../api/baseApi";
+import { app } from "../../../firebaseConfig";
+
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -20,7 +27,23 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    googleSignInWithPopup: builder.mutation({
+      queryFn: async () => {
+        try {
+          const userCredential = await signInWithPopup(auth, googleProvider);
+          console.log(userCredential);
+          return { data: userCredential.user };
+        } catch (error) {
+          return { error: error.message };
+        }
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useSingupMutation } = authApi;
+export const {
+  useLoginMutation,
+  useSingupMutation,
+  useGoogleSignInWithPopupMutation,
+} = authApi;
