@@ -2,9 +2,20 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close, KeyboardArrowDown } from "@mui/icons-material";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
+import { Button } from "@mui/material";
+
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const user = useAppSelector(userCurrentUser);
+  const dispatch = useAppDispatch();
+  let role = user?.role;
+
+  const handeLogout = () => {
+    dispatch(logout());
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +42,7 @@ const NavBar = () => {
           : "border-none bg-[#F7F9FC]"
       }`}
     >
-      <div className="max-w-[1300px] flex items-center justify-between mx-auto px-2">
+      <div className="max-w-[1170px] flex items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <Link to="/">
             <div className=" flex items-center justify-center">
@@ -88,21 +99,20 @@ const NavBar = () => {
                 About us
               </Link>
             </li>
-            <li>
-              <Link to="/dashboard" className="py-7 px-3 inline-block">
-                Dashboard
-              </Link>
-            </li>
 
             {/* <NavLinks /> */}
           </ul>
           <div className="w-[1px] h-6 bg-[#EEEEEE]"></div>
           <div className="md:flex gap-x-2 hidden ">
-            <Link to="/login">
-              <button className=" border-[#6644D3] text-[#6644D3] hover:bg-[#6644D3] hover:text-white  px-6 w-36  py-2 border rounded-[9px] font-semibold">
-                Log in{" "}
-              </button>
-            </Link>
+            {user ? (
+              <Button variant="contained" size="large">
+                <Link to={`/${role}/dashboard`}>Dashboard</Link>
+              </Button>
+            ) : (
+              <Button variant="contained" size="large">
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
           </div>
         </div>
         {/* Mobile nav */}
@@ -113,7 +123,7 @@ const NavBar = () => {
       `}
         >
           <img
-            src="https://besnik-space.fra1.cdn.digitaloceanspaces.com/ezytor/theme/N8lApmzhKXbK5HA7kTpU1702703250.svg"
+            src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
             alt="logo"
             className="md:cursor-pointer h-9"
           />

@@ -2,11 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import router from "./routes/routes.tsx";
 import { RouterProvider } from "react-router-dom";
-import { store } from "./redux/store.ts";
+import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import "./index.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import AuthProvider from "./providor/authProvidor.tsx";
+import { PersistGate } from "redux-persist/integration/react";
 
 const theme = createTheme({
   breakpoints: {
@@ -18,16 +20,25 @@ const theme = createTheme({
       xl: 1440,
     },
   },
+  palette: {
+    primary: {
+      main: "#1222FE",
+    },
+  },
 });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-        <Toaster />
-      </Provider>
-      <CssBaseline />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <RouterProvider router={router} />
+            <Toaster />
+          </PersistGate>
+        </Provider>
+        <CssBaseline />
+      </ThemeProvider>
+    </AuthProvider>
   </StrictMode>
 );

@@ -7,7 +7,7 @@ export default {
         roboto: ["Roboto", "sans-serif"],
       },
       colors: {
-        primary: "#1976d2",
+        primary: "#1222FE",
       },
       screens: {
         xs: 0,
