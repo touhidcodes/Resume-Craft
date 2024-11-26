@@ -24,15 +24,15 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+      {
+        path: "/resume-builder/*",
+        element: <ResumeBuilderLayout />,
+      },
     ],
   },
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/resume",
-    element: <Templateone></Templateone>,
   },
   {
     path: "/register",
