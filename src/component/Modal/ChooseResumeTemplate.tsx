@@ -8,15 +8,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
-import ResumeTemplate from "../component/shared/ResumeTemplate";
 import AddIcon from "@mui/icons-material/Add";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ResumeTemplate from "../shared/ResumeTemplate";
 
 type TChooseResumeTemplateProps = {
   label: string;
   color?: "primary" | "secondary";
   size: "small" | "large" | "medium";
-  variant: "text" | "outlined" | "contained";
+  variant?: "text" | "outlined" | "contained";
   startIcon?: JSX.Element;
 };
 

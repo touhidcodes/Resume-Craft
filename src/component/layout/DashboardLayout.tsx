@@ -12,9 +12,8 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import SideBar from "./SideBar";
-import { Button } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import ChooseResumeTemplate from "../../modal/ChooseResumeTemplate";
+import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
 const drawerWidth = 220;
 
