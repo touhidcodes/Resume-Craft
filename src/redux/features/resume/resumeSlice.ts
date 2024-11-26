@@ -196,21 +196,19 @@ const resumeSlice = createSlice({
   initialState,
   reducers: {
     updateActiveSection: (state, action) => {
-      const activeSections = state.resume.allSections; // Copy of original sections
-
-      // Find index for updated section
-      const findIndexOfSection = state.resume.allSections.findIndex(
-        (section) => section.name === action.payload.name
+      state.resume.allSections = state.resume.allSections.map((item) =>
+        item.name === action.payload.name
+          ? { ...item, isActive: !action.payload.isActive }
+          : item
       );
+    },
 
-      activeSections[findIndexOfSection] = {
-        ...action.payload,
-        isActive: !action.payload.isActive,
-      };
+    setActiveSections: (state, action) => {
+      state.resume.allSections = action.payload;
     },
   },
 });
 
-export const { updateActiveSection } = resumeSlice.actions;
+export const { updateActiveSection, setActiveSections } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

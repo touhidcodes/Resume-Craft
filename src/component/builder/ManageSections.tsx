@@ -45,9 +45,6 @@ const DrawerList = ({ toggleDrawer }: TDrawerListProps) => {
         </IconButton>
       </div>
       <SectionSwitcher />
-      {/* {allSections.map((section, index) => (
-        <SectionSwitcher key={section + index} label={section} />
-      ))} */}
     </Box>
   );
 };

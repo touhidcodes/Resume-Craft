@@ -1,6 +1,9 @@
 import { Switch } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { updateActiveSection } from "../../redux/features/resume/resumeSlice";
+import {
+  setActiveSections,
+  updateActiveSection,
+} from "../../redux/features/resume/resumeSlice";
 import { DndContext } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -8,11 +11,8 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { arrayMove } from "@dnd-kit/sortable";
-import { useState } from "react";
-
-type TSectionSwitcherProps = {
-  section: TSection;
-};
+import { useEffect, useState } from "react";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 type TSection = {
   name: string;
@@ -20,19 +20,23 @@ type TSection = {
 };
 
 const SectionSwitcher = () => {
-  const resume = useAppSelector((state) => state.resume.resume);
   const dispatch = useAppDispatch();
-  const [items, setItems] = useState<TSection[]>(resume.allSections);
+  const allSections = useAppSelector(
+    (state) => state.resume.resume.allSections
+  );
+  const [items, setItems] = useState<TSection[]>(allSections);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-
     if (active.id !== over.id) {
       const oldIndex = items.findIndex((item) => item.name === active.id);
       const newIndex = items.findIndex((item) => item.name === over.id);
-
       if (oldIndex !== -1 && newIndex !== -1) {
-        setItems((prevItems) => arrayMove(prevItems, oldIndex, newIndex));
+        setItems((prevItems) => {
+          const newArr = arrayMove(prevItems, oldIndex, newIndex);
+          dispatch(setActiveSections(newArr));
+          return newArr;
+        });
       }
     }
   };
@@ -41,8 +45,12 @@ const SectionSwitcher = () => {
     dispatch(updateActiveSection(section));
   };
 
+  useEffect(() => {
+    setItems(allSections);
+  }, [allSections]);
+
   return (
-    <div>
+    <div className="mt-5">
       <DndContext onDragEnd={handleDragEnd}>
         <SortableContext
           items={items.map((item) => item.name)}
@@ -77,6 +85,7 @@ const Switcher = ({
     isDragging,
   } = useSortable({ id: section.name });
 
+  // Styling for the dragged element to apply smooth transitions
   const style = {
     ...(transform
       ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` }
@@ -87,24 +96,32 @@ const Switcher = ({
     backgroundColor: isDragging ? "#d3d3d3" : "#f4f4f4",
     border: "1px solid #ccc",
     borderRadius: "4px",
-    cursor: "move",
   };
 
   return (
-    <button
-      ref={setNodeRef}
-      {...listeners}
-      {...attributes}
-      style={style}
-      onClick={() => onChange(section)}
-      className="flex justify-between items-center w-full border-b py-1.5"
-    >
-      <h3 className="font-medium">{section.name}</h3>
-      <Switch
-        checked={section.isActive}
-        inputProps={{ "aria-label": "controlled" }}
-      />
-    </button>
+    <div onClick={() => onChange(section)}>
+      <div
+        ref={setNodeRef}
+        style={{ ...style }}
+        className="flex justify-between items-center gap-x-2"
+      >
+        <button
+          {...listeners}
+          {...attributes}
+          className="flex items-center py-1.5 px-1 cursor-grab"
+        >
+          <DragIndicatorIcon sx={{ color: "rgba(0, 0, 0, 0.5)" }} />
+        </button>
+
+        <div className="flex-1 flex justify-between items-center">
+          <h3 className="font-medium">{section.name}</h3>
+          <Switch
+            checked={section.isActive}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
