@@ -9,6 +9,9 @@ import { routerGenerator } from "../utils/routesGeneroter";
 import { adminPath } from "./adminroute";
 import { userPath } from "./userroute";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
+import Templateone from "../pages/Resume/Temple1/Templateone";
+import NotFound from "../pages/notFound/NotFound";
+
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,10 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/resume",
+    element: <Templateone></Templateone>,
+  },
+  {
     path: "/register",
     element: <Singup />,
   },
@@ -47,6 +54,10 @@ const router = createBrowserRouter([
     path: "user",
     element: <DashboardLayout />,
     children: routerGenerator(userPath),
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

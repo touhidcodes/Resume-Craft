@@ -65,7 +65,7 @@ const AboutUsSlider: React.FC = () => {
 
   return (
     <div className="py-[60px]">
-      <div className="container mx-auto px-4 font-roboto">
+      <div className="container mx-auto font-roboto">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8">
           <div className="text-center md:text-left">
             <h1 className="text-4xl md:text-7xl font-bold leading-tight md:leading-[84px] text-[#003366]">
@@ -111,7 +111,7 @@ const AboutUsSlider: React.FC = () => {
             <div
               className="flex flex-col md:flex-row text-start items-start 
               md:items-center
-              w-full max-w-[240px] md:max-w-[1077px] h-[440px] md:h-[440px] 
+             max-w-[240px] md:max-w-[1077px] h-[440px] md:h-[440px] 
               p-4 md:p-6 rounded-lg shadow-lg mx-auto"
               style={{ backgroundColor: colors[index % colors.length] }}
             >
