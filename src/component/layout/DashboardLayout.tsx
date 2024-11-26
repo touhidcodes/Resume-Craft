@@ -14,6 +14,7 @@ import { Link, Outlet } from "react-router-dom";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import ChooseResumeTemplate from "../../modal/ChooseResumeTemplate";
 
 const drawerWidth = 220;
 
@@ -119,7 +120,6 @@ const DashboardLayout = () => {
             bgcolor: "#fff",
             color: "#000",
             borderBottom: "1px solid #ddd",
-            boxShadow: "none",
           }}
         >
           <IconButton
@@ -142,9 +142,10 @@ const DashboardLayout = () => {
             </Typography>
             <div className="hidden sm:flex items-center gap-x-8">
               <NotificationsNoneIcon fontSize="medium" />
-              <Button variant="contained" size="small">
+              <ChooseResumeTemplate size="small" label="Create New" />
+              {/* <Button variant="contained" size="small">
                 Create New
-              </Button>
+              </Button> */}
             </div>
           </div>
         </Toolbar>

@@ -1,14 +1,13 @@
 import { Divider } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
-  useLoginMutation,
+  useGoogleSignInWithPopupMutation,
   useSingupMutation,
 } from "../../redux/features/auth/authApi";
-import { Password, Visibility, VisibilityOff } from "@mui/icons-material";
-import { AuthContext } from "../../providor/authProvidor";
 
 const Singup = () => {
   const [statics] = useState([
@@ -21,7 +20,7 @@ const Singup = () => {
     "Link resume with Indeed",
   ]);
   const [visible, setVisible] = useState(false);
-  const { googleSignIn }: any = useContext(AuthContext);
+  const [googleSign] = useGoogleSignInWithPopupMutation();
   const [singup] = useSingupMutation();
   const navigate = useNavigate();
   const {
@@ -31,14 +30,17 @@ const Singup = () => {
     formState: { errors },
   } = useForm();
 
-  const handleGoogleSignIn = () => {
-    googleSignIn().then((result: any) => {
-      const userInfo = {
-        email: result.user?.email,
-        name: result.user?.displayName,
-      };
-      console.log(userInfo);
-    });
+  const handleGoogleSignIn = async () => {
+    const res = await googleSign(null);
+    console.log(res);
+
+    // googleSignIn().then((result: any) => {
+    //   const userInfo = {
+    //     email: result.user?.email,
+    //     name: result.user?.displayName,
+    //   };
+    //   console.log(userInfo);
+    // });
   };
 
   const onSubmit = async (data: FieldValues) => {
