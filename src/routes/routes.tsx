@@ -11,6 +11,7 @@ import { userPath } from "./userroute";
 import Templateone from "../pages/Resume/Temple1/Templateone";
 import NotFound from "../pages/notFound/NotFound";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/resume",
+    element: <Templateone></Templateone>,
   },
   {
     path: "/register",
