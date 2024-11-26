@@ -1,4 +1,4 @@
-import { Edit } from "@mui/icons-material";
+import CertifiageModal from "../../Modal/CertifiageModal";
 
 const Certificates = () => {
   return (
@@ -12,7 +12,7 @@ const Certificates = () => {
         <p>Show your certificates, licenses, and training in your field.</p>
 
         <div className="hidden w-[35px] h-[35px] bg-[#FFFF] shadow-sm  group-hover:flex justify-center items-center rounded-[10px] absolute  top-1 right-1 duration-100 ease-in-out transition-all">
-          <Edit />
+          <CertifiageModal />
         </div>
       </div>
     </div>

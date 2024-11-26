@@ -1,5 +1,4 @@
-import { Edit } from "@mui/icons-material";
-import React from "react";
+import LanguesModel from "../../Modal/LanguesModel";
 
 const Languages = () => {
   return (
@@ -13,7 +12,7 @@ const Languages = () => {
         <p>Engilsh , Hinde , Bangla </p>
 
         <div className="hidden w-[35px] h-[35px] bg-[#FFFF] shadow-sm  group-hover:flex justify-center items-center rounded-[10px] absolute  top-1 right-1 duration-100 ease-in-out transition-all">
-          <Edit />
+          <LanguesModel />
         </div>
       </div>
     </div>
