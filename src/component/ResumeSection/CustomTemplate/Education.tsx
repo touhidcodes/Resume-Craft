@@ -1,10 +1,10 @@
 import EducationEditModal from "../../Modal/EducationEditModal";
 
-const Experience = () => {
+const Education = () => {
   return (
     <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
-        Experience
+        Education
       </h1>
       <div className="w-[100%] h-0.5 bg-gray-400 mb-1"></div>
       <div className=" text-[#6E6E6E] text-[13px] space-y-2">
@@ -41,4 +41,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default Education;

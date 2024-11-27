@@ -1,6 +1,6 @@
 import SummaryEditModal from "../../Modal/SummaryEditModal";
 
-const Summery = () => {
+const Summary = () => {
   return (
     <div className="cursor-pointer group mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">Summary</h1>
@@ -16,4 +16,4 @@ const Summery = () => {
   );
 };
 
-export default Summery;
+export default Summary;
