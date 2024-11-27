@@ -25,7 +25,6 @@ const ExperienceEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [experience, setExperience] = useState("");
 
-  // Open and close the dialog
   function open() {
     setIsOpen(true);
   }
@@ -34,7 +33,6 @@ const ExperienceEditModal = () => {
     setIsOpen(false);
   }
 
-  // Initialize react-hook-form with the zodResolver
   const {
     register,
     handleSubmit,
@@ -47,7 +45,6 @@ const ExperienceEditModal = () => {
   // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
     console.log("Form Submitted:", data);
-    // Close the modal after successful submission
     close();
   };
 
@@ -126,12 +123,12 @@ const ExperienceEditModal = () => {
                                     {...field}
                                     label="Start Date"
                                     views={["month", "year"]}
-                                    format="MM/YYYY" // Directly format as MM/YYYY
+                                    format="MM/YYYY"
                                     value={
                                       field.value
                                         ? dayjs(field.value, "MM/YYYY")
                                         : null
-                                    } // Handle dayjs object
+                                    }
                                     onChange={(date) => {
                                       field.onChange(
                                         dayjs(date).format("MM/YYYY")
@@ -161,12 +158,12 @@ const ExperienceEditModal = () => {
                                     {...field}
                                     label="End Date"
                                     views={["month", "year"]}
-                                    format="MM/YYYY" // Directly format as MM/YYYY
+                                    format="MM/YYYY"
                                     value={
                                       field.value
                                         ? dayjs(field.value, "MM/YYYY")
                                         : null
-                                    } // Handle dayjs object
+                                    }
                                     onChange={(date) => {
                                       field.onChange(
                                         dayjs(date).format("MM/YYYY")
