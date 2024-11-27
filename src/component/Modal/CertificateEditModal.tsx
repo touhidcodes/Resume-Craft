@@ -1,143 +1,122 @@
-import {
-  MenuItem,
-  DialogActions,
-  FormControl,
-  InputLabel,
-  Select,
-  SelectChangeEvent,
-  Theme,
-  OutlinedInput,
-  Chip,
-  Box,
-} from "@mui/material";
-
-import { DialogContent } from "@mui/material";
-
-import { DialogTitle } from "@mui/material";
-
-import { Dialog } from "@mui/material";
-
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { useState } from "react";
+import ResumeEditBtn from "../shared/ResumeEditBtn";
+import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
+import MultipleSelect from "../builder/MultipleSelect";
 
-import { useTheme } from "@mui/material/styles";
-import { Fragment, useState } from "react";
+const CertificateEditModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [certificates, setCertificates] = useState<string[]>([]);
 
-import { useMediaQuery } from "@mui/material";
-import { Edit } from "@mui/icons-material";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight: personName.includes(name)
-      ? theme.typography.fontWeightMedium
-      : theme.typography.fontWeightRegular,
-  };
-}
-
-const CertificateModal = () => {
-  const [open, setOpen] = useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("lg"));
-  const [personName, setPersonName] = useState<string[]>([]);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+  const handleRemoveCertificate = (certificate: string) => {
+    const filteredCertificate = certificates.filter(
+      (item) => item !== certificate
     );
+    setCertificates(filteredCertificate);
   };
+
+  function open() {
+    setIsOpen(true);
+  }
+
+  function close() {
+    setIsOpen(false);
+  }
 
   return (
-    <Fragment>
-      <div onClick={handleClickOpen}>
-        <Edit />
-      </div>
+    <>
+      <ResumeEditBtn handleClick={open} />
+
       <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        maxWidth={"md"}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        open={isOpen}
+        as="div"
+        className="relative z-[999] focus:outline-none"
+        onClose={close}
       >
-        <DialogTitle id="responsive-dialog-title">{"Certificates"}</DialogTitle>
-        <DialogContent>
-          <FormControl sx={{ m: 1, width: 500 }}>
-            <InputLabel id="demo-multiple-chip-label">Certifite</InputLabel>
-            <Select
-              labelId="demo-multiple-chip-label"
-              id="demo-multiple-chip"
-              multiple
-              value={personName}
-              onChange={handleChange}
-              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-              renderValue={(selected) => (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </Box>
-              )}
-              MenuProps={MenuProps}
+        <div className="fixed inset-0 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 bg-black/45">
+            <DialogPanel
+              transition
+              className="w-full max-h-[calc(100svh_-_100px)] max-w-[950px] rounded-lg backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 bg-white flex flex-col justify-between"
             >
-              {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, personName, theme)}
+              <DialogTitle
+                as="h3"
+                className="flex justify-between items-center border-b py-3 px-5"
+              >
+                <h3 className="text-xl font-semibold">Certificates</h3>
+                <Close onClick={close} sx={{ cursor: "pointer" }} />
+              </DialogTitle>
+              <div className="flex-1 overflow-y-auto">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+                  <div className="p-5 col-span-7 space-y-5">
+                    <h2 className="font-semibold">
+                      Show your certificates, licenses, and training in your
+                      field.
+                    </h2>
+                    <MultipleSelect
+                      label="Select Certificate"
+                      setValue={setCertificates}
+                    />
+                    <div className="mt-5 flex items-center gap-4 flex-wrap">
+                      {certificates.map((certificate) => (
+                        <button className="flex items-center gap-x-3 text-sm border rounded-md py-1.5 px-3 cursor-default">
+                          <span>{certificate}</span>
+                          <Close
+                            fontSize="small"
+                            onClick={() => handleRemoveCertificate(certificate)}
+                            sx={{ cursor: "pointer" }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
+                    <h2 className="text-lg font-semibold">Tips</h2>
+                    <div className="text-sm mt-5">
+                      <p>
+                        Professional certifications are a great way to stand out
+                        from the crowd in your job search. Some jobs require
+                        specific certifications, and including certifications
+                        can help showcase your skills and abilities with an
+                        objective measure. Extra certifications can also be a
+                        great way to show your interests and proficiencies
+                        outside of work. Press enter to save and add another.
+                        Although online courses don’t always offer
+                        certification, you can still list non-certification
+                        classes on your resume to demonstrate proficiency.
+                        Include name of certification, certifying organization
+                        and date received. List job-critical certifications at
+                        the top of the list, and consider adding them in your
+                        resume summary and work experience as well. For extra or
+                        ‘bonus’ certifications, keep them lower on the list and
+                        limit to your most impressive achievements.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dialog footer */}
+              <div className="py-4 px-5 space-x-5 flex justify-end border-t">
+                <Button variant="outlined" autoFocus onClick={close}>
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  //   onClick={handleClose}
+                  autoFocus
                 >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={handleClose}
-            autoFocus
-          >
-            Save
-          </Button>
-        </DialogActions>
+                  Save
+                </Button>
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
       </Dialog>
-    </Fragment>
+    </>
   );
 };
-export default CertificateModal;
+
+export default CertificateEditModal;

@@ -3,9 +3,15 @@ import { useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/index";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import TextEditor from "../shared/TextEditor";
 
-const HeaderEditModal = () => {
+const ExperienceEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [experience, setExperience] = useState("");
 
   function open() {
     setIsOpen(true);
@@ -35,46 +41,71 @@ const HeaderEditModal = () => {
                 as="h3"
                 className="flex justify-between items-center border-b py-3 px-5"
               >
-                <h3 className="text-xl font-semibold">Personal Info</h3>
+                <h3 className="text-xl font-semibold">Experience</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
               <div className="flex-1 overflow-y-auto">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-12">
                   <div className="p-5 col-span-7 space-y-5">
                     <div className="flex flex-col md:flex-row gap-5">
+                      <div className="w-full md:w-1/2">
+                        <p className="mb-3">Employer</p>
+                        <TextField
+                          id="outlined-basic"
+                          label="Company A"
+                          fullWidth
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="w-full md:w-1/2">
+                        <p className="mb-3">Role or job title</p>
+                        <TextField
+                          id="outlined-basic"
+                          label="Frontend Developer"
+                          fullWidth
+                          variant="outlined"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <p>Start date and end date</p>
+                      <div className="flex flex-col md:flex-row gap-5 mt-3">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <DatePicker
+                              label="End Date"
+                              views={["month", "year"]}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <DatePicker
+                              label="End Date"
+                              views={["month", "year"]}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="mb-3">Location</p>
                       <TextField
                         id="outlined-basic"
-                        label="First name"
-                        fullWidth
-                        variant="outlined"
-                      />
-                      <TextField
-                        id="outlined-basic"
-                        label="Last name"
+                        label="City, state"
                         fullWidth
                         variant="outlined"
                       />
                     </div>
-                    <div className="flex flex-col md:flex-row gap-5">
-                      <TextField
-                        id="outlined-basic"
-                        label="Email"
-                        fullWidth
-                        variant="outlined"
-                      />
-                      <TextField
-                        id="outlined-basic"
-                        label="Phone"
-                        fullWidth
-                        variant="outlined"
-                      />
+
+                    <div>
+                      <p className="font-medium mb-3">
+                        What were your responsibilities and accomplishments?
+                      </p>
+                      <TextEditor value={experience} setValue={setExperience} />
                     </div>
-                    <TextField
-                      id="outlined-basic"
-                      label="Location"
-                      fullWidth
-                      variant="outlined"
-                    />
                   </div>
                   <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
                     <h2 className="text-lg font-semibold">Tips</h2>
@@ -125,4 +156,4 @@ const HeaderEditModal = () => {
   );
 };
 
-export default HeaderEditModal;
+export default ExperienceEditModal;

@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import CustomTemplate from "../../pages/Resume/Temple1/CustomTemplate";
 import ResumeBuilderNavbar from "../../component/NavBar/ResumeBuilderNavbar";
 import ResumeBuilderSidebar from "../../component/layout/ResumeBuilderSidebar";
-import MultipleSelect from "../../component/builder/MultipleSelect";
 
 const Template1 = () => {
   return <div className="text-3xl mt-10">Template 1</div>;
@@ -17,6 +16,7 @@ const ResumeBuilder = () => {
       <div className="flex-1">
         <h1 className="text-3xl font-bold mb-10 text-center">My Resume</h1>
         <ResumeBuilderNavbar />
+
         <Routes>
           <Route path="/custom" Component={CustomTemplate} />
           {[
