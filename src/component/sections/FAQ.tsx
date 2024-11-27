@@ -1,5 +1,5 @@
 import Layout from "../shared/Layout";
-import AccordionItem from "../ui/AccordionItem";
+import AccordionItem from "../shared/AccordionItem";
 
 const faqItems = [
   {
