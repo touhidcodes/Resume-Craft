@@ -16,7 +16,7 @@ const TextEditor = ({ value, setValue }: TTextEditorProps) => {
       value={value}
       theme="snow"
       onChange={handleChange}
-      className="h-64"
+      className="h-60"
       modules={{
         toolbar: [
           ["bold", "italic", "underline", "strike", "blockquote"],

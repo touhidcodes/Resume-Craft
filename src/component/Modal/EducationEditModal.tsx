@@ -3,9 +3,15 @@ import { useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/index";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import TextEditor from "../shared/TextEditor";
 
-const HeaderEditModal = () => {
+const EducationEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [experience, setExperience] = useState("");
 
   function open() {
     setIsOpen(true);
@@ -35,79 +41,81 @@ const HeaderEditModal = () => {
                 as="h3"
                 className="flex justify-between items-center border-b py-3 px-5"
               >
-                <h3 className="text-xl font-semibold">Personal Info</h3>
+                <h3 className="text-xl font-semibold">Education</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
               <div className="flex-1 overflow-y-auto">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-12">
                   <div className="p-5 col-span-7 space-y-5">
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">First name</p>
+                        <p className="mb-3">School</p>
                         <TextField
                           id="outlined-basic"
-                          label="First name"
+                          label="School name"
                           fullWidth
                           variant="outlined"
                         />
                       </div>
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Last name</p>
+                        <p className="mb-3">Field of study</p>
                         <TextField
                           id="outlined-basic"
-                          label="Last name"
+                          label="English literature"
                           fullWidth
                           variant="outlined"
                         />
                       </div>
                     </div>
+
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Email</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="Email"
-                          fullWidth
-                          variant="outlined"
-                        />
+                        <p>Graduation date</p>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer
+                            components={["DatePicker"]}
+                            sx={{ pt: 1.5 }}
+                          >
+                            <DatePicker
+                              label="End Date"
+                              views={["month", "year"]}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
                       </div>
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Phone number</p>
+                        <p className="mb-3">Location</p>
                         <TextField
                           id="outlined-basic"
-                          label="Phone"
+                          label="City, State"
                           fullWidth
                           variant="outlined"
                         />
                       </div>
                     </div>
+
                     <div>
-                      <p className="mb-3">Location</p>
-                      <TextField
-                        id="outlined-basic"
-                        label="Location"
-                        fullWidth
-                        variant="outlined"
-                      />
+                      <p className="font-medium mb-3">
+                        What were your responsibilities and accomplishments?
+                      </p>
+                      <TextEditor value={experience} setValue={setExperience} />
                     </div>
                   </div>
                   <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
                     <h2 className="text-lg font-semibold">Tips</h2>
                     <div className="text-sm mt-5 space-y-6">
                       <p>
-                        The difference is in the details. More than 80% of
-                        employers think that a phone number must always be
-                        present on a resume.* Make sure that you add your
-                        contact information so that employers can contact you
-                        for a job interview!
+                        It pays to be picky about the academic accomplishments
+                        that you list on your resume. Employers want to see a
+                        maximum of three education entries in a resume.* If you
+                        have more academic achievements, consider listing them
+                        under one of your main education entries.
                       </p>
                       <p>
-                        Employers usually want to know the city and state you
-                        currently live in, even if you plan to move soon. If
-                        you’re applying for a position that is located far away,
-                        share a little about why you’re applying in your cover
-                        letter to help the employer better understand why you’re
-                        still a great fit for the job.
+                        Listing your education shows that you meet any necessary
+                        prerequisites to employment and allows you to showcase
+                        your book smarts if you’re a little short on actual
+                        experience.
                       </p>
                       <p>
                         *Indeed survey conducted with Lucid, N=2661 employers
@@ -140,4 +148,4 @@ const HeaderEditModal = () => {
   );
 };
 
-export default HeaderEditModal;
+export default EducationEditModal;

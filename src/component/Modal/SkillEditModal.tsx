@@ -48,9 +48,7 @@ const SkillEditModal = () => {
               <div className="flex-1 overflow-y-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
                   <div className="p-5 col-span-7 space-y-5">
-                    <h2 className="font-semibold">
-                      What are your stand-out skills?
-                    </h2>
+                    <h2>What are your stand-out skills?</h2>
                     <MultipleSelect
                       label="Select Skills"
                       setValue={setSkills}
