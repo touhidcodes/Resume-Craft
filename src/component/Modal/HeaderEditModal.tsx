@@ -3,9 +3,30 @@ import { useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { headerValidationSchema } from "../../zod/headerValidationSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Define the form data type
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  location: string;
+};
 
 const HeaderEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Use the correct type for useForm
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(headerValidationSchema),
+  });
 
   function open() {
     setIsOpen(true);
@@ -14,6 +35,11 @@ const HeaderEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  // Handle form submission
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log("Form Submitted:", data);
+  };
 
   return (
     <>
@@ -49,7 +75,14 @@ const HeaderEditModal = () => {
                           label="First name"
                           fullWidth
                           variant="outlined"
+                          color={
+                            errors?.firstName?.message ? "error" : "primary"
+                          }
+                          {...register("firstName")}
                         />
+                        <p className="text-sm text-red-500 mt-1">
+                          {errors?.firstName?.message as string}
+                        </p>
                       </div>
                       <div className="w-full md:w-1/2">
                         <p className="mb-3">Last name</p>
@@ -58,7 +91,14 @@ const HeaderEditModal = () => {
                           label="Last name"
                           fullWidth
                           variant="outlined"
+                          {...register("lastName")}
+                          color={
+                            errors?.lastName?.message ? "error" : "primary"
+                          }
                         />
+                        <p className="text-sm text-red-500 mt-1">
+                          {errors?.lastName?.message as string}
+                        </p>
                       </div>
                     </div>
                     <div className="flex flex-col md:flex-row gap-5">
@@ -69,7 +109,12 @@ const HeaderEditModal = () => {
                           label="Email"
                           fullWidth
                           variant="outlined"
+                          {...register("email")}
+                          color={errors?.email?.message ? "error" : "primary"}
                         />
+                        <p className="text-sm text-red-500 mt-1">
+                          {errors?.email?.message as string}
+                        </p>
                       </div>
                       <div className="w-full md:w-1/2">
                         <p className="mb-3">Phone number</p>
@@ -78,7 +123,12 @@ const HeaderEditModal = () => {
                           label="Phone"
                           fullWidth
                           variant="outlined"
+                          {...register("phone")}
+                          color={errors?.phone?.message ? "error" : "primary"}
                         />
+                        <p className="text-sm text-red-500 mt-1">
+                          {errors?.phone?.message as string}
+                        </p>
                       </div>
                     </div>
                     <div>
@@ -88,7 +138,12 @@ const HeaderEditModal = () => {
                         label="Location"
                         fullWidth
                         variant="outlined"
+                        {...register("location")}
+                        color={errors?.location?.message ? "error" : "primary"}
                       />
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors?.location?.message as string}
+                      </p>
                     </div>
                   </div>
                   <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
@@ -126,7 +181,7 @@ const HeaderEditModal = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  //   onClick={handleClose}
+                  onClick={handleSubmit(onSubmit)}
                   autoFocus
                 >
                   Save

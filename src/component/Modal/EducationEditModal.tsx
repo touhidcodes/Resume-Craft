@@ -3,15 +3,34 @@ import { useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/index";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import TextEditor from "../shared/TextEditor";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import dayjs from "dayjs";
+import { educationValidationSchema } from "../../zod/educationValidationSchema";
+
+type EducationFormData = {
+  school: string;
+  fieldOfStudy: string;
+  graduationDate: string;
+  location: string;
+};
 
 const EducationEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [experience, setExperience] = useState("");
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<EducationFormData>({
+    resolver: zodResolver(educationValidationSchema),
+  });
 
   function open() {
     setIsOpen(true);
@@ -20,6 +39,12 @@ const EducationEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  // Handle form submission
+  const onSubmit: SubmitHandler<EducationFormData> = (data) => {
+    console.log("Form Submitted:", data);
+    close();
+  };
 
   return (
     <>
@@ -55,33 +80,70 @@ const EducationEditModal = () => {
                           label="School name"
                           fullWidth
                           variant="outlined"
+                          color={errors.school ? "error" : "primary"}
+                          {...register("school")}
                         />
+                        {errors.school && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.school.message}
+                          </p>
+                        )}
                       </div>
                       <div className="w-full md:w-1/2">
                         <p className="mb-3">Field of study</p>
                         <TextField
                           id="outlined-basic"
-                          label="English literature"
+                          label="Field of study"
                           fullWidth
                           variant="outlined"
+                          color={errors.fieldOfStudy ? "error" : "primary"}
+                          {...register("fieldOfStudy")}
                         />
+                        {errors.fieldOfStudy && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.fieldOfStudy.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p>Graduation date</p>
+                        <p>Graduation Date</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DemoContainer
                             components={["DatePicker"]}
                             sx={{ pt: 1.5 }}
                           >
-                            <DatePicker
-                              label="End Date"
-                              views={["month", "year"]}
+                            <Controller
+                              name="graduationDate"
+                              control={control}
+                              render={({ field }) => (
+                                <DatePicker
+                                  {...field}
+                                  label="Graduation Date"
+                                  views={["month", "year"]}
+                                  value={
+                                    field.value
+                                      ? dayjs(field.value, "MM/YYYY")
+                                      : null
+                                  }
+                                  onChange={(date) =>
+                                    field.onChange(
+                                      dayjs(date).format("MM/YYYY")
+                                    )
+                                  }
+                                  format="MM/YYYY"
+                                />
+                              )}
                             />
                           </DemoContainer>
                         </LocalizationProvider>
+                        {errors.graduationDate && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.graduationDate.message}
+                          </p>
+                        )}
                       </div>
                       <div className="w-full md:w-1/2">
                         <p className="mb-3">Location</p>
@@ -90,7 +152,14 @@ const EducationEditModal = () => {
                           label="City, State"
                           fullWidth
                           variant="outlined"
+                          color={errors.location ? "error" : "primary"}
+                          {...register("location")}
                         />
+                        {errors.location && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.location.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -134,8 +203,7 @@ const EducationEditModal = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  //   onClick={handleClose}
-                  autoFocus
+                  onClick={handleSubmit(onSubmit)}
                 >
                   Save
                 </Button>

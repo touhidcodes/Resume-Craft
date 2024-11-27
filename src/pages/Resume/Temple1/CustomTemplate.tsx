@@ -7,7 +7,6 @@ import Summary from "../../../component/ResumeSection/CustomTemplate/Summary";
 import { FC } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 
-// Define types for the section data
 interface Section {
   name: string;
   component: FC;
@@ -18,7 +17,6 @@ interface SectionStatus {
   isActive: boolean;
 }
 
-// Define the type for the resumeSections object
 const resumeSections: { [key: string]: Section } = {
   Summary: {
     name: "Summary",
@@ -43,12 +41,10 @@ const resumeSections: { [key: string]: Section } = {
 };
 
 const CustomTemplate = () => {
-  // Define allSections with the SectionStatus type
   const allSections: SectionStatus[] = useAppSelector(
     (state) => state.resume.resume.allSections
   );
 
-  // Create the result array based on the active sections
   const result: Section[] = allSections.reduce(
     (acc, section) => {
       if (resumeSections[section.name] && section.isActive) {
@@ -66,7 +62,6 @@ const CustomTemplate = () => {
 
   return (
     <div className="min-h-[590px] w-full py-[30px] px-[50px] rounded-[9px] border my-[20px]">
-      {/* Render the active sections */}
       {result.map((section) => (
         <section.component key={section.name} />
       ))}

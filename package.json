@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.13.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^3.9.1",
     "@mui/icons-material": "^6.1.7",
     "@mui/material": "^6.1.7",
     "@mui/styled-engine-sc": "^6.1.7",
@@ -39,7 +40,8 @@
     "redux-persist": "^6.0.0",
     "sonner": "^1.7.0",
     "styled-components": "^6.1.13",
-    "swiper": "^11.1.15"
+    "swiper": "^11.1.15",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
