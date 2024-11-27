@@ -24,15 +24,6 @@ type ExperienceFormData = {
 const ExperienceEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [experience, setExperience] = useState("");
-
-  function open() {
-    setIsOpen(true);
-  }
-
-  function close() {
-    setIsOpen(false);
-  }
-
   const {
     register,
     handleSubmit,
@@ -41,6 +32,14 @@ const ExperienceEditModal = () => {
   } = useForm<ExperienceFormData>({
     resolver: zodResolver(experienceValidationSchema),
   });
+
+  function open() {
+    setIsOpen(true);
+  }
+
+  function close() {
+    setIsOpen(false);
+  }
 
   // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {

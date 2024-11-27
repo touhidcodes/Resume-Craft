@@ -67,7 +67,7 @@ const SectionSwitcher = () => {
         >
           {items
             .filter((section) => section.name !== "Summary")
-            .map((section, index) => (
+            .map((section) => (
               <Switcher
                 key={section.name}
                 section={section}

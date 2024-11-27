@@ -9,38 +9,20 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import TextEditor from "../shared/TextEditor";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs from "dayjs";
-
-const educationValidationSchema = z.object({
-  school: z.string().min(1, "School name is required"),
-  fieldOfStudy: z.string().min(1, "Field of study is required"),
-  graduationDate: z.string().min(1, "Graduation date is required"),
-  location: z.string().min(1, "Location is required"),
-  responsibilities: z.string().min(1, "Responsibilities are required"),
-});
+import { educationValidationSchema } from "../../zod/educationValidationSchema";
 
 type EducationFormData = {
   school: string;
   fieldOfStudy: string;
   graduationDate: string;
   location: string;
-  responsibilities: string;
 };
 
 const EducationEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [experience, setExperience] = useState("");
-
-  function open() {
-    setIsOpen(true);
-  }
-
-  function close() {
-    setIsOpen(false);
-  }
-
   const {
     register,
     handleSubmit,
@@ -49,6 +31,14 @@ const EducationEditModal = () => {
   } = useForm<EducationFormData>({
     resolver: zodResolver(educationValidationSchema),
   });
+
+  function open() {
+    setIsOpen(true);
+  }
+
+  function close() {
+    setIsOpen(false);
+  }
 
   // Handle form submission
   const onSubmit: SubmitHandler<EducationFormData> = (data) => {
