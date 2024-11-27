@@ -1,4 +1,4 @@
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import LanguagesEditModel from "../../Modal/LanguagesEditModel";
 
 const Languages = () => {
   return (
@@ -11,7 +11,7 @@ const Languages = () => {
         <p>Engilsh , Hinde , Bangla </p>
       </div>
 
-      <ResumeEditBtn handleClick={() => {}} />
+      <LanguagesEditModel />
     </div>
   );
 };

@@ -1,5 +1,4 @@
-import { Edit } from "@mui/icons-material";
-import SkillModal from "../../Modal/SkillModal";
+import SkillEditModal from "../../Modal/SkillEditModal";
 
 const Skill = () => {
   return (
@@ -10,7 +9,7 @@ const Skill = () => {
         <p>Javascript , Html , Css</p>
 
         <div className="hidden w-[35px] h-[35px] bg-[#FFFF] shadow-sm  group-hover:flex justify-center items-center rounded-[10px] absolute  top-1 right-1 duration-100 ease-in-out transition-all">
-          <SkillModal></SkillModal>
+          <SkillEditModal />
         </div>
       </div>
     </div>

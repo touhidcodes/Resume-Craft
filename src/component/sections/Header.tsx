@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import imgOne from "../../assets/header-img/header-img-1.webp";
 import imgTwo from "../../assets/header-img/header-img-2.webp";
 import imgThree from "../../assets/header-img/header-img-3.webp";
@@ -8,7 +7,7 @@ import imgSix from "../../assets/header-img/header-img-6.webp";
 import imgSeven from "../../assets/header-img/header-img-7.webp";
 import imgEight from "../../assets/header-img/header-img-8.webp";
 import headerImg from "../../assets/header-img/header-img.webp";
-import ChooseResumeTemplate from "../../modal/ChooseResumeTemplate";
+import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
 const Header = () => {
   return (

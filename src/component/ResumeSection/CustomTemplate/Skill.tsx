@@ -1,4 +1,4 @@
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import SkillEditModal from "../../Modal/SkillEditModal";
 
 const Skill = () => {
   return (
@@ -9,7 +9,7 @@ const Skill = () => {
         <p>Javascript , Html , Css</p>
       </div>
 
-      <ResumeEditBtn handleClick={() => {}} />
+      <SkillEditModal />
     </div>
   );
 };
