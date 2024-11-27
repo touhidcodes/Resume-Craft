@@ -1,9 +1,9 @@
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import HeaderEditModal from "../../Modal/HeaderEditModal";
 
 const Header = () => {
   return (
     <div className="font-roboto hover:bg-[#f8f9fa] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
-      <ResumeEditBtn handleClick={() => {}} />
+      <HeaderEditModal />
 
       <h1 className="text-[20px] leading-[30px] font-semibold ">
         Anonymous Dog

@@ -99,7 +99,7 @@ const Switcher = ({
   };
 
   return (
-    <div onClick={() => onChange(section)}>
+    <div>
       <div
         ref={setNodeRef}
         style={{ ...style }}
@@ -115,10 +115,12 @@ const Switcher = ({
 
         <div className="flex-1 flex justify-between items-center">
           <h3 className="font-medium">{section.name}</h3>
-          <Switch
-            checked={section.isActive}
-            inputProps={{ "aria-label": "controlled" }}
-          />
+          <button onClick={() => onChange(section)}>
+            <Switch
+              checked={section.isActive}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+          </button>
         </div>
       </div>
     </div>

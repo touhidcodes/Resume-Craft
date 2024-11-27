@@ -12,7 +12,6 @@ import ResumeBuilder from "../pages/builder/ResumeBuilder";
 import Templateone from "../pages/Resume/Temple1/Templateone";
 import NotFound from "../pages/notFound/NotFound";
 
-
 const router = createBrowserRouter([
   {
     path: "/",

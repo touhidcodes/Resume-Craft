@@ -20,7 +20,6 @@ const NavBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        console.log(window.screenX);
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -36,7 +35,7 @@ const NavBar = () => {
   }, []);
   return (
     <nav
-      className={`z-[999] sticky top-0  w-full transition-all duration-300 ${
+      className={`z-50 sticky top-0  w-full transition-all duration-300 ${
         isScrolled
           ? "border-b border-gray-300 bg-white"
           : "border-none bg-[#F7F9FC]"
