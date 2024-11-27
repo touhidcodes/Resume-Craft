@@ -10,7 +10,7 @@ import { adminPath } from "./adminroute";
 import { userPath } from "./userroute";
 import Templateone from "../pages/Resume/Temple1/Templateone";
 import NotFound from "../pages/notFound/NotFound";
-
+import ResumeBuilderLayout from "../component/layout/ResumeBuilderLayout";
 
 const router = createBrowserRouter([
   {
