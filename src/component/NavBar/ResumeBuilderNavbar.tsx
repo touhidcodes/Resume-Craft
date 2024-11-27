@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import ManageSections from "../builder/ManageSections";
 import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
+import ManageSectionsSidebar from "../layout/ManageSectionsSidebar";
 
 const ResumeBuilderNavbar = () => {
   return (
@@ -15,7 +15,8 @@ const ResumeBuilderNavbar = () => {
           color="secondary"
           startIcon={<GridViewOutlinedIcon />}
         />
-        <ManageSections />
+
+        <ManageSectionsSidebar />
       </div>
       <Button
         color="secondary"
