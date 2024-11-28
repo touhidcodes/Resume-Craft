@@ -2,7 +2,7 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../builder/MultipleSelect";
 
 const SkillEditModal = () => {
@@ -49,7 +49,17 @@ const SkillEditModal = () => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
                   <div className="p-5 col-span-7 space-y-5">
                     <h2>What are your stand-out skills?</h2>
+                    <div>
+                      <p className="mb-3">Category</p>
+                      <TextField
+                        id="outlined-basic"
+                        label="Category"
+                        fullWidth
+                        variant="outlined"
+                      />
+                    </div>
                     <MultipleSelect
+                      placeholder="Type you skill and press enter..."
                       label="Select Skills"
                       setValue={setSkills}
                     />

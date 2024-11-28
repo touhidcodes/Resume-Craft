@@ -14,7 +14,7 @@ import { experienceValidationSchema } from "../../zod/experienceValidationSchema
 import dayjs from "dayjs";
 
 type ExperienceFormData = {
-  employer: string;
+  companyName: string;
   jobTitle: string;
   startDate: string;
   endDate: string;
@@ -43,7 +43,8 @@ const ExperienceEditModal = () => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
-    console.log("Form Submitted:", data);
+    // console.log("Form Submitted:", data);
+    console.log(experience);
     close();
   };
 
@@ -75,18 +76,18 @@ const ExperienceEditModal = () => {
                   <div className="p-5 col-span-7 space-y-5">
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Employer</p>
+                        <p className="mb-3">Company Name</p>
                         <TextField
                           id="outlined-basic"
-                          label="Employer"
+                          label="Company Name"
                           fullWidth
                           variant="outlined"
-                          color={errors.employer ? "error" : "primary"}
-                          {...register("employer")}
+                          color={errors.companyName ? "error" : "primary"}
+                          {...register("companyName")}
                         />
-                        {errors.employer && (
+                        {errors.companyName && (
                           <p className="text-sm text-red-500 mt-1">
-                            {errors.employer.message}
+                            {errors.companyName.message}
                           </p>
                         )}
                       </div>

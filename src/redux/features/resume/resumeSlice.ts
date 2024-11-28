@@ -1,193 +1,133 @@
-// type TResume
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   resume: {
-    id: "646ef3b5ad1d3e2b1458f960",
-    userId: "646ef3b5ad1d3e2b1458f961",
-    templateId: "template_001",
+    templateId: "b3f932pae3fba893",
+    userId: "b3f932pae3fba893",
+    resumeName: "John Doe's Resume",
     allSections: [
       { name: "Summary", isActive: true },
       { name: "Experience", isActive: true },
       { name: "Skills", isActive: true },
-      { name: "Education", isActive: false },
-      { name: "Language", isActive: false },
-      { name: "Certificate", isActive: false },
-      { name: "Awards", isActive: false },
+      { name: "Education", isActive: true },
+      { name: "Language", isActive: true },
+      { name: "Certificate", isActive: true },
+      { name: "Awards", isActive: true },
     ],
     personalInfo: {
-      fullName: "John Doe",
-      jobTitle: "Software Engineer",
-      contact: {
-        email: "john.doe@example.com",
-        phone: "+1234567890",
-        website: "https://johndoe.dev",
-        linkedin: "https://linkedin.com/in/johndoe",
-        github: "https://github.com/johndoe",
+      id: "b3f932pae3fba893",
+      firstName: "John",
+      lastName: "Doe",
+      location: "San Francisco, CA",
+      title: "Software Engineer",
+      email: "john.doe@example.com",
+      phone: "+1234567890",
+    },
+    summary:
+      "<p>Experienced Software Engineer with a strong background in web development and software solutions. Passionate about building innovative applications using modern technologies.</p>",
+    hobby: ["Coding", "Reading", "Travelling"],
+    skills: [
+      {
+        id: "b3f932pae3fba893",
+        category: "Programming Languages",
+        skill: ["JavaScript", "Python", "Java"],
       },
-      address: {
-        street: "123 Main St",
-        city: "New York",
-        state: "NY",
-        zip: "10001",
-        country: "USA",
+      {
+        id: "c4f932pae3fba894",
+        category: "Web Development",
+        skill: ["HTML", "CSS", "React"],
       },
-    },
-    profileSummary:
-      "Passionate Software Engineer with 5+ years of experience in full-stack development and cloud computing.",
-    design: {
-      font: "Arial",
-      themeColor: "#4CAF50",
-      backgroundColor: "#FFFFFF",
-      sectionStyles: {
-        header: {
-          fontSize: "24px",
-          color: "#000000",
-        },
-        titles: {
-          fontSize: "18px",
-          color: "#4CAF50",
-        },
+    ],
+    experience: [
+      {
+        id: "b3f932pae3fba893",
+        companyName: "TechCorp",
+        jobTitle: "Senior Developer",
+        startDate: "2020-06-01T00:00:00Z",
+        endDate: "2020-06-01T00:00:00Z",
+        location: "San Francisco, CA",
+        responsibilities:
+          "<ol><li>Educated patients on their conditions and prescribed medications</li><li>Educated patients on their conditions and prescribed medications</li></ol>",
       },
-    },
-    lastUpdated: "2024-11-24T12:00:00Z",
-    WorkExperience: {
-      id: "646ef3b5ad1d3e2b1458f962",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Professional",
-      title: "Work Experience",
-      items: [
-        {
-          companyName: "TechCorp",
-          jobTitle: "Senior Developer",
-          startDate: "2020-06-01T00:00:00Z",
-          endDate: null,
-          isCurrent: true,
-          location: "San Francisco, CA",
-          responsibilities: [
-            "Developed scalable web applications using React and Node.js.",
-            "Led a team of developers in Agile sprints.",
-            "Improved application performance by 30%.",
-          ],
-        },
-        {
-          companyName: "Tech B",
-          jobTitle: "Senior Developer",
-          startDate: "2020-06-01T00:00:00Z",
-          endDate: null,
-          isCurrent: true,
-          location: "San Francisco, CA",
-          responsibilities: [
-            "Developed scalable web applications using React and Node.js.",
-            "Led a team of developers in Agile sprints.",
-            "Improved application performance by 30%.",
-          ],
-        },
-      ],
-    },
-    Education: {
-      id: "646ef3b5ad1d3e2b1458f963",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Academic",
-      title: "Education",
-      items: [
-        {
-          institution: "University of Tech",
-          degree: "BSc in Computer Science",
-          startDate: "2016-09-01T00:00:00Z",
-          endDate: "2020-05-15T00:00:00Z",
-          location: "Boston, MA",
-          description:
-            "Graduated with honors, focusing on software engineering and AI.",
-        },
-      ],
-    },
-    Skill: {
-      id: "646ef3b5ad1d3e2b1458f964",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Technical",
-      title: "Skills",
-      items: [
-        {
-          category: "Programming Languages",
-          skills: ["JavaScript", "Python", "Java"],
-        },
-        {
-          category: "Tools",
-          skills: ["Git", "Docker", "Jenkins"],
-        },
-      ],
-    },
-    Certification: {
-      id: "646ef3b5ad1d3e2b1458f965",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Professional",
-      title: "Certifications",
-      items: [
-        {
-          name: "AWS Certified Solutions Architect",
-          issuer: "Amazon Web Services",
-          issueDate: "2023-01-10T00:00:00Z",
-          expirationDate: "2026-01-10T00:00:00Z",
-          credentialId: "ABC123456",
-        },
-      ],
-    },
-    Project: {
-      id: "646ef3b5ad1d3e2b1458f966",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Development",
-      title: "Projects",
-      items: [
-        {
-          name: "Portfolio Website",
-          description:
-            "Built a personal portfolio website to showcase projects and skills.",
-          technologies: ["React", "Tailwind CSS", "Vercel"],
-          role: "Developer",
-          link: "https://johndoe.dev",
-        },
-      ],
-    },
-    Award: {
-      id: "646ef3b5ad1d3e2b1458f967",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Recognition",
-      title: "Awards",
-      items: [
-        {
-          name: "Employee of the Year",
-          organization: "TechCorp",
-          year: 2022,
-          description:
-            "Recognized for outstanding performance and contributions.",
-        },
-      ],
-    },
-    Language: {
-      id: "646ef3b5ad1d3e2b1458f968",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Linguistic",
-      title: "Languages",
-      items: [
-        {
-          name: "English",
-          proficiency: "Native",
-        },
-        {
-          name: "Spanish",
-          proficiency: "Intermediate",
-        },
-      ],
-    },
-    Hobby: {
-      id: "646ef3b5ad1d3e2b1458f969",
-      templateId: "646ef3b5ad1d3e2b1458f960",
-      type: "Personal",
-      title: "Hobbies",
-      items: ["Photography", "Cycling", "Chess"],
-    },
+      {
+        id: "d5f932pae3fba895",
+        companyName: "InnovateX",
+        jobTitle: "Frontend Developer",
+        startDate: "2018-03-01T00:00:00Z",
+        endDate: "2020-05-30T00:00:00Z",
+        location: "Los Angeles, CA",
+        responsibilities:
+          "<ul><li>Educated patients on their conditions and prescribed medications</li><li>Educated patients on their conditions and prescribed medications</li></ul>",
+      },
+    ],
+    education: [
+      {
+        id: "b3f932pae3fba893",
+        institution: "University of Tech",
+        fieldOfStudy: "BSc in Computer Science",
+        startDate: "2016-09-01T00:00:00Z",
+        endDate: "2020-05-15T00:00:00Z",
+        location: "Boston, MA",
+        description: "Studied various programming languages and algorithms.",
+      },
+      {
+        id: "d5f932pae3fba895",
+        institution: "Tech University",
+        fieldOfStudy: "MSc in Data Science",
+        startDate: "2021-09-01T00:00:00Z",
+        endDate: "2023-05-15T00:00:00Z",
+        location: "San Francisco, CA",
+        description: "Focused on machine learning, big data, and AI research.",
+      },
+    ],
+    language: [
+      {
+        id: "b3f932pae3fba893",
+        name: "English",
+        proficiency: "Native",
+      },
+      {
+        id: "d5f932pae3fba896",
+        name: "Spanish",
+        proficiency: "Intermediate",
+      },
+    ],
+    award: [
+      {
+        id: "b3f932pae3fba893",
+        name: "Employee of the Year",
+        organization: "TechCorp",
+        year: 2022,
+        description:
+          "Recognized for outstanding contributions to the software development team.",
+      },
+      {
+        id: "d5f932pae3fba896",
+        name: "Best Innovator",
+        organization: "InnovateX",
+        year: 2021,
+        description:
+          "Awarded for innovative contributions to the company's tech solutions.",
+      },
+    ],
+    certificate: [
+      {
+        id: "b3f932pae3fba893",
+        name: "AWS Certified Solutions Architect",
+        issuer: "Amazon Web Services",
+        issueDate: "2023-01-10T00:00:00Z",
+        expirationDate: "2026-01-10T00:00:00Z",
+        credentialId: "ABC123456",
+      },
+      {
+        id: "d5f932pae3fba897",
+        name: "Google Certified Professional Cloud Architect",
+        issuer: "Google Cloud",
+        issueDate: "2023-04-15T00:00:00Z",
+        expirationDate: "2026-04-15T00:00:00Z",
+        credentialId: "XYZ123456",
+      },
+    ],
   },
 };
 

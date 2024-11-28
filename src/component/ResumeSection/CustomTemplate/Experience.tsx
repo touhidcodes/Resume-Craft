@@ -1,38 +1,37 @@
+import { useAppSelector } from "../../../redux/hooks";
 import ExperienceEditModal from "../../Modal/ExperienceEditModal";
+import HtmlRenderer from "../../shared/HtmlRenderer";
 
 const Experience = () => {
+  const experience = useAppSelector((state) => state.resume.resume.experience);
+
   return (
     <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Experience
       </h1>
       <div className="w-[100%] h-0.5 bg-gray-400 mb-1"></div>
-      <div className=" text-[#6E6E6E] text-[13px] space-y-2">
-        {[...Array(2)].map((experince, index) => (
+      <div className=" text-[#6E6E6E] text-[13px] space-y-3.5">
+        {experience.map((exp) => (
           <div
-            key={index}
-            className="text-neutral-600 group hover:bg-[#f8f9fa] duration-100 ease-in-out transition-all leading-[17px] relative"
+            key={exp.id}
+            className="text-neutral-700 group hover:bg-[#f8f9fa] duration-100 ease-in-out transition-all leading-[17px] relative"
           >
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
-              <h3 className="">Emonics</h3>
-              <span className="w-0.5 h-3.5 bg-neutral-600"></span>
-              <h3>Dhaka Mirpur 12204</h3>
+              <h3 className="">{exp.companyName}</h3>
+              <span className="w-0.5 h-3.5 bg-neutral-700"></span>
+              <h3>{exp.location}</h3>
             </div>
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
-              <h3>Frontend Developer </h3>
-              <span className="w-0.5 h-3.5 bg-neutral-600"></span>
+              <h3>{exp.jobTitle} </h3>
+              <span className="w-0.5 h-3.5 bg-neutral-700"></span>
               <span>01/2024</span>
               <span>-</span>
               <span> 05/2024</span>
             </div>
-            <ul className="list-disc list-inside text-[#6E6E6E]">
-              <li>
-                Educated patients on their conditions and prescribed medications
-              </li>
-              <li>
-                Educated patients on their conditions and prescribed medications
-              </li>
-            </ul>
+
+            <HtmlRenderer text={exp.responsibilities} />
+
             <ExperienceEditModal />
           </div>
         ))}

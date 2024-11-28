@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 export const experienceValidationSchema = z
   .object({
-    employer: z.string().min(1, "Employer is required"),
+    companyName: z.string().min(1, "Company name is required"),
     jobTitle: z.string().min(1, "Job title is required"),
     startDate: z.string().min(1, "Start date is required"),
     endDate: z.string().min(1, "End date is required"),
