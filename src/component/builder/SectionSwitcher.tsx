@@ -51,18 +51,29 @@ const SectionSwitcher = () => {
 
   return (
     <div className="mt-5">
+      <div className="flex-1 flex justify-between items-center border border-[#ccc] p-2.5 mb-2 rounded">
+        <h3 className="font-medium pl-10">{allSections[0].name}</h3>
+        <button onClick={() => handleChange(allSections[0])}>
+          <Switch
+            checked={allSections[0].isActive}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        </button>
+      </div>
       <DndContext onDragEnd={handleDragEnd}>
         <SortableContext
           items={items.map((item) => item.name)}
           strategy={verticalListSortingStrategy}
         >
-          {items.map((section) => (
-            <Switcher
-              key={section.name}
-              section={section}
-              onChange={handleChange}
-            />
-          ))}
+          {items
+            .filter((section) => section.name !== "Summary")
+            .map((section) => (
+              <Switcher
+                key={section.name}
+                section={section}
+                onChange={handleChange}
+              />
+            ))}
         </SortableContext>
       </DndContext>
     </div>
@@ -93,35 +104,33 @@ const Switcher = ({
     transition,
     padding: "10px",
     marginBottom: "8px",
-    backgroundColor: isDragging ? "#d3d3d3" : "#f4f4f4",
+    backgroundColor: isDragging ? "#f4f4f4" : "",
     border: "1px solid #ccc",
     borderRadius: "4px",
   };
 
   return (
-    <div>
-      <div
-        ref={setNodeRef}
-        style={{ ...style }}
-        className="flex justify-between items-center gap-x-2"
+    <div
+      ref={setNodeRef}
+      style={{ ...style }}
+      className="flex justify-between items-center gap-x-2"
+    >
+      <button
+        {...listeners}
+        {...attributes}
+        className="flex items-center py-1.5 px-1 cursor-grab"
       >
-        <button
-          {...listeners}
-          {...attributes}
-          className="flex items-center py-1.5 px-1 cursor-grab"
-        >
-          <DragIndicatorIcon sx={{ color: "rgba(0, 0, 0, 0.5)" }} />
-        </button>
+        <DragIndicatorIcon sx={{ color: "rgba(0, 0, 0, 0.5)" }} />
+      </button>
 
-        <div className="flex-1 flex justify-between items-center">
-          <h3 className="font-medium">{section.name}</h3>
-          <button onClick={() => onChange(section)}>
-            <Switch
-              checked={section.isActive}
-              inputProps={{ "aria-label": "controlled" }}
-            />
-          </button>
-        </div>
+      <div className="flex-1 flex justify-between items-center">
+        <h3 className="font-medium">{section.name}</h3>
+        <button onClick={() => onChange(section)}>
+          <Switch
+            checked={section.isActive}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        </button>
       </div>
     </div>
   );

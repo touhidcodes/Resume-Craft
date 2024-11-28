@@ -3,15 +3,35 @@ import { useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/index";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import TextEditor from "../shared/TextEditor";
+import { experienceValidationSchema } from "../../zod/experienceValidationSchema";
+import dayjs from "dayjs";
+
+type ExperienceFormData = {
+  employer: string;
+  jobTitle: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+};
 
 const ExperienceEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [experience, setExperience] = useState("");
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ExperienceFormData>({
+    resolver: zodResolver(experienceValidationSchema),
+  });
 
   function open() {
     setIsOpen(true);
@@ -20,6 +40,12 @@ const ExperienceEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  // Handle form submission
+  const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
+    console.log("Form Submitted:", data);
+    close();
+  };
 
   return (
     <>
@@ -52,41 +78,107 @@ const ExperienceEditModal = () => {
                         <p className="mb-3">Employer</p>
                         <TextField
                           id="outlined-basic"
-                          label="Company A"
+                          label="Employer"
                           fullWidth
                           variant="outlined"
+                          color={errors.employer ? "error" : "primary"}
+                          {...register("employer")}
                         />
+                        {errors.employer && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.employer.message}
+                          </p>
+                        )}
                       </div>
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Role or job title</p>
+                        <p className="mb-3">Job Title</p>
                         <TextField
                           id="outlined-basic"
-                          label="Frontend Developer"
+                          label="Job Title"
                           fullWidth
                           variant="outlined"
+                          color={errors.jobTitle ? "error" : "primary"}
+                          {...register("jobTitle")}
                         />
+                        {errors.jobTitle && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.jobTitle.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div>
-                      <p>Start date and end date</p>
-                      <div className="flex flex-col md:flex-row gap-5 mt-3">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label="End Date"
-                              views={["month", "year"]}
-                            />
-                          </DemoContainer>
-                        </LocalizationProvider>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label="End Date"
-                              views={["month", "year"]}
-                            />
-                          </DemoContainer>
-                        </LocalizationProvider>
+                      <p>Start date and End date</p>
+                      <div className="flex flex-col md:flex-row gap-5 mt-1">
+                        <div>
+                          <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={["DatePicker"]}>
+                              <Controller
+                                name="startDate"
+                                control={control}
+                                render={({ field }) => (
+                                  <DatePicker
+                                    {...field}
+                                    label="Start Date"
+                                    views={["month", "year"]}
+                                    format="MM/YYYY"
+                                    value={
+                                      field.value
+                                        ? dayjs(field.value, "MM/YYYY")
+                                        : null
+                                    }
+                                    onChange={(date) => {
+                                      field.onChange(
+                                        dayjs(date).format("MM/YYYY")
+                                      );
+                                    }}
+                                  />
+                                )}
+                              />
+                            </DemoContainer>
+                          </LocalizationProvider>
+                          {errors.startDate && (
+                            <p className="text-sm text-red-500 mt-1">
+                              {errors.startDate.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          {" "}
+                          <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={["DatePicker"]}>
+                              <Controller
+                                name="endDate"
+                                control={control}
+                                render={({ field }) => (
+                                  <DatePicker
+                                    {...field}
+                                    label="End Date"
+                                    views={["month", "year"]}
+                                    format="MM/YYYY"
+                                    value={
+                                      field.value
+                                        ? dayjs(field.value, "MM/YYYY")
+                                        : null
+                                    }
+                                    onChange={(date) => {
+                                      field.onChange(
+                                        dayjs(date).format("MM/YYYY")
+                                      );
+                                    }}
+                                  />
+                                )}
+                              />
+                            </DemoContainer>
+                          </LocalizationProvider>
+                          {errors.endDate && (
+                            <p className="text-sm text-red-500 mt-1">
+                              {errors.endDate.message}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -97,7 +189,14 @@ const ExperienceEditModal = () => {
                         label="City, state"
                         fullWidth
                         variant="outlined"
+                        color={errors.location ? "error" : "primary"}
+                        {...register("location")}
                       />
+                      {errors.location && (
+                        <p className="text-sm text-red-500 mt-1">
+                          {errors.location.message}
+                        </p>
+                      )}
                     </div>
 
                     <div>
@@ -139,12 +238,7 @@ const ExperienceEditModal = () => {
                 <Button variant="outlined" autoFocus onClick={close}>
                   Cancel
                 </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  //   onClick={handleClose}
-                  autoFocus
-                >
+                <Button variant="contained" onClick={handleSubmit(onSubmit)}>
                   Save
                 </Button>
               </div>
