@@ -6,7 +6,7 @@ const Header = () => {
     (state) => state.resume.resume.personalInfo
   );
   return (
-    <div className="font-roboto hover:bg-[#f8f9fa] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
+    <div className="font-roboto hover:bg-primary/[.04] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
       <HeaderEditModal />
       <h1 className="text-2xl font-bold">
         {personalInfo.firstName} {personalInfo.lastName}

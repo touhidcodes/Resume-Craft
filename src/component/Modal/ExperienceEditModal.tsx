@@ -76,7 +76,9 @@ const ExperienceEditModal = () => {
                   <div className="p-5 col-span-7 space-y-5">
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Company Name</p>
+                        <p className="mb-3">
+                          Company Name <span className="text-red-500">*</span>
+                        </p>
                         <TextField
                           id="outlined-basic"
                           label="Company Name"
@@ -92,7 +94,9 @@ const ExperienceEditModal = () => {
                         )}
                       </div>
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Job Title</p>
+                        <p className="mb-3">
+                          Job Title <span className="text-red-500">*</span>
+                        </p>
                         <TextField
                           id="outlined-basic"
                           label="Job Title"
@@ -109,82 +113,79 @@ const ExperienceEditModal = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <p>Start date and End date</p>
-                      <div className="flex flex-col md:flex-row gap-5 mt-1">
-                        <div>
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={["DatePicker"]}>
-                              <Controller
-                                name="startDate"
-                                control={control}
-                                render={({ field }) => (
-                                  <DatePicker
-                                    {...field}
-                                    label="Start Date"
-                                    views={["month", "year"]}
-                                    format="MM/YYYY"
-                                    value={
-                                      field.value
-                                        ? dayjs(field.value, "MM/YYYY")
-                                        : null
-                                    }
-                                    onChange={(date) => {
-                                      field.onChange(
-                                        dayjs(date).format("MM/YYYY")
-                                      );
-                                    }}
-                                  />
-                                )}
-                              />
-                            </DemoContainer>
-                          </LocalizationProvider>
-                          {errors.startDate && (
-                            <p className="text-sm text-red-500 mt-1">
-                              {errors.startDate.message}
-                            </p>
-                          )}
-                        </div>
+                    <div className="flex flex-col md:flex-row gap-5 mt-1">
+                      <div>
+                        <p>
+                          Start date <span className="text-red-500">*</span>
+                        </p>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <Controller
+                              name="startDate"
+                              control={control}
+                              render={({ field }) => (
+                                <DatePicker
+                                  {...field}
+                                  label="Start Date"
+                                  views={["month", "year"]}
+                                  format="MM/YYYY"
+                                  value={
+                                    field.value
+                                      ? dayjs(field.value, "MM/YYYY")
+                                      : null
+                                  }
+                                  onChange={(date) => {
+                                    field.onChange(
+                                      dayjs(date).format("MM/YYYY")
+                                    );
+                                  }}
+                                />
+                              )}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                        {errors.startDate && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.startDate.message}
+                          </p>
+                        )}
+                      </div>
 
-                        <div>
-                          {" "}
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={["DatePicker"]}>
-                              <Controller
-                                name="endDate"
-                                control={control}
-                                render={({ field }) => (
-                                  <DatePicker
-                                    {...field}
-                                    label="End Date"
-                                    views={["month", "year"]}
-                                    format="MM/YYYY"
-                                    value={
-                                      field.value
-                                        ? dayjs(field.value, "MM/YYYY")
-                                        : null
-                                    }
-                                    onChange={(date) => {
-                                      field.onChange(
-                                        dayjs(date).format("MM/YYYY")
-                                      );
-                                    }}
-                                  />
-                                )}
-                              />
-                            </DemoContainer>
-                          </LocalizationProvider>
-                          {errors.endDate && (
-                            <p className="text-sm text-red-500 mt-1">
-                              {errors.endDate.message}
-                            </p>
-                          )}
-                        </div>
+                      <div>
+                        <p>End date</p>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <Controller
+                              name="endDate"
+                              control={control}
+                              render={({ field }) => (
+                                <DatePicker
+                                  {...field}
+                                  label="End Date"
+                                  views={["month", "year"]}
+                                  format="MM/YYYY"
+                                  value={
+                                    field.value
+                                      ? dayjs(field.value, "MM/YYYY")
+                                      : null
+                                  }
+                                  onChange={(date) => {
+                                    field.onChange(
+                                      dayjs(date).format("MM/YYYY")
+                                    );
+                                  }}
+                                />
+                              )}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
                       </div>
                     </div>
 
                     <div>
-                      <p className="mb-3">Location</p>
+                      <p className="mb-3">
+                        Location <span className="text-red-500">*</span>
+                      </p>
                       <TextField
                         id="outlined-basic"
                         label="City, state"

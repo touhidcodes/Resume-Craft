@@ -15,7 +15,7 @@ const Experience = () => {
         {experience.map((exp) => (
           <div
             key={exp.id}
-            className="text-neutral-700 group hover:bg-[#f8f9fa] duration-100 ease-in-out transition-all leading-[17px] relative"
+            className="text-neutral-700 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
           >
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
               <h3 className="">{exp.companyName}</h3>

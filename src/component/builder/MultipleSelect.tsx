@@ -22,7 +22,9 @@ const MultipleSelect = ({
 
   return (
     <div>
-      <p className="mb-3">{label}</p>
+      <p className="mb-3">
+        {label} <span className="text-red-500">*</span>
+      </p>
       <TextField
         id="outlined-basic"
         label={label}

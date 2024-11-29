@@ -11,7 +11,7 @@ const Education = () => {
         {[...Array(2)].map((experince, index) => (
           <div
             key={index}
-            className="text-neutral-600 group hover:bg-[#f8f9fa] duration-100 ease-in-out transition-all leading-[17px] relative"
+            className="text-neutral-600 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
           >
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
               <h3 className="">Emonics</h3>

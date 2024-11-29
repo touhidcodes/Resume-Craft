@@ -50,7 +50,9 @@ const SkillEditModal = () => {
                   <div className="p-5 col-span-7 space-y-5">
                     <h2>What are your stand-out skills?</h2>
                     <div>
-                      <p className="mb-3">Category</p>
+                      <p className="mb-3">
+                        Category <span className="text-red-500">*</span>
+                      </p>
                       <TextField
                         id="outlined-basic"
                         label="Category"
@@ -60,7 +62,7 @@ const SkillEditModal = () => {
                     </div>
                     <MultipleSelect
                       placeholder="Type you skill and press enter..."
-                      label="Select Skills"
+                      label="Skills"
                       setValue={setSkills}
                     />
                     <div className="mt-5 flex items-center gap-4 flex-wrap">

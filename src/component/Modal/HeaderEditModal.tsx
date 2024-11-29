@@ -9,11 +9,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 // Define the form data type
 type FormData = {
-  firstName: string;
-  lastName: string;
+  userName: string;
+  title: string;
   email: string;
   phone: string;
   location: string;
+  website: string;
+  linkedin: string;
+  github: string;
 };
 
 const HeaderEditModal = () => {
@@ -67,43 +70,44 @@ const HeaderEditModal = () => {
               <div className="flex-1 overflow-y-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
                   <div className="p-5 col-span-7 space-y-5">
-                    <div className="flex flex-col md:flex-row gap-5">
-                      <div className="w-full md:w-1/2">
-                        <p className="mb-3">First name</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="First name"
-                          fullWidth
-                          variant="outlined"
-                          color={
-                            errors?.firstName?.message ? "error" : "primary"
-                          }
-                          {...register("firstName")}
-                        />
-                        <p className="text-sm text-red-500 mt-1">
-                          {errors?.firstName?.message as string}
-                        </p>
-                      </div>
-                      <div className="w-full md:w-1/2">
-                        <p className="mb-3">Last name</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="Last name"
-                          fullWidth
-                          variant="outlined"
-                          {...register("lastName")}
-                          color={
-                            errors?.lastName?.message ? "error" : "primary"
-                          }
-                        />
-                        <p className="text-sm text-red-500 mt-1">
-                          {errors?.lastName?.message as string}
-                        </p>
-                      </div>
+                    <div className="w-full">
+                      <p className="mb-3">
+                        Name <span className="text-red-500">*</span>
+                      </p>
+                      <TextField
+                        id="outlined-basic"
+                        label="Your name"
+                        fullWidth
+                        variant="outlined"
+                        {...register("userName")}
+                        color={errors?.userName?.message ? "error" : "primary"}
+                      />
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors?.userName?.message as string}
+                      </p>
+                    </div>
+                    <div className="w-full">
+                      <p className="mb-3">
+                        Title <span className="text-red-500">*</span>
+                      </p>
+                      <TextField
+                        id="outlined-basic"
+                        label="Resume title"
+                        placeholder="ft. Software Engineer"
+                        fullWidth
+                        variant="outlined"
+                        {...register("title")}
+                        color={errors?.title?.message ? "error" : "primary"}
+                      />
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors?.title?.message as string}
+                      </p>
                     </div>
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Email</p>
+                        <p className="mb-3">
+                          Email <span className="text-red-500">*</span>
+                        </p>
                         <TextField
                           id="outlined-basic"
                           label="Email"
@@ -117,10 +121,12 @@ const HeaderEditModal = () => {
                         </p>
                       </div>
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Phone number</p>
+                        <p className="mb-3">
+                          Phone <span className="text-red-500">*</span>
+                        </p>
                         <TextField
                           id="outlined-basic"
-                          label="Phone"
+                          label="Phone number"
                           fullWidth
                           variant="outlined"
                           {...register("phone")}
@@ -131,19 +137,59 @@ const HeaderEditModal = () => {
                         </p>
                       </div>
                     </div>
-                    <div>
-                      <p className="mb-3">Location</p>
-                      <TextField
-                        id="outlined-basic"
-                        label="Location"
-                        fullWidth
-                        variant="outlined"
-                        {...register("location")}
-                        color={errors?.location?.message ? "error" : "primary"}
-                      />
-                      <p className="text-sm text-red-500 mt-1">
-                        {errors?.location?.message as string}
-                      </p>
+
+                    <div className="flex flex-col md:flex-row gap-5">
+                      <div className="w-full md:w-1/2">
+                        <p className="mb-3">
+                          Location <span className="text-red-500">*</span>
+                        </p>
+                        <TextField
+                          id="outlined-basic"
+                          label="Location"
+                          fullWidth
+                          variant="outlined"
+                          {...register("location")}
+                          color={
+                            errors?.location?.message ? "error" : "primary"
+                          }
+                        />
+                        <p className="text-sm text-red-500 mt-1">
+                          {errors?.location?.message as string}
+                        </p>
+                      </div>
+                      <div className="w-full md:w-1/2">
+                        <p className="mb-3">Website</p>
+                        <TextField
+                          id="outlined-basic"
+                          label="Website link"
+                          fullWidth
+                          variant="outlined"
+                          {...register("website")}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row gap-5">
+                      <div className="w-full md:w-1/2">
+                        <p className="mb-3">Linkedin</p>
+                        <TextField
+                          id="outlined-basic"
+                          label="Linkedin profile link"
+                          fullWidth
+                          variant="outlined"
+                          {...register("linkedin")}
+                        />
+                      </div>
+                      <div className="w-full md:w-1/2">
+                        <p className="mb-3">Github</p>
+                        <TextField
+                          id="outlined-basic"
+                          label="Github link"
+                          fullWidth
+                          variant="outlined"
+                          {...register("github")}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
