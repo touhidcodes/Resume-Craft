@@ -14,7 +14,7 @@ const Languages = () => {
       <div className="space-x-10 flex items-center">
         {languages.map((language) => (
           <div
-            key={language.id}
+            key={language.name}
             className=" text-neutral-700 text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative  duration-100 ease-in-out transition-all"
           >
             <p>

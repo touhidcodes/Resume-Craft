@@ -82,12 +82,10 @@ const initialState = {
     ],
     language: [
       {
-        id: "b3f932pae3fba893",
         name: "English",
         proficiency: "Native",
       },
       {
-        id: "d5f932pae3fba896",
         name: "Spanish",
         proficiency: "Intermediate",
       },

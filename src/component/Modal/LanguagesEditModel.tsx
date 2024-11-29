@@ -1,18 +1,26 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
-import { Button } from "@mui/material";
-import MultipleSelect from "../builder/MultipleSelect";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import { useAppSelector } from "../../redux/hooks";
+
+type TFormData = {
+  name: string;
+  proficiency: string;
+};
 
 const LanguageEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [languages, setLanguages] = useState<string[]>([]);
-
-  const handleRemoveLanguage = (language: string) => {
-    const filteredLanguages = languages.filter((item) => item !== language);
-    setLanguages(filteredLanguages);
-  };
+  const languages = useAppSelector((state) => state.resume.resume.language);
+  const [formData, setFormData] = useState<TFormData[]>(languages);
 
   function open() {
     setIsOpen(true);
@@ -21,6 +29,37 @@ const LanguageEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  const handleInputChange = (
+    index: number,
+    field: "name" | "proficiency",
+    value: string
+  ): void => {
+    const updatedFormData = [...formData];
+    updatedFormData[index] = {
+      ...updatedFormData[index],
+      [field]: value,
+    };
+    setFormData(updatedFormData);
+  };
+
+  console.log(formData);
+
+  // Handle form submission
+  const handleSubmit = (event: FormEvent): void => {
+    event.preventDefault();
+
+    // Dispatch the action to update the languages in Redux state
+    // dispatch(
+    //   updateLanguages(
+    //     formData.map((lang, index) => ({
+    //       name: lang.name,
+    //       proficiency: lang.proficiency,
+    //       index,
+    //     }))
+    //   )
+    // );
+  };
 
   return (
     <>
@@ -47,24 +86,63 @@ const LanguageEditModal = () => {
               </DialogTitle>
               <div className="flex-1 overflow-y-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-                  <div className="p-5 col-span-7 space-y-5">
-                    <h2>What languages do you speak?</h2>
-                    <MultipleSelect
-                      label="Select Language"
-                      setValue={setLanguages}
-                    />
-                    <div className="mt-5 flex items-center gap-4 flex-wrap">
-                      {languages.map((skill) => (
-                        <button className="flex items-center gap-x-3 text-sm border rounded-md py-1.5 px-3 cursor-default">
-                          <span>{skill}</span>
-                          <Close
-                            fontSize="small"
-                            onClick={() => handleRemoveLanguage(skill)}
-                            sx={{ cursor: "pointer" }}
-                          />
-                        </button>
+                  <div className="p-5 col-span-7">
+                    <form className="space-y-5">
+                      {languages.map((language, index) => (
+                        <div
+                          key={language.name}
+                          className="flex flex-col items-center md:flex-row gap-5 mt-1"
+                        >
+                          <div className="w-full md:w-1/2">
+                            <p className="mb-3">
+                              Language <span className="text-red-500">*</span>
+                            </p>
+                            <TextField
+                              id={language.name}
+                              label="Language"
+                              defaultValue={language.name}
+                              fullWidth
+                              variant="outlined"
+                            />
+                          </div>
+                          <div className="w-full md:w-1/2">
+                            <p className="mb-3">
+                              Proficiency{" "}
+                              <span className="text-red-500">*</span>
+                            </p>
+
+                            <FormControl fullWidth>
+                              <InputLabel id="demo-simple-select-helper-label">
+                                Proficiency
+                              </InputLabel>
+                              <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                label="Proficiency"
+                                defaultValue={language.proficiency}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    index,
+                                    "proficiency",
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <MenuItem value="Native">Native</MenuItem>
+                                <MenuItem value="Fluent">Fluent</MenuItem>
+                                <MenuItem value="Comfortable">
+                                  Comfortable
+                                </MenuItem>
+                                <MenuItem value="Intermediate">
+                                  Intermediate
+                                </MenuItem>
+                                <MenuItem value="Beginner">Beginner</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </div>
+                        </div>
                       ))}
-                    </div>
+                    </form>
                   </div>
                   <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
                     <h2 className="text-lg font-semibold">Tips</h2>
