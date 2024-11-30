@@ -4,10 +4,11 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
+  useGoogleSignInBgMutation,
   useGoogleSignInWithPopupMutation,
   useLoginMutation,
 } from "../../redux/features/auth/authApi";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Password, Visibility, VisibilityOff } from "@mui/icons-material";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
@@ -28,17 +29,34 @@ const Login = () => {
   const navigate = useNavigate();
   const [googleSign] = useGoogleSignInWithPopupMutation();
 
+  const [googbg] = useGoogleSignInBgMutation();
   const handleGoogleSignIn = async () => {
-    const res = await googleSign(null);
-    console.log(res);
+    let toastId = toast.loading("Logging in");
+    try {
+      const firebaseRes = await googleSign(null);
+      const userCredential = firebaseRes?.data;
 
-    // googleSignIn().then((result: any) => {
-    //   const userInfo = {
-    //     email: result.user?.email,
-    //     name: result.user?.displayName,
-    //   };
-    //   console.log(userInfo);
-    // });
+      console.log(userCredential);
+      const userData = {
+        email: userCredential?.email,
+        password: "123456", // Provide a default password or let the backend handle it
+        userName: userCredential?.displayName,
+      };
+      console.log(userData);
+      const backendRes = await googbg(userData).unwrap();
+
+      const accessToken = backendRes?.data?.accessToken;
+      console.log(backendRes);
+
+      const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+
+      dispatch(setUser({ user: verifiedUser, token: accessToken }));
+
+      toast.success("Login successful", { id: toastId, duration: 2000 });
+      navigate(location?.state?.from?.pathname || "/");
+    } catch (error) {
+      toast.error("Something wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   const [login] = useLoginMutation();
@@ -50,8 +68,7 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data: FieldValues) => {
-    const toastId = toast.loading("Logging in");
-
+    let toastId = toast.loading("Logging in");
     try {
       const res = await login(data).unwrap();
       console.log(res);

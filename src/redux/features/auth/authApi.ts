@@ -33,10 +33,17 @@ const authApi = baseApi.injectEndpoints({
         try {
           const userCredential = await signInWithPopup(auth, googleProvider);
           return { data: userCredential.user };
-        } catch (error) {
-          return { error: error?.message };
+        } catch (error: any) {
+          return { error: error.message };
         }
       },
+    }),
+    googleSignInBg: builder.mutation({
+      query: (userInfo) => ({
+        url: "/user/register-google",
+        method: "POST",
+        body: userInfo,
+      }),
     }),
   }),
 });
@@ -45,4 +52,5 @@ export const {
   useLoginMutation,
   useSingupMutation,
   useGoogleSignInWithPopupMutation,
+  useGoogleSignInBgMutation,
 } = authApi;
