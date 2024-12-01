@@ -12,7 +12,7 @@ const About = () => {
   return (
     <div>
       <Helmet>
-        <title>About Us- Resume Craft</title>
+        <title>About Us - Resume Craft</title>
       </Helmet>
       <AboutUsSlider />
       <div className="bg-gray-100 py-16 font-roboto">
