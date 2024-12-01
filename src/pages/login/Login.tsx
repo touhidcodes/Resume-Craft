@@ -12,6 +12,7 @@ import { Password, Visibility, VisibilityOff } from "@mui/icons-material";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
   const [statics] = useState([
     "Alawys free",
@@ -84,6 +85,9 @@ const Login = () => {
   };
   return (
     <section className="py-[60px]">
+      <Helmet>
+        <title>Login - Resume Craft</title>
+      </Helmet>
       <div className="max-w-[1240px] mx-auto px-5  font-roboto">
         <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">

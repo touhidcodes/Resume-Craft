@@ -6,10 +6,14 @@ import teamImage2 from "../../assets/images/t2.jpeg";
 import teamImage3 from "../../assets/images/t3.jpeg";
 import AboutUsSlider from "../../component/slider/AboutSlider";
 import { Button } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   return (
     <div>
+      <Helmet>
+        <title>About Us- Resume Craft</title>
+      </Helmet>
       <AboutUsSlider />
       <div className="bg-gray-100 py-16 font-roboto">
         {/* Hero Section */}

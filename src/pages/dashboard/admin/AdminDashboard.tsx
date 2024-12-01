@@ -3,6 +3,7 @@ import { Bar } from "react-chartjs-2";
 import template from "../../../assets/admin/resume-and-cv.png";
 import popular from "../../../assets/admin/cv (1).png";
 import users from "../../../assets/admin/team.png";
+import { Helmet } from "react-helmet-async";
 
 // Sample Data for the Chart
 const revenueChartData = {
@@ -30,6 +31,9 @@ const userLogins = [
 const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6 flex flex-col lg:flex-row gap-6">
+      <Helmet>
+        <title>Admin Dashboard - Resume Craft</title>
+      </Helmet>
       {/* Left Section */}
       <div className="w-full lg:w-3/4 flex flex-col gap-6">
         {/* Statistics Section */}

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import CustomTemplate from "../../pages/Resume/Temple1/CustomTemplate";
 import ResumeBuilderNavbar from "../../component/NavBar/ResumeBuilderNavbar";
 import ResumeBuilderSidebar from "../../component/layout/ResumeBuilderSidebar";
+import { Helmet } from "react-helmet-async";
 
 const Template1 = () => {
   return <div className="text-3xl mt-10">Template 1</div>;
@@ -13,6 +14,9 @@ const Template2 = () => {
 const ResumeBuilder = () => {
   return (
     <div className="max-w-[1170px] w-full mx-auto min-h-svh py-10 flex gap-5">
+      <Helmet>
+        <title>Build Resume- Resume Craft</title>
+      </Helmet>
       <div className="flex-1">
         <h1 className="text-3xl font-bold mb-10 text-center">My Resume</h1>
         <ResumeBuilderNavbar />
