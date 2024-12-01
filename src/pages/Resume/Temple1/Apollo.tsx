@@ -1,20 +1,15 @@
-import Education from "../../../component/ResumeSection/CustomTemplate/Education";
-import Experience from "../../../component/ResumeSection/CustomTemplate/Experience";
-import Header from "../../../component/ResumeSection/CustomTemplate/Header";
-import Languages from "../../../component/ResumeSection/CustomTemplate/Languages";
-import Skill from "../../../component/ResumeSection/CustomTemplate/Skill";
-import Summary from "../../../component/ResumeSection/CustomTemplate/Summary";
+import Education from "../../../component/ResumeSection/Apollo/Education";
+import Experience from "../../../component/ResumeSection/Apollo/Experience";
+import Header from "../../../component/ResumeSection/Apollo/Header";
+import Languages from "../../../component/ResumeSection/Apollo/Languages";
+import Skill from "../../../component/ResumeSection/Apollo/Skill";
+import Summary from "../../../component/ResumeSection/Apollo/Summary";
 import { FC } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 
 interface Section {
   name: string;
   component: FC;
-}
-
-interface SectionStatus {
-  name: string;
-  isActive: boolean;
 }
 
 const resumeSections: { [key: string]: Section } = {
@@ -40,9 +35,9 @@ const resumeSections: { [key: string]: Section } = {
   },
 };
 
-const CustomTemplate = () => {
-  const allSections: SectionStatus[] = useAppSelector(
-    (state) => state.resume.resume.allSections
+const Apollo = () => {
+  const allSections = useAppSelector(
+    (state) => state?.resume?.resume?.allSection || []
   );
 
   const result: Section[] = allSections.reduce(
@@ -62,11 +57,11 @@ const CustomTemplate = () => {
 
   return (
     <div className="min-h-[590px] w-full py-[30px] px-[50px] rounded-[9px] border my-[20px]">
-      {result.map((section) => (
+      {result?.map((section) => (
         <section.component key={section.name} />
       ))}
     </div>
   );
 };
 
-export default CustomTemplate;
+export default Apollo;

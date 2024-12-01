@@ -10,7 +10,9 @@ import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
-import ResumeTemplate from "../shared/ResumeTemplate";
+import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
+import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
+import { useCreateResumeMutation } from "../../redux/features/resume/resumeApi";
 
 type TChooseResumeTemplateProps = {
   label: string;
@@ -38,6 +40,8 @@ const ChooseResumeTemplate = ({
 }: TChooseResumeTemplateProps) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { data, isLoading } = useGetAllTemplatesQuery(null);
+  const [createResume, createResumeApiRes] = useCreateResumeMutation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,10 +51,16 @@ const ChooseResumeTemplate = ({
     setOpen(false);
   };
 
-  const handleNavigate = (path: string) => {
-    handleClose();
-    navigate(path);
+  const handleCreateResume = async (templateId: string) => {
+    try {
+      const res = await createResume(templateId).unwrap();
+
+      handleClose();
+      navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
+    } catch (error) {}
   };
+
+  if (isLoading) return;
 
   return (
     <>
@@ -108,17 +118,17 @@ const ChooseResumeTemplate = ({
         {/* Main Content */}
         <div className="max-w-[1170px] w-full mx-auto px-4 pt-6 pb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-3">
           <div
-            onClick={() => handleNavigate("/resume-builder/custom")}
+            // onClick={() => handleCreateResume("/resume-builder/custom")}
             className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200 flex flex-col justify-center items-center text-muted"
           >
             <AddIcon sx={{ fontSize: 50 }} />
             <h5>Create New</h5>
           </div>
-          {[...Array(9)].map((_, index) => (
+          {data?.data?.map((template: TTemplate) => (
             <ResumeTemplate
-              key={index}
-              index={index}
-              handleNavigate={handleNavigate}
+              key={template.id}
+              template={template}
+              handleCreateResume={handleCreateResume}
             />
           ))}
         </div>

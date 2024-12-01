@@ -3,7 +3,9 @@ import ExperienceEditModal from "../../Modal/ExperienceEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
 const Experience = () => {
-  const experience = useAppSelector((state) => state.resume.resume.experience);
+  const experiences = useAppSelector(
+    (state) => state?.resume?.resume?.WorkExperience
+  );
 
   return (
     <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
@@ -12,7 +14,7 @@ const Experience = () => {
       </h1>
       <div className="w-[100%] h-0.5 bg-gray-400 mb-1"></div>
       <div className=" text-[#6E6E6E] text-[13px] space-y-3.5">
-        {experience.map((exp) => (
+        {experiences?.map((exp) => (
           <div
             key={exp.id}
             className="text-neutral-700 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
