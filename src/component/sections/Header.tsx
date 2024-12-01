@@ -7,6 +7,7 @@ import imgSix from "../../assets/header-img/header-img-6.webp";
 import imgSeven from "../../assets/header-img/header-img-7.webp";
 import imgEight from "../../assets/header-img/header-img-8.webp";
 import headerImg from "../../assets/header-img/header-img.webp";
+import "../../pages/login/loginStyle.css";
 import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
 const Header = () => {
@@ -19,8 +20,15 @@ const Header = () => {
               <span className="size-1.5 bg-green-500 rounded-full animate-pulse"></span>
               <p>35,330 resumes created today</p>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold mt-3">
-              The professional resume builder
+            <h1 className="text-3xl md:text-[48px] leading-[58px] font-bold mt-3 title">
+              The professional{" "}
+              <span
+                className=" tittel
+"
+              >
+                resume builder
+                <span className="  ai-powered-tag"></span>
+              </span>
             </h1>
             <h3 className="md:text-xl my-7">
               Only 2% of resumes win. Yours will be one of them. Let’s build you
