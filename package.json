@@ -20,6 +20,7 @@
     "@mui/icons-material": "^6.1.7",
     "@mui/material": "^6.1.7",
     "@mui/styled-engine-sc": "^6.1.7",
+    "@mui/x-charts": "^7.23.0",
     "@mui/x-date-pickers": "^7.22.3",
     "@reduxjs/toolkit": "^2.3.0",
     "chart.js": "^4.4.6",
