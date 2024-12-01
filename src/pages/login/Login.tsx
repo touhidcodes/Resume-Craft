@@ -8,7 +8,7 @@ import {
   useGoogleSignInWithPopupMutation,
   useLoginMutation,
 } from "../../redux/features/auth/authApi";
-import { Password, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
@@ -27,6 +27,13 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const [credentials, setCredentials] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
   const [googleSign] = useGoogleSignInWithPopupMutation();
 
   const [googbg] = useGoogleSignInBgMutation();
@@ -63,9 +70,21 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
 
     formState: { errors },
   } = useForm();
+
+  const handleCredentials = (type: string) => {
+    const newCredentials =
+      type === "user"
+        ? { email: "emonsss@gmail.com", password: "123456" }
+        : { email: "imonshomon@gmail.com", password: "123456789" };
+
+    setCredentials(newCredentials);
+    setValue("email", newCredentials.email);
+    setValue("password", newCredentials.password);
+  };
 
   const onSubmit = async (data: FieldValues) => {
     let toastId = toast.loading("Logging in");
@@ -103,7 +122,26 @@ const Login = () => {
             <p className="text-gray-600 mb-8  text-center">
               You may use Socail logins for more-fuild experience
             </p>
-            <div className="flex justify-center  mb-5">
+            <div className="flex justify-center  mb-5 gap-x-3">
+              <button
+                onClick={() => handleCredentials("user")}
+                className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    width="24px"
+                    fill="#5985E1"
+                  >
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
+                </span>
+                User
+              </button>
+
               <button
                 onClick={handleGoogleSignIn}
                 className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
@@ -142,6 +180,33 @@ const Login = () => {
                   </svg>
                 </span>
                 Google
+              </button>
+
+              <button
+                onClick={() => handleCredentials("admin")}
+                className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    enable-background="new 0 0 24 24"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    width="24px"
+                    fill="#75FBFD"
+                  >
+                    <g>
+                      <rect fill="none" height="24" width="24" />
+                    </g>
+                    <g>
+                      <g>
+                        <path d="M18.39,14.56C16.71,13.7,14.53,13,12,13c-2.53,0-4.71,0.7-6.39,1.56C4.61,15.07,4,16.1,4,17.22V20h16v-2.78 C20,16.1,19.39,15.07,18.39,14.56z M18,18H6v-0.78c0-0.38,0.2-0.72,0.52-0.88C7.71,15.73,9.63,15,12,15 c2.37,0,4.29,0.73,5.48,1.34C17.8,16.5,18,16.84,18,17.22V18z" />
+                        <path d="M12,12c2.21,0,4-1.79,4-4c0-1.37,0-3.5,0-3.5C16,3.67,15.33,3,14.5,3c-0.52,0-0.98,0.27-1.25,0.67 C12.98,3.27,12.52,3,12,3s-0.98,0.27-1.25,0.67C10.48,3.27,10.02,3,9.5,3C8.67,3,8,3.67,8,4.5c0,0,0,2.12,0,3.5 C8,10.21,9.79,12,12,12z M10,5.5h4V8c0,1.1-0.9,2-2,2s-2-0.9-2-2V5.5z" />
+                      </g>
+                    </g>
+                  </svg>
+                </span>
+                Admin
               </button>
             </div>
             <div className="max-w-[500px] text-gray-400 text-[14px]  mb-5 mx-auto">
