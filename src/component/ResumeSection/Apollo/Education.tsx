@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
+import AddEducationModal from "../../Modal/AddModal/AddEducationModal";
 import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
@@ -29,7 +30,10 @@ const Education = () => {
             </div>
             <HtmlRenderer text={`<p>${education.description}</p>`} />
 
-            <EducationEditModal />
+            <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all">
+              <EducationEditModal education={education} />
+              <AddEducationModal />
+            </div>
           </div>
         ))}
       </div>

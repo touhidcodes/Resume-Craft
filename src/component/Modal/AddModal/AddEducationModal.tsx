@@ -2,17 +2,12 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { educationValidationSchema } from "../../../zod/educationValidationSchema";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import EducationForm from "../../form/EducationForm";
-import { Education } from "../../../types/resumeTypes";
-
-type TEducationEditProps = {
-  education: Education;
-};
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
 type EducationFormData = {
   institution: string;
@@ -22,9 +17,9 @@ type EducationFormData = {
   location: string;
 };
 
-const EducationEditModal = ({ education }: TEducationEditProps) => {
+const AddEducationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [description, setDescription] = useState(education.description);
+  const [description, setDescription] = useState("");
   const {
     register,
     handleSubmit,
@@ -32,13 +27,6 @@ const EducationEditModal = ({ education }: TEducationEditProps) => {
     formState: { errors },
   } = useForm<EducationFormData>({
     resolver: zodResolver(educationValidationSchema),
-    defaultValues: {
-      degree: education.degree,
-      institution: education.institution,
-      startDate: education.startDate,
-      endDate: education.endDate || "",
-      location: education.location,
-    },
   });
 
   function open() {
@@ -57,7 +45,7 @@ const EducationEditModal = ({ education }: TEducationEditProps) => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} />
 
       <Dialog
         open={isOpen}
@@ -108,4 +96,4 @@ const EducationEditModal = ({ education }: TEducationEditProps) => {
   );
 };
 
-export default EducationEditModal;
+export default AddEducationModal;
