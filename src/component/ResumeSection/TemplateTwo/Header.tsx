@@ -1,4 +1,4 @@
-import HeaderEditModal from "../../Modal/HeaderEditModal";
+import HeaderEditModal from "../../Modal/EditModal/HeaderEditModal";
 
 const Header = () => {
   return (

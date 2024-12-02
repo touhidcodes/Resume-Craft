@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const headerValidationSchema = z.object({
-  firstName: z.string().min(1, { message: "First name is required" }),
-  lastName: z.string().min(1, { message: "Last name is required" }),
+  userName: z.string().min(1, { message: "User name is required" }),
+  title: z.string().min(1, { message: "Resume title is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().refine(
     (val) => {
@@ -15,4 +15,7 @@ export const headerValidationSchema = z.object({
     }
   ),
   location: z.string().min(1, { message: "Location is required" }),
+  website: z.string().optional(),
+  linkedin: z.string().optional(),
+  github: z.string().optional(),
 });

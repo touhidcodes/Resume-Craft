@@ -1,22 +1,23 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import TextEditor from "../shared/TextEditor";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs from "dayjs";
-import { educationValidationSchema } from "../../zod/educationValidationSchema";
+import { educationValidationSchema } from "../../../zod/educationValidationSchema";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import TextEditor from "../../shared/TextEditor";
 
 type EducationFormData = {
-  school: string;
-  fieldOfStudy: string;
-  graduationDate: string;
+  institution: string;
+  degree: string;
+  startDate: string;
+  endDate?: string;
   location: string;
 };
 
@@ -74,92 +75,109 @@ const EducationEditModal = () => {
                   <div className="p-5 col-span-7 space-y-5">
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">School</p>
+                        <p className="mb-3">
+                          Institution <span className="text-red-500">*</span>
+                        </p>
                         <TextField
                           id="outlined-basic"
-                          label="School name"
+                          label="Institution Name"
                           fullWidth
                           variant="outlined"
-                          color={errors.school ? "error" : "primary"}
-                          {...register("school")}
+                          color={errors.institution ? "error" : "primary"}
+                          {...register("institution")}
                         />
-                        {errors.school && (
+                        {errors.institution && (
                           <p className="text-sm text-red-500 mt-1">
-                            {errors.school.message}
+                            {errors.institution.message}
                           </p>
                         )}
                       </div>
                       <div className="w-full md:w-1/2">
-                        <p className="mb-3">Field of study</p>
+                        <p className="mb-3">
+                          Degree <span className="text-red-500">*</span>
+                        </p>
                         <TextField
                           id="outlined-basic"
-                          label="Field of study"
+                          label="Degree Name"
                           fullWidth
                           variant="outlined"
-                          color={errors.fieldOfStudy ? "error" : "primary"}
-                          {...register("fieldOfStudy")}
+                          color={errors.degree ? "error" : "primary"}
+                          {...register("degree")}
                         />
-                        {errors.fieldOfStudy && (
+                        {errors.degree && (
                           <p className="text-sm text-red-500 mt-1">
-                            {errors.fieldOfStudy.message}
+                            {errors.degree.message}
                           </p>
                         )}
                       </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row gap-5">
-                      <div className="w-full md:w-1/2">
-                        <p>Graduation Date</p>
+                    <div className="flex flex-col md:flex-row gap-5 mt-1">
+                      <div>
+                        <p>
+                          Start date <span className="text-red-500">*</span>
+                        </p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer
-                            components={["DatePicker"]}
-                            sx={{ pt: 1.5 }}
-                          >
+                          <DemoContainer components={["DatePicker"]}>
                             <Controller
-                              name="graduationDate"
+                              name="startDate"
                               control={control}
                               render={({ field }) => (
                                 <DatePicker
                                   {...field}
-                                  label="Graduation Date"
+                                  label="Start Date"
                                   views={["month", "year"]}
+                                  format="MM/YYYY"
                                   value={
                                     field.value
                                       ? dayjs(field.value, "MM/YYYY")
                                       : null
                                   }
-                                  onChange={(date) =>
+                                  onChange={(date) => {
                                     field.onChange(
                                       dayjs(date).format("MM/YYYY")
-                                    )
-                                  }
-                                  format="MM/YYYY"
+                                    );
+                                  }}
                                 />
                               )}
                             />
                           </DemoContainer>
                         </LocalizationProvider>
-                        {errors.graduationDate && (
+                        {errors.startDate && (
                           <p className="text-sm text-red-500 mt-1">
-                            {errors.graduationDate.message}
+                            {errors.startDate.message}
                           </p>
                         )}
                       </div>
-                      <div className="w-full md:w-1/2">
-                        <p className="mb-3">Location</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="City, State"
-                          fullWidth
-                          variant="outlined"
-                          color={errors.location ? "error" : "primary"}
-                          {...register("location")}
-                        />
-                        {errors.location && (
-                          <p className="text-sm text-red-500 mt-1">
-                            {errors.location.message}
-                          </p>
-                        )}
+
+                      <div>
+                        <p>End date</p>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <Controller
+                              name="endDate"
+                              control={control}
+                              render={({ field }) => (
+                                <DatePicker
+                                  {...field}
+                                  label="End Date"
+                                  views={["month", "year"]}
+                                  format="MM/YYYY"
+                                  value={
+                                    field.value
+                                      ? dayjs(field.value, "MM/YYYY")
+                                      : null
+                                  }
+                                  onChange={(date) => {
+                                    field.onChange(
+                                      dayjs(date).format("MM/YYYY")
+                                    );
+                                  }}
+                                />
+                              )}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
                       </div>
                     </div>
 

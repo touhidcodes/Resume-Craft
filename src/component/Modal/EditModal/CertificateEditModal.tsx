@@ -1,17 +1,19 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import MultipleSelect from "../builder/MultipleSelect";
+import MultipleSelect from "../../builder/MultipleSelect";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
 
-const LanguageEditModal = () => {
+const CertificateEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [languages, setLanguages] = useState<string[]>([]);
+  const [certificates, setCertificates] = useState<string[]>([]);
 
-  const handleRemoveLanguage = (language: string) => {
-    const filteredLanguages = languages.filter((item) => item !== language);
-    setLanguages(filteredLanguages);
+  const handleRemoveCertificate = (certificate: string) => {
+    const filteredCertificate = certificates.filter(
+      (item) => item !== certificate
+    );
+    setCertificates(filteredCertificate);
   };
 
   function open() {
@@ -42,24 +44,27 @@ const LanguageEditModal = () => {
                 as="h3"
                 className="flex justify-between items-center border-b py-3 px-5"
               >
-                <h3 className="text-xl font-semibold">Languages</h3>
+                <h3 className="text-xl font-semibold">Certificates</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
               <div className="flex-1 overflow-y-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
                   <div className="p-5 col-span-7 space-y-5">
-                    <h2>What languages do you speak?</h2>
+                    <h2>
+                      Show your certificates, licenses, and training in your
+                      field.
+                    </h2>
                     <MultipleSelect
-                      label="Select Language"
-                      setValue={setLanguages}
+                      label="Select Certificate"
+                      setValue={setCertificates}
                     />
                     <div className="mt-5 flex items-center gap-4 flex-wrap">
-                      {languages.map((skill) => (
+                      {certificates.map((certificate) => (
                         <button className="flex items-center gap-x-3 text-sm border rounded-md py-1.5 px-3 cursor-default">
-                          <span>{skill}</span>
+                          <span>{certificate}</span>
                           <Close
                             fontSize="small"
-                            onClick={() => handleRemoveLanguage(skill)}
+                            onClick={() => handleRemoveCertificate(certificate)}
                             sx={{ cursor: "pointer" }}
                           />
                         </button>
@@ -70,32 +75,23 @@ const LanguageEditModal = () => {
                     <h2 className="text-lg font-semibold">Tips</h2>
                     <div className="text-sm mt-5">
                       <p>
-                        You've got the skills and this is the place to show them
-                        off. This two or three column section uses bullet points
-                        to highlight the qualities that set you apart. List your
-                        special, work-related, talents in short, 2-3 word
-                        phrases and leave the punctuation at the door.
+                        Professional certifications are a great way to stand out
+                        from the crowd in your job search. Some jobs require
+                        specific certifications, and including certifications
+                        can help showcase your skills and abilities with an
+                        objective measure. Extra certifications can also be a
+                        great way to show your interests and proficiencies
+                        outside of work. Press enter to save and add another.
+                        Although online courses don’t always offer
+                        certification, you can still list non-certification
+                        classes on your resume to demonstrate proficiency.
+                        Include name of certification, certifying organization
+                        and date received. List job-critical certifications at
+                        the top of the list, and consider adding them in your
+                        resume summary and work experience as well. For extra or
+                        ‘bonus’ certifications, keep them lower on the list and
+                        limit to your most impressive achievements.
                       </p>
-                      <ul className="list-disc space-y-3 mt-8 pl-3">
-                        <li>
-                          Punctuation in your skills section is overrated. Your
-                          bullet points will look much better without periods or
-                          exclamation marks.
-                        </li>
-                        <li>
-                          If you’re short on skills relevant to the given
-                          position, try listing skills and personal
-                          characteristics that are transferable to just about
-                          any position such as consensus building,
-                          cross-functional collaboration, or project management.
-                        </li>
-                        <li>
-                          For inspiration turn to the job description that
-                          you’re applying for. Employers will often highlight
-                          key characteristics they’d like in their ideal
-                          employee.
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -123,4 +119,4 @@ const LanguageEditModal = () => {
   );
 };
 
-export default LanguageEditModal;
+export default CertificateEditModal;

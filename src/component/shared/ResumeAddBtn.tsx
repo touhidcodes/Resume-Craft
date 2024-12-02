@@ -1,20 +1,20 @@
-import { Edit } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 
-type TResumeEditBtnProps = {
+type TResumeAddBtnProps = {
   handleClick: () => void;
 };
 
-const ResumeEditBtn = ({ handleClick }: TResumeEditBtnProps) => {
+const ResumeAddBtn = ({ handleClick }: TResumeAddBtnProps) => {
   return (
     <button
       onClick={handleClick}
       className="bg-white custom-shadow group-hover:flex justify-center items-center rounded-lg p-1"
     >
       <span className="hover:bg-neutral-100 inline-block p-1 rounded-lg">
-        <Edit sx={{ fontSize: "23px" }} />
+        <Add />
       </span>
     </button>
   );
 };
 
-export default ResumeEditBtn;
+export default ResumeAddBtn;

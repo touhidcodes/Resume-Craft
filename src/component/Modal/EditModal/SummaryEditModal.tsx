@@ -1,9 +1,9 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
-import TextEditor from "../shared/TextEditor";
 import { Button } from "@mui/material";
+import TextEditor from "../../shared/TextEditor";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
 
 const SummaryEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);

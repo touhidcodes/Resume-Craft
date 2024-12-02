@@ -13,38 +13,39 @@ import {
 import { arrayMove } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
-
-type TSection = {
-  name: string;
-  isActive: boolean;
-};
+import { Section } from "../../types/resumeTypes";
 
 const SectionSwitcher = () => {
   const dispatch = useAppDispatch();
-  const allSections = useAppSelector(
-    (state) => state.resume.resume.allSections
-  );
-  const [items, setItems] = useState<TSection[]>(allSections);
 
+  // Ensure fallback to empty array if no sections exist
+  const allSections = useAppSelector(
+    (state) => state?.resume?.resume?.allSection || []
+  );
+
+  // State for items, ensuring it's typed correctly
+  const [items, setItems] = useState<Section[]>(allSections);
+
+  // handleDragEnd type fix
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (active.id !== over.id) {
       const oldIndex = items.findIndex((item) => item.name === active.id);
       const newIndex = items.findIndex((item) => item.name === over.id);
       if (oldIndex !== -1 && newIndex !== -1) {
-        setItems((prevItems) => {
-          const newArr = arrayMove(prevItems, oldIndex, newIndex);
-          dispatch(setActiveSections(newArr));
-          return newArr;
-        });
+        const newArr = arrayMove(items, oldIndex, newIndex);
+        setItems(newArr);
+        dispatch(setActiveSections(newArr)); // Dispatch action to update sections in the store
       }
     }
   };
 
-  const handleChange = (section: TSection) => {
-    dispatch(updateActiveSection(section));
+  // Correct typing for handleChange
+  const handleChange = (section: Section) => {
+    dispatch(updateActiveSection(section)); // Dispatch update for active section
   };
 
+  // Sync state items with allSections when it changes
   useEffect(() => {
     setItems(allSections);
   }, [allSections]);
@@ -52,14 +53,16 @@ const SectionSwitcher = () => {
   return (
     <div className="mt-5">
       <div className="flex-1 flex justify-between items-center border border-[#ccc] p-2.5 mb-2 rounded">
-        <h3 className="font-medium pl-10">{allSections[0].name}</h3>
+        <h3 className="font-medium pl-10">{allSections[0]?.name}</h3>
         <button onClick={() => handleChange(allSections[0])}>
           <Switch
-            checked={allSections[0].isActive}
+            checked={allSections[0]?.isActive || false}
+            onChange={() => handleChange(allSections[0])} // Correct onChange to call handleChange
             inputProps={{ "aria-label": "controlled" }}
           />
         </button>
       </div>
+
       <DndContext onDragEnd={handleDragEnd}>
         <SortableContext
           items={items.map((item) => item.name)}
@@ -80,12 +83,13 @@ const SectionSwitcher = () => {
   );
 };
 
+// Fixing Switcher's onChange
 const Switcher = ({
   section,
   onChange,
 }: {
-  section: TSection;
-  onChange: (section: TSection) => void;
+  section: Section;
+  onChange: (section: Section) => void;
 }) => {
   const {
     attributes,
@@ -112,7 +116,7 @@ const Switcher = ({
   return (
     <div
       ref={setNodeRef}
-      style={{ ...style }}
+      style={style}
       className="flex justify-between items-center gap-x-2"
     >
       <button
@@ -125,9 +129,10 @@ const Switcher = ({
 
       <div className="flex-1 flex justify-between items-center">
         <h3 className="font-medium">{section.name}</h3>
-        <button onClick={() => onChange(section)}>
+        <button>
           <Switch
             checked={section.isActive}
+            onChange={() => onChange(section)} // Ensure onChange correctly calls passed function
             inputProps={{ "aria-label": "controlled" }}
           />
         </button>

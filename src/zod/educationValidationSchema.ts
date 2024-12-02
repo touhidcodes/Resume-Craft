@@ -1,8 +1,9 @@
 import { z } from "zod";
 
 export const educationValidationSchema = z.object({
-  school: z.string().min(1, "School name is required"),
-  fieldOfStudy: z.string().min(1, "Field of study is required"),
-  graduationDate: z.string().min(1, "Graduation date is required"),
+  institution: z.string().min(1, "Institution name is required"),
+  degree: z.string().min(1, "Degree is required"),
+  startDate: z.string().min(1, "Start date is required"),
+  endDate: z.string().optional(),
   location: z.string().min(1, "Location is required"),
 });

@@ -91,7 +91,7 @@ const Login = () => {
   const onSubmit = async (data: FieldValues) => {
     let toastId = toast.loading("Logging in");
     try {
-      const res = await login(data).unwrap();
+      const res = await login({ ...data, identifier: data.email }).unwrap();
       console.log(res);
       const user = verifyToken(res.data.accessToken);
       console.log(user);
