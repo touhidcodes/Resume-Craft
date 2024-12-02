@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../../redux/hooks";
 import ExperienceEditModal from "../../Modal/ExperienceEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
+import AddExperienceModal from "../../Modal/AddModal/AddExperienceModal";
 
 const Experience = () => {
   const experiences = useAppSelector(
@@ -27,14 +28,17 @@ const Experience = () => {
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
               <h3>{exp.jobTitle} </h3>
               <span className="w-0.5 h-3.5 bg-neutral-700"></span>
-              <span>01/2024</span>
+              <span>{exp.startDate}</span>
               <span>-</span>
-              <span> 05/2024</span>
+              <span> {exp.endDate}</span>
             </div>
 
             <HtmlRenderer text={exp.responsibilities} />
 
-            <ExperienceEditModal />
+            <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all">
+              <ExperienceEditModal experience={exp} />
+              <AddExperienceModal />
+            </div>
           </div>
         ))}
       </div>

@@ -1,18 +1,15 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { experienceValidationSchema } from "../../zod/experienceValidationSchema";
-import dayjs, { Dayjs } from "dayjs";
-import { Experience } from "../../types/resumeTypes";
-import ExperienceForm from "../form/ExperienceForm";
-
-type TExperienceEditModalProps = {
-  experience: Experience;
-};
+import ExperienceForm from "../../form/experienceForm";
+import { experienceValidationSchema } from "../../../zod/experienceValidationSchema";
+import { Experience } from "../../../types/resumeTypes";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
 type ExperienceFormData = {
   companyName: string;
@@ -22,11 +19,9 @@ type ExperienceFormData = {
   location: string;
 };
 
-const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
+const AddExperienceModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [responsibilities, setResponsibilities] = useState(
-    experience.responsibilities || ""
-  );
+  const [responsibilities, setResponsibilities] = useState("");
 
   const {
     register,
@@ -35,13 +30,6 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
     formState: { errors },
   } = useForm<ExperienceFormData>({
     resolver: zodResolver(experienceValidationSchema),
-    defaultValues: {
-      companyName: experience.companyName,
-      jobTitle: experience.jobTitle,
-      startDate: experience.startDate,
-      endDate: experience.endDate || "",
-      location: experience.location,
-    },
   });
 
   function open() {
@@ -52,14 +40,17 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
     setIsOpen(false);
   }
 
+  // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
+    // console.log("Form Submitted:", data);
     console.log(data);
     // close();
   };
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      {/* <ResumeEditBtn handleClick={open} /> */}
+      <ResumeAddBtn handleClick={open} />
 
       <Dialog
         open={isOpen}
@@ -89,6 +80,7 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
                 setResponsibilities={setResponsibilities}
               />
 
+              {/* Dialog footer */}
               <div className="py-4 px-5 space-x-5 flex justify-end border-t">
                 <Button variant="outlined" autoFocus onClick={close}>
                   Cancel
@@ -105,4 +97,4 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
   );
 };
 
-export default ExperienceEditModal;
+export default AddExperienceModal;

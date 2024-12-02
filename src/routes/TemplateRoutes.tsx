@@ -15,7 +15,6 @@ type TemplateData = {
 
 type TemplateRoute = {
   id: string;
-  name: string;
   component: React.ComponentType<any>;
 };
 
@@ -34,7 +33,6 @@ const TemplateRoutes = () => {
       if (template) {
         acc.push({
           id: data.id,
-          name: data.name,
           component: template.component,
         });
       }

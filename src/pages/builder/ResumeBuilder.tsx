@@ -9,7 +9,7 @@ const ResumeBuilder = () => {
   const queryParams = new URLSearchParams(location.search);
 
   // Access query parameters by name
-  const resumeId = queryParams.get("resume");
+  const resumeId = queryParams.get("resume"); 
 
   const { isLoading } = useGetResumeDataQuery(resumeId);
 

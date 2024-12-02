@@ -17,10 +17,10 @@ type TFormData = {
   proficiency: string;
 };
 
-const LanguageEditModal = () => {
+const LanguagesEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const languages = useAppSelector((state) => state.resume.resume.language);
-  const [formData, setFormData] = useState<TFormData[]>(languages);
+  const languages = useAppSelector((state) => state?.resume?.resume?.language);
+  const [formData, setFormData] = useState<TFormData[] | undefined>(languages);
 
   function open() {
     setIsOpen(true);
@@ -88,7 +88,7 @@ const LanguageEditModal = () => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
                   <div className="p-5 col-span-7">
                     <form className="space-y-5">
-                      {languages.map((language, index) => (
+                      {languages?.map((language, index) => (
                         <div
                           key={language.name}
                           className="flex flex-col items-center md:flex-row gap-5 mt-1"
@@ -201,4 +201,4 @@ const LanguageEditModal = () => {
   );
 };
 
-export default LanguageEditModal;
+export default LanguagesEditModal;
