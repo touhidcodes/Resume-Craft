@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { educationValidationSchema } from "../../../zod/educationValidationSchema";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
+
 import EducationForm from "../../form/EducationForm";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
@@ -20,6 +20,7 @@ type EducationFormData = {
 const AddEducationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -38,8 +39,7 @@ const AddEducationModal = () => {
   }
 
   // Handle form submission
-  const onSubmit: SubmitHandler<EducationFormData> = (data) => {
-    console.log("Form Submitted:", data);
+  const onSubmit: SubmitHandler<EducationFormData> = async (data) => {
     close();
   };
 

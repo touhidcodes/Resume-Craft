@@ -98,14 +98,21 @@ const NavBar = () => {
                 About us
               </Link>
             </li>
+            {user ? (
+              <li>
+                <Link to={`/${role}/dashboard`}>Dashboard</Link>
+              </li>
+            ) : (
+              ""
+            )}
 
             {/* <NavLinks /> */}
           </ul>
           <div className="w-[1px] h-6 bg-[#EEEEEE]"></div>
           <div className="md:flex gap-x-2 hidden ">
             {user ? (
-              <Button variant="contained" size="large">
-                <Link to={`/${role}/dashboard`}>Dashboard</Link>
+              <Button variant="contained" onClick={handeLogout} size="large">
+                Logout
               </Button>
             ) : (
               <Button variant="contained" size="large">

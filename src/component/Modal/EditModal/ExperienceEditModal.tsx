@@ -9,6 +9,7 @@ import { experienceValidationSchema } from "../../../zod/experienceValidationSch
 import { Experience } from "../../../types/resumeTypes";
 import ExperienceForm from "../../form/ExperienceForm";
 import { useUpdateExperienceMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
 
 type TExperienceEditModalProps = {
   experience: Experience;
@@ -57,10 +58,19 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
 
   const onSubmit: SubmitHandler<ExperienceFormData> = async (data) => {
     console.log(data);
+    let toastId = toast.loading(" loading...", { duration: 1000 });
     // updateExperience({ experienceId: experience.id, data });
-    console.log(data);
-    // experience
-    // close();
+    try {
+      const res = await updateExperience({
+        experienceId: experience.id,
+        data: { ...data, responsibilities },
+      });
+      toast.success("Upadateing Complateing", { id: toastId, duration: 2000 });
+
+      close();
+    } catch (error) {
+      toast.error("Something went wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   return (
