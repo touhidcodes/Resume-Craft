@@ -4,12 +4,26 @@ import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../../builder/MultipleSelect";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import { Skill } from "../../../types/resumeTypes";
+import { useUpdateSkillMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
-const SkillEditModal = () => {
+type TSkillModalProps = {
+  skill: Skill;
+};
+
+const SkillEditModal = ({ skill }: TSkillModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [skills, setSkills] = useState<string[]>([]);
+  const [category, setCategory] = useState(skill.category);
+  const [skills, setSkills] = useState<string[]>(skill.skills);
+  const [updateSkill, { isLoading }] = useUpdateSkillMutation();
 
   const handleRemoveSkill = (skill: string) => {
+    const isSkillAlreadyExist = skills.find((sk) => sk === skill);
+
+    if (!isSkillAlreadyExist) {
+    }
     const filteredSkills = skills.filter((item) => item !== skill);
     setSkills(filteredSkills);
   };
@@ -21,6 +35,21 @@ const SkillEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  const handleUpdateSkill = async () => {
+    try {
+      const res = await updateSkill({
+        id: skill.id,
+        data: { category, skills },
+      }).unwrap();
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+      close();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -58,16 +87,22 @@ const SkillEditModal = () => {
                         label="Category"
                         fullWidth
                         variant="outlined"
+                        defaultValue={category}
+                        onChange={(e) => setCategory(e.target.value)}
                       />
                     </div>
                     <MultipleSelect
                       placeholder="Type you skill and press enter..."
                       label="Skills"
+                      value={skills}
                       setValue={setSkills}
                     />
                     <div className="mt-5 flex items-center gap-4 flex-wrap">
-                      {skills.map((skill) => (
-                        <button className="flex items-center gap-x-3 text-sm border rounded-md py-1.5 px-3 cursor-default">
+                      {skills.map((skill, index) => (
+                        <button
+                          key={skill + index}
+                          className="flex items-center gap-x-3 text-xs border rounded-md py-1.5 px-3 cursor-default"
+                        >
                           <span>{skill}</span>
                           <Close
                             fontSize="small"
@@ -119,12 +154,13 @@ const SkillEditModal = () => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  variant={isLoading ? "outlined" : "contained"}
+                  disabled={isLoading}
                   color="primary"
-                  //   onClick={handleClose}
+                  onClick={handleUpdateSkill}
                   autoFocus
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

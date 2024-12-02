@@ -4,19 +4,30 @@ import { Dispatch, KeyboardEvent, useState } from "react";
 type TMultipleSelectProps = {
   label: string;
   placeholder?: string;
+  value: string[];
   setValue: Dispatch<React.SetStateAction<string[]>>;
 };
 
 const MultipleSelect = ({
   label,
   placeholder,
+  value,
   setValue,
 }: TMultipleSelectProps) => {
   const [inputValue, setInputValue] = useState("");
+  const [showError, setShowError] = useState(false);
+
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      setValue((prev) => [...prev, inputValue]);
-      setInputValue("");
+      const isValueAlreadyExist = value.find((val) => val === inputValue);
+
+      if (!isValueAlreadyExist) {
+        setValue((prev) => [...prev, inputValue]);
+        setInputValue("");
+        setShowError(false);
+      } else {
+        setShowError(true);
+      }
     }
   };
 
@@ -35,6 +46,9 @@ const MultipleSelect = ({
         onKeyDown={handleKeyDown}
         onChange={(e) => setInputValue(e.target.value)}
       />
+      {showError && (
+        <p className="mt-1 text-red-500 text-xs">This value already exists</p>
+      )}
     </div>
   );
 };

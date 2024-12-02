@@ -31,7 +31,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ChooseResumeTemplate = ({
+const ChangeResumeTemplate = ({
   size,
   label,
   color = "primary",
@@ -53,10 +53,11 @@ const ChooseResumeTemplate = ({
 
   const handleCreateResume = async (templateId: string) => {
     try {
-      const res = await createResume(templateId).unwrap();
+      alert("Hello");
+      //   const res = await createResume(templateId).unwrap();
 
-      handleClose();
-      navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
+      //   handleClose();
+      //   navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
     } catch (error) {}
   };
 
@@ -137,4 +138,4 @@ const ChooseResumeTemplate = ({
   );
 };
 
-export default ChooseResumeTemplate;
+export default ChangeResumeTemplate;

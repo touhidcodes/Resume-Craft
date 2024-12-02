@@ -17,22 +17,6 @@ const resumeApi = baseApi.injectEndpoints({
       }),
     }),
 
-    updateExperience: builder.mutation({
-      query: ({ experienceId, data }) => ({
-        url: `/resume/work-experience/update-experience/${experienceId}`,
-        method: "PATCH",
-        body: data,
-      }),
-    }),
-
-    updateEducation: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/resume/education/update-education/${id}`,
-        method: "PATCH",
-        body: data,
-      }),
-    }),
-
     updatePersonalInfo: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/update-resume/${id}`,
@@ -48,6 +32,30 @@ const resumeApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    updateSkill: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/skill/update-skill/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
+    updateExperience: builder.mutation({
+      query: ({ experienceId, data }) => ({
+        url: `/resume/work-experience/update-experience/${experienceId}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
+    updateEducation: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/education/update-education/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -57,6 +65,7 @@ export const {
   useUpdateExperienceMutation,
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
+  useUpdateSkillMutation,
   useUpdatePersonalInfoMutation,
 } = resumeApi;
 
