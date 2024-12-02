@@ -8,6 +8,7 @@ import {
   useGoogleSignInWithPopupMutation,
   useSingupMutation,
 } from "../../redux/features/auth/authApi";
+import { Helmet } from "react-helmet-async";
 
 const Singup = () => {
   const [statics] = useState([
@@ -66,6 +67,9 @@ const Singup = () => {
 
   return (
     <section className="py-[60px]">
+      <Helmet>
+        <title>Sign Up - Resume Craft</title>
+      </Helmet>
       <div className="max-w-[1240px] mx-auto px-5  font-roboto">
         <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">

@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import "./index.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { PersistGate } from "redux-persist/integration/react";
+import { HelmetProvider } from 'react-helmet-async';
 
 const theme = createTheme({
   breakpoints: {
@@ -31,14 +32,16 @@ const theme = createTheme({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <RouterProvider router={router} />
-          <Toaster />
-        </PersistGate>
-      </Provider>
-      <CssBaseline />
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <RouterProvider router={router} />
+            <Toaster />
+          </PersistGate>
+        </Provider>
+        <CssBaseline />
+      </ThemeProvider>
+    </HelmetProvider>
   </StrictMode>
 );

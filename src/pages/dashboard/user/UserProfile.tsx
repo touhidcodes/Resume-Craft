@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import teamImage from "../../../assets/images/t.jpeg";
+import { Helmet } from "react-helmet-async";
 
 const UserProfile = () => {
   const [isEditingPersonalInfo, setIsEditingPersonalInfo] = useState(false);
@@ -25,6 +26,9 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
+      <Helmet>
+        <title>User Profile - Resume Craft</title>
+      </Helmet>
       {/* Container */}
       <div className="max-w-7xl mx-auto bg-white shadow-md rounded-lg p-4">
         <h1 className="text-xl font-bold mb-6">My Profile</h1>

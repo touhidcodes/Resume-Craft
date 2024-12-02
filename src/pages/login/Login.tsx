@@ -12,6 +12,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { Helmet } from "react-helmet-async";
+
 const Login = () => {
   const [statics] = useState([
     "Alawys free",
@@ -36,7 +38,7 @@ const Login = () => {
   });
   const [googleSign] = useGoogleSignInWithPopupMutation();
 
-  const [googbg] = useGoogleSignInBgMutation();
+  const [google] = useGoogleSignInBgMutation();
   const handleGoogleSignIn = async () => {
     let toastId = toast.loading("Logging in");
     try {
@@ -50,7 +52,7 @@ const Login = () => {
         userName: userCredential?.displayName,
       };
       console.log(userData);
-      const backendRes = await googbg(userData).unwrap();
+      const backendRes = await google(userData).unwrap();
 
       const accessToken = backendRes?.data?.accessToken;
       console.log(backendRes);
@@ -103,6 +105,9 @@ const Login = () => {
   };
   return (
     <section className="py-[60px]">
+      <Helmet>
+        <title>Login - Resume Craft</title>
+      </Helmet>
       <div className="max-w-[1240px] mx-auto px-5  font-roboto">
         <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">
