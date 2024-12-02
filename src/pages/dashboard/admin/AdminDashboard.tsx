@@ -3,6 +3,9 @@ import { Bar } from "react-chartjs-2";
 import template from "../../../assets/admin/resume-and-cv.png";
 import popular from "../../../assets/admin/cv (1).png";
 import users from "../../../assets/admin/team.png";
+import { Helmet } from "react-helmet-async";
+import { useGetAllTemplatesQuery } from "../../../redux/api/adminApi";
+import { useGetAllUsersQuery } from "../../../redux/api/userApi";
 
 // Sample Data for the Chart
 const revenueChartData = {
@@ -27,9 +30,21 @@ const userLogins = [
   { name: "Evan Wright", email: "evan@example.com", time: "2024-11-23 12:10 PM" },
 ];
 
+
 const AdminDashboard = () => {
+
+  const { data: allTemplates } = useGetAllTemplatesQuery("")
+  const { data: allUsers } = useGetAllUsersQuery("")
+  console.log(allUsers)
+
+  // console.log(allTemplates?.data?.length)
+  const totalTemplates = allTemplates?.data?.length;
+
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6 flex flex-col lg:flex-row gap-6">
+      <Helmet>
+        <title>Admin Dashboard - Resume Craft</title>
+      </Helmet>
       {/* Left Section */}
       <div className="w-full lg:w-3/4 flex flex-col gap-6">
         {/* Statistics Section */}
@@ -37,7 +52,7 @@ const AdminDashboard = () => {
           {[
             {
               title: "Total Templates",
-              value: "10,724",
+              value: totalTemplates,
               image: template,
             },
             {
@@ -47,7 +62,7 @@ const AdminDashboard = () => {
             },
             {
               title: "Popular Templates",
-              value: "923",
+              value: totalTemplates,
               image: popular,
             },
           ].map((stat, index) => (
