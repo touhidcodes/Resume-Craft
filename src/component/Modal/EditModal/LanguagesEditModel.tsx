@@ -1,6 +1,5 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { FormEvent, useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import {
   Button,
@@ -10,7 +9,8 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
 
 type TFormData = {
   name: string;
@@ -20,7 +20,7 @@ type TFormData = {
 const LanguagesEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const languages = useAppSelector((state) => state?.resume?.resume?.language);
-  const [formData, setFormData] = useState<TFormData[] | undefined>(languages);
+  const [formData, setFormData] = useState<TFormData[]>(languages || []);
 
   function open() {
     setIsOpen(true);
@@ -42,8 +42,6 @@ const LanguagesEditModal = () => {
     };
     setFormData(updatedFormData);
   };
-
-  console.log(formData);
 
   // Handle form submission
   const handleSubmit = (event: FormEvent): void => {

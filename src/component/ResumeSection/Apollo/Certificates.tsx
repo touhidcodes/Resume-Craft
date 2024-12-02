@@ -1,4 +1,4 @@
-import CertificateEditModal from "../../Modal/CertificateEditModal";
+import CertificateEditModal from "../../Modal/EditModal/CertificateEditModal";
 
 const Certificates = () => {
   return (

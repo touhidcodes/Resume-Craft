@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import SummaryEditModal from "../../Modal/SummaryEditModal";
+import SummaryEditModal from "../../Modal/EditModal/SummaryEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
 const Summary = () => {

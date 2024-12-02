@@ -1,4 +1,4 @@
-import EducationEditModal from "../../Modal/EducationEditModal";
+import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
 
 const Education = () => {
   return (

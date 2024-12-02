@@ -1,11 +1,11 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { headerValidationSchema } from "../../zod/headerValidationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { headerValidationSchema } from "../../../zod/headerValidationSchema";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
 
 // Define the form data type
 type FormData = {

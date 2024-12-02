@@ -1,4 +1,4 @@
-import SkillEditModal from "../../Modal/SkillEditModal";
+import SkillEditModal from "../../Modal/EditModal/SkillEditModal";
 
 const Skill = () => {
   return (

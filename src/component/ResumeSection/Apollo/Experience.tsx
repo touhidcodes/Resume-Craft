@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import ExperienceEditModal from "../../Modal/ExperienceEditModal";
+import ExperienceEditModal from "../../Modal/EditModal/ExperienceEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 import AddExperienceModal from "../../Modal/AddModal/AddExperienceModal";
 

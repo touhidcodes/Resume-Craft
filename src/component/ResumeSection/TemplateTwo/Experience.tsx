@@ -1,4 +1,4 @@
-import ExperienceEditModal from "../../Modal/ExperienceEditModal";
+import ExperienceEditModal from "../../Modal/EditModal/ExperienceEditModal";
 
 const Experience = () => {
   return (
@@ -33,7 +33,7 @@ const Experience = () => {
                 Educated patients on their conditions and prescribed medications
               </li>
             </ul>
-            <ExperienceEditModal />
+            {/* <ExperienceEditModal /> */}
           </div>
         ))}
       </div>

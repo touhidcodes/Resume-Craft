@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import HeaderEditModal from "../../Modal/HeaderEditModal";
+import HeaderEditModal from "../../Modal/EditModal/HeaderEditModal";
 
 const Header = () => {
   const personalInfo = useAppSelector(

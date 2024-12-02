@@ -1,14 +1,13 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { experienceValidationSchema } from "../../zod/experienceValidationSchema";
-import dayjs, { Dayjs } from "dayjs";
-import { Experience } from "../../types/resumeTypes";
-import ExperienceForm from "../form/ExperienceForm";
+import { experienceValidationSchema } from "../../../zod/experienceValidationSchema";
+import { Experience } from "../../../types/resumeTypes";
+import ExperienceForm from "../../form/ExperienceForm";
 
 type TExperienceEditModalProps = {
   experience: Experience;

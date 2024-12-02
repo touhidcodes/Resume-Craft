@@ -1,4 +1,4 @@
-import LanguagesEditModel from "../../Modal/LanguagesEditModel";
+import LanguagesEditModel from "../../Modal/EditModal/LanguagesEditModel";
 
 const Languages = () => {
   return (

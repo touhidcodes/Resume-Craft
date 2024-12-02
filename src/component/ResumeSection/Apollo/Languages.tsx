@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import LanguagesEditModal from "../../Modal/LanguagesEditModel";
+import LanguagesEditModal from "../../Modal/EditModal/LanguagesEditModel";
 
 const Languages = () => {
   const languages = useAppSelector((state) => state?.resume?.resume?.language);

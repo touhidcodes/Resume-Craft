@@ -1,4 +1,4 @@
-import SummaryEditModal from "../../Modal/SummaryEditModal";
+import SummaryEditModal from "../../Modal/EditModal/SummaryEditModal";
 
 const Summary = () => {
   return (

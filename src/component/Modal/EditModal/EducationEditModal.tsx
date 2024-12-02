@@ -1,17 +1,17 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import TextEditor from "../shared/TextEditor";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs from "dayjs";
-import { educationValidationSchema } from "../../zod/educationValidationSchema";
+import { educationValidationSchema } from "../../../zod/educationValidationSchema";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import TextEditor from "../../shared/TextEditor";
 
 type EducationFormData = {
   institution: string;

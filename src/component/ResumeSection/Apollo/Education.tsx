@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import EducationEditModal from "../../Modal/EducationEditModal";
+import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
 const Education = () => {

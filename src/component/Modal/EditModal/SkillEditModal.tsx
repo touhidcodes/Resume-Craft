@@ -1,9 +1,9 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
-import ResumeEditBtn from "../shared/ResumeEditBtn";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
-import MultipleSelect from "../builder/MultipleSelect";
+import MultipleSelect from "../../builder/MultipleSelect";
+import ResumeEditBtn from "../../shared/ResumeEditBtn";
 
 const SkillEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
