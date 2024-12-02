@@ -17,7 +17,7 @@ const About = () => {
       <AboutUsSlider />
       <div className="bg-gray-100 py-16 font-roboto">
         {/* Hero Section */}
-        <section className="container mx-auto px-6 text-center md:text-left mb-16">
+        <section className="px-6 text-center md:text-left mb-16">
           <h1 className="text-4xl md:text-6xl font-bold text-center text-[#003366] leading-snug mb-4">
             Why build my resume with Resume{" "}
             <span className="text-primary">Craft</span> ?
@@ -25,7 +25,7 @@ const About = () => {
         </section>
 
         {/* Features Section */}
-        <section className="container mx-auto px-6 grid gap-8 md:grid-cols-3 mb-16">
+        <section className=" mx-auto px-6 grid gap-8 md:grid-cols-3 mb-16">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center">
             <img
               src={featureImage1}
@@ -33,7 +33,7 @@ const About = () => {
               className="w-20 h-20 mx-auto mb-4"
             />
             <h3 className="text-2xl font-semibold text-[#003366]">
-              We’re actually free
+              Professional Templates
             </h3>
             <p className="text-base font-normal mt-2">
               No gimmicks, no freemium features, no joke. Get everything you
@@ -48,7 +48,7 @@ const About = () => {
               className="w-20 h-20 mx-auto mb-4"
             />
             <h3 className="text-2xl font-semibold text-[#003366]">
-              Data-driven templates
+              Real-time Editing
             </h3>
             <p className="text-base font-normal mt-2">
               Rest assured that the templates you find on Resume.com are the
@@ -62,7 +62,7 @@ const About = () => {
               alt="Feature 3"
               className="w-20 h-20 mx-auto mb-4"
             />
-            <h3 className="text-2xl font-semibold text-[#003366]">Get seen</h3>
+            <h3 className="text-2xl font-semibold text-[#003366]">Expert Guidance</h3>
             <p className="text-base mt-2 font-normal">
               With your resume ready for top employers, easily share with
               millions of interested employers on Indeed, the world’s #1 job
@@ -130,101 +130,107 @@ const About = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {/* Team Member Card */}
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
-                <img
+                {/* <img
                   src={teamImage}
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
-                />
+                /> */}
                 <h3 className="text-2xl font-semibold text-[#003366]">
-                  John Doe
+                  Touhidur Zaman
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
-                <p className="text-base	font-normal	">
+                <p className="text-gray-600 font-medium mb-4">Team Leader & GitHub Manager
+                </p>
+                {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
-                </p>
+                </p> */}
               </div>
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
-                <img
+                {/* <img
                   src={teamImage}
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
-                />
+                /> */}
                 <h3 className="text-2xl font-semibold text-[#003366]">
-                  John Doe
+                  MD Rifat
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
-                <p className="text-base	font-normal	">
+                <p className="text-gray-600 font-medium mb-4">Co-Leader & Backend Developer</p>
+                {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
-                </p>
+                </p> */}
               </div>
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
-                <img
+                {/* <img
                   src={teamImage}
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
-                />
+                /> */}
                 <h3 className="text-2xl font-semibold text-[#003366]">
-                  John Doe
+                  Imtiaz Tamim
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
-                <p className="text-base	font-normal	">
+                <p className="text-gray-600 font-medium mb-4">Backend Developer
+                </p>
+                {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
-                </p>
+                </p> */}
               </div>
-              <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
-                <img
-                  src={teamImage}
-                  alt="Team Member"
-                  className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
-                />
-                <h3 className="text-2xl font-semibold text-[#003366]">
-                  John Doe
-                </h3>
-                <p className="text-gray-600 font-medium mb-4">Founder & CEO</p>
-                <p className="text-base	font-normal	">
-                  With years of experience in leadership, John brings vision and
-                  passion to our team.
-                </p>
-              </div>
+
 
               {/* Team Member Card */}
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
-                <img
+                {/* <img
                   src={teamImage3}
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#EDD7DF] mb-6"
-                />
+                /> */}
                 <h3 className="text-2xl font-semibold text-[#003366]">
-                  Emily Carter
+                  Emon Ahmed
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">
-                  Head of Product Design
+                  Frontend Developer
                 </p>
-                <p className="text-base	font-normal	">
+                {/* <p className="text-base	font-normal	">
                   Emily's creativity ensures our products are intuitive and
                   visually stunning.
-                </p>
+                </p> */}
               </div>
 
               {/* Team Member Card */}
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
-                <img
+                {/* <img
                   src={teamImage2}
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#faf9da] mb-6"
-                />
+                /> */}
                 <h3 className="text-2xl font-semibold text-[#003366]">
-                  James Peterson
+                  Rakib Ahmed
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Career Coach</p>
-                <p className="text-base	font-normal	">
+                <p className="text-gray-600 font-medium mb-4">Frontend Developer
+                </p>
+                {/* <p className="text-base	font-normal	">
                   James provides expert career advice and helps our users
                   succeed.
-                </p>
+                </p> */}
               </div>
+
+              <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
+                {/* <img
+                  src={teamImage}
+                  alt="Team Member"
+                  className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
+                /> */}
+                <h3 className="text-2xl font-semibold text-[#003366]">
+                  Nur Muhammad
+                </h3>
+                <p className="text-gray-600 font-medium mb-4">Frontend Developer</p>
+                {/* <p className="text-base	font-normal	">
+                  With years of experience in leadership, John brings vision and
+                  passion to our team.
+                </p> */}
+              </div>
+
             </div>
           </div>
         </section>
