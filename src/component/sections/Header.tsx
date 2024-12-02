@@ -27,7 +27,7 @@ const Header = () => {
 "
               >
                 resume builder
-                <span className="  ai-powered-tag"></span>
+                <span className="ai-powered-tag"></span>
               </span>
             </h1>
             <h3 className="md:text-xl my-7">
