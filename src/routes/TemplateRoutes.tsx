@@ -43,17 +43,16 @@ const TemplateRoutes = () => {
   );
 
   return (
-    <PrivetRoute>
-      <Routes>
-        {result?.map((template) => (
-          <Route
-            key={template.id}
-            path={`/${template.id}`}
-            Component={template.component}
-          />
-        ))}
-      </Routes>
-    </PrivetRoute>
+    <Routes>
+      {" "}
+      {result?.map((template) => (
+        <Route
+          key={template.id}
+          path={`/${template.id}`}
+          Component={template.component}
+        />
+      ))}
+    </Routes>
   );
 };
 

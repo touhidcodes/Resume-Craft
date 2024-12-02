@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
 import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
 import { useCreateResumeMutation } from "../../redux/features/resume/resumeApi";
+import { useAppSelector } from "../../redux/hooks";
+import { userCurrentToken } from "../../redux/features/auth/authSlice";
 
 type TChooseResumeTemplateProps = {
   label: string;
@@ -42,9 +44,12 @@ const ChooseResumeTemplate = ({
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllTemplatesQuery(null);
   const [createResume, createResumeApiRes] = useCreateResumeMutation();
-
+  const token = useAppSelector(userCurrentToken);
   const handleClickOpen = () => {
     setOpen(true);
+    if (!token) {
+      navigate("/login");
+    }
   };
 
   const handleClose = () => {
@@ -54,9 +59,9 @@ const ChooseResumeTemplate = ({
   const handleCreateResume = async (templateId: string) => {
     try {
       const res = await createResume(templateId).unwrap();
+      navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
 
       handleClose();
-      navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
     } catch (error) {}
   };
 
