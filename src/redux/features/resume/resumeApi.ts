@@ -9,6 +9,7 @@ const resumeApi = baseApi.injectEndpoints({
         body: { templateId },
       }),
     }),
+
     getResumeData: builder.query({
       query: (resumeId) => ({
         url: `/resume/resume/${resumeId}`,
@@ -39,6 +40,14 @@ const resumeApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    updateProfileSummary: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/update-resume/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -47,6 +56,7 @@ export const {
   useGetResumeDataQuery,
   useUpdateExperienceMutation,
   useUpdateEducationMutation,
+  useUpdateProfileSummaryMutation,
   useUpdatePersonalInfoMutation,
 } = resumeApi;
 

@@ -13,7 +13,9 @@ const Summary = () => {
       <div className="w-full h-[2px] bg-gray-400 mb-1"></div>
       <HtmlRenderer text={`<p>${summary}</p>`} />
 
-      <SummaryEditModal />
+      <div className="hidden group-hover:block absolute top-1 right-1 duration-100 ease-in-out transition-all">
+        <SummaryEditModal />
+      </div>
     </div>
   );
 };
