@@ -6,11 +6,20 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { headerValidationSchema } from "../../../zod/headerValidationSchema";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import { PersonalInfo } from "../../../types/resumeTypes";
+import { useUpdatePersonalInfoMutation } from "../../../redux/features/resume/resumeApi";
+import { useAppSelector } from "../../../redux/hooks";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
+
+type THeaderProps = {
+  personalInfo: PersonalInfo | undefined;
+};
 
 // Define the form data type
 type FormData = {
-  userName: string;
-  title: string;
+  fullName: string;
+  jobTitle: string;
   email: string;
   phone: string;
   location: string;
@@ -19,8 +28,10 @@ type FormData = {
   github: string;
 };
 
-const HeaderEditModal = () => {
+const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const [updatePersonal, { isLoading }] = useUpdatePersonalInfoMutation();
 
   // Use the correct type for useForm
   const {
@@ -29,6 +40,16 @@ const HeaderEditModal = () => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(headerValidationSchema),
+    defaultValues: {
+      email: personalInfo?.email,
+      fullName: personalInfo?.fullName,
+      jobTitle: personalInfo?.jobTitle,
+      phone: personalInfo?.phone,
+      location: personalInfo?.location,
+      website: personalInfo?.website,
+      linkedin: personalInfo?.linkedin,
+      github: personalInfo?.github,
+    },
   });
 
   function open() {
@@ -40,8 +61,21 @@ const HeaderEditModal = () => {
   }
 
   // Handle form submission
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Submitted:", data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const res = await updatePersonal({
+        id: resumeId,
+        data: { personalInfo: data },
+      }).unwrap();
+
+      if (res.success) {
+        toast.success(res.message);
+      }
+
+      close();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -79,16 +113,16 @@ const HeaderEditModal = () => {
                         label="Your name"
                         fullWidth
                         variant="outlined"
-                        {...register("userName")}
-                        color={errors?.userName?.message ? "error" : "primary"}
+                        {...register("fullName")}
+                        color={errors?.fullName?.message ? "error" : "primary"}
                       />
                       <p className="text-sm text-red-500 mt-1">
-                        {errors?.userName?.message as string}
+                        {errors?.fullName?.message as string}
                       </p>
                     </div>
                     <div className="w-full">
                       <p className="mb-3">
-                        Title <span className="text-red-500">*</span>
+                        Job Title <span className="text-red-500">*</span>
                       </p>
                       <TextField
                         id="outlined-basic"
@@ -96,11 +130,11 @@ const HeaderEditModal = () => {
                         placeholder="ft. Software Engineer"
                         fullWidth
                         variant="outlined"
-                        {...register("title")}
-                        color={errors?.title?.message ? "error" : "primary"}
+                        {...register("jobTitle")}
+                        color={errors?.jobTitle?.message ? "error" : "primary"}
                       />
                       <p className="text-sm text-red-500 mt-1">
-                        {errors?.title?.message as string}
+                        {errors?.jobTitle?.message as string}
                       </p>
                     </div>
                     <div className="flex flex-col md:flex-row gap-5">
@@ -225,12 +259,13 @@ const HeaderEditModal = () => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  variant={isLoading ? "outlined" : "contained"}
+                  disabled={isLoading}
                   color="primary"
                   onClick={handleSubmit(onSubmit)}
                   autoFocus
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>
