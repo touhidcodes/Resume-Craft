@@ -5,11 +5,13 @@ import { Button } from "@mui/material";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ExperienceForm from "../../form/experienceForm";
 import { experienceValidationSchema } from "../../../zod/experienceValidationSchema";
-import { Experience } from "../../../types/resumeTypes";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
+import ExperienceForm from "../../form/ExperienceForm";
+
+type TAddExperienceProps = {
+  experienceId: string;
+};
 
 type ExperienceFormData = {
   companyName: string;
@@ -19,7 +21,7 @@ type ExperienceFormData = {
   location: string;
 };
 
-const AddExperienceModal = () => {
+const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [responsibilities, setResponsibilities] = useState("");
 
@@ -42,6 +44,7 @@ const AddExperienceModal = () => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
+    console.log(experienceId);
     // console.log("Form Submitted:", data);
     console.log(data);
     // close();

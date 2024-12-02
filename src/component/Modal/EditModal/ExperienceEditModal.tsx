@@ -8,12 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { experienceValidationSchema } from "../../../zod/experienceValidationSchema";
 import { Experience } from "../../../types/resumeTypes";
 import ExperienceForm from "../../form/ExperienceForm";
+import { useUpdateExperienceMutation } from "../../../redux/features/resume/resumeApi";
 
 type TExperienceEditModalProps = {
   experience: Experience;
 };
 
 type ExperienceFormData = {
+  id: string;
   companyName: string;
   jobTitle: string;
   startDate: string;
@@ -43,6 +45,8 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
     },
   });
 
+  const [updateExperience, { isLoading }] = useUpdateExperienceMutation();
+
   function open() {
     setIsOpen(true);
   }
@@ -51,8 +55,11 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
     setIsOpen(false);
   }
 
-  const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
+  const onSubmit: SubmitHandler<ExperienceFormData> = async (data) => {
     console.log(data);
+    // updateExperience({ experienceId: experience.id, data });
+    console.log(data);
+    // experience
     // close();
   };
 

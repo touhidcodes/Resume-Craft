@@ -15,9 +15,21 @@ const resumeApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    updateExperience: builder.mutation({
+      query: ({ experienceId, data }) => ({
+        url: `/resume/work-experience/update-experience/${experienceId}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useCreateResumeMutation, useGetResumeDataQuery } = resumeApi;
+export const {
+  useCreateResumeMutation,
+  useGetResumeDataQuery,
+  useUpdateExperienceMutation,
+} = resumeApi;
 
 export default resumeApi;
