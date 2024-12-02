@@ -24,6 +24,14 @@ const resumeApi = baseApi.injectEndpoints({
       }),
     }),
 
+    updateEducation: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/education/update-education/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
     updatePersonalInfo: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/update-resume/${id}`,
@@ -38,6 +46,7 @@ export const {
   useCreateResumeMutation,
   useGetResumeDataQuery,
   useUpdateExperienceMutation,
+  useUpdateEducationMutation,
   useUpdatePersonalInfoMutation,
 } = resumeApi;
 

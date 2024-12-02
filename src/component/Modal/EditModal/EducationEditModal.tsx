@@ -9,6 +9,9 @@ import { educationValidationSchema } from "../../../zod/educationValidationSchem
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import EducationForm from "../../form/EducationForm";
 import { Education } from "../../../types/resumeTypes";
+import { useUpdateEducationMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TEducationEditProps = {
   education: Education;
@@ -25,6 +28,7 @@ type EducationFormData = {
 const EducationEditModal = ({ education }: TEducationEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState(education.description);
+  const [updateEducation, { isLoading }] = useUpdateEducationMutation();
   const {
     register,
     handleSubmit,
@@ -50,9 +54,21 @@ const EducationEditModal = ({ education }: TEducationEditProps) => {
   }
 
   // Handle form submission
-  const onSubmit: SubmitHandler<EducationFormData> = (data) => {
-    console.log("Form Submitted:", data);
-    close();
+  const onSubmit: SubmitHandler<EducationFormData> = async (data) => {
+    try {
+      const res = await updateEducation({
+        id: education.id,
+        data: { ...data, description },
+      }).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+
+      close();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -93,11 +109,12 @@ const EducationEditModal = ({ education }: TEducationEditProps) => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  variant={isLoading ? "outlined" : "contained"}
+                  disabled={isLoading}
                   color="primary"
                   onClick={handleSubmit(onSubmit)}
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

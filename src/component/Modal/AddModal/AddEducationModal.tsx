@@ -5,9 +5,12 @@ import { Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { educationValidationSchema } from "../../../zod/educationValidationSchema";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import EducationForm from "../../form/EducationForm";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
+
+type TAddEducationModalProps = {
+  educationId: string;
+};
 
 type EducationFormData = {
   institution: string;
@@ -17,7 +20,7 @@ type EducationFormData = {
   location: string;
 };
 
-const AddEducationModal = () => {
+const AddEducationModal = ({ educationId }: TAddEducationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState("");
   const {
