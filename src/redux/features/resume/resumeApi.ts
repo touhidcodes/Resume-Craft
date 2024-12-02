@@ -14,6 +14,7 @@ const resumeApi = baseApi.injectEndpoints({
         url: `/resume/resume/${resumeId}`,
         method: "GET",
       }),
+      providesTags: ["Resume"],
     }),
 
     updateExperience: builder.mutation({
@@ -22,6 +23,15 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
+    }),
+    CreateExperience: builder.mutation({
+      query: (data) => ({
+        url: `/resume/work-experience/create-experience`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
     }),
   }),
 });
@@ -30,6 +40,7 @@ export const {
   useCreateResumeMutation,
   useGetResumeDataQuery,
   useUpdateExperienceMutation,
+  useCreateExperienceMutation,
 } = resumeApi;
 
 export default resumeApi;

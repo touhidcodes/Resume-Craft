@@ -1,4 +1,4 @@
-const ReusmeLoading = ({ children }) => {
+const ReusmeLoading = () => {
   return (
     <>
       <div className="animate-pulse  dark:bg-gray-300">

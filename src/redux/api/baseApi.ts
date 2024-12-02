@@ -4,7 +4,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: "https://resume-craft-server-theta.vercel.app/api",
+  baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -18,6 +18,7 @@ export const baseQuery = fetchBaseQuery({
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQuery,
+  tagTypes: ["Resume", "User"],
 
   endpoints: () => ({}),
 });

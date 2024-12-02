@@ -14,6 +14,7 @@ import ResumeBuilder from "../pages/builder/ResumeBuilder";
 import NotFound from "../pages/notFound/NotFound";
 import TemplateTwo from "../pages/Resume/TemplateTwo/TemplateTwo";
 import ReusmeLoading from "../component/shared/ReusmeLoading";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/resume-builder/*",
-        element: <ResumeBuilder />,
+        element: (
+          <PrivetRoute>
+            {" "}
+            <ResumeBuilder />
+          </PrivetRoute>
+        ),
       },
     ],
   },
