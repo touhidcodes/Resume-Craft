@@ -9,6 +9,10 @@ import { experienceValidationSchema } from "../../../zod/experienceValidationSch
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
 import ExperienceForm from "../../form/ExperienceForm";
 
+type TAddExperienceProps = {
+  experienceId: string;
+};
+
 type ExperienceFormData = {
   companyName: string;
   jobTitle: string;
@@ -17,7 +21,7 @@ type ExperienceFormData = {
   location: string;
 };
 
-const AddExperienceModal = () => {
+const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [responsibilities, setResponsibilities] = useState("");
 
@@ -40,6 +44,7 @@ const AddExperienceModal = () => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
+    console.log(experienceId);
     // console.log("Form Submitted:", data);
     console.log(data);
     // close();

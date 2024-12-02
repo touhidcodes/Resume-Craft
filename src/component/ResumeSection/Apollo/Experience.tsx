@@ -37,7 +37,7 @@ const Experience = () => {
 
             <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all">
               <ExperienceEditModal experience={exp} />
-              <AddExperienceModal />
+              <AddExperienceModal experienceId={exp.id} />
             </div>
           </div>
         ))}
