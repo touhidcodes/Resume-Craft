@@ -12,7 +12,7 @@ const revenueChartData = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   datasets: [
     {
-      label: "Revenue",
+      label: "Resume",
       data: [20000, 30000, 25000, 35000, 28000, 50000, 30000, 40000, 37000, 45000, 42000, 46000],
       backgroundColor: "#cbd5e1",
       borderRadius: 4,
@@ -87,7 +87,7 @@ const AdminDashboard = () => {
         <div>
           <div className="bg-white shadow-md rounded-lg p-4 md:p-6">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-800">Revenue Chart</h3>
+              <h3 className="text-lg font-semibold text-gray-800">Monthly Resume Creation</h3>
               <select className="border border-gray-300 rounded-md p-2 text-sm text-gray-600 mt-2 md:mt-0">
                 <option value="This Year">This Year</option>
                 <option value="This Month">This Month</option>
