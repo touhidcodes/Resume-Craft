@@ -33,7 +33,6 @@ const router = createBrowserRouter([
         path: "/resume-builder/*",
         element: (
           <PrivetRoute>
-            {" "}
             <ResumeBuilder />
           </PrivetRoute>
         ),
