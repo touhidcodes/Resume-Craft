@@ -12,7 +12,7 @@ const revenueChartData = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   datasets: [
     {
-      label: "Revenue",
+      label: "Resume",
       data: [20000, 30000, 25000, 35000, 28000, 50000, 30000, 40000, 37000, 45000, 42000, 46000],
       backgroundColor: "#cbd5e1",
       borderRadius: 4,
