@@ -8,6 +8,7 @@ const resumeApi = baseApi.injectEndpoints({
         method: "POST",
         body: { templateId },
       }),
+      invalidatesTags: ["Resume"],
     }),
 
     getResumeData: builder.query({
@@ -15,6 +16,7 @@ const resumeApi = baseApi.injectEndpoints({
         url: `/resume/resume/${resumeId}`,
         method: "GET",
       }),
+      providesTags: ["Resume"],
     }),
 
     updatePersonalInfo: builder.mutation({
@@ -23,6 +25,7 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
     }),
 
     updateProfileSummary: builder.mutation({
@@ -31,6 +34,7 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
     }),
 
     updateSkill: builder.mutation({
@@ -39,6 +43,7 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
     }),
 
     updateExperience: builder.mutation({
@@ -47,6 +52,16 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    CreateExperience: builder.mutation({
+      query: (data) => ({
+        url: `/resume/work-experience/create-experience`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
     }),
 
     updateEducation: builder.mutation({
@@ -55,6 +70,7 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
     }),
   }),
 });
@@ -67,6 +83,7 @@ export const {
   useUpdateProfileSummaryMutation,
   useUpdateSkillMutation,
   useUpdatePersonalInfoMutation,
+  useCreateExperienceMutation,
 } = resumeApi;
 
 export default resumeApi;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import loginStyle from "./loginStyle.css";
 import {
   useGoogleSignInBgMutation,
   useGoogleSignInWithPopupMutation,
@@ -138,7 +139,7 @@ const Login = () => {
                     height="24px"
                     viewBox="0 0 24 24"
                     width="24px"
-                    fill="#5985E1"
+                    fill="#4285F4"
                   >
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />

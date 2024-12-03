@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { experienceValidationSchema } from "../../../zod/experienceValidationSchema";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
 import ExperienceForm from "../../form/ExperienceForm";
-
+import { useCreateExperienceMutation } from "../../../redux/features/resume/resumeApi";
 type TAddExperienceProps = {
   experienceId: string;
 };
@@ -24,7 +24,7 @@ type ExperienceFormData = {
 const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [responsibilities, setResponsibilities] = useState("");
-
+  const [create] = useCreateExperienceMutation();
   const {
     register,
     handleSubmit,
@@ -43,10 +43,10 @@ const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
   }
 
   // Handle form submission
-  const onSubmit: SubmitHandler<ExperienceFormData> = (data) => {
-    console.log(experienceId);
-    // console.log("Form Submitted:", data);
+  const onSubmit: SubmitHandler<ExperienceFormData> = async (data) => {
     console.log(data);
+    const res = await create(data);
+    console.log(res);
     // close();
   };
 

@@ -1,3 +1,4 @@
+import Awards from "../../../component/ResumeSection/Apollo/Awards";
 import Education from "../../../component/ResumeSection/Apollo/Education";
 import Experience from "../../../component/ResumeSection/Apollo/Experience";
 import Header from "../../../component/ResumeSection/Apollo/Header";
@@ -28,6 +29,10 @@ const resumeSections: TResumeSections = {
   Language: {
     name: "Language",
     component: Languages,
+  },
+  Awards: {
+    name: "AWards",
+    component: Awards,
   },
 };
 
