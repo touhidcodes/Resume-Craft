@@ -4,10 +4,17 @@ import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import TextEditor from "../../shared/TextEditor";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import { useUpdateProfileSummaryMutation } from "../../../redux/features/resume/resumeApi";
+import { useAppSelector } from "../../../redux/hooks";
+import ButtonSpinner from "../../shared/ButtonSpinner";
+import { toast } from "sonner";
 
 const SummaryEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [summary, setSummary] = useState("");
+  const resume = useAppSelector((state) => state.resume.resume);
+  const [summary, setSummary] = useState(resume?.profileSummary as string);
+  const [updateProfileSummary, { isLoading }] =
+    useUpdateProfileSummaryMutation();
 
   function open() {
     setIsOpen(true);
@@ -16,6 +23,23 @@ const SummaryEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  const handleUpdateProfileSummary = async () => {
+    try {
+      const res = await updateProfileSummary({
+        id: resume?.id,
+        data: { profileSummary: summary },
+      }).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+
+      close();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -81,16 +105,21 @@ const SummaryEditModal = () => {
 
               {/* Dialog footer */}
               <div className="py-4 px-5 space-x-5 flex justify-end border-t">
-                <Button variant="outlined" autoFocus onClick={close}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  autoFocus
+                  onClick={close}
+                >
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
-                  color="primary"
-                  //   onClick={handleClose}
+                  variant={isLoading ? "outlined" : "contained"}
+                  disabled={isLoading}
+                  onClick={handleUpdateProfileSummary}
                   autoFocus
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

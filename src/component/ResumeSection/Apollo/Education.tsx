@@ -24,15 +24,15 @@ const Education = () => {
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
               <h3>{education.institution}</h3>
               <span className="w-0.5 h-3.5 bg-neutral-600"></span>
-              <span>01/2024</span>
+              <span>{education.startDate}</span>
               <span>-</span>
-              <span> 05/2024</span>
+              <span> {education.endDate ? education.endDate : "Present"}</span>
             </div>
             <HtmlRenderer text={`<p>${education.description}</p>`} />
 
             <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all">
               <EducationEditModal education={education} />
-              <AddEducationModal />
+              <AddEducationModal educationId={education.id} />
             </div>
           </div>
         ))}

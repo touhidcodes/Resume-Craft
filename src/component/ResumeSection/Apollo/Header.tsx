@@ -8,7 +8,6 @@ const Header = () => {
 
   return (
     <div className="font-roboto hover:bg-primary/[.04] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
-      <HeaderEditModal />
       <h1 className="text-2xl font-bold">{personalInfo?.fullName}</h1>
       <h2 className="text-[20px] leading-[30px] font-medium ">
         {personalInfo?.jobTitle}
@@ -20,6 +19,9 @@ const Header = () => {
         <p>{personalInfo?.email}</p>
         <div className="w-[1px] h-[15px] bg-[#6E6E6E] mb-2"></div>
         <p>{personalInfo?.location}</p>
+      </div>
+      <div className="hidden group-hover:block absolute top-1 right-1 duration-100 ease-in-out transition-all">
+        <HeaderEditModal personalInfo={personalInfo} />
       </div>
     </div>
   );

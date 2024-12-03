@@ -56,6 +56,7 @@ const CertificateEditModal = () => {
                     </h2>
                     <MultipleSelect
                       label="Select Certificate"
+                      value={certificates}
                       setValue={setCertificates}
                     />
                     <div className="mt-5 flex items-center gap-4 flex-wrap">

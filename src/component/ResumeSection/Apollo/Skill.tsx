@@ -19,7 +19,9 @@ const Skill = () => {
             </span>
             {skill.skills.join(", ")}
           </p>
-          <SkillEditModal />
+          <div className="hidden group-hover:block absolute top-0 right-1 duration-100 ease-in-out transition-all">
+            <SkillEditModal skill={skill} />
+          </div>
         </div>
       ))}
     </div>

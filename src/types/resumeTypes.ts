@@ -4,12 +4,14 @@ export type Section = {
 };
 
 export type PersonalInfo = {
-  id: string;
   fullName: string;
   location: string;
   jobTitle: string;
   email: string;
   phone: string;
+  linkedin: string;
+  github: string;
+  website: string;
 };
 
 export type Skill = {
@@ -61,6 +63,7 @@ export type Certificate = {
 };
 
 export type ResumeInitialState = {
+  id: string;
   templateId: string;
   userId: string;
   allSection: Section[];
