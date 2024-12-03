@@ -19,6 +19,14 @@ const resumeApi = baseApi.injectEndpoints({
       providesTags: ["Resume"],
     }),
 
+    addSkill: builder.mutation({
+      query: () => ({
+        url: ``,
+        method: "POST",
+        body: {},
+      }),
+    }),
+
     updatePersonalInfo: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/update-resume/${id}`,
@@ -78,6 +86,7 @@ const resumeApi = baseApi.injectEndpoints({
 export const {
   useCreateResumeMutation,
   useGetResumeDataQuery,
+  useAddSkillMutation,
   useUpdateExperienceMutation,
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
