@@ -1,9 +1,9 @@
-import Education from "../../../component/ResumeSection/TemplateTwo/Education";
-import Experience from "../../../component/ResumeSection/TemplateTwo/Experience";
-import Header from "../../../component/ResumeSection/TemplateTwo/Header";
-import Languages from "../../../component/ResumeSection/TemplateTwo/Languages";
-import Skill from "../../../component/ResumeSection/TemplateTwo/Skill";
-import Summery from "../../../component/ResumeSection/TemplateTwo/Summary";
+import Education from "../../../component/ResumeSection/Orion/Education";
+import Experience from "../../../component/ResumeSection/Orion/Experience";
+import Header from "../../../component/ResumeSection/Orion/Header";
+import Languages from "../../../component/ResumeSection/Orion/Languages";
+import Skill from "../../../component/ResumeSection/Orion/Skill";
+import Summery from "../../../component/ResumeSection/Orion/Summary";
 
 const TemplateTwo = () => {
   return (

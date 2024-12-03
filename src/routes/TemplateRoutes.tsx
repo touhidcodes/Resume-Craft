@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useGetAllTemplatesQuery } from "../redux/features/template/templateApi";
 import Apollo from "../pages/Resume/Temple1/Apollo";
-import PrivetRoute from "./PrivetRoute";
 
 // Define types for template data
 type Template = {
@@ -44,7 +43,6 @@ const TemplateRoutes = () => {
 
   return (
     <Routes>
-      {" "}
       {result?.map((template) => (
         <Route
           key={template.id}

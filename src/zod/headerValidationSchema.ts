@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const headerValidationSchema = z.object({
-  userName: z.string().min(1, { message: "User name is required" }),
-  title: z.string().min(1, { message: "Resume title is required" }),
+  fullName: z.string().min(1, { message: "Full name is required" }),
+  jobTitle: z.string().min(1, { message: "Job title is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().refine(
     (val) => {

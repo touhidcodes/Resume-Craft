@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close, KeyboardArrowDown } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -7,13 +7,15 @@ import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
 import { Button } from "@mui/material";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const user = useAppSelector(userCurrentUser);
   const dispatch = useAppDispatch();
   let role = user?.role;
 
-  const handeLogout = () => {
+  const handleLogout = () => {
+    navigate("/login");
     dispatch(logout());
   };
 
@@ -111,7 +113,7 @@ const NavBar = () => {
           <div className="w-[1px] h-6 bg-[#EEEEEE]"></div>
           <div className="md:flex gap-x-2 hidden ">
             {user ? (
-              <Button variant="contained" onClick={handeLogout} size="large">
+              <Button variant="contained" onClick={handleLogout} size="large">
                 Logout
               </Button>
             ) : (

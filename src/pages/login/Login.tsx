@@ -81,8 +81,8 @@ const Login = () => {
   const handleCredentials = (type: string) => {
     const newCredentials =
       type === "user"
-        ? { email: "emonsss@gmail.com", password: "123456" }
-        : { email: "imonshomon@gmail.com", password: "123456789" };
+        ? { email: "user@gmail.com", password: "123456" }
+        : { email: "admin@gmail.com", password: "123456" };
 
     setCredentials(newCredentials);
     setValue("email", newCredentials.email);

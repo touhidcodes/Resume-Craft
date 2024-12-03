@@ -4,19 +4,14 @@ import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../../builder/MultipleSelect";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import { Skill } from "../../../types/resumeTypes";
 import { useUpdateSkillMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 
-type TSkillModalProps = {
-  skill: Skill;
-};
-
-const SkillEditModal = ({ skill }: TSkillModalProps) => {
+const AddSkillModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [category, setCategory] = useState(skill.category);
-  const [skills, setSkills] = useState<string[]>(skill.skills);
+  const [category, setCategory] = useState("");
+  const [skills, setSkills] = useState<string[]>([]);
   const [updateSkill, { isLoading }] = useUpdateSkillMutation();
 
   const handleRemoveSkill = (skill: string) => {
@@ -38,13 +33,13 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
 
   const handleUpdateSkill = async () => {
     try {
-      const res = await updateSkill({
-        id: skill.id,
-        data: { category, skills },
-      }).unwrap();
-      if (res?.success) {
-        toast.success(res?.message);
-      }
+      //   const res = await updateSkill({
+      //     id: skill.id,
+      //     data: { category, skills },
+      //   }).unwrap();
+      //   if (res?.success) {
+      //     toast.success(res?.message);
+      //   }
       close();
     } catch (error) {
       console.log(error);
@@ -171,4 +166,4 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
   );
 };
 
-export default SkillEditModal;
+export default AddSkillModal;
