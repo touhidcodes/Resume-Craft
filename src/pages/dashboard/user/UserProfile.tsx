@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import teamImage from "../../../assets/images/t.jpeg";
 import { Helmet } from "react-helmet-async";
-import { useGetAllUsersQuery } from "../../../redux/api/userApi";
+import { useGetAllUsersQuery } from "../../../redux/features/user/userApi";
 
 const UserProfile = () => {
   const { data: usersData, isLoading, isError } = useGetAllUsersQuery("");
