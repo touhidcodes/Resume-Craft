@@ -13,7 +13,7 @@ import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
 import TemplateTwo from "../pages/Resume/TemplateTwo/TemplateTwo";
-import ReusmeLoading from "../component/shared/ReusmeLoading";
+import ResumeLoading from "../component/shared/ResumeLoading";
 import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/loading",
-    element: <ReusmeLoading></ReusmeLoading>,
+    element: <ResumeLoading></ResumeLoading>,
   },
   {
     path: "/register",

@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
+import AddSkillModal from "../../Modal/AddModal/AddSkillModal";
 import SkillEditModal from "../../Modal/EditModal/SkillEditModal";
 
 const Skill = () => {
@@ -19,8 +20,9 @@ const Skill = () => {
             </span>
             {skill.skills.join(", ")}
           </p>
-          <div className="hidden group-hover:block absolute top-0 right-1 duration-100 ease-in-out transition-all">
+          <div className="hidden group-hover:flex gap-x-3 items-center absolute top-0 right-1 duration-100 ease-in-out transition-all text-neutral-900">
             <SkillEditModal skill={skill} />
+            <AddSkillModal />
           </div>
         </div>
       ))}
