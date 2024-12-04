@@ -12,8 +12,8 @@ import { userPath } from "./userroute";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
-import TemplateTwo from "../pages/Resume/TemplateTwo/TemplateTwo";
-import ResumeLoading from "../component/shared/ResumeLoading";
+import TemplateTwo from "../pages/Template/Orion";
+
 import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
@@ -47,10 +47,7 @@ const router = createBrowserRouter([
     path: "/resume",
     element: <TemplateTwo></TemplateTwo>,
   },
-  {
-    path: "/loading",
-    element: <ResumeLoading></ResumeLoading>,
-  },
+
   {
     path: "/register",
     element: <Singup />,

@@ -1,13 +1,13 @@
-import Awards from "../../../component/ResumeSection/Apollo/Awards";
-import Education from "../../../component/ResumeSection/Apollo/Education";
-import Experience from "../../../component/ResumeSection/Apollo/Experience";
-import Header from "../../../component/ResumeSection/Apollo/Header";
-import Languages from "../../../component/ResumeSection/Apollo/Languages";
-import Skill from "../../../component/ResumeSection/Apollo/Skill";
-import Summary from "../../../component/ResumeSection/Apollo/Summary";
 import useActiveSections, {
   TResumeSections,
-} from "../../../hooks/useActiveSections";
+} from "../../hooks/useActiveSections";
+import Awards from "../../component/TemplateSection/Apollo/Awards";
+import Summary from "../../component/TemplateSection/Apollo/Summary";
+import Experience from "../../component/TemplateSection/Apollo/Experience";
+import Skill from "../../component/TemplateSection/Apollo/Skill";
+import Languages from "../../component/TemplateSection/Apollo/Languages";
+import Header from "../../component/TemplateSection/Apollo/Header";
+import Education from "../../component/TemplateSection/Apollo/Education";
 
 const resumeSections: TResumeSections = {
   Summary: {
