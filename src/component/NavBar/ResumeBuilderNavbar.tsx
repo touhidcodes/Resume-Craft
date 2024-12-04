@@ -6,8 +6,8 @@ import ChangeResumeTemplate from "../Modal/ChangeResumeTemplate";
 
 const ResumeBuilderNavbar = () => {
   return (
-    <div className="w-full flex items-center justify-between">
-      <div className="space-x-5">
+    <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-y-5">
+      <div className="flex items-center justify-between md:gap-x-5">
         <ChangeResumeTemplate
           variant="outlined"
           label="Template"
