@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 import { userCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hooks";
 
-const AdminPrivet = ({ children }: { children: ReactNode }) => {
+const AdminPrivate = ({ children }: { children: ReactNode }) => {
   const user = useAppSelector(userCurrentUser);
-  console.log(user);
+  // console.log(user);
 
   if (!user) {
     return (
@@ -22,4 +22,4 @@ const AdminPrivet = ({ children }: { children: ReactNode }) => {
   return children;
 };
 
-export default AdminPrivet;
+export default AdminPrivate;

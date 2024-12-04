@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../redux/hooks";
 import { userCurrentToken } from "../redux/features/auth/authSlice";
 
-const PrivetRoute = ({ children }: { children: ReactNode }) => {
+const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const token = useAppSelector(userCurrentToken);
   const location = useLocation();
   if (!token) {
@@ -16,4 +16,4 @@ const PrivetRoute = ({ children }: { children: ReactNode }) => {
   return children;
 };
 
-export default PrivetRoute;
+export default PrivateRoute;
