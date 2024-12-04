@@ -43,7 +43,6 @@ const TemplateRoutes = () => {
 
   return (
     <Routes>
-      {" "}
       {result?.map((template) => (
         <Route
           key={template.id}

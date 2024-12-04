@@ -9,6 +9,10 @@ import { educationValidationSchema } from "../../../zod/educationValidationSchem
 import EducationForm from "../../form/EducationForm";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
+type TAddEducationModalProps = {
+  educationId: string;
+};
+
 type EducationFormData = {
   institution: string;
   degree: string;
@@ -17,7 +21,7 @@ type EducationFormData = {
   location: string;
 };
 
-const AddEducationModal = () => {
+const AddEducationModal = ({ educationId }: TAddEducationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState("");
 

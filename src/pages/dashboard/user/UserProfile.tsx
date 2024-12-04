@@ -1,22 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import teamImage from "../../../assets/images/t.jpeg";
 import { Helmet } from "react-helmet-async";
+import { useGetAllUsersQuery } from "../../../redux/api/userApi";
 
 const UserProfile = () => {
+  const { data: usersData, isLoading, isError } = useGetAllUsersQuery("");
+  console.log(usersData?.data)
+
   const [isEditingPersonalInfo, setIsEditingPersonalInfo] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
-  const [userInfo, setUserInfo] = useState({
-    firstName: "Jack",
-    lastName: "Adams",
+  const defaultUserInfo = {
+    userName: "Jack",
     email: "jackadams@gmail.com",
     phone: "(213) 555-1234",
     bio: "Product Designer",
     country: "United States of America",
     city: "California, USA",
-    postalCode: "ERT 62574",
-    taxId: "AS564178969",
-  });
+  };
+
+  const [userInfo, setUserInfo] = useState(defaultUserInfo);
+
+  // Update userInfo state when API data is available
+  useEffect(() => {
+    if (usersData?.data) {
+      const user = usersData.data; // Assuming the first user is the profile user
+      setUserInfo({
+        userName: user?.userName || defaultUserInfo.userName,
+        email: user?.email || defaultUserInfo.email,
+        phone: user?.phone || defaultUserInfo.phone,
+        bio: user?.bio || defaultUserInfo.bio,
+        country: user?.country || defaultUserInfo.country,
+        city: user?.city || defaultUserInfo.city,
+      });
+    }
+  }, [usersData]);
 
   // Handle input change for fields
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,12 +47,11 @@ const UserProfile = () => {
       <Helmet>
         <title>User Profile - Resume Craft</title>
       </Helmet>
-      {/* Container */}
+
       <div className="max-w-7xl mx-auto bg-white shadow-md rounded-lg p-4">
         <h1 className="text-xl font-bold mb-6">My Profile</h1>
 
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Profile Details */}
           <div className="w-full space-y-6">
             {/* User Info */}
             <div className="bg-gray-50 p-4 md:p-6 shadow-md rounded-lg flex flex-wrap items-center justify-between">
@@ -45,11 +62,9 @@ const UserProfile = () => {
                   className="w-16 h-16 md:w-20 md:h-20 rounded-full"
                 />
                 <div>
-                  <h3 className="text-lg font-bold">{`${userInfo.firstName} ${userInfo.lastName}`}</h3>
+                  <h3 className="text-lg font-bold">{`${userInfo.userName}`}</h3>
                   <p className="text-gray-500 text-sm md:text-base">{userInfo.bio}</p>
-                  <p className="text-gray-500 text-sm md:text-base">
-                    {userInfo.city}
-                  </p>
+                  <p className="text-gray-500 text-sm md:text-base">{userInfo.city}</p>
                 </div>
               </div>
               <button
@@ -66,8 +81,7 @@ const UserProfile = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {(
                   Object.entries({
-                    firstName: "First Name",
-                    lastName: "Last Name",
+                    userName: "Full Name",
                     email: "Email Address",
                     phone: "Phone",
                     bio: "Bio",
@@ -107,8 +121,6 @@ const UserProfile = () => {
                   Object.entries({
                     country: "Country",
                     city: "City/State",
-                    postalCode: "Postal Code",
-                    taxId: "TAX ID",
                   }) as [keyof typeof userInfo, string][]
                 ).map(([key, label]) => (
                   <div key={key}>

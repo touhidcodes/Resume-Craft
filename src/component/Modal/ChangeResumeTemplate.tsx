@@ -8,13 +8,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
 import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
 import { useCreateResumeMutation } from "../../redux/features/resume/resumeApi";
-import { useAppSelector } from "../../redux/hooks";
-import { userCurrentToken } from "../../redux/features/auth/authSlice";
 
 type TChooseResumeTemplateProps = {
   label: string;
@@ -33,7 +30,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ChooseResumeTemplate = ({
+const ChangeResumeTemplate = ({
   size,
   label,
   color = "primary",
@@ -44,12 +41,9 @@ const ChooseResumeTemplate = ({
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllTemplatesQuery(null);
   const [createResume, createResumeApiRes] = useCreateResumeMutation();
-  const token = useAppSelector(userCurrentToken);
+
   const handleClickOpen = () => {
     setOpen(true);
-    if (!token) {
-      navigate("/login");
-    }
   };
 
   const handleClose = () => {
@@ -58,10 +52,11 @@ const ChooseResumeTemplate = ({
 
   const handleCreateResume = async (templateId: string) => {
     try {
-      const res = await createResume(templateId).unwrap();
-      navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
+      alert("Hello");
+      //   const res = await createResume(templateId).unwrap();
 
-      handleClose();
+      //   handleClose();
+      //   navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
     } catch (error) {}
   };
 
@@ -142,4 +137,4 @@ const ChooseResumeTemplate = ({
   );
 };
 
-export default ChooseResumeTemplate;
+export default ChangeResumeTemplate;

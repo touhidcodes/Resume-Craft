@@ -8,13 +8,50 @@ const resumeApi = baseApi.injectEndpoints({
         method: "POST",
         body: { templateId },
       }),
+      invalidatesTags: ["Resume"],
     }),
+
     getResumeData: builder.query({
       query: (resumeId) => ({
         url: `/resume/resume/${resumeId}`,
         method: "GET",
       }),
       providesTags: ["Resume"],
+    }),
+
+    addSkill: builder.mutation({
+      query: () => ({
+        url: ``,
+        method: "POST",
+        body: {},
+      }),
+    }),
+
+    updatePersonalInfo: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/update-resume/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    updateProfileSummary: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/update-resume/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    updateSkill: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/skill/update-skill/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
     }),
 
     updateExperience: builder.mutation({
@@ -25,10 +62,20 @@ const resumeApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Resume"],
     }),
+
     CreateExperience: builder.mutation({
       query: (data) => ({
         url: `/resume/work-experience/create-experience`,
         method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    updateEducation: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/education/update-education/${id}`,
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["Resume"],
@@ -39,7 +86,12 @@ const resumeApi = baseApi.injectEndpoints({
 export const {
   useCreateResumeMutation,
   useGetResumeDataQuery,
+  useAddSkillMutation,
   useUpdateExperienceMutation,
+  useUpdateEducationMutation,
+  useUpdateProfileSummaryMutation,
+  useUpdateSkillMutation,
+  useUpdatePersonalInfoMutation,
   useCreateExperienceMutation,
 } = resumeApi;
 

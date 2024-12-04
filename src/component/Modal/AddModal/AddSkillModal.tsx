@@ -4,20 +4,15 @@ import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../../builder/MultipleSelect";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import { Skill } from "../../../types/resumeTypes";
 import { useUpdateSkillMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
-type TSkillModalProps = {
-  skill: Skill;
-};
-
-const SkillEditModal = ({ skill }: TSkillModalProps) => {
+const AddSkillModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [errors, setErrors] = useState({ category: "", skills: "" });
-  const [category, setCategory] = useState(skill.category);
-  const [skills, setSkills] = useState<string[]>(skill.skills);
+  const [category, setCategory] = useState("");
+  const [skills, setSkills] = useState<string[]>([]);
   const [updateSkill, { isLoading }] = useUpdateSkillMutation();
 
   const handleRemoveSkill = (skill: string) => {
@@ -39,24 +34,13 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
 
   const handleUpdateSkill = async () => {
     try {
-      if (!category || skills.length < 1) {
-        setErrors((prev) => ({
-          ...prev,
-          category: !category ? "Category is required" : prev.category,
-          skills: skills.length < 1 ? "Skills is required" : prev.skills,
-        }));
-        return;
-      }
-
-      setErrors({ category: "", skills: "" });
-
-      const res = await updateSkill({
-        id: skill.id,
-        data: { category, skills },
-      }).unwrap();
-      if (res?.success) {
-        toast.success(res?.message);
-      }
+      //   const res = await updateSkill({
+      //     id: skill.id,
+      //     data: { category, skills },
+      //   }).unwrap();
+      //   if (res?.success) {
+      //     toast.success(res?.message);
+      //   }
       close();
     } catch (error) {
       console.log(error);
@@ -65,7 +49,7 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} />
 
       <Dialog
         open={isOpen}
@@ -102,9 +86,6 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
                         defaultValue={category}
                         onChange={(e) => setCategory(e.target.value)}
                       />
-                      <p className="mt-1 text-xs text-red-500">
-                        {errors.category}
-                      </p>
                     </div>
                     <MultipleSelect
                       placeholder="Type you skill and press enter..."
@@ -112,12 +93,11 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
                       value={skills}
                       setValue={setSkills}
                     />
-                    <p className="mt-1 text-xs text-red-500">{errors.skills}</p>
                     <div className="mt-5 flex items-center gap-4 flex-wrap">
                       {skills.map((skill, index) => (
                         <button
                           key={skill + index}
-                          className="flex items-center gap-x-3 text-xs border rounded-md py-1.5 px-3 hover:border-neutral-400 cursor-default"
+                          className="flex items-center gap-x-3 text-xs border rounded-md py-1.5 px-3 cursor-default"
                         >
                           <span>{skill}</span>
                           <Close
@@ -187,4 +167,4 @@ const SkillEditModal = ({ skill }: TSkillModalProps) => {
   );
 };
 
-export default SkillEditModal;
+export default AddSkillModal;

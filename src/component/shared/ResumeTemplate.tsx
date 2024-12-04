@@ -17,11 +17,11 @@ const ResumeTemplate = ({
 }: TResumeTemplateProps) => {
   return (
     <div className="relative group">
-      <div className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200">
+      <div className="bg-white p-2.5 mb-3 cursor-pointer border border-neutral-200">
         <img
           src={template.image}
           alt="user's resume"
-          className="object-cover object-center"
+          className="object-center h-[260px]"
         />
       </div>
       <div className="w-full flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:transition-all group-hover:duration-300 scale-95">

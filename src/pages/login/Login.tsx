@@ -81,8 +81,8 @@ const Login = () => {
   const handleCredentials = (type: string) => {
     const newCredentials =
       type === "user"
-        ? { email: "emonsss@gmail.com", password: "123456" }
-        : { email: "imonshomon@gmail.com", password: "123456789" };
+        ? { email: "user@gmail.com", password: "123456" }
+        : { email: "admin@gmail.com", password: "123456" };
 
     setCredentials(newCredentials);
     setValue("email", newCredentials.email);
@@ -296,11 +296,9 @@ const Login = () => {
           </div>
           <div className="bg-[url('https://www.resume.com/static/siwi-left-bg-2775bb16ee97d03f578d52c38329ccbf.webp')] bg-cover bg-no-repeat w-full md:w-1/2 object-cover h-[500px] md:h-[600px] lg:h-[600px] rounded-[9px]">
             <div className=" max-w-[400px] mx-auto py-10 px-5 lg:px-0">
-              <p className="text-white  text-[14px] mb-3 font-semibold">
-                An Our Patner
+              <p className="text-white  text-[24px] mb-3 font-semibold">
+                An Our Partner
               </p>
-              <img className="mb-5" src="" alt="logo" />
-
               <div className="grid grid-cols-1 gap-y-10  ">
                 {statics.map((st) => (
                   <div className="flex gap-2  items-center">
