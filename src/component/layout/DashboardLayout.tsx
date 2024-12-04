@@ -15,7 +15,7 @@ import SideBar from "./SideBar";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
-const drawerWidth = 220;
+const drawerWidth = 200;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -112,7 +112,7 @@ const DashboardLayout = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} className="font-roboto">
       <AppBar position="fixed" open={open} elevation={0}>
         <Toolbar
           sx={{
