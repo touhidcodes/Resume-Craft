@@ -6,16 +6,16 @@ import Singup from "../pages/singup/Singup";
 import About from "../pages/about/about";
 import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGeneroter";
-import { adminPath } from "./adminroute";
-import { userPath } from "./userroute";
+import { adminPath } from "./AdminRoute";
+import { userPath } from "./UserRoute";
 
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
 import TemplateTwo from "../pages/Template/Orion";
 
-import PrivetRoute from "./PrivetRoute";
-import AdminPrivet from "./AdminPrivet";
+import PrivetRoute from "./PrivateRoute";
+import AdminPrivet from "./AdminPrivate";
 
 const router = createBrowserRouter([
   {

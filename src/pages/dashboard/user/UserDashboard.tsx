@@ -4,8 +4,17 @@ import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import UserResumes from "../../../component/dashboard/userDashboard/UserResumes";
 import UserCoverLetters from "../../../component/dashboard/userDashboard/UserCoverLetters";
 import { Helmet } from "react-helmet-async";
+import { useGetUserProfileQuery } from "../../../redux/features/user/userApi";
+import { CircularProgress } from "@mui/material";
 
 const UserDashboard = () => {
+  const { data: usersData, isLoading } = useGetUserProfileQuery("");
+
+  if (isLoading) {
+    <div className="flex justify-center items-center h-64">
+      <CircularProgress />
+    </div>
+  }
   return (
     <div className="space-y-8">
       <Helmet>
@@ -13,7 +22,7 @@ const UserDashboard = () => {
       </Helmet>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="space-y-1">
-          <h2 className="text-2xl font-bold">Hey, Rakib !</h2>
+          <h2 className="text-2xl font-bold">Hey, {usersData?.data?.userName} !</h2>
           <p className="text-neutral-500">What do you want to create.</p>
         </div>
         <div className="custom border flex items-center gap-x-5 p-2 cursor-pointer">

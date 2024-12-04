@@ -35,10 +35,11 @@ const AdminDashboard = () => {
 
   const { data: allTemplates } = useGetAllTemplatesQuery("")
   const { data: allUsers } = useGetAllUsersQuery("")
-  console.log(allUsers)
+  console.log(allTemplates)
 
   // console.log(allTemplates?.data?.length)
   const totalTemplates = allTemplates?.data?.length;
+  const totalUsers = allUsers?.data?.length;
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6 flex flex-col lg:flex-row gap-6">
@@ -57,7 +58,7 @@ const AdminDashboard = () => {
             },
             {
               title: "Total Users",
-              value: "9,801",
+              value: totalUsers,
               image: users,
             },
             {
@@ -88,10 +89,7 @@ const AdminDashboard = () => {
           <div className="bg-white shadow-md rounded-lg p-4 md:p-6">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-800">Monthly Resume Creation</h3>
-              <select className="border border-gray-300 rounded-md p-2 text-sm text-gray-600 mt-2 md:mt-0">
-                <option value="This Year">This Year</option>
-                <option value="This Month">This Month</option>
-              </select>
+
             </div>
             <div className="mt-4">
               <Bar

@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import router from "./routes/routes.tsx";
+import router from "./routes/Routes.tsx";
 import { RouterProvider } from "react-router-dom";
 import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
