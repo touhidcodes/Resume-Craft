@@ -11,7 +11,7 @@ const TemplateTwo = () => {
       <Header />
       <Summery />
       <Experience />
-      <Education></Education>
+      <Education />
       <Skill />
       <Languages />
     </div>

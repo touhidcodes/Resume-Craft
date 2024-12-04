@@ -51,7 +51,6 @@ const LanguagesEditModal = () => {
 
   const handleAddLanguage = () => {
     setFormData([...formData, { name: "", proficiency: "" }]);
-    // dispatch(addLanguage({ name: "", proficiency: "" }));
   };
 
   const handleRemoveLanguage = (index: number) => {
@@ -75,7 +74,6 @@ const LanguagesEditModal = () => {
     setErrors(newErrors);
 
     if (newErrors.length === 0) {
-      // Proceed with the submission logic
       console.log(formData);
       // Dispatch actions to update the languages in Redux state if needed
     }

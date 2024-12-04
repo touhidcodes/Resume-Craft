@@ -19,12 +19,22 @@ const resumeApi = baseApi.injectEndpoints({
       providesTags: ["Resume"],
     }),
 
-    addSkill: builder.mutation({
-      query: () => ({
-        url: ``,
+    addExperience: builder.mutation({
+      query: (data) => ({
+        url: `/resume/work-experience/create-experience`,
         method: "POST",
-        body: {},
+        body: data,
       }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    addSkill: builder.mutation({
+      query: (data) => ({
+        url: `/skill/create-skill`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
     }),
 
     updatePersonalInfo: builder.mutation({
@@ -63,15 +73,6 @@ const resumeApi = baseApi.injectEndpoints({
       invalidatesTags: ["Resume"],
     }),
 
-    CreateExperience: builder.mutation({
-      query: (data) => ({
-        url: `/resume/work-experience/create-experience`,
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["Resume"],
-    }),
-
     updateEducation: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/education/update-education/${id}`,
@@ -87,12 +88,12 @@ export const {
   useCreateResumeMutation,
   useGetResumeDataQuery,
   useAddSkillMutation,
+  useAddExperienceMutation,
   useUpdateExperienceMutation,
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
   useUpdateSkillMutation,
   useUpdatePersonalInfoMutation,
-  useCreateExperienceMutation,
 } = resumeApi;
 
 export default resumeApi;

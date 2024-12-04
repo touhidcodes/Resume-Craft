@@ -4,17 +4,22 @@ import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../../builder/MultipleSelect";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import { useUpdateSkillMutation } from "../../../redux/features/resume/resumeApi";
+import {
+  useAddSkillMutation,
+  useUpdateSkillMutation,
+} from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
+import { useAppSelector } from "../../../redux/hooks";
 
 const AddSkillModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("");
   const [errors, setErrors] = useState({ category: "", skills: "" });
   const [skills, setSkills] = useState<string[]>([]);
-  const [updateSkill, { isLoading }] = useUpdateSkillMutation();
+  const [addSkill, { isLoading }] = useAddSkillMutation();
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
 
   const handleRemoveSkill = (skill: string) => {
     const isSkillAlreadyExist = skills.find((sk) => sk === skill);
@@ -45,7 +50,14 @@ const AddSkillModal = () => {
       }
 
       setErrors({ category: "", skills: "" });
-      // close();
+
+      const res = await addSkill({ resumeId, category, skills }).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+
+      close();
     } catch (error) {
       console.log(error);
     }
