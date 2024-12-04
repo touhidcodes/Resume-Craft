@@ -12,9 +12,10 @@ import { userPath } from "./userroute";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
-import TemplateTwo from "../pages/Resume/TemplateTwo/TemplateTwo";
-import ResumeLoading from "../component/shared/ResumeLoading";
+import TemplateTwo from "../pages/Template/Orion";
+
 import PrivetRoute from "./PrivetRoute";
+import AdminPrivet from "./AdminPrivet";
 
 const router = createBrowserRouter([
   {
@@ -47,23 +48,28 @@ const router = createBrowserRouter([
     path: "/resume",
     element: <TemplateTwo></TemplateTwo>,
   },
-  {
-    path: "/loading",
-    element: <ResumeLoading></ResumeLoading>,
-  },
+
   {
     path: "/register",
     element: <Singup />,
   },
   {
-    path: "admin",
-    element: <DashboardLayout />,
+    path: "ADMIN",
+    element: (
+      <AdminPrivet>
+        <DashboardLayout />
+      </AdminPrivet>
+    ),
     children: routerGenerator(adminPath),
   },
 
   {
-    path: "user",
-    element: <DashboardLayout />,
+    path: "USER",
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
     children: routerGenerator(userPath),
   },
   {

@@ -4,8 +4,8 @@ import template from "../../../assets/admin/resume-and-cv.png";
 import popular from "../../../assets/admin/cv (1).png";
 import users from "../../../assets/admin/team.png";
 import { Helmet } from "react-helmet-async";
-import { useGetAllTemplatesQuery } from "../../../redux/api/adminApi";
-import { useGetAllUsersQuery } from "../../../redux/api/userApi";
+import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
+import { useGetAllUsersQuery } from "../../../redux/features/user/userApi";
 
 // Sample Data for the Chart
 const revenueChartData = {
@@ -72,10 +72,10 @@ const AdminDashboard = () => {
             >
               <div className="flex items-center space-x-4">
                 <div className="p-2 rounded-full">
-                  <img src={stat.image} alt={stat.title} className="h-12 w-12 object-cover" /> {/* Image as icon */}
+                  <img src={stat.image} alt={stat.title} className="h-10 w-10 object-cover" /> {/* Image as icon */}
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium">{stat.title}</h3>
+                  <h3 className="text-base font-medium">{stat.title}</h3>
                   <p className="text-2xl font-bold my-2">{stat.value}</p>
                 </div>
               </div>

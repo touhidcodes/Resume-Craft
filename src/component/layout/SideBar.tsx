@@ -23,8 +23,8 @@ const SideBar = ({ open }: Open) => {
     USER: "USER",
   };
 
-  // let user = useAppSelector(userCurrentUser);
-  let user = { role: "USER" };
+  let user = useAppSelector(userCurrentUser);
+  // let user = { role: "USER" };
   let sidebarItem;
   switch (user.role) {
     case userRole.ADMIN:

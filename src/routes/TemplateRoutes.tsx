@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useGetAllTemplatesQuery } from "../redux/features/template/templateApi";
-import Apollo from "../pages/Resume/Temple1/Apollo";
+import Apollo from "../pages/Template/Apollo";
 
 // Define types for template data
 type Template = {

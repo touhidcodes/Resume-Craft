@@ -16,4 +16,14 @@ export const adminPath = [
     path: "addTemplate",
     element: <AdminDashboard />,
   },
+  {
+    name: "Add Template",
+    path: "addTemplate",
+    element: <AdminDashboard />,
+  },
+  {
+    name: "Add Template",
+    path: "addTemplate",
+    element: <AdminDashboard />,
+  },
 ];
