@@ -43,7 +43,7 @@ const Apollo = () => {
   });
 
   return (
-    <div className="min-h-[590px] w-full py-[30px] px-[50px] rounded-[9px] border my-[20px]">
+    <div className="min-h-[590px] w-full py-[30px] px-5 md:px-[50px] rounded-[9px] border my-[20px]">
       {sections?.map((section) => (
         <section.component key={section.name} />
       ))}

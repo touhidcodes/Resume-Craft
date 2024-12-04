@@ -7,6 +7,7 @@ import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import { useUpdateSkillMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
 const AddSkillModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,7 @@ const AddSkillModal = () => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} />
 
       <Dialog
         open={isOpen}
