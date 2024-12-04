@@ -24,7 +24,9 @@ const Languages = () => {
           </div>
         ))}
       </div>
-      <LanguagesEditModal />
+      <div className="hidden group-hover:block absolute top-1 right-1 duration-100 ease-in-out transition-all">
+        <LanguagesEditModal />
+      </div>
     </div>
   );
 };
