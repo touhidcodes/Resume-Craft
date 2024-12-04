@@ -1,9 +1,10 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { FormEvent, useState } from "react";
-import { Close } from "@mui/icons-material";
+import { FormEvent, useEffect, useState } from "react";
+import { Add, Close } from "@mui/icons-material";
 import {
   Button,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -21,6 +22,11 @@ const LanguagesEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const languages = useAppSelector((state) => state?.resume?.resume?.language);
   const [formData, setFormData] = useState<TFormData[]>(languages || []);
+  const [errors, setErrors] = useState<Partial<TFormData>[]>([]);
+
+  useEffect(() => {
+    setFormData(languages || []);
+  }, [languages]);
 
   function open() {
     setIsOpen(true);
@@ -32,7 +38,7 @@ const LanguagesEditModal = () => {
 
   const handleInputChange = (
     index: number,
-    field: "name" | "proficiency",
+    field: keyof TFormData,
     value: string
   ): void => {
     const updatedFormData = [...formData];
@@ -43,20 +49,36 @@ const LanguagesEditModal = () => {
     setFormData(updatedFormData);
   };
 
-  // Handle form submission
+  const handleAddLanguage = () => {
+    setFormData([...formData, { name: "", proficiency: "" }]);
+    // dispatch(addLanguage({ name: "", proficiency: "" }));
+  };
+
+  const handleRemoveLanguage = (index: number) => {
+    const filteredLanguage = formData.filter((_, indx) => index !== indx);
+    setFormData(filteredLanguage);
+  };
+
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
 
-    // Dispatch the action to update the languages in Redux state
-    // dispatch(
-    //   updateLanguages(
-    //     formData.map((lang, index) => ({
-    //       name: lang.name,
-    //       proficiency: lang.proficiency,
-    //       index,
-    //     }))
-    //   )
-    // );
+    const newErrors: Partial<TFormData>[] = [];
+
+    formData.forEach((language, index) => {
+      const error: Partial<TFormData> = {};
+      if (!language.name) error.name = "Language is required";
+      if (!language.proficiency) error.proficiency = "Proficiency is required";
+
+      if (Object.keys(error).length > 0) newErrors[index] = error;
+    });
+
+    setErrors(newErrors);
+
+    if (newErrors.length === 0) {
+      // Proceed with the submission logic
+      console.log(formData);
+      // Dispatch actions to update the languages in Redux state if needed
+    }
   };
 
   return (
@@ -84,59 +106,81 @@ const LanguagesEditModal = () => {
               </DialogTitle>
               <div className="flex-1 overflow-y-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-                  <div className="p-5 col-span-7">
-                    <form className="space-y-5">
-                      {languages?.map((language, index) => (
-                        <div
-                          key={language.name}
-                          className="flex flex-col items-center md:flex-row gap-5 mt-1"
-                        >
-                          <div className="w-full md:w-1/2">
-                            <p className="mb-3">
-                              Language <span className="text-red-500">*</span>
-                            </p>
-                            <TextField
-                              id={language.name}
-                              label="Language"
-                              defaultValue={language.name}
-                              fullWidth
-                              variant="outlined"
-                            />
-                          </div>
-                          <div className="w-full md:w-1/2">
-                            <p className="mb-3">
-                              Proficiency{" "}
-                              <span className="text-red-500">*</span>
-                            </p>
-
-                            <FormControl fullWidth>
-                              <InputLabel id="demo-simple-select-helper-label">
-                                Proficiency
-                              </InputLabel>
-                              <Select
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                label="Proficiency"
-                                defaultValue={language.proficiency}
+                  <div className="p-5 col-span-7 border">
+                    <form className="space-y-5" onSubmit={handleSubmit}>
+                      {formData.map((language, index) => (
+                        <div className="flex gap-x-4 items-start md:items-center border-b pb-2 last-of-type:border-none">
+                          <div
+                            key={index}
+                            className="flex-1 flex flex-col items-center md:flex-row gap-y-2 md:gap-5 mt-1"
+                          >
+                            <div className="w-full md:w-1/2">
+                              <p className="mb-3">
+                                Language <span className="text-red-500">*</span>
+                              </p>
+                              <TextField
+                                id={`language-name-${index}`}
+                                label="Language"
+                                value={language.name}
+                                fullWidth
+                                variant="outlined"
                                 onChange={(e) =>
                                   handleInputChange(
                                     index,
-                                    "proficiency",
+                                    "name",
                                     e.target.value
                                   )
                                 }
-                              >
-                                <MenuItem value="Native">Native</MenuItem>
-                                <MenuItem value="Fluent">Fluent</MenuItem>
-                                <MenuItem value="Comfortable">
-                                  Comfortable
-                                </MenuItem>
-                                <MenuItem value="Intermediate">
-                                  Intermediate
-                                </MenuItem>
-                                <MenuItem value="Beginner">Beginner</MenuItem>
-                              </Select>
-                            </FormControl>
+                              />
+                              <p className="text-red-500 text-sm mt-1 h-5">
+                                {errors[index]?.name}
+                              </p>
+                            </div>
+                            <div className="w-full md:w-1/2">
+                              <p className="mb-3">
+                                Proficiency{" "}
+                                <span className="text-red-500">*</span>
+                              </p>
+                              <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-helper-label">
+                                  Proficiency
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-helper-label"
+                                  id="demo-simple-select-helper"
+                                  label="Proficiency"
+                                  value={language.proficiency}
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      index,
+                                      "proficiency",
+                                      e.target.value
+                                    )
+                                  }
+                                >
+                                  <MenuItem value="Native">Native</MenuItem>
+                                  <MenuItem value="Fluent">Fluent</MenuItem>
+                                  <MenuItem value="Comfortable">
+                                    Comfortable
+                                  </MenuItem>
+                                  <MenuItem value="Intermediate">
+                                    Intermediate
+                                  </MenuItem>
+                                  <MenuItem value="Beginner">Beginner</MenuItem>
+                                </Select>
+                                <p className="text-red-500 text-sm mt-1 h-5">
+                                  {errors[index]?.proficiency}
+                                </p>
+                              </FormControl>
+                            </div>
+                          </div>
+                          <div>
+                            <IconButton
+                              color="error"
+                              onClick={() => handleRemoveLanguage(index)}
+                            >
+                              <Close />
+                            </IconButton>
                           </div>
                         </div>
                       ))}
@@ -177,19 +221,30 @@ const LanguagesEditModal = () => {
                 </div>
               </div>
 
-              {/* Dialog footer */}
-              <div className="py-4 px-5 space-x-5 flex justify-end border-t">
-                <Button variant="outlined" autoFocus onClick={close}>
-                  Cancel
-                </Button>
+              <div className="py-4 px-5 space-x-5 flex justify-between border-t">
                 <Button
-                  variant="contained"
-                  color="primary"
-                  //   onClick={handleClose}
+                  variant="text"
+                  color="secondary"
                   autoFocus
+                  startIcon={<Add />}
+                  onClick={handleAddLanguage}
                 >
-                  Save
+                  Add Language
                 </Button>
+                <div className="space-x-5">
+                  <Button variant="outlined" autoFocus onClick={close}>
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    autoFocus
+                    type="submit"
+                  >
+                    Save
+                  </Button>
+                </div>
               </div>
             </DialogPanel>
           </div>
