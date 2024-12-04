@@ -1,9 +1,9 @@
-import Education from "../../../component/ResumeSection/Apollo/Education";
-import Experience from "../../../component/ResumeSection/Apollo/Experience";
-import Header from "../../../component/ResumeSection/Apollo/Header";
-import Languages from "../../../component/ResumeSection/Apollo/Languages";
-import Skill from "../../../component/ResumeSection/Apollo/Skill";
-import Summary from "../../../component/ResumeSection/Apollo/Summary";
+import Education from "../../../component/TemplateSection/Apollo/Education";
+import Experience from "../../../component/TemplateSection/Apollo/Experience";
+import Header from "../../../component/TemplateSection/Apollo/Header";
+import Languages from "../../../component/TemplateSection/Apollo/Languages";
+import Skill from "../../../component/TemplateSection/Apollo/Skill";
+import Summary from "../../../component/TemplateSection/Apollo/Summary";
 import { FC } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 

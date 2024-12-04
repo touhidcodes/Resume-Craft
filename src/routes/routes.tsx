@@ -12,7 +12,7 @@ import { userPath } from "./userroute";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
-import TemplateTwo from "../pages/Resume/TemplateTwo/TemplateTwo";
+import TemplateTwo from "../pages/Template/Orion";
 import ReusmeLoading from "../component/shared/ReusmeLoading";
 import PrivetRoute from "./PrivetRoute";
 
