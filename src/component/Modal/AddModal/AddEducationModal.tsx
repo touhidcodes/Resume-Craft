@@ -5,13 +5,12 @@ import { Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { educationValidationSchema } from "../../../zod/educationValidationSchema";
-
 import EducationForm from "../../form/EducationForm";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
-
-type TAddEducationModalProps = {
-  educationId: string;
-};
+import { useAddEducationMutation } from "../../../redux/features/resume/resumeApi";
+import { useAppSelector } from "../../../redux/hooks";
+import ButtonSpinner from "../../shared/ButtonSpinner";
+import { toast } from "sonner";
 
 type EducationFormData = {
   institution: string;
@@ -21,9 +20,11 @@ type EducationFormData = {
   location: string;
 };
 
-const AddEducationModal = ({ educationId }: TAddEducationModalProps) => {
+const AddEducationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState("");
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const [addEducation, { isLoading }] = useAddEducationMutation();
 
   const {
     register,
@@ -44,7 +45,18 @@ const AddEducationModal = ({ educationId }: TAddEducationModalProps) => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<EducationFormData> = async (data) => {
-    close();
+    try {
+      const payload = { resumeId, description, ...data };
+      const res = await addEducation(payload).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+      close();
+    } catch (error) {
+      console.log(error);
+      close();
+    }
   };
 
   return (
@@ -85,11 +97,12 @@ const AddEducationModal = ({ educationId }: TAddEducationModalProps) => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  variant={isLoading ? "outlined" : "contained"}
+                  // disabled={isLoading}
                   color="primary"
                   onClick={handleSubmit(onSubmit)}
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

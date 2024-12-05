@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useGetAllTemplatesQuery } from "../redux/features/template/templateApi";
 import Apollo from "../pages/Template/Apollo";
+import Orion from "../pages/Template/Orion";
 
 // Define types for template data
 type Template = {
@@ -18,7 +19,10 @@ type TemplateRoute = {
   component: React.ComponentType<any>;
 };
 
-const templates: Template[] = [{ name: "Apollo", component: Apollo }];
+const templates: Template[] = [
+  { name: "Apollo", component: Apollo },
+  { name: "Orion", component: Orion },
+];
 
 const TemplateRoutes = () => {
   const { isLoading, data } = useGetAllTemplatesQuery(null);

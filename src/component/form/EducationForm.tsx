@@ -128,6 +128,25 @@ const EducationForm = ({
           </div>
 
           <div>
+            <p className="mb-3">
+              Location <span className="text-red-500">*</span>
+            </p>
+            <TextField
+              id="outlined-basic"
+              label="City, state"
+              fullWidth
+              variant="outlined"
+              color={errors.location ? "error" : "primary"}
+              {...register("location")}
+            />
+            {errors.location && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.location.message}
+              </p>
+            )}
+          </div>
+
+          <div>
             <p className="font-medium mb-3">
               What were your responsibilities and accomplishments?
             </p>

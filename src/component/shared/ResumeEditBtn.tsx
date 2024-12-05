@@ -1,18 +1,23 @@
-import { Edit } from "@mui/icons-material";
+import clsx from "clsx";
+import { MdOutlineEdit } from "react-icons/md";
 
 type TResumeEditBtnProps = {
   handleClick: () => void;
+  className?: string;
 };
 
-const ResumeEditBtn = ({ handleClick }: TResumeEditBtnProps) => {
+const ResumeEditBtn = ({ handleClick, className }: TResumeEditBtnProps) => {
   return (
     <button
       onClick={handleClick}
-      className="bg-white custom-shadow group-hover:flex justify-center items-center rounded-lg p-1"
+      className={`${clsx(
+        "bg-white flex justify-center items-center size-10",
+        className
+      )}`}
     >
-      <span className="hover:bg-neutral-100 inline-block p-1 rounded-lg">
-        <Edit sx={{ fontSize: "23px" }} />
-      </span>
+      <div className="size-[32px] hover:bg-neutral-100 rounded flex justify-center items-center text-black">
+        <MdOutlineEdit size={22} />
+      </div>
     </button>
   );
 };
