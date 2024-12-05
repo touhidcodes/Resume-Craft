@@ -1,21 +1,50 @@
-import Education from "../../component/TemplateSection/TemplateTwo/Education";
-import Experience from "../../component/TemplateSection/TemplateTwo/Experience";
-import Header from "../../component/TemplateSection/TemplateTwo/Header";
-import Languages from "../../component/TemplateSection/TemplateTwo/Languages";
-import Skill from "../../component/TemplateSection/TemplateTwo/Skill";
-import Summery from "../../component/TemplateSection/TemplateTwo/Summary";
+import TemplateWrapper from "../../component/shared/TemplateWrapper";
+import Education from "../../component/TemplateSection/Orion/Education";
+import Experience from "../../component/TemplateSection/Orion/Experience";
+import Header from "../../component/TemplateSection/Orion/Header";
+import Languages from "../../component/TemplateSection/Orion/Languages";
+import Skill from "../../component/TemplateSection/Orion/Skill";
+import Summary from "../../component/TemplateSection/Orion/Summary";
+import useActiveSections, {
+  TResumeSections,
+} from "../../hooks/useActiveSections";
 
-const TemplateTwo = () => {
+const resumeSections: TResumeSections = {
+  Summary: {
+    name: "Summary",
+    component: Summary,
+  },
+  Experience: {
+    name: "Experience",
+    component: Experience,
+  },
+  Skills: {
+    name: "Skills",
+    component: Skill,
+  },
+  Education: {
+    name: "Education",
+    component: Education,
+  },
+  Language: {
+    name: "Language",
+    component: Languages,
+  },
+};
+
+const Orion = () => {
+  const sections = useActiveSections(resumeSections, {
+    name: "Header",
+    component: Header,
+  });
+
   return (
-    <div className="min-h-[590px] max-w-[750px] mx-auto py-[30px] px-[50px] rounded-[9px] border my-[20px]">
-      <Header />
-      <Summery />
-      <Experience />
-      <Education />
-      <Skill />
-      <Languages />
-    </div>
+    <TemplateWrapper>
+      {sections?.map((section) => (
+        <section.component key={section.name} />
+      ))}
+    </TemplateWrapper>
   );
 };
 
-export default TemplateTwo;
+export default Orion;

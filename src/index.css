@@ -28,3 +28,30 @@
     appearance: none;
   }
 }
+
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Prevent breaking content inside elements */
+  * {
+    page-break-inside: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+
+  #resumeContainer {
+    zoom: 1 !important;
+    padding: 10;
+    border: none;
+  }
+
+  /* Optional: Define page size */
+  @page {
+    size: A4;
+    margin: 0.6cm;
+    margin-top: 0;
+  }
+}

@@ -16,7 +16,7 @@ const Education = () => {
         {educations?.map((education, index) => (
           <div
             key={index}
-            className="text-neutral-600 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
+            className="break-inside-avoid text-neutral-600 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
           >
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
               <h3 className="">{education?.degree}</h3>
@@ -32,7 +32,7 @@ const Education = () => {
 
             <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all text-neutral-900">
               <EducationEditModal education={education} />
-              <AddEducationModal educationId={education.id} />
+              <AddEducationModal />
             </div>
           </div>
         ))}

@@ -18,7 +18,7 @@ const Experience = () => {
         {experiences?.map((exp) => (
           <div
             key={exp.id}
-            className="text-neutral-700 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
+            className="break-inside-avoid text-neutral-700 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative"
           >
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
               <h3 className="">{exp.companyName}</h3>
@@ -37,7 +37,7 @@ const Experience = () => {
 
             <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all">
               <ExperienceEditModal experience={exp} />
-              <AddExperienceModal experienceId={exp.id} />
+              <AddExperienceModal />
             </div>
           </div>
         ))}

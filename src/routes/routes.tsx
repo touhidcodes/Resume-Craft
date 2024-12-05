@@ -12,7 +12,7 @@ import { userPath } from "./userroute";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
-import TemplateTwo from "../pages/Template/Orion";
+import Orion from "../pages/Template/Orion";
 
 import PrivetRoute from "./PrivetRoute";
 import AdminPrivet from "./AdminPrivet";
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path: "/resume",
+        element: <Orion />,
+      },
     ],
   },
   {
@@ -46,7 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/resume",
-    element: <TemplateTwo></TemplateTwo>,
+    element: <Orion></Orion>,
   },
 
   {

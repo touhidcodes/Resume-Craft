@@ -1,17 +1,19 @@
-import SkillEditModal from "../../Modal/EditModal/SkillEditModal";
+import LanguagesEditModel from "../../Modal/EditModal/LanguagesEditModel";
 
-const Skill = () => {
+const Languages = () => {
   return (
     <div className="cursor-pointer  group  mb-5  border border-transparent hover:border-dashed hover:border-primary relative">
-      <h1 className="text-[20px] leading-[30px] font-semibold mb-1"> Skills</h1>
+      <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
+        Languages
+      </h1>
 
       <div className=" text-[#6E6E6E] text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative  duration-100 ease-in-out transition-all ">
-        <p>Javascript , Html , Css</p>
+        <p>Engilsh , Hinde , Bangla </p>
       </div>
 
-      <SkillEditModal />
+      {/* <LanguagesEditModel /> */}
     </div>
   );
 };
 
-export default Skill;
+export default Languages;

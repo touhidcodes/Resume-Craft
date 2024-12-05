@@ -37,6 +37,15 @@ const resumeApi = baseApi.injectEndpoints({
       invalidatesTags: ["Resume"],
     }),
 
+    addEducation: builder.mutation({
+      query: (data) => ({
+        url: "/resume/education/create-education",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
     updatePersonalInfo: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/update-resume/${id}`,
@@ -89,6 +98,7 @@ export const {
   useGetResumeDataQuery,
   useAddSkillMutation,
   useAddExperienceMutation,
+  useAddEducationMutation,
   useUpdateExperienceMutation,
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
