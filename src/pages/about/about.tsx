@@ -161,7 +161,7 @@ const About = () => {
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">Co-Leader & Backend Developer</p>
                 <p className="text-gray-600 font-medium">md.rifat.taluckdar@gmail.com</p>
-                <p className="text-gray-600 font-medium mb-4">0 1755-481526</p>
+                <p className="text-gray-600 font-medium mb-4">01755481526</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
