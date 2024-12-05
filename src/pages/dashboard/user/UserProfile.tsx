@@ -6,6 +6,7 @@ import { useGetUserProfileQuery } from "../../../redux/features/user/userApi";
 const UserProfile = () => {
   const { data: usersData, isLoading, isError } = useGetUserProfileQuery("");
   // console.log(usersData?.data)
+  console.log(usersData);
 
   const [isEditingPersonalInfo, setIsEditingPersonalInfo] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
