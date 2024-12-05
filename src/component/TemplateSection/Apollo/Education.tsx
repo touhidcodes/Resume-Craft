@@ -1,5 +1,6 @@
 import { useAppSelector } from "../../../redux/hooks";
 import AddEducationModal from "../../Modal/AddModal/AddEducationModal";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
@@ -7,7 +8,7 @@ const Education = () => {
   const educations = useAppSelector((state) => state.resume?.resume?.Education);
 
   return (
-    <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
+    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Education
       </h1>
@@ -29,10 +30,10 @@ const Education = () => {
               <span> {education.endDate ? education.endDate : "Present"}</span>
             </div>
             <HtmlRenderer text={`<p>${education.description}</p>`} />
-
-            <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all text-neutral-900">
+            <div className="hidden group-hover:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <EducationEditModal education={education} />
               <AddEducationModal />
+              <DeleteModal handleDelete={() => {}} />
             </div>
           </div>
         ))}

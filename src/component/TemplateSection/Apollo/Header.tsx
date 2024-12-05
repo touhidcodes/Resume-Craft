@@ -7,7 +7,7 @@ const Header = () => {
   );
 
   return (
-    <div className="font-roboto hover:bg-primary/[.04] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
+    <div className="font-roboto hover:bg-primary/[.04] cursor-pointer relative group duration-100 ease-in-out transition-all">
       <h1 className="text-2xl font-bold">{personalInfo?.fullName}</h1>
       <h2 className="text-[20px] leading-[30px] font-medium ">
         {personalInfo?.jobTitle}

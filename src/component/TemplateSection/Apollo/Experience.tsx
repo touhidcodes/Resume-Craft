@@ -2,6 +2,7 @@ import { useAppSelector } from "../../../redux/hooks";
 import ExperienceEditModal from "../../Modal/EditModal/ExperienceEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 import AddExperienceModal from "../../Modal/AddModal/AddExperienceModal";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 
 const Experience = () => {
   const experiences = useAppSelector(
@@ -9,7 +10,7 @@ const Experience = () => {
   );
 
   return (
-    <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
+    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Experience
       </h1>
@@ -35,9 +36,10 @@ const Experience = () => {
 
             <HtmlRenderer text={exp.responsibilities} />
 
-            <div className="hidden group-hover:flex gap-x-3 items-center absolute top-1 right-1 duration-100 ease-in-out transition-all">
+            <div className="hidden group-hover:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <ExperienceEditModal experience={exp} />
               <AddExperienceModal />
+              <DeleteModal handleDelete={() => {}} />
             </div>
           </div>
         ))}

@@ -81,7 +81,7 @@ const LanguagesEditModal = () => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeEditBtn handleClick={open} className="custom-shadow rounded-md" />
 
       <Dialog
         open={isOpen}
