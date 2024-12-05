@@ -7,6 +7,7 @@ import teamImage3 from "../../assets/images/t3.jpeg";
 import AboutUsSlider from "../../component/slider/AboutSlider";
 import { Button } from "@mui/material";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -18,7 +19,7 @@ const About = () => {
       <div className="bg-gray-100 py-16 font-roboto">
         {/* Hero Section */}
         <section className="px-6 text-center md:text-left mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold text-center text-[#003366] leading-snug mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-center text-black leading-snug mb-4">
             Why build my resume with Resume{" "}
             <span className="text-primary">Craft</span> ?
           </h1>
@@ -32,7 +33,7 @@ const About = () => {
               alt="Feature 1"
               className="w-20 h-20 mx-auto mb-4"
             />
-            <h3 className="text-2xl font-semibold text-[#003366]">
+            <h3 className="text-2xl font-semibold text-black">
               Professional Templates
             </h3>
             <p className="text-base font-normal mt-2">
@@ -47,7 +48,7 @@ const About = () => {
               alt="Feature 2"
               className="w-20 h-20 mx-auto mb-4"
             />
-            <h3 className="text-2xl font-semibold text-[#003366]">
+            <h3 className="text-2xl font-semibold text-black">
               Real-time Editing
             </h3>
             <p className="text-base font-normal mt-2">
@@ -62,7 +63,7 @@ const About = () => {
               alt="Feature 3"
               className="w-20 h-20 mx-auto mb-4"
             />
-            <h3 className="text-2xl font-semibold text-[#003366]">Expert Guidance</h3>
+            <h3 className="text-2xl font-semibold text-black">Expert Guidance</h3>
             <p className="text-base mt-2 font-normal">
               With your resume ready for top employers, easily share with
               millions of interested employers on Indeed, the world’s #1 job
@@ -76,7 +77,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto">
           {/* Heading */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-[#003366]">
+            <h1 className="text-4xl md:text-5xl font-bold text-black">
               Our Mission & Vision
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mt-4">
@@ -94,7 +95,7 @@ const About = () => {
               <h2 className="text-2xl font-semibold text-gray-800 relative">
                 Our Mission
               </h2>
-              <p className="text-gray-600 mt-4 relative">
+              <p className="text-black mt-4 relative">
                 To simplify the job application process by providing a
                 user-friendly platform for creating professional resumes. We
                 strive to empower individuals in achieving their career goals
@@ -109,7 +110,7 @@ const About = () => {
               <h2 className="text-2xl font-semibold text-gray-800 relative">
                 Our Vision
               </h2>
-              <p className="text-gray-600 mt-4 relative">
+              <p className="text-black mt-4 relative">
                 To become the most trusted and innovative resume builder
                 globally, enabling individuals to unlock their potential and
                 connect with the opportunities they deserve.
@@ -124,7 +125,7 @@ const About = () => {
 
         <section className="py-[60px] lg:py-[90px]  ">
           <div className=" w-full mx-auto px-6 md:px-12 lg:px-20">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#003366] text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-black text-center mb-12">
               Meet Our Team
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -135,10 +136,14 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-[#003366]">
+                <h3 className="text-2xl font-semibold text-black">
                   Touhidur Zaman
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">Team Leader & GitHub Manager
+                </p>
+                <p className="text-gray-600 font-medium">touhidcodes@gmail.com
+                </p>
+                <p className="text-gray-600 font-medium mb-4">01939924424
                 </p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
@@ -151,10 +156,12 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-[#003366]">
+                <h3 className="text-2xl font-semibold text-black">
                   MD Rifat
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">Co-Leader & Backend Developer</p>
+                <p className="text-gray-600 font-medium">md.rifat.taluckdar@gmail.com</p>
+                <p className="text-gray-600 font-medium mb-4">01755481526</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
@@ -166,10 +173,14 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-[#003366]">
+                <h3 className="text-2xl font-semibold text-black">
                   Imtiaz Tamim
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">Backend Developer
+                </p>
+                <p className="text-gray-600 font-medium">itamim12202@gmail.com
+                </p>
+                <p className="text-gray-600 font-medium mb-4">01799664358
                 </p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
@@ -185,11 +196,17 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#EDD7DF] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-[#003366]">
+                <h3 className="text-2xl font-semibold text-black">
                   Emon Ahmed
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">
                   Frontend Developer
+                </p>
+                <p className="text-gray-600 font-medium">
+                  imonshomon@gmail.com
+                </p>
+                <p className="text-gray-600 font-medium mb-4">
+                  01731106500
                 </p>
                 {/* <p className="text-base	font-normal	">
                   Emily's creativity ensures our products are intuitive and
@@ -204,10 +221,14 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#faf9da] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-[#003366]">
+                <h3 className="text-2xl font-semibold text-black">
                   Rakib Ahmed
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">Frontend Developer
+                </p>
+                <p className="text-gray-600 font-medium">sujonahmed45a4@gmail.com
+                </p>
+                <p className="text-gray-600 font-medium mb-4">01829218489
                 </p>
                 {/* <p className="text-base	font-normal	">
                   James provides expert career advice and helps our users
@@ -221,10 +242,12 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-[#003366]">
+                <h3 className="text-2xl font-semibold text-black">
                   Nur Muhammad
                 </h3>
                 <p className="text-gray-600 font-medium mb-4">Frontend Developer</p>
+                <p className="text-gray-600 font-medium">nurmuhammadd2003@gmail.com</p>
+                <p className="text-gray-600 font-medium mb-4">01741119114</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
@@ -250,7 +273,8 @@ const About = () => {
               Start Building Now
             </button> */}
 
-            <Button variant="contained" size="large">
+            <Button component={Link}
+              to="/user/resumes" variant="contained" size="large">
               Start Building Now
             </Button>
           </div>

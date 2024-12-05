@@ -58,7 +58,7 @@ const router = createBrowserRouter([
     element: <Singup />,
   },
   {
-    path: "ADMIN",
+    path: "admin",
     element: (
       <AdminPrivet>
         <DashboardLayout />
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "USER",
+    path: "user",
     element: (
       <PrivetRoute>
         <DashboardLayout />
