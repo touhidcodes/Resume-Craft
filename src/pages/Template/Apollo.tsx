@@ -8,6 +8,9 @@ import Skill from "../../component/TemplateSection/Apollo/Skill";
 import Languages from "../../component/TemplateSection/Apollo/Languages";
 import Header from "../../component/TemplateSection/Apollo/Header";
 import Education from "../../component/TemplateSection/Apollo/Education";
+import TemplateWrapper from "../../component/shared/TemplateWrapper";
+import Certificates from "../../component/TemplateSection/Apollo/Certificates";
+import Hobby from "../../component/TemplateSection/Apollo/Hobby";
 
 const resumeSections: TResumeSections = {
   Summary: {
@@ -30,9 +33,17 @@ const resumeSections: TResumeSections = {
     name: "Language",
     component: Languages,
   },
+  Certificate: {
+    name: "Certificate",
+    component: Certificates,
+  },
   Awards: {
     name: "AWards",
     component: Awards,
+  },
+  Hobby: {
+    name: "Hobby",
+    component: Hobby,
   },
 };
 
@@ -43,11 +54,11 @@ const Apollo = () => {
   });
 
   return (
-    <div className="min-h-[590px] w-full py-[30px] px-5 md:px-[50px] rounded-[9px] border my-[20px]">
+    <TemplateWrapper>
       {sections?.map((section) => (
         <section.component key={section.name} />
       ))}
-    </div>
+    </TemplateWrapper>
   );
 };
 

@@ -9,7 +9,7 @@ const Skill = () => {
         <p>Javascript , Html , Css</p>
       </div>
 
-      <SkillEditModal />
+      {/* <SkillEditModal /> */}
     </div>
   );
 };
