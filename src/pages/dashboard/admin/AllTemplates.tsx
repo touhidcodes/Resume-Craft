@@ -2,7 +2,7 @@ import { Key } from "react";
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 
 const AllTemplates = () => {
-  const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
+  const { data: allTemplates, isLoading,  } = useGetAllTemplatesQuery("");
 
   return (
     <div>

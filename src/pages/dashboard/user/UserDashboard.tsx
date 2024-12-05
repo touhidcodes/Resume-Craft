@@ -2,7 +2,6 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import UserResumes from "../../../component/dashboard/userDashboard/UserResumes";
-import UserCoverLetters from "../../../component/dashboard/userDashboard/UserCoverLetters";
 import { Helmet } from "react-helmet-async";
 import { useGetUserProfileQuery } from "../../../redux/features/user/userApi";
 import { CircularProgress } from "@mui/material";
@@ -49,7 +48,6 @@ const UserDashboard = () => {
       </div>
 
       <UserResumes />
-      <UserCoverLetters />
     </div>
   );
 };

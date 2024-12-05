@@ -7,6 +7,7 @@ const templateApi = baseApi.injectEndpoints({
         url: "/template/templates",
         method: "GET",
       }),
+      providesTags: ["Template"],
     }),
     createTemplates: builder.mutation({
       query: (templateData) => {
@@ -17,6 +18,7 @@ const templateApi = baseApi.injectEndpoints({
           body: templateData,
         };
       },
+      invalidatesTags:['Template']
     }),
   }),
 });
