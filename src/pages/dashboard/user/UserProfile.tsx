@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import teamImage from "../../../assets/images/t.jpeg";
 import { Helmet } from "react-helmet-async";
-import { useGetUserProfileQuery } from "../../../redux/features/user/userApi";
+import {
+  useGetUserProfileQuery,
+  useUpdateUserMutation,
+} from "../../../redux/features/user/userApi";
+import { toast } from "sonner";
 
 const UserProfile = () => {
   const { data: usersData, isLoading, isError } = useGetUserProfileQuery("");
-  // console.log(usersData?.data)
-  console.log(usersData);
+  const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
   const [isEditingPersonalInfo, setIsEditingPersonalInfo] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -22,10 +25,9 @@ const UserProfile = () => {
 
   const [userInfo, setUserInfo] = useState(defaultUserInfo);
 
-  // Update userInfo state when API data is available
   useEffect(() => {
     if (usersData?.data) {
-      const user = usersData.data; // Assuming the first user is the profile user
+      const user = usersData.data;
       setUserInfo({
         userName: user?.userName || defaultUserInfo.userName,
         email: user?.email || defaultUserInfo.email,
@@ -37,10 +39,23 @@ const UserProfile = () => {
     }
   }, [usersData]);
 
-  // Handle input change for fields
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserInfo({ ...userInfo, [name]: value });
+  // Handle input changes
+  const handleInputChange = (key: keyof typeof userInfo, value: string) => {
+    setUserInfo((prev) => ({ ...prev, [key]: value }));
+  };
+
+  // Handle save action
+  const handleSave = async () => {
+    try {
+      const userData = await updateUser(userInfo).unwrap();
+      console.log(userData)
+      
+      toast.success("Profile updated successfully!");
+      setIsEditingPersonalInfo(false);
+      setIsEditingAddress(false);
+    } catch (error) {
+      toast.error("Failed to update profile. Please try again.");
+    }
   };
 
   return (
@@ -63,7 +78,7 @@ const UserProfile = () => {
                   className="w-16 h-16 md:w-20 md:h-20 rounded-full"
                 />
                 <div>
-                  <h3 className="text-lg font-bold">{`${userInfo.userName}`}</h3>
+                  <h3 className="text-lg font-bold">{userInfo.userName}</h3>
                   <p className="text-gray-500 text-sm md:text-base">{userInfo.bio}</p>
                   <p className="text-gray-500 text-sm md:text-base">{userInfo.city}</p>
                 </div>
@@ -80,26 +95,27 @@ const UserProfile = () => {
             <div className="bg-white p-4 md:p-6 shadow-md rounded-lg space-y-4">
               <h3 className="font-bold text-gray-800">Personal Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(
-                  Object.entries({
-                    userName: "Full Name",
-                    email: "Email Address",
-                    phone: "Phone",
-                    bio: "Bio",
-                  }) as [keyof typeof userInfo, string][]
-                ).map(([key, label]) => (
+                {Object.entries({
+                  userName: "Full Name",
+                  email: "Email Address",
+                  phone: "Phone",
+                  bio: "Bio",
+                }).map(([key, label]) => (
                   <div key={key}>
                     <p className="text-sm text-gray-600">{label}</p>
                     {isEditingPersonalInfo ? (
                       <input
                         type="text"
-                        name={key}
-                        value={userInfo[key]}
-                        onChange={handleInputChange}
+                        value={userInfo[key as keyof typeof userInfo]}
+                        onChange={(e) =>
+                          handleInputChange(key as keyof typeof userInfo, e.target.value)
+                        }
                         className="w-full border rounded-lg p-2 text-gray-800"
                       />
                     ) : (
-                      <p className="text-gray-800 font-medium">{userInfo[key]}</p>
+                      <p className="text-gray-800 font-medium">
+                        {userInfo[key as keyof typeof userInfo]}
+                      </p>
                     )}
                   </div>
                 ))}
@@ -109,38 +125,46 @@ const UserProfile = () => {
             {/* Address */}
             <div className="bg-white p-4 md:p-6 shadow-md rounded-lg space-y-4">
               <h3 className="font-bold text-gray-800">Address</h3>
-              <div className="flex justify-between items-center">
-                <button
-                  className="text-blue-500 border border-blue-500 rounded-lg px-4 py-2 hover:bg-blue-100"
-                  onClick={() => setIsEditingAddress(!isEditingAddress)}
-                >
-                  {isEditingAddress ? "Save" : "Edit"}
-                </button>
-              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(
-                  Object.entries({
-                    country: "Country",
-                    city: "City/State",
-                  }) as [keyof typeof userInfo, string][]
-                ).map(([key, label]) => (
+                {Object.entries({
+                  country: "Country",
+                  city: "City/State",
+                }).map(([key, label]) => (
                   <div key={key}>
                     <p className="text-sm text-gray-600">{label}</p>
                     {isEditingAddress ? (
                       <input
                         type="text"
-                        name={key}
-                        value={userInfo[key]}
-                        onChange={handleInputChange}
+                        value={userInfo[key as keyof typeof userInfo]}
+                        onChange={(e) =>
+                          handleInputChange(key as keyof typeof userInfo, e.target.value)
+                        }
                         className="w-full border rounded-lg p-2 text-gray-800"
                       />
                     ) : (
-                      <p className="text-gray-800 font-medium">{userInfo[key]}</p>
+                      <p className="text-gray-800 font-medium">
+                        {userInfo[key as keyof typeof userInfo]}
+                      </p>
                     )}
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Save Button */}
+            {(isEditingPersonalInfo || isEditingAddress) && (
+              <div className="text-right">
+                <button
+                  className={`px-6 py-2 rounded-lg text-white ${
+                    isUpdating ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+                  }`}
+                  onClick={handleSave}
+                  disabled={isUpdating}
+                >
+                  {isUpdating ? "Saving..." : "Save Changes"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

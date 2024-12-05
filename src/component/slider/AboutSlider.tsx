@@ -68,7 +68,7 @@ const AboutUsSlider: React.FC = () => {
       <div className="container mx-auto font-roboto">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-7xl font-bold leading-tight md:leading-[84px] text-[#003366]">
+            <h1 className="text-4xl md:text-7xl font-bold leading-tight md:leading-[84px] text-black">
               The Elevator
             </h1>
             <p className="text-lg md:text-2xl font-normal leading-6 md:leading-[28px] mt-4 text-gray-600">

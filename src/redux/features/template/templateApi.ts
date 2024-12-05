@@ -11,7 +11,7 @@ const templateApi = baseApi.injectEndpoints({
     }),
     createTemplates: builder.mutation({
       query: (templateData) => {
-        console.log(templateData);
+        // console.log(templateData);
         return {
           url: "/template/create-template",
           method: "POST",
