@@ -11,7 +11,7 @@ const Languages = () => {
         <p>Engilsh , Hinde , Bangla </p>
       </div>
 
-      <LanguagesEditModel />
+      {/* <LanguagesEditModel /> */}
     </div>
   );
 };

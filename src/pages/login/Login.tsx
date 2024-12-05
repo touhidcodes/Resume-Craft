@@ -93,9 +93,9 @@ const Login = () => {
     let toastId = toast.loading("Logging in");
     try {
       const res = await login({ ...data, identifier: data.email }).unwrap();
-      console.log(res);
+      // console.log(res);
       const user = verifyToken(res.data.accessToken);
-      console.log(user);
+      // console.log(user);
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("login successfully", { id: toastId, duration: 2000 });
       navigate(location?.state ? location.state.from.pathname : "/");

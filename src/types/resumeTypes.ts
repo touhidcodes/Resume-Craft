@@ -59,7 +59,7 @@ export type Certificate = {
   issuer: string;
   issueDate: string;
   expirationDate: string;
-  credentialId: string;
+  certificateLink: string;
 };
 
 export type ResumeInitialState = {

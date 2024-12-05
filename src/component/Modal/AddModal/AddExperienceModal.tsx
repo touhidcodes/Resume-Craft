@@ -2,16 +2,15 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { experienceValidationSchema } from "../../../zod/experienceValidationSchema";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";
 import ExperienceForm from "../../form/ExperienceForm";
-import { useCreateExperienceMutation } from "../../../redux/features/resume/resumeApi";
-type TAddExperienceProps = {
-  experienceId: string;
-};
+import { useAddExperienceMutation } from "../../../redux/features/resume/resumeApi";
+import { useAppSelector } from "../../../redux/hooks";
+import ButtonSpinner from "../../shared/ButtonSpinner";
+import { toast } from "sonner";
 
 type ExperienceFormData = {
   companyName: string;
@@ -21,10 +20,11 @@ type ExperienceFormData = {
   location: string;
 };
 
-const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
+const AddExperienceModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [responsibilities, setResponsibilities] = useState("");
-  const [create] = useCreateExperienceMutation();
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const [addExperience, { isLoading }] = useAddExperienceMutation();
   const {
     register,
     handleSubmit,
@@ -44,15 +44,20 @@ const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<ExperienceFormData> = async (data) => {
-    console.log(data);
-    const res = await create(data);
-    console.log(res);
-    // close();
+    try {
+      const payload = { resumeId, responsibilities, ...data };
+      const res = await addExperience(payload).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+
+      close();
+    } catch (error) {}
   };
 
   return (
     <>
-      {/* <ResumeEditBtn handleClick={open} /> */}
       <ResumeAddBtn handleClick={open} />
 
       <Dialog
@@ -88,8 +93,12 @@ const AddExperienceModal = ({ experienceId }: TAddExperienceProps) => {
                 <Button variant="outlined" autoFocus onClick={close}>
                   Cancel
                 </Button>
-                <Button variant="contained" onClick={handleSubmit(onSubmit)}>
-                  Save
+                <Button
+                  variant={isLoading ? "outlined" : "contained"}
+                  disabled={isLoading}
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

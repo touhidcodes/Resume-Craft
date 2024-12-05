@@ -33,7 +33,7 @@ const Education = () => {
                 Educated patients on their conditions and prescribed medications
               </li>
             </ul>
-            <EducationEditModal />
+            {/* <EducationEditModal /> */}
           </div>
         ))}
       </div>

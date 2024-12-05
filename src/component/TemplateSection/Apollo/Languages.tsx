@@ -5,7 +5,7 @@ const Languages = () => {
   const languages = useAppSelector((state) => state?.resume?.resume?.language);
 
   return (
-    <div className="cursor-pointer  group  mb-5  border border-transparent hover:border-dashed hover:border-primary relative">
+    <div className="cursor-pointer group border border-transparent hover:border-dashed hover:border-primary relative">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Languages
       </h1>
@@ -24,7 +24,9 @@ const Languages = () => {
           </div>
         ))}
       </div>
-      <LanguagesEditModal />
+      <div className="hidden group-hover:block absolute top-1 right-1 duration-100 ease-in-out transition-all">
+        <LanguagesEditModal />
+      </div>
     </div>
   );
 };

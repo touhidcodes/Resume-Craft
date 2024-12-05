@@ -1,18 +1,23 @@
-import { Add } from "@mui/icons-material";
+import clsx from "clsx";
+import { MdAdd } from "react-icons/md";
 
 type TResumeAddBtnProps = {
   handleClick: () => void;
+  className?: string;
 };
 
-const ResumeAddBtn = ({ handleClick }: TResumeAddBtnProps) => {
+const ResumeAddBtn = ({ handleClick, className }: TResumeAddBtnProps) => {
   return (
     <button
       onClick={handleClick}
-      className="bg-white custom-shadow group-hover:flex justify-center items-center rounded-lg p-1"
+      className={`${clsx(
+        "bg-white flex justify-center items-center size-10",
+        className
+      )}`}
     >
-      <span className="hover:bg-neutral-100 inline-block p-1 rounded-lg">
-        <Add />
-      </span>
+      <div className="size-[32px] hover:bg-neutral-100 rounded flex justify-center items-center text-black">
+        <MdAdd size={26} />
+      </div>
     </button>
   );
 };

@@ -4,15 +4,22 @@ import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../../builder/MultipleSelect";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import { useUpdateSkillMutation } from "../../../redux/features/resume/resumeApi";
+import {
+  useAddSkillMutation,
+  useUpdateSkillMutation,
+} from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
+import { useAppSelector } from "../../../redux/hooks";
 
 const AddSkillModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("");
+  const [errors, setErrors] = useState({ category: "", skills: "" });
   const [skills, setSkills] = useState<string[]>([]);
-  const [updateSkill, { isLoading }] = useUpdateSkillMutation();
+  const [addSkill, { isLoading }] = useAddSkillMutation();
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
 
   const handleRemoveSkill = (skill: string) => {
     const isSkillAlreadyExist = skills.find((sk) => sk === skill);
@@ -33,13 +40,23 @@ const AddSkillModal = () => {
 
   const handleUpdateSkill = async () => {
     try {
-      //   const res = await updateSkill({
-      //     id: skill.id,
-      //     data: { category, skills },
-      //   }).unwrap();
-      //   if (res?.success) {
-      //     toast.success(res?.message);
-      //   }
+      if (!category || skills.length < 1) {
+        setErrors((prev) => ({
+          ...prev,
+          category: !category ? "Category is required" : prev.category,
+          skills: skills.length < 1 ? "Skills is required" : prev.skills,
+        }));
+        return;
+      }
+
+      setErrors({ category: "", skills: "" });
+
+      const res = await addSkill({ resumeId, category, skills }).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+
       close();
     } catch (error) {
       console.log(error);
@@ -48,7 +65,7 @@ const AddSkillModal = () => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} />
 
       <Dialog
         open={isOpen}
@@ -85,6 +102,9 @@ const AddSkillModal = () => {
                         defaultValue={category}
                         onChange={(e) => setCategory(e.target.value)}
                       />
+                      <p className="mt-1 text-xs text-red-500">
+                        {errors.category}
+                      </p>
                     </div>
                     <MultipleSelect
                       placeholder="Type you skill and press enter..."
@@ -92,6 +112,7 @@ const AddSkillModal = () => {
                       value={skills}
                       setValue={setSkills}
                     />
+                    <p className="mt-1 text-xs text-red-500">{errors.skills}</p>
                     <div className="mt-5 flex items-center gap-4 flex-wrap">
                       {skills.map((skill, index) => (
                         <button

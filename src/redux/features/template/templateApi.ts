@@ -7,8 +7,21 @@ const templateApi = baseApi.injectEndpoints({
         url: "/template/templates",
         method: "GET",
       }),
+      providesTags: ["Template"],
+    }),
+    createTemplates: builder.mutation({
+      query: (templateData) => {
+        // console.log(templateData);
+        return {
+          url: "/template/create-template",
+          method: "POST",
+          body: templateData,
+        };
+      },
+      invalidatesTags:['Template']
     }),
   }),
 });
 
-export const { useGetAllTemplatesQuery } = templateApi;
+export const { useGetAllTemplatesQuery, useCreateTemplatesMutation } =
+  templateApi;

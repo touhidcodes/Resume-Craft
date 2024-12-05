@@ -4,8 +4,8 @@ import template from "../../../assets/admin/resume-and-cv.png";
 import popular from "../../../assets/admin/cv (1).png";
 import users from "../../../assets/admin/team.png";
 import { Helmet } from "react-helmet-async";
-import { useGetAllTemplatesQuery } from "../../../redux/api/adminApi";
-import { useGetAllUsersQuery } from "../../../redux/api/userApi";
+import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
+import { useGetAllUsersQuery } from "../../../redux/features/user/userApi";
 
 // Sample Data for the Chart
 const revenueChartData = {
@@ -35,10 +35,11 @@ const AdminDashboard = () => {
 
   const { data: allTemplates } = useGetAllTemplatesQuery("")
   const { data: allUsers } = useGetAllUsersQuery("")
-  console.log(allUsers)
+  console.log(allTemplates)
 
   // console.log(allTemplates?.data?.length)
   const totalTemplates = allTemplates?.data?.length;
+  const totalUsers = allUsers?.data?.length;
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6 flex flex-col lg:flex-row gap-6">
@@ -57,7 +58,7 @@ const AdminDashboard = () => {
             },
             {
               title: "Total Users",
-              value: "9,801",
+              value: totalUsers,
               image: users,
             },
             {
@@ -72,10 +73,10 @@ const AdminDashboard = () => {
             >
               <div className="flex items-center space-x-4">
                 <div className="p-2 rounded-full">
-                  <img src={stat.image} alt={stat.title} className="h-12 w-12 object-cover" /> {/* Image as icon */}
+                  <img src={stat.image} alt={stat.title} className="h-10 w-10 object-cover" /> {/* Image as icon */}
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium">{stat.title}</h3>
+                  <h3 className="text-base font-medium">{stat.title}</h3>
                   <p className="text-2xl font-bold my-2">{stat.value}</p>
                 </div>
               </div>
@@ -88,10 +89,7 @@ const AdminDashboard = () => {
           <div className="bg-white shadow-md rounded-lg p-4 md:p-6">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-800">Monthly Resume Creation</h3>
-              <select className="border border-gray-300 rounded-md p-2 text-sm text-gray-600 mt-2 md:mt-0">
-                <option value="This Year">This Year</option>
-                <option value="This Month">This Month</option>
-              </select>
+
             </div>
             <div className="mt-4">
               <Bar

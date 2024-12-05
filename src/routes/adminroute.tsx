@@ -1,4 +1,6 @@
+import AddTemplate from "../pages/dashboard/admin/AddTemplate";
 import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
+import AllTemplates from "../pages/dashboard/admin/AllTemplates";
 
 export const adminPath = [
   {
@@ -7,13 +9,13 @@ export const adminPath = [
     element: <AdminDashboard />,
   },
   {
-    name: "All Template",
-    path: "allTemplate",
-    element: <AdminDashboard />,
+    name: "All Templates",
+    path: "allTemplates",
+    element: <AllTemplates />,
   },
   {
     name: "Add Template",
     path: "addTemplate",
-    element: <AdminDashboard />,
+    element: <AddTemplate />,
   },
 ];

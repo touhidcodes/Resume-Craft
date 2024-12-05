@@ -6,15 +6,16 @@ import Singup from "../pages/singup/Singup";
 import About from "../pages/about/about";
 import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGeneroter";
-import { adminPath } from "./adminroute";
-import { userPath } from "./userroute";
+import { adminPath } from "./AdminRoute";
+import { userPath } from "./UserRoute";
 
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 
 import NotFound from "../pages/notFound/NotFound";
-import TemplateTwo from "../pages/Resume/TemplateTwo/TemplateTwo";
-import ReusmeLoading from "../component/shared/ReusmeLoading";
-import PrivetRoute from "./PrivetRoute";
+import Orion from "../pages/Template/Orion";
+
+import PrivetRoute from "./PrivateRoute";
+import AdminPrivet from "./AdminPrivate";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path: "/resume",
+        element: <Orion />,
+      },
     ],
   },
   {
@@ -45,25 +50,30 @@ const router = createBrowserRouter([
   },
   {
     path: "/resume",
-    element: <TemplateTwo></TemplateTwo>,
+    element: <Orion></Orion>,
   },
-  {
-    path: "/loading",
-    element: <ReusmeLoading></ReusmeLoading>,
-  },
+
   {
     path: "/register",
     element: <Singup />,
   },
   {
     path: "admin",
-    element: <DashboardLayout />,
+    element: (
+      <AdminPrivet>
+        <DashboardLayout />
+      </AdminPrivet>
+    ),
     children: routerGenerator(adminPath),
   },
 
   {
     path: "user",
-    element: <DashboardLayout />,
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
     children: routerGenerator(userPath),
   },
   {
