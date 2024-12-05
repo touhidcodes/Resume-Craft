@@ -1,4 +1,6 @@
 import { useAppSelector } from "../../../redux/hooks";
+import AddCertificateModal from "../../Modal/AddModal/AddCertificateModal";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import CertificateEditModal from "../../Modal/EditModal/CertificateEditModal";
 
 const Certificates = () => {
@@ -7,7 +9,7 @@ const Certificates = () => {
   );
 
   return (
-    <div className="cursor-pointer group border border-transparent hover:border-dashed hover:border-primary relative">
+    <div className="cursor-pointer group border border-transparent hover:border-dashed hover:border-primary relative group/container">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Certificates
       </h1>
@@ -15,7 +17,7 @@ const Certificates = () => {
       {certificates?.map((certificate) => (
         <div
           key={certificate.id}
-          className="text-[#6E6E6E] text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative duration-100 ease-in-out transition-all"
+          className="text-[#6E6E6E] text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative duration-100 ease-in-out transition-all group/certificate"
         >
           <div className="flex gap-x-3 items-end">
             <h2 className="font-semibold">{certificate.name}</h2>
@@ -29,18 +31,20 @@ const Certificates = () => {
           </div>
           <p>{certificate?.issuer}</p>
           <p className="text-xs">
-            <span>{certificate.issueDate}</span>
+            <span>{certificate?.issueDate}</span>
             <span>
               {certificate?.expirationDate
                 ? ` - ${certificate.expirationDate}`
                 : ""}
             </span>
           </p>
-          <div className="hidden group-hover:block absolute top-1 right-1 duration-100 ease-in-out transition-all">
-            <CertificateEditModal />
+          <div className="hidden group-hover/certificate:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
+            <CertificateEditModal certificate={certificate} />
+            <DeleteModal handleDelete={() => {}} />
           </div>
         </div>
       ))}
+      <AddCertificateModal />
     </div>
   );
 };

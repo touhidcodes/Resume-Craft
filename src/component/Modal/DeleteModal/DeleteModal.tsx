@@ -4,7 +4,6 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { Delete } from "@mui/icons-material";
 import { useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 

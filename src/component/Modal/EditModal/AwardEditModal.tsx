@@ -3,39 +3,37 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import CertificateForm from "../../form/CertificateForm";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { certificateValidationSchema } from "../../../zod/certificateValidationSchema";
-import { Certificate } from "../../../types/resumeTypes";
+import { Award } from "../../../types/resumeTypes";
+import { AwardValidationSchema } from "../../../zod/awardValidationSchema";
+import AwardForm from "../../form/AwardForm";
 
-type TCertificateEditProps = {
-  certificate: Certificate;
+type TAwardEditProps = {
+  award: Award;
 };
 
-type TCertificateFormData = {
+type TAwardFormData = {
   name: string;
-  issuer: string;
-  issueDate: string;
-  expirationDate?: string;
-  certificateLink?: string;
+  organization: string;
+  year: number;
+  description?: string;
 };
 
-const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
+const AwardEditModal = ({ award }: TAwardEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [description, setDescription] = useState(award?.description);
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TCertificateFormData>({
-    resolver: zodResolver(certificateValidationSchema),
+  } = useForm<TAwardFormData>({
+    resolver: zodResolver(AwardValidationSchema),
     defaultValues: {
-      name: certificate?.name,
-      issuer: certificate?.issuer,
-      issueDate: certificate.issueDate,
-      expirationDate: certificate?.expirationDate || "",
-      certificateLink: certificate?.certificateLink || "",
+      name: award?.name,
+      organization: award.organization,
+      year: award.year,
+      description: award.description || "",
     },
   });
 
@@ -48,8 +46,8 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   }
 
   // Handle form submission
-  const onSubmit: SubmitHandler<TCertificateFormData> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<TAwardFormData> = async (data) => {
+    // console.log(data);
   };
 
   return (
@@ -75,10 +73,11 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
                 <h3 className="text-xl font-semibold">Certificates</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
-              <CertificateForm
-                control={control}
+              <AwardForm
                 register={register}
                 errors={errors}
+                description={description}
+                setDescription={setDescription}
               />
 
               {/* Dialog footer */}
@@ -103,4 +102,4 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   );
 };
 
-export default CertificateEditModal;
+export default AwardEditModal;

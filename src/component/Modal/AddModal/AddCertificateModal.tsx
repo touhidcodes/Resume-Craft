@@ -2,16 +2,11 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import CertificateForm from "../../form/CertificateForm";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { certificateValidationSchema } from "../../../zod/certificateValidationSchema";
-import { Certificate } from "../../../types/resumeTypes";
-
-type TCertificateEditProps = {
-  certificate: Certificate;
-};
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
 type TCertificateFormData = {
   name: string;
@@ -21,7 +16,7 @@ type TCertificateFormData = {
   certificateLink?: string;
 };
 
-const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
+const AddCertificateModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {
     control,
@@ -30,13 +25,6 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
     formState: { errors },
   } = useForm<TCertificateFormData>({
     resolver: zodResolver(certificateValidationSchema),
-    defaultValues: {
-      name: certificate?.name,
-      issuer: certificate?.issuer,
-      issueDate: certificate.issueDate,
-      expirationDate: certificate?.expirationDate || "",
-      certificateLink: certificate?.certificateLink || "",
-    },
   });
 
   function open() {
@@ -54,7 +42,7 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} className="custom-shadow rounded-md" />
 
       <Dialog
         open={isOpen}
@@ -103,4 +91,4 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   );
 };
 
-export default CertificateEditModal;
+export default AddCertificateModal;

@@ -5,6 +5,7 @@ import { Close, KeyboardArrowDown } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
 import { Button } from "@mui/material";
+import logo from "../../assets/Logo.png";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -46,13 +47,13 @@ const NavBar = () => {
       <div className="max-w-[1170px] flex items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <Link to="/">
-            <div className=" flex items-center justify-center">
+            <div className="flex items-center justify-center gap-x-3">
               <img
-                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                src={logo}
                 alt="logo"
-                className="md:cursor-pointer size-12 bg-cover  object-contain"
+                className="md:cursor-pointer size-10 bg-cover  object-contain"
               />
-              <h1 className="ml-5 text-2xl font-medium md:hidden lg:block">
+              <h1 className="text-2xl font-medium md:hidden lg:block">
                 Resume <span className="text-[#45C4F3]">Craft</span>
               </h1>
             </div>
