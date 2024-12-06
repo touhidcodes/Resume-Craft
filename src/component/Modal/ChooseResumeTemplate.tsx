@@ -43,7 +43,7 @@ const ChooseResumeTemplate = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllTemplatesQuery(null);
-  const [createResume, createResumeApiRes] = useCreateResumeMutation();
+  const [createResume] = useCreateResumeMutation();
   const token = useAppSelector(userCurrentToken);
   const handleClickOpen = () => {
     setOpen(true);

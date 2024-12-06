@@ -14,9 +14,12 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { Section } from "../../types/resumeTypes";
+import { useUpdateResumeMutation } from "../../redux/features/resume/resumeApi";
 
 const SectionSwitcher = () => {
   const dispatch = useAppDispatch();
+  const [manageSection] = useUpdateResumeMutation();
+  const resumeId = useAppSelector((state) => state?.resume.resume?.id);
 
   // Ensure fallback to empty array if no sections exist
   const allSections = useAppSelector(
@@ -27,16 +30,27 @@ const SectionSwitcher = () => {
   const [items, setItems] = useState<Section[]>(allSections);
 
   // handleDragEnd type fix
-  const handleDragEnd = (event: any) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      const oldIndex = items.findIndex((item) => item.name === active.id);
-      const newIndex = items.findIndex((item) => item.name === over.id);
-      if (oldIndex !== -1 && newIndex !== -1) {
-        const newArr = arrayMove(items, oldIndex, newIndex);
-        setItems(newArr);
-        dispatch(setActiveSections(newArr)); // Dispatch action to update sections in the store
+  const handleDragEnd = async (event: any) => {
+    try {
+      const { active, over } = event;
+      if (active.id !== over.id) {
+        const oldIndex = items.findIndex((item) => item.name === active.id);
+        const newIndex = items.findIndex((item) => item.name === over.id);
+        if (oldIndex !== -1 && newIndex !== -1) {
+          const newArr = arrayMove(items, oldIndex, newIndex);
+
+          setItems(newArr);
+          dispatch(setActiveSections(newArr));
+
+          const res = await manageSection({
+            id: resumeId,
+            data: { allSection: newArr },
+          });
+          console.log(res);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 

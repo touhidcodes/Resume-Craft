@@ -55,7 +55,7 @@ const resumeApi = baseApi.injectEndpoints({
       invalidatesTags: ["Resume"],
     }),
 
-    updatePersonalInfo: builder.mutation({
+    updateResume: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/update-resume/${id}`,
         method: "PATCH",
@@ -106,6 +106,7 @@ const resumeApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["Resume"],
     }),
   }),
 });
@@ -121,7 +122,7 @@ export const {
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
   useUpdateSkillMutation,
-  useUpdatePersonalInfoMutation,
+  useUpdateResumeMutation,
   useUpdateCertificateMutation,
 } = resumeApi;
 
