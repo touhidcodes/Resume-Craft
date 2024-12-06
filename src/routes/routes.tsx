@@ -16,6 +16,7 @@ import Orion from "../pages/Template/Orion";
 
 import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
+import Pinguin from "../pages/Template/Pinguin";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,8 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/resume",
-    element: <Orion></Orion>,
+    path: "/resumeb",
+    element: <Pinguin></Pinguin>,
   },
 
   {

@@ -7,11 +7,12 @@ import {
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { adminPath } from "../../routes/AdminRoute";
-import { userPath } from "../../routes/UserRoute";
+
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { userCurrentUser } from "../../redux/features/auth/authSlice";
+import { userPath } from "../../routes/UserRoute";
+import { adminPath } from "../../routes/AdminRoute";
 
 type Open = {
   open: boolean;
@@ -51,11 +52,11 @@ const SideBar = ({ open }: Open) => {
                 },
                 open
                   ? {
-                    justifyContent: "initial",
-                  }
+                      justifyContent: "initial",
+                    }
                   : {
-                    justifyContent: "center",
-                  },
+                      justifyContent: "center",
+                    },
               ]}
             >
               <ListItemIcon
@@ -66,11 +67,11 @@ const SideBar = ({ open }: Open) => {
                   },
                   open
                     ? {
-                      mr: 3,
-                    }
+                        mr: 3,
+                      }
                     : {
-                      mr: "auto",
-                    },
+                        mr: "auto",
+                      },
                 ]}
               >
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -80,11 +81,11 @@ const SideBar = ({ open }: Open) => {
                 sx={[
                   open
                     ? {
-                      opacity: 1,
-                    }
+                        opacity: 1,
+                      }
                     : {
-                      opacity: 0,
-                    },
+                        opacity: 0,
+                      },
                 ]}
               />
             </ListItemButton>
