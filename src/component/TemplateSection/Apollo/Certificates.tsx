@@ -14,7 +14,7 @@ const Certificates = () => {
         Certificates
       </h1>
       <div className="w-[100%] h-[2px] bg-gray-400 mb-1"></div>
-      <div className="space-y-2">
+      <div className="space-y-2 leading-tight">
         {certificates?.map((certificate) => (
           <div
             key={certificate.id}

@@ -51,10 +51,10 @@ const NavBar = () => {
               <img
                 src={logo}
                 alt="logo"
-                className="md:cursor-pointer size-10 bg-cover  object-contain"
+                className="md:cursor-pointer size-9 bg-cover object-contain"
               />
-              <h1 className="text-2xl font-medium md:hidden lg:block">
-                Resume <span className="text-[#45C4F3]">Craft</span>
+              <h1 className="text-2xl font-medium md:hidden lg:block lowercase">
+                Resume Craft
               </h1>
             </div>
           </Link>

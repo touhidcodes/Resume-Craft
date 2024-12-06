@@ -55,6 +55,15 @@ const resumeApi = baseApi.injectEndpoints({
       invalidatesTags: ["Resume"],
     }),
 
+    addAward: builder.mutation({
+      query: (data) => ({
+        url: `/resume/award/create-award`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
     updateResume: builder.mutation({
       query: ({ id, data }) => ({
         url: `/resume/update-resume/${id}`,
@@ -108,6 +117,15 @@ const resumeApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Resume"],
     }),
+
+    updateAward: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/resume/award/update-award/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
   }),
 });
 
@@ -118,12 +136,14 @@ export const {
   useAddExperienceMutation,
   useAddEducationMutation,
   useAddCertificateMutation,
+  useAddAwardMutation,
   useUpdateExperienceMutation,
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
   useUpdateSkillMutation,
   useUpdateResumeMutation,
   useUpdateCertificateMutation,
+  useUpdateAwardMutation,
 } = resumeApi;
 
 export default resumeApi;

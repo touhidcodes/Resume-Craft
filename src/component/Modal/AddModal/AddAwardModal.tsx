@@ -2,19 +2,15 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Award } from "../../../types/resumeTypes";
 import { AwardValidationSchema } from "../../../zod/awardValidationSchema";
 import AwardForm from "../../form/AwardForm";
-import { useUpdateAwardMutation } from "../../../redux/features/resume/resumeApi";
+import { useAddAwardMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
-
-type TAwardEditProps = {
-  award: Award;
-};
+import { useAppSelector } from "../../../redux/hooks";
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
 
 type TAwardFormData = {
   name: string;
@@ -23,22 +19,17 @@ type TAwardFormData = {
   description?: string;
 };
 
-const AwardEditModal = ({ award }: TAwardEditProps) => {
+const AddAwardModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [description, setDescription] = useState(award?.description);
-  const [updateAward, { isLoading }] = useUpdateAwardMutation();
+  const [description, setDescription] = useState("");
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const [addAward, { isLoading }] = useAddAwardMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TAwardFormData>({
     resolver: zodResolver(AwardValidationSchema),
-    defaultValues: {
-      name: award?.name,
-      organization: award.organization,
-      year: award.year,
-      description: award.description || "",
-    },
   });
 
   function open() {
@@ -52,10 +43,7 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
   // Handle form submission
   const onSubmit: SubmitHandler<TAwardFormData> = async (data) => {
     try {
-      const res = await updateAward({
-        id: award.id,
-        data: { ...data, description },
-      }).unwrap();
+      const res = await addAward({ resumeId, ...data, description }).unwrap();
 
       if (res.success) {
         toast.success(res?.message);
@@ -69,7 +57,7 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} className="custom-shadow rounded-md" />
 
       <Dialog
         open={isOpen}
@@ -120,4 +108,4 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
   );
 };
 
-export default AwardEditModal;
+export default AddAwardModal;
