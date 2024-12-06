@@ -20,8 +20,8 @@ const About = () => {
         {/* Hero Section */}
         <section className="px-6 text-center md:text-left mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-center text-black leading-snug mb-4">
-            Why build my resume with Resume{" "}
-            <span className="text-primary">Craft</span> ?
+            Why build my resume with{" "}
+            <span className="text-primary">Resume Craft</span>?
           </h1>
         </section>
 
