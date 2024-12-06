@@ -27,6 +27,7 @@ const AddCertificateModal = () => {
   const {
     control,
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<TCertificateFormData>({
@@ -51,6 +52,7 @@ const AddCertificateModal = () => {
         toast.success(res.message);
       }
 
+      reset();
       close();
     } catch (error) {
       console.log(error);

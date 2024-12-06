@@ -30,7 +30,7 @@ const resumeApi = baseApi.injectEndpoints({
 
     addSkill: builder.mutation({
       query: (data) => ({
-        url: `/skill/create-skill`,
+        url: `/resume/skill/create-skill`,
         method: "POST",
         body: data,
       }),
@@ -48,7 +48,7 @@ const resumeApi = baseApi.injectEndpoints({
 
     addCertificate: builder.mutation({
       query: (data) => ({
-        url: `/certificate/create-certification`,
+        url: `/resume/certification/create-certification`,
         method: "POST",
         body: data,
       }),
@@ -84,7 +84,7 @@ const resumeApi = baseApi.injectEndpoints({
 
     updateSkill: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/skill/update-skill/${id}`,
+        url: `/resume/skill/update-skill/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -111,7 +111,7 @@ const resumeApi = baseApi.injectEndpoints({
 
     updateCertificate: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/certificate/update-certification/${id}`,
+        url: `/resume/certification/update-certification/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -123,6 +123,14 @@ const resumeApi = baseApi.injectEndpoints({
         url: `/resume/award/update-award/${id}`,
         method: "PATCH",
         body: data,
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    deleteSkill: builder.mutation({
+      query: (id) => ({
+        url: `/resume/skill/remove-skill/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["Resume"],
     }),
@@ -144,6 +152,7 @@ export const {
   useUpdateResumeMutation,
   useUpdateCertificateMutation,
   useUpdateAwardMutation,
+  useDeleteSkillMutation,
 } = resumeApi;
 
 export default resumeApi;

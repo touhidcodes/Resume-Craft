@@ -29,6 +29,7 @@ const AddExperienceModal = () => {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<ExperienceFormData>({
     resolver: zodResolver(experienceValidationSchema),
@@ -50,6 +51,7 @@ const AddExperienceModal = () => {
 
       if (res?.success) {
         toast.success(res?.message);
+        reset();
       }
 
       close();
