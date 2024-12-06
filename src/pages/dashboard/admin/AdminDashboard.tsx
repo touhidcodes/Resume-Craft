@@ -6,40 +6,55 @@ import users from "../../../assets/admin/team.png";
 import { Helmet } from "react-helmet-async";
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 import { useGetAllUsersQuery } from "../../../redux/features/user/userApi";
-
-// Sample Data for the Chart
-const revenueChartData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  datasets: [
-    {
-      label: "Resume",
-      data: [20000, 30000, 25000, 35000, 28000, 50000, 30000, 40000, 37000, 45000, 42000, 46000],
-      backgroundColor: "#cbd5e1",
-      borderRadius: 4,
-      hoverBackgroundColor: "#879fff",
-    },
-  ],
-};
-
-// Sample Data for Last 5 User Logins
-const userLogins = [
-  { name: "Alice Johnson", email: "alice@example.com", time: "2024-11-24 10:45 AM" },
-  { name: "Bob Smith", email: "bob@example.com", time: "2024-11-24 09:30 AM" },
-  { name: "Charlie Brown", email: "charlie@example.com", time: "2024-11-23 05:15 PM" },
-  { name: "Diana Prince", email: "diana@example.com", time: "2024-11-23 03:50 PM" },
-  { name: "Evan Wright", email: "evan@example.com", time: "2024-11-23 12:10 PM" },
-];
-
+import { useGetAllAnalyticsQuery } from "../../../redux/features/admin/adminApi";
 
 const AdminDashboard = () => {
+  const { data: analytics } = useGetAllAnalyticsQuery("");
+  const { data: allTemplates } = useGetAllTemplatesQuery("");
+  const { data: allUsers } = useGetAllUsersQuery("");
 
-  const { data: allTemplates } = useGetAllTemplatesQuery("")
-  const { data: allUsers } = useGetAllUsersQuery("")
-  console.log(allTemplates)
-
-  // console.log(allTemplates?.data?.length)
   const totalTemplates = allTemplates?.data?.length;
+  const popularTemplates = analytics?.data?.popularTemplates || [];
   const totalUsers = allUsers?.data?.length;
+
+  // Map monthlyResumeCount data for the chart
+  const monthlyResumeData = analytics?.data?.monthlyResumeCount || [];
+  const labels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // Generate data for the chart
+  const resumeCounts = Array(12).fill(0); // Initialize counts for 12 months
+  monthlyResumeData.forEach(({ month, count }) => {
+    const [year, monthIndex] = month.split("-").map(Number);
+    if (!isNaN(monthIndex) && monthIndex >= 1 && monthIndex <= 12) {
+      resumeCounts[monthIndex - 1] = count; // Populate count at the correct month index
+    }
+  });
+
+  const revenueChartData = {
+    labels,
+    datasets: [
+      {
+        label: "Resumes Created",
+        data: resumeCounts,
+        backgroundColor: "#cbd5e1",
+        borderRadius: 4,
+        hoverBackgroundColor: "#879fff",
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6 flex flex-col lg:flex-row gap-6">
@@ -63,7 +78,7 @@ const AdminDashboard = () => {
             },
             {
               title: "Popular Templates",
-              value: totalTemplates,
+              value: popularTemplates.length,
               image: popular,
             },
           ].map((stat, index) => (
@@ -73,7 +88,11 @@ const AdminDashboard = () => {
             >
               <div className="flex items-center space-x-4">
                 <div className="p-2 rounded-full">
-                  <img src={stat.image} alt={stat.title} className="h-10 w-10 object-cover" /> {/* Image as icon */}
+                  <img
+                    src={stat.image}
+                    alt={stat.title}
+                    className="h-10 w-10 object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="text-base font-medium">{stat.title}</h3>
@@ -87,10 +106,9 @@ const AdminDashboard = () => {
         {/* Revenue Chart Section */}
         <div>
           <div className="bg-white shadow-md rounded-lg p-4 md:p-6">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-800">Monthly Resume Creation</h3>
-
-            </div>
+            <h3 className="text-lg font-semibold text-gray-800">
+              Monthly Resume Creation
+            </h3>
             <div className="mt-4">
               <Bar
                 data={revenueChartData}
@@ -107,25 +125,39 @@ const AdminDashboard = () => {
         {/* Last 5 User Logins Table */}
         <div>
           <div className="bg-white shadow-md rounded-lg p-4 md:p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Last 5 User Logins</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Last 5 User Logins
+            </h3>
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b-2 bg-white">
-                  <th className="border-b-2 border-gray-200 p-3 text-left text-gray-600">Name</th>
-                  <th className="border-b-2 border-gray-200 p-3 text-left text-gray-600">Email</th>
-                  <th className="border-b-2 border-gray-200 p-3 text-left text-gray-600">Login Time</th>
+                  <th className="border-b-2 border-gray-200 p-3 text-left text-gray-600">
+                    Name
+                  </th>
+                  <th className="border-b-2 border-gray-200 p-3 text-left text-gray-600">
+                    Email
+                  </th>
+                  <th className="border-b-2 border-gray-200 p-3 text-left text-gray-600">
+                    Login Time
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {userLogins.map((user, index) => (
+                {analytics?.data?.lastFiveUsers?.map((user:any, index:any) => (
                   <tr
                     key={index}
                     className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
                       } hover:bg-[#879fff] hover:text-white transition-all duration-200`}
                   >
-                    <td className="border-b-2 border-gray-200 p-3">{user.name}</td>
-                    <td className="border-b-2 border-gray-200 p-3">{user.email}</td>
-                    <td className="border-b-2 border-gray-200 p-3">{user.time}</td>
+                    <td className="border-b-2 border-gray-200 p-3">
+                      {user.userName}
+                    </td>
+                    <td className="border-b-2 border-gray-200 p-3">
+                      {user.email}
+                    </td>
+                    <td className="border-b-2 border-gray-200 p-3">
+                      {new Date(user.createdAt).toLocaleString()}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -135,46 +167,22 @@ const AdminDashboard = () => {
       </div>
 
       {/* Right Section */}
-      <div className="w-full lg:w-1/4 flex flex-col gap-6">
-        {[
-          {
-            title: "Team Review",
-            desc: "Oxish Project Team is built for every user of your project team to plan, manage.",
-            date: "14th Oct",
-            members: ["A", "B", "C"], // Placeholder for avatars
-          },
-          {
-            title: "Meeting",
-            desc: "Upcoming Event Planning Discussion",
-            date: "16th Oct",
-            time: "11:00 - 12:00",
-          },
-        ].map((card, index) => (
-          <div
-            key={index}
-            className="bg-white p-4 shadow-md rounded-lg flex flex-col"
-          >
-            <h3 className="text-lg font-medium text-gray-800">{card.title}</h3>
-            <p className="text-sm text-gray-500 mt-2">{card.desc}</p>
-            {card.members && (
-              <div className="flex items-center mt-4 space-x-2">
-                {card.members.map((member, idx) => (
-                  <div
-                    key={idx}
-                    className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm"
-                  >
-                    {member}
-                  </div>
-                ))}
-              </div>
-            )}
-            {card.date && (
-              <p className="text-sm text-gray-600 mt-4">
-                {card.date} {card.time && `| ${card.time}`}
-              </p>
-            )}
-          </div>
-        ))}
+      <div className="w-full lg:w-1/4 bg-white shadow-md rounded-lg p-4 md:p-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          Popular Resume Templates
+        </h3>
+        <div className="flex flex-col space-y-4">
+          {popularTemplates.map((template:any) => (
+            <div key={template.id} className="flex flex-col items-center">
+              <img
+                src={template.image}
+                alt={template.name}
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+              <h4 className="text-base font-medium mt-2">{template.name}</h4>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
