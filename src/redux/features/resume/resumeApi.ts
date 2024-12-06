@@ -48,7 +48,7 @@ const resumeApi = baseApi.injectEndpoints({
 
     addCertificate: builder.mutation({
       query: (data) => ({
-        url: "",
+        url: `/certificate/create-certification`,
         method: "POST",
         body: data,
       }),
@@ -102,7 +102,7 @@ const resumeApi = baseApi.injectEndpoints({
 
     updateCertificate: builder.mutation({
       query: ({ id, data }) => ({
-        url: `${id}`,
+        url: `/certificate/update-certification/${id}`,
         method: "PATCH",
         body: data,
       }),

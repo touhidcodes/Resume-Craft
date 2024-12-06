@@ -14,36 +14,38 @@ const Certificates = () => {
         Certificates
       </h1>
       <div className="w-[100%] h-[2px] bg-gray-400 mb-1"></div>
-      {certificates?.map((certificate) => (
-        <div
-          key={certificate.id}
-          className="text-[#6E6E6E] text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative duration-100 ease-in-out transition-all group/certificate"
-        >
-          <div className="flex gap-x-3 items-end">
-            <h2 className="font-semibold">{certificate.name}</h2>
-            <a
-              href={certificate.certificateLink}
-              target="_blank"
-              className="text-xs text-blue-500 underline"
-            >
-              Link
-            </a>
+      <div className="space-y-2">
+        {certificates?.map((certificate) => (
+          <div
+            key={certificate.id}
+            className="text-[#6E6E6E] text-[13px] hover:bg-primary/[.04] cursor-pointer relative duration-100 ease-in-out transition-all group/certificate break-inside-avoid"
+          >
+            <div className="flex gap-x-3 items-end">
+              <h2 className="font-semibold">{certificate.name}</h2>
+              <a
+                href={certificate.certificateLink}
+                target="_blank"
+                className="text-xs text-blue-500 underline"
+              >
+                Link
+              </a>
+            </div>
+            <p>{certificate?.issuer}</p>
+            <p className="text-xs">
+              <span>{certificate?.issueDate}</span>
+              <span>
+                {certificate?.expirationDate
+                  ? ` - ${certificate.expirationDate}`
+                  : ""}
+              </span>
+            </p>
+            <div className="hidden group-hover/certificate:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
+              <CertificateEditModal certificate={certificate} />
+              <DeleteModal handleDelete={() => {}} />
+            </div>
           </div>
-          <p>{certificate?.issuer}</p>
-          <p className="text-xs">
-            <span>{certificate?.issueDate}</span>
-            <span>
-              {certificate?.expirationDate
-                ? ` - ${certificate.expirationDate}`
-                : ""}
-            </span>
-          </p>
-          <div className="hidden group-hover/certificate:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
-            <CertificateEditModal certificate={certificate} />
-            <DeleteModal handleDelete={() => {}} />
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <AddCertificateModal />
     </div>
   );

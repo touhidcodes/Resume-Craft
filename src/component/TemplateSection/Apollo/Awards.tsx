@@ -11,7 +11,7 @@ const Awards = () => {
       <div className="w-[100%] h-[2px] bg-gray-400 mb-1"></div>
       <div className=" text-[#6E6E6E] text-[13px] group-hover:bg-[#f8f9fa] cursor-pointer relative  duration-100 ease-in-out transition-all ">
         {awards?.map((award) => (
-          <div key={award.id} className="group/award">
+          <div key={award.id} className="group/award break-inside-avoid">
             <h2 className="font-semibold">{award.name}</h2>
             <p>{award.organization}</p>
             <p className="text-xs">{award.year}</p>

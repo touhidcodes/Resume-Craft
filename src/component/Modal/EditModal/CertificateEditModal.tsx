@@ -8,6 +8,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { certificateValidationSchema } from "../../../zod/certificateValidationSchema";
 import { Certificate } from "../../../types/resumeTypes";
+import { useUpdateCertificateMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TCertificateEditProps = {
   certificate: Certificate;
@@ -23,6 +26,7 @@ type TCertificateFormData = {
 
 const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [updateCertificate, { isLoading }] = useUpdateCertificateMutation();
   const {
     control,
     register,
@@ -49,7 +53,20 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
 
   // Handle form submission
   const onSubmit: SubmitHandler<TCertificateFormData> = async (data) => {
-    console.log(data);
+    try {
+      const res = await updateCertificate({
+        id: certificate.id,
+        data,
+      }).unwrap();
+
+      if (res?.success) {
+        toast.success(res.message);
+      }
+
+      close();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -87,12 +104,13 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  variant={isLoading ? "outlined" : "contained"}
                   color="primary"
+                  disabled={isLoading}
                   onClick={handleSubmit(onSubmit)}
                   autoFocus
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>
