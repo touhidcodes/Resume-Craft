@@ -6,6 +6,13 @@ import AddAwardModal from "../../Modal/AddModal/AddAwardModal";
 import { useDeleteAwardMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 
+const placeholderAward = {
+  name: "Best Developer Award",
+  organization: "Tech Association",
+  year: 2023,
+  description: `<p>Awarded for outstanding contributions to the development team.</p>`,
+};
+
 const Awards = () => {
   const awards = useAppSelector((state) => state.resume.resume?.Award);
   const [deleteAward, { isLoading }] = useDeleteAwardMutation();

@@ -8,11 +8,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
 import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
-import { useCreateResumeMutation } from "../../redux/features/resume/resumeApi";
 import { useAppSelector } from "../../redux/hooks";
 import { userCurrentToken } from "../../redux/features/auth/authSlice";
 
@@ -43,7 +41,6 @@ const ChooseResumeTemplate = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllTemplatesQuery(null);
-  const [createResume] = useCreateResumeMutation();
   const token = useAppSelector(userCurrentToken);
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,15 +51,6 @@ const ChooseResumeTemplate = ({
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleCreateResume = async (templateId: string) => {
-    try {
-      const res = await createResume(templateId).unwrap();
-      navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
-
-      handleClose();
-    } catch (error) {}
   };
 
   if (isLoading) return;
@@ -130,11 +118,7 @@ const ChooseResumeTemplate = ({
             <h5>Create New</h5>
           </div> */}
           {data?.data?.map((template: TTemplate) => (
-            <ResumeTemplate
-              key={template.id}
-              template={template}
-              handleCreateResume={handleCreateResume}
-            />
+            <ResumeTemplate key={template.id} template={template} />
           ))}
         </div>
       </Dialog>

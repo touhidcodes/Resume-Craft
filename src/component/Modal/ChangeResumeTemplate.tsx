@@ -161,7 +161,6 @@ const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
           <Button
             onClick={() => handleChangeResume(template.id)}
             variant={isLoading ? "outlined" : "contained"}
-            disabled={isLoading}
             size="small"
             fullWidth
             sx={{ fontSize: [10, 14] }}

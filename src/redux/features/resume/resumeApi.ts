@@ -3,10 +3,10 @@ import { baseApi } from "../../api/baseApi";
 const resumeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createResume: builder.mutation({
-      query: (templateId) => ({
+      query: (data) => ({
         url: "/resume/create-resume",
         method: "POST",
-        body: { templateId },
+        body: data,
       }),
       invalidatesTags: ["Resume"],
     }),

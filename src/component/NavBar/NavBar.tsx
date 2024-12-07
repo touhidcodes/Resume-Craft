@@ -47,11 +47,11 @@ const NavBar = () => {
       <div className="max-w-[1170px] flex items-center justify-between mx-auto px-2">
         <div className="z-50 p-1 md:w-auto w-full flex justify-between">
           <Link to="/">
-            <div className="flex items-center justify-center gap-x-3">
+            <div className="flex items-center justify-center gap-x-2">
               <img
                 src={logo}
                 alt="logo"
-                className="md:cursor-pointer size-9 bg-cover object-contain"
+                className="md:cursor-pointer size-8 bg-cover object-contain"
               />
               <h1 className="text-2xl font-medium md:hidden lg:block lowercase">
                 Resume Craft
