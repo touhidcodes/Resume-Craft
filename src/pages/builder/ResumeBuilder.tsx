@@ -17,7 +17,7 @@ const ResumeBuilder = () => {
   // Access query parameters by name
   const resumeId = queryParams.get("resume");
 
-  const { isLoading } = useGetResumeDataQuery(resumeId);
+  const { isLoading, data } = useGetResumeDataQuery(resumeId);
 
   if (isLoading) {
     return <ResumeLoading />;
@@ -29,7 +29,9 @@ const ResumeBuilder = () => {
         <title>Build Resume- Resume Craft</title>
       </Helmet>
       <div className="flex-1">
-        <h1 className="text-3xl font-bold mb-8 text-center">My Resume</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          {data?.data?.name}
+        </h1>
         <ResumeBuilderNavbar reactToPrintFn={reactToPrintFn} />
         <div ref={contentRef}>
           <TemplateRoutes />

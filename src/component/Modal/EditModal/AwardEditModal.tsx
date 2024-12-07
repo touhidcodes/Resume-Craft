@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TAwardEditProps = {
-  award: Award;
+  award?: Award;
 };
 
 type TAwardFormData = {
@@ -35,9 +35,9 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
     resolver: zodResolver(AwardValidationSchema),
     defaultValues: {
       name: award?.name,
-      organization: award.organization,
-      year: award.year,
-      description: award.description || "",
+      organization: award?.organization,
+      year: award?.year,
+      description: award?.description || "",
     },
   });
 
@@ -53,7 +53,7 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
   const onSubmit: SubmitHandler<TAwardFormData> = async (data) => {
     try {
       const res = await updateAward({
-        id: award.id,
+        id: award?.id,
         data: { ...data, description },
       }).unwrap();
 
@@ -87,7 +87,7 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
                 as="h3"
                 className="flex justify-between items-center border-b py-3 px-5"
               >
-                <h3 className="text-xl font-semibold">Certificates</h3>
+                <h3 className="text-xl font-semibold">Award</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
               <AwardForm

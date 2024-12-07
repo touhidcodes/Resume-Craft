@@ -46,11 +46,13 @@ const Education = () => {
             <HtmlRenderer text={education.description} />
             <div className="hidden group-hover/education:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <EducationEditModal education={education} />
-              <DeleteModal
-                id={education.id}
-                isLoading={isLoading}
-                handleDelete={(id) => handleDeleteEducation(id)}
-              />
+              {educations.length > 1 && (
+                <DeleteModal
+                  id={education.id}
+                  isLoading={isLoading}
+                  handleDelete={(id) => handleDeleteEducation(id)}
+                />
+              )}
             </div>
           </div>
         ))}

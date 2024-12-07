@@ -37,11 +37,13 @@ const Skill = () => {
           </p>
           <div className="hidden group-hover:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
             <SkillEditModal skill={skill} />
-            <DeleteModal
-              id={skill.id}
-              isLoading={isLoading}
-              handleDelete={(id) => handleDeleteSkill(id)}
-            />
+            {skills.length > 1 && (
+              <DeleteModal
+                id={skill.id}
+                isLoading={isLoading}
+                handleDelete={(id) => handleDeleteSkill(id)}
+              />
+            )}
           </div>
         </div>
       ))}

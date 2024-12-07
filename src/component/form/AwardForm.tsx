@@ -5,8 +5,8 @@ import TextEditor from "../shared/TextEditor";
 type TAwardFormProps = {
   register: any;
   errors: any;
-  description: string;
-  setDescription: Dispatch<React.SetStateAction<string>>;
+  description: string | undefined;
+  setDescription: Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 const AwardForm = ({

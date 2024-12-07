@@ -55,11 +55,13 @@ const Certificates = () => {
             </p>
             <div className="hidden group-hover/certificate:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <CertificateEditModal certificate={certificate} />
-              <DeleteModal
-                id={certificate.id}
-                isLoading={isLoading}
-                handleDelete={(id) => handleDeleteCertificate(id)}
-              />
+              {certificates.length > 1 && (
+                <DeleteModal
+                  id={certificate.id}
+                  isLoading={isLoading}
+                  handleDelete={(id) => handleDeleteCertificate(id)}
+                />
+              )}
             </div>
           </div>
         ))}
