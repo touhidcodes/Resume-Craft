@@ -3,43 +3,41 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import CertificateForm from "../../form/CertificateForm";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { certificateValidationSchema } from "../../../zod/certificateValidationSchema";
-import { Certificate } from "../../../types/resumeTypes";
-import { useUpdateCertificateMutation } from "../../../redux/features/resume/resumeApi";
+import { Award } from "../../../types/resumeTypes";
+import { AwardValidationSchema } from "../../../zod/awardValidationSchema";
+import AwardForm from "../../form/AwardForm";
+import { useUpdateAwardMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 
-type TCertificateEditProps = {
-  certificate: Certificate;
+type TAwardEditProps = {
+  award?: Award;
 };
 
-type TCertificateFormData = {
+type TAwardFormData = {
   name: string;
-  issuer: string;
-  issueDate: string;
-  expirationDate?: string;
-  certificateLink?: string;
+  organization: string;
+  year: number;
+  description?: string;
 };
 
-const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
+const AwardEditModal = ({ award }: TAwardEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [updateCertificate, { isLoading }] = useUpdateCertificateMutation();
+  const [description, setDescription] = useState(award?.description);
+  const [updateAward, { isLoading }] = useUpdateAwardMutation();
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TCertificateFormData>({
-    resolver: zodResolver(certificateValidationSchema),
+  } = useForm<TAwardFormData>({
+    resolver: zodResolver(AwardValidationSchema),
     defaultValues: {
-      name: certificate?.name,
-      issuer: certificate?.issuer,
-      issueDate: certificate.issueDate,
-      expirationDate: certificate?.expirationDate || "",
-      certificateLink: certificate?.certificateLink || "",
+      name: award?.name,
+      organization: award?.organization,
+      year: award?.year,
+      description: award?.description || "",
     },
   });
 
@@ -52,15 +50,15 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   }
 
   // Handle form submission
-  const onSubmit: SubmitHandler<TCertificateFormData> = async (data) => {
+  const onSubmit: SubmitHandler<TAwardFormData> = async (data) => {
     try {
-      const res = await updateCertificate({
-        id: certificate.id,
-        data,
+      const res = await updateAward({
+        id: award?.id,
+        data: { ...data, description },
       }).unwrap();
 
-      if (res?.success) {
-        toast.success(res.message);
+      if (res.success) {
+        toast.success(res?.message);
       }
 
       close();
@@ -89,13 +87,14 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
                 as="h3"
                 className="flex justify-between items-center border-b py-3 px-5"
               >
-                <h3 className="text-xl font-semibold">Certificates</h3>
+                <h3 className="text-xl font-semibold">Award</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
-              <CertificateForm
-                control={control}
+              <AwardForm
                 register={register}
                 errors={errors}
+                description={description}
+                setDescription={setDescription}
               />
 
               {/* Dialog footer */}
@@ -121,4 +120,4 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   );
 };
 
-export default CertificateEditModal;
+export default AwardEditModal;

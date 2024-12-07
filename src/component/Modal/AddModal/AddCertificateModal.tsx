@@ -2,19 +2,15 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import CertificateForm from "../../form/CertificateForm";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { certificateValidationSchema } from "../../../zod/certificateValidationSchema";
-import { Certificate } from "../../../types/resumeTypes";
-import { useUpdateCertificateMutation } from "../../../redux/features/resume/resumeApi";
+import ResumeAddBtn from "../../shared/ResumeAddBtn";
+import { useAppSelector } from "../../../redux/hooks";
+import { useAddCertificateMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
-
-type TCertificateEditProps = {
-  certificate: Certificate;
-};
 
 type TCertificateFormData = {
   name: string;
@@ -24,23 +20,18 @@ type TCertificateFormData = {
   certificateLink?: string;
 };
 
-const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
+const AddCertificateModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [updateCertificate, { isLoading }] = useUpdateCertificateMutation();
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const [addCertificate, { isLoading }] = useAddCertificateMutation();
   const {
     control,
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<TCertificateFormData>({
     resolver: zodResolver(certificateValidationSchema),
-    defaultValues: {
-      name: certificate?.name,
-      issuer: certificate?.issuer,
-      issueDate: certificate.issueDate,
-      expirationDate: certificate?.expirationDate || "",
-      certificateLink: certificate?.certificateLink || "",
-    },
   });
 
   function open() {
@@ -54,15 +45,14 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   // Handle form submission
   const onSubmit: SubmitHandler<TCertificateFormData> = async (data) => {
     try {
-      const res = await updateCertificate({
-        id: certificate.id,
-        data,
-      }).unwrap();
+      const payload = { resumeId, ...data };
+      const res = await addCertificate(payload).unwrap();
 
       if (res?.success) {
         toast.success(res.message);
       }
 
+      reset();
       close();
     } catch (error) {
       console.log(error);
@@ -71,7 +61,7 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
 
   return (
     <>
-      <ResumeEditBtn handleClick={open} />
+      <ResumeAddBtn handleClick={open} className="custom-shadow rounded-md" />
 
       <Dialog
         open={isOpen}
@@ -121,4 +111,4 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   );
 };
 
-export default CertificateEditModal;
+export default AddCertificateModal;

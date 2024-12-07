@@ -15,11 +15,11 @@ const Languages = () => {
         {languages?.map((language) => (
           <div
             key={language.name}
-            className=" text-neutral-700 text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative  duration-100 ease-in-out transition-all"
+            className="break-inside-avoid text-neutral-700 text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative duration-100 ease-in-out transition-all"
           >
             <p>
-              <span className="font-semibold">{language.proficiency} : </span>
-              {language.name}
+              <span className="font-semibold">{language.name} : </span>
+              {language.proficiency}
             </p>
           </div>
         ))}

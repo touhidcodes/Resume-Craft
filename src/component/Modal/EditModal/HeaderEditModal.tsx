@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { headerValidationSchema } from "../../../zod/headerValidationSchema";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import { PersonalInfo } from "../../../types/resumeTypes";
-import { useUpdatePersonalInfoMutation } from "../../../redux/features/resume/resumeApi";
+import { useUpdateResumeMutation } from "../../../redux/features/resume/resumeApi";
 import { useAppSelector } from "../../../redux/hooks";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
@@ -31,7 +31,7 @@ type FormData = {
 const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const resumeId = useAppSelector((state) => state.resume.resume?.id);
-  const [updatePersonal, { isLoading }] = useUpdatePersonalInfoMutation();
+  const [updatePersonal, { isLoading }] = useUpdateResumeMutation();
 
   // Use the correct type for useForm
   const {

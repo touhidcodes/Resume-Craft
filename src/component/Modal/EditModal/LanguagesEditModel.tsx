@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { useAppSelector } from "../../../redux/hooks";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import { useUpdateResumeMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TFormData = {
   name: string;
@@ -20,9 +23,11 @@ type TFormData = {
 
 const LanguagesEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const resumeId = useAppSelector((state) => state?.resume?.resume?.id);
   const languages = useAppSelector((state) => state?.resume?.resume?.language);
   const [formData, setFormData] = useState<TFormData[]>(languages || []);
   const [errors, setErrors] = useState<Partial<TFormData>[]>([]);
+  const [updateLanguage, { isLoading }] = useUpdateResumeMutation();
 
   useEffect(() => {
     setFormData(languages || []);
@@ -58,7 +63,7 @@ const LanguagesEditModal = () => {
     setFormData(filteredLanguage);
   };
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     const newErrors: Partial<TFormData>[] = [];
@@ -74,8 +79,20 @@ const LanguagesEditModal = () => {
     setErrors(newErrors);
 
     if (newErrors.length === 0) {
-      console.log(formData);
-      // Dispatch actions to update the languages in Redux state if needed
+      try {
+        const res = await updateLanguage({
+          id: resumeId,
+          data: { language: formData },
+        }).unwrap();
+
+        if (res?.success) {
+          toast.success(res?.message);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        close();
+      }
     }
   };
 
@@ -234,13 +251,14 @@ const LanguagesEditModal = () => {
                     Cancel
                   </Button>
                   <Button
-                    variant="contained"
+                    variant={isLoading ? "outlined" : "contained"}
+                    disabled={isLoading}
                     color="primary"
                     onClick={handleSubmit}
                     autoFocus
                     type="submit"
                   >
-                    Save
+                    {isLoading ? <ButtonSpinner /> : "Save"}
                   </Button>
                 </div>
               </div>

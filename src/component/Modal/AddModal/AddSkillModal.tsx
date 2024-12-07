@@ -55,6 +55,8 @@ const AddSkillModal = () => {
 
       if (res?.success) {
         toast.success(res?.message);
+        setSkills([]);
+        setCategory("");
       }
 
       close();
