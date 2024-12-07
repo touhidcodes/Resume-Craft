@@ -26,7 +26,7 @@ const ResumeBuilderNavbar = ({ reactToPrintFn }: TResumeBuilderNavbarProps) => {
       <Button
         color="secondary"
         variant="outlined"
-        onClick={reactToPrintFn}
+        onClick={() => reactToPrintFn()}
         startIcon={<DownloadOutlinedIcon />}
       >
         Download Resume

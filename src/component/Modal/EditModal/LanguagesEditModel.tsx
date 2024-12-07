@@ -13,6 +13,8 @@ import {
 import { useAppSelector } from "../../../redux/hooks";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import { useUpdateResumeMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TFormData = {
   name: string;
@@ -77,11 +79,20 @@ const LanguagesEditModal = () => {
     setErrors(newErrors);
 
     if (newErrors.length === 0) {
-      const res = await updateLanguage({
-        id: resumeId,
-        language: formData,
-      }).unwrap();
-      console.log(res);
+      try {
+        const res = await updateLanguage({
+          id: resumeId,
+          data: { language: formData },
+        }).unwrap();
+
+        if (res?.success) {
+          toast.success(res?.message);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        close();
+      }
     }
   };
 
@@ -240,13 +251,14 @@ const LanguagesEditModal = () => {
                     Cancel
                   </Button>
                   <Button
-                    variant="contained"
+                    variant={isLoading ? "outlined" : "contained"}
+                    disabled={isLoading}
                     color="primary"
                     onClick={handleSubmit}
                     autoFocus
                     type="submit"
                   >
-                    Save
+                    {isLoading ? <ButtonSpinner /> : "Save"}
                   </Button>
                 </div>
               </div>

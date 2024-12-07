@@ -1,11 +1,25 @@
+import { toast } from "sonner";
 import { useAppSelector } from "../../../redux/hooks";
 import AddEducationModal from "../../Modal/AddModal/AddEducationModal";
 import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
+import { useDeleteEducationMutation } from "../../../redux/features/resume/resumeApi";
 
 const Education = () => {
   const educations = useAppSelector((state) => state.resume?.resume?.Education);
+  const [deleteEducation, { isLoading }] = useDeleteEducationMutation();
+
+  const handleDeleteEducation = async (id: string) => {
+    try {
+      const res = await deleteEducation(id).unwrap();
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+    } catch (error) {
+      console.error("Error deleting education:", error);
+    }
+  };
 
   return (
     <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container">
@@ -32,7 +46,11 @@ const Education = () => {
             <HtmlRenderer text={education.description} />
             <div className="hidden group-hover/education:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <EducationEditModal education={education} />
-              <DeleteModal handleDelete={() => {}} />
+              <DeleteModal
+                id={education.id}
+                isLoading={isLoading}
+                handleDelete={(id) => handleDeleteEducation(id)}
+              />
             </div>
           </div>
         ))}

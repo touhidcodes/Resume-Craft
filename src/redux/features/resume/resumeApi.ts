@@ -134,6 +134,38 @@ const resumeApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Resume"],
     }),
+
+    deleteExperience: builder.mutation({
+      query: (id) => ({
+        url: `/resume/work-experience/remove-experience/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    deleteEducation: builder.mutation({
+      query: (id) => ({
+        url: `/resume/education/remove-education/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    deleteCertificate: builder.mutation({
+      query: (id) => ({
+        url: `/resume/certification/remove-certification/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Resume"],
+    }),
+
+    deleteAward: builder.mutation({
+      query: (id) => ({
+        url: `/resume/award//remove-award/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Resume"],
+    }),
   }),
 });
 
@@ -153,6 +185,10 @@ export const {
   useUpdateCertificateMutation,
   useUpdateAwardMutation,
   useDeleteSkillMutation,
+  useDeleteExperienceMutation,
+  useDeleteEducationMutation,
+  useDeleteCertificateMutation,
+  useDeleteAwardMutation,
 } = resumeApi;
 
 export default resumeApi;

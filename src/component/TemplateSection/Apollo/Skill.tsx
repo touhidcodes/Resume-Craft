@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDeleteSkillMutation } from "../../../redux/features/resume/resumeApi";
 import { useAppSelector } from "../../../redux/hooks";
 import AddSkillModal from "../../Modal/AddModal/AddSkillModal";

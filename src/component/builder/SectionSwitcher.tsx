@@ -1,4 +1,4 @@
-import { Switch } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setActiveSections,
@@ -15,10 +15,11 @@ import { useEffect, useState } from "react";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { Section } from "../../types/resumeTypes";
 import { useUpdateResumeMutation } from "../../redux/features/resume/resumeApi";
+import IOSSwitch from "../shared/IOSSwitch";
 
 const SectionSwitcher = () => {
   const dispatch = useAppDispatch();
-  const [manageSection] = useUpdateResumeMutation();
+  const [manageSection, { isLoading }] = useUpdateResumeMutation();
   const resumeId = useAppSelector((state) => state?.resume.resume?.id);
 
   // Ensure fallback to empty array if no sections exist
@@ -42,11 +43,10 @@ const SectionSwitcher = () => {
           setItems(newArr);
           dispatch(setActiveSections(newArr));
 
-          const res = await manageSection({
+          await manageSection({
             id: resumeId,
             data: { allSection: newArr },
           });
-          console.log(res);
         }
       }
     } catch (error) {
@@ -55,8 +55,18 @@ const SectionSwitcher = () => {
   };
 
   // Correct typing for handleChange
-  const handleChange = (section: Section) => {
-    dispatch(updateActiveSection(section)); // Dispatch update for active section
+  const handleChange = async (section: Section) => {
+    dispatch(updateActiveSection(section));
+    const sections = allSections.map((item) =>
+      item.name === section.name
+        ? { ...item, isActive: !section.isActive }
+        : item
+    );
+
+    await manageSection({
+      id: resumeId,
+      data: { allSection: sections },
+    });
   };
 
   // Sync state items with allSections when it changes
@@ -66,13 +76,19 @@ const SectionSwitcher = () => {
 
   return (
     <div className="mt-5">
-      <div className="flex-1 flex justify-between items-center border border-[#ccc] p-2.5 mb-2 rounded">
+      <div className="flex-1 flex justify-between items-center border border-[#ccc] p-3.5 pr-0 mb-2 rounded">
         <h3 className="font-medium pl-10">{allSections[0]?.name}</h3>
         <button onClick={() => handleChange(allSections[0])}>
-          <Switch
-            checked={allSections[0]?.isActive || false}
-            onChange={() => handleChange(allSections[0])} // Correct onChange to call handleChange
-            inputProps={{ "aria-label": "controlled" }}
+          <FormControlLabel
+            label=""
+            control={
+              <IOSSwitch
+                sx={{ marginRight: "-5px" }}
+                disabled={isLoading}
+                checked={allSections[0]?.isActive || false}
+                onChange={() => handleChange(allSections[0])}
+              />
+            }
           />
         </button>
       </div>
@@ -86,6 +102,7 @@ const SectionSwitcher = () => {
             .filter((section) => section.name !== "Summary")
             .map((section) => (
               <Switcher
+                isLoading={isLoading}
                 key={section.name}
                 section={section}
                 onChange={handleChange}
@@ -100,9 +117,11 @@ const SectionSwitcher = () => {
 // Fixing Switcher's onChange
 const Switcher = ({
   section,
+  isLoading,
   onChange,
 }: {
   section: Section;
+  isLoading: boolean;
   onChange: (section: Section) => void;
 }) => {
   const {
@@ -144,10 +163,10 @@ const Switcher = ({
       <div className="flex-1 flex justify-between items-center">
         <h3 className="font-medium">{section.name}</h3>
         <button>
-          <Switch
+          <IOSSwitch
             checked={section.isActive}
-            onChange={() => onChange(section)} // Ensure onChange correctly calls passed function
-            inputProps={{ "aria-label": "controlled" }}
+            disabled={isLoading}
+            onChange={() => onChange(section)}
           />
         </button>
       </div>

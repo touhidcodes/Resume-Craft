@@ -39,7 +39,7 @@ const DeleteModal = ({ id, isLoading, handleDelete }: TDeleteModalProps) => {
               </Button>
               <Button
                 color="error"
-                variant={isLoading ? "outlined" : "contained"}
+                variant="outlined"
                 disabled={isLoading}
                 onClick={() => handleDelete(id)}
               >

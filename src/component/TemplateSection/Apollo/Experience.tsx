@@ -3,11 +3,25 @@ import ExperienceEditModal from "../../Modal/EditModal/ExperienceEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 import AddExperienceModal from "../../Modal/AddModal/AddExperienceModal";
 import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
+import { useDeleteExperienceMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
 
 const Experience = () => {
   const experiences = useAppSelector(
     (state) => state?.resume?.resume?.WorkExperience
   );
+  const [deleteExperience, { isLoading }] = useDeleteExperienceMutation();
+
+  const handleDeleteExperience = async (id: string) => {
+    try {
+      const res = await deleteExperience(id).unwrap();
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+    } catch (error) {
+      console.error("Error deleting education:", error);
+    }
+  };
 
   return (
     <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container">
@@ -38,7 +52,11 @@ const Experience = () => {
 
             <div className="hidden group-hover/experience:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <ExperienceEditModal experience={exp} />
-              <DeleteModal handleDelete={() => {}} />
+              <DeleteModal
+                id={exp.id}
+                isLoading={isLoading}
+                handleDelete={(id) => handleDeleteExperience(id)}
+              />
             </div>
           </div>
         ))}

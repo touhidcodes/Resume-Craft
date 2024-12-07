@@ -3,9 +3,23 @@ import HtmlRenderer from "../../shared/HtmlRenderer";
 import AwardEditModal from "../../Modal/EditModal/AwardEditModal";
 import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import AddAwardModal from "../../Modal/AddModal/AddAwardModal";
+import { useDeleteAwardMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
 
 const Awards = () => {
   const awards = useAppSelector((state) => state.resume.resume?.Award);
+  const [deleteAward, { isLoading }] = useDeleteAwardMutation();
+
+  const handleDeleteAward = async (id: string) => {
+    try {
+      const res = await deleteAward(id).unwrap();
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+    } catch (error) {
+      console.error("Error deleting education:", error);
+    }
+  };
 
   return (
     <div className="font-roboto cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container">
@@ -21,7 +35,11 @@ const Awards = () => {
 
             <div className="hidden group-hover/award:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <AwardEditModal award={award} />
-              <DeleteModal handleDelete={() => {}} />
+              <DeleteModal
+                id={award.id}
+                isLoading={isLoading}
+                handleDelete={(id) => handleDeleteAward(id)}
+              />
             </div>
           </div>
         ))}
