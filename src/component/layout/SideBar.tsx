@@ -7,12 +7,11 @@ import {
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { userCurrentUser } from "../../redux/features/auth/authSlice";
-import { userPath } from "../../routes/UserRoute";
-import { adminPath } from "../../routes/AdminRoute";
+import { AdminPath } from "../../routes/AdminRoute";
+import { UserPath } from "../../routes/UserRoute";
 
 type Open = {
   open: boolean;
@@ -29,10 +28,10 @@ const SideBar = ({ open }: Open) => {
   let sidebarItem;
   switch (user.role) {
     case userRole.ADMIN:
-      sidebarItem = adminPath;
+      sidebarItem = AdminPath;
       break;
     case userRole.USER:
-      sidebarItem = userPath;
+      sidebarItem = UserPath;
       break;
     default:
       break;

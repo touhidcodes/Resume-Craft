@@ -7,7 +7,7 @@ import ButtonSpinner from "../../shared/ButtonSpinner";
 type TDeleteModalProps = {
   id: string;
   isLoading: boolean;
-  handleDelete: ((id: string) => Promise<void>) | undefined | undefined;
+  handleDelete: (id: string) => Promise<void>;
 };
 
 const DeleteModal = ({ id, isLoading, handleDelete }: TDeleteModalProps) => {

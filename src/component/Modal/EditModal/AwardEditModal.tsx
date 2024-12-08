@@ -25,7 +25,7 @@ type TAwardFormData = {
 
 const AwardEditModal = ({ award }: TAwardEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [description, setDescription] = useState(award?.description);
+  const [description, setDescription] = useState(award?.description || "");
   const [updateAward, { isLoading }] = useUpdateAwardMutation();
   const {
     register,
