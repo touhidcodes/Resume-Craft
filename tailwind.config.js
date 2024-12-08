@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
+        ubuntu: ["Ubuntu", "sans - serif"],
+        roboto: ["Roboto", "sans - serif"],
+
       },
       colors: {
         primary: "#1222FE",
