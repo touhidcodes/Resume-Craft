@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close, KeyboardArrowDown } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
 import { Button } from "@mui/material";
 import logo from "../../assets/Logo.png";
+import { toast } from "sonner";
 
 const NavBar = () => {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const user = useAppSelector(userCurrentUser);
@@ -16,7 +16,9 @@ const NavBar = () => {
   let role = user?.role;
 
   const handleLogout = () => {
-    navigate("/login");
+    toast.success("Logout successful", {
+      duration: 2000,
+    });
     dispatch(logout());
   };
 
