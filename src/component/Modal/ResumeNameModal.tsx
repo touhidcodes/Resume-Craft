@@ -103,7 +103,7 @@ const ResumeNameModal = ({ template }: { template: TTemplate }) => {
                     type="submit"
                     fullWidth
                     size="large"
-                    variant="contained"
+                    variant={isLoading ? "outlined" : "contained"}
                   >
                     {isLoading ? <ButtonSpinner /> : "Continue"}
                   </Button>
