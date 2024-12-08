@@ -18,6 +18,8 @@ import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
 import Pinguin from "../pages/Template/Pinguin";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
+import SunsideCover from "../pages/CoverLetter/SunsideCover";
+
 
 const router = createBrowserRouter([
   {
@@ -56,7 +58,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/resumeb",
-    element: <Pinguin></Pinguin>,
+    element: <SunsideCover></SunsideCover>,
   },
 
   {
