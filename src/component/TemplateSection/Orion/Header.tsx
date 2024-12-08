@@ -1,20 +1,23 @@
+import { useAppSelector } from "../../../redux/hooks";
 import HeaderEditModal from "../../Modal/EditModal/HeaderEditModal";
 
 const Header = () => {
+  const personalInfo = useAppSelector(
+    (state) => state?.resume?.resume?.personalInfo
+  );
   return (
     <div className="font-roboto hover:bg-[#f8f9fa] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
-      <HeaderEditModal />
-
       <h1 className="text-[20px] leading-[30px] font-semibold ">
-        Anonymous Dog
+        {personalInfo?.fullName}
       </h1>
 
       <div className="flex gap-x-1  flex-col text-[#6E6E6E] text-[13px]">
-        <p>Phone number</p>
-
-        <p>Email@example.com</p>
-
-        <p> City, State</p>
+        <p>{personalInfo?.phone}</p>
+        <p>{personalInfo?.email}</p>
+        <p>{personalInfo?.location}</p>
+      </div>
+      <div className="hidden group-hover:block absolute top-1 right-1 duration-100 ease-in-out transition-all">
+        <HeaderEditModal personalInfo={personalInfo} />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ const templateApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Template"],
     }),
+
     createTemplates: builder.mutation({
       query: (templateData) => {
         // console.log(templateData);
@@ -18,10 +19,32 @@ const templateApi = baseApi.injectEndpoints({
           body: templateData,
         };
       },
-      invalidatesTags:['Template']
+      invalidatesTags: ["Template"],
+    }),
+
+    // Cover letter
+    getAllCoverLetterTemplate: builder.query({
+      query: () => ({
+        url: "/cover-letter-template/templates",
+        method: "GET",
+      }),
+      providesTags: ["CL Template"],
+    }),
+
+    createCoverLetterTemplate: builder.mutation({
+      query: (data) => ({
+        url: "/cover-letter-template/create-template",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["CL Template"],
     }),
   }),
 });
 
-export const { useGetAllTemplatesQuery, useCreateTemplatesMutation } =
-  templateApi;
+export const {
+  useGetAllTemplatesQuery,
+  useGetAllCoverLetterTemplateQuery,
+  useCreateTemplatesMutation,
+  useCreateCoverLetterTemplateMutation,
+} = templateApi;

@@ -1,42 +1,63 @@
+import { toast } from "sonner";
+import { useAppSelector } from "../../../redux/hooks";
+import AddEducationModal from "../../Modal/AddModal/AddEducationModal";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
+import HtmlRenderer from "../../shared/HtmlRenderer";
+import { useDeleteEducationMutation } from "../../../redux/features/resume/resumeApi";
 
 const Education = () => {
+  const educations = useAppSelector((state) => state.resume?.resume?.Education);
+  const [deleteEducation, { isLoading }] = useDeleteEducationMutation();
+
+  const handleDeleteEducation = async (id: string) => {
+    try {
+      const res = await deleteEducation(id).unwrap();
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+    } catch (error) {
+      console.error("Error deleting education:", error);
+    }
+  };
+
   return (
-    <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
+    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Education
       </h1>
-
+      <div className="w-[100%] h-0.5 bg-gray-400 mb-1"></div>
       <div className=" text-[#6E6E6E] text-[13px] space-y-2">
-        {[...Array(2)].map((experince, index) => (
+        {educations?.map((education, index) => (
           <div
             key={index}
-            className="text-neutral-600 group hover:bg-[#f8f9fa] duration-100 ease-in-out transition-all leading-[17px] relative"
+            className="break-inside-avoid text-neutral-600 group hover:bg-primary/[.04] duration-100 ease-in-out transition-all leading-[17px] relative group/education"
           >
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
-              <h3 className="">Emonics</h3>
-              <span className="w-0.5 h-3.5 bg-neutral-600"></span>
-              <h3>Dhaka Mirpur 12204</h3>
+              <h3 className="">{education?.degree}</h3>
             </div>
             <div className="flex items-center gap-x-2 font-medium text-[14px]">
-              <h3>Frontend Developer </h3>
+              <h3>{education.institution}</h3>
               <span className="w-0.5 h-3.5 bg-neutral-600"></span>
-              <span>01/2024</span>
+              <span>{education.startDate}</span>
               <span>-</span>
-              <span> 05/2024</span>
+              <span> {education.endDate ? education.endDate : "Present"}</span>
             </div>
-            <ul className="list-disc list-inside text-[#6E6E6E]">
-              <li>
-                Educated patients on their conditions and prescribed medications
-              </li>
-              <li>
-                Educated patients on their conditions and prescribed medications
-              </li>
-            </ul>
-            {/* <EducationEditModal /> */}
+            <HtmlRenderer text={education.description} />
+            <div className="hidden group-hover/education:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
+              <EducationEditModal education={education} />
+              {educations.length > 1 && (
+                <DeleteModal
+                  id={education.id}
+                  isLoading={isLoading}
+                  handleDelete={(id) => handleDeleteEducation(id)}
+                />
+              )}
+            </div>
           </div>
         ))}
       </div>
+      <AddEducationModal />
     </div>
   );
 };
