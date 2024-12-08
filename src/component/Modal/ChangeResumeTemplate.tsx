@@ -14,6 +14,7 @@ import { useGetAllTemplatesQuery } from "../../redux/features/template/templateA
 import { useUpdateResumeMutation } from "../../redux/features/resume/resumeApi";
 import { useAppSelector } from "../../redux/hooks";
 import ButtonSpinner from "../shared/ButtonSpinner";
+import { BuildTwoTone, Done } from "@mui/icons-material";
 
 type TChooseResumeTemplateProps = {
   label: string;
@@ -128,11 +129,14 @@ type ResumeTemplateProps = {
 const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
   const navigate = useNavigate();
   const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const templateId = useAppSelector((state) => state.resume.resume?.templateId);
   const [changeResume, { isLoading }] = useUpdateResumeMutation();
 
-  const handleChangeResume = async (templateId: string) => {
+  const handleChangeResume = async (id: string) => {
+    if (templateId === id) return;
+
     try {
-      const payload = { id: resumeId, data: { templateId } };
+      const payload = { id: resumeId, data: { templateId: id } };
       const res = await changeResume(payload).unwrap();
 
       if (res.success) {
@@ -148,7 +152,11 @@ const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
   };
 
   return (
-    <div key={template.id} className="relative group">
+    <div
+      onClick={() => handleChangeResume(template.id)}
+      key={template.id}
+      className="relative cursor-pointer"
+    >
       <div className="bg-white p-2.5 cursor-pointer border border-neutral-200">
         <img
           src={template.image}
@@ -156,17 +164,24 @@ const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
           className="object-center h-[260px]"
         />
       </div>
-      <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-300">
+      <div className="bg-transparent absolute inset-0 group">
         <div className="flex justify-center items-center h-full px-3">
-          <Button
-            onClick={() => handleChangeResume(template.id)}
-            variant={isLoading ? "outlined" : "contained"}
-            size="small"
-            fullWidth
-            sx={{ fontSize: [10, 14] }}
-          >
-            {isLoading ? <ButtonSpinner /> : "Use This Template"}
-          </Button>
+          {templateId === template.id ? (
+            <div className="bg-primary size-12 text-white rounded-full flex justify-center items-center">
+              <Done sx={{ fontSize: "900" }} />
+            </div>
+          ) : (
+            <div className="w-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <Button
+                variant={isLoading ? "outlined" : "contained"}
+                size="small"
+                fullWidth
+                sx={{ fontSize: [10, 14] }}
+              >
+                {isLoading ? <ButtonSpinner /> : "Use This Template"}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

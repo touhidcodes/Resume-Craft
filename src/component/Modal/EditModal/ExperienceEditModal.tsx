@@ -10,6 +10,7 @@ import { Experience } from "../../../types/resumeTypes";
 import ExperienceForm from "../../form/ExperienceForm";
 import { useUpdateExperienceMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TExperienceEditModalProps = {
   experience: Experience;
@@ -109,8 +110,13 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
                 <Button variant="outlined" autoFocus onClick={close}>
                   Cancel
                 </Button>
-                <Button variant="contained" onClick={handleSubmit(onSubmit)}>
-                  Save
+                <Button
+                  variant={isLoading ? "outlined" : "contained"}
+                  color="primary"
+                  disabled={isLoading}
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

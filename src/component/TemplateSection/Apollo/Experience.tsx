@@ -2,9 +2,9 @@ import { useAppSelector } from "../../../redux/hooks";
 import ExperienceEditModal from "../../Modal/EditModal/ExperienceEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 import AddExperienceModal from "../../Modal/AddModal/AddExperienceModal";
-import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import { useDeleteExperienceMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 
 const Experience = () => {
   const experiences = useAppSelector(
