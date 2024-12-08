@@ -18,6 +18,12 @@
       0 4px 8px 0 rgba(45, 45, 45, 0.12), 0 8px 16px 0 rgba(45, 45, 45, 0.08);
   }
 
+  /* Circle Css */
+  .circle-progress {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
   .scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;

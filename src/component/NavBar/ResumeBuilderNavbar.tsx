@@ -5,7 +5,7 @@ import ManageSectionsSidebar from "../layout/ManageSectionsSidebar";
 import ChangeResumeTemplate from "../Modal/ChangeResumeTemplate";
 import { UseReactToPrintFn } from "react-to-print";
 
-type TResumeBuilderNavbarProps = {
+export type TResumeBuilderNavbarProps = {
   reactToPrintFn: UseReactToPrintFn;
 };
 
@@ -26,6 +26,7 @@ const ResumeBuilderNavbar = ({ reactToPrintFn }: TResumeBuilderNavbarProps) => {
       <Button
         color="secondary"
         variant="outlined"
+        sx={{ bgcolor: "#fff" }}
         onClick={() => reactToPrintFn()}
         startIcon={<DownloadOutlinedIcon />}
       >

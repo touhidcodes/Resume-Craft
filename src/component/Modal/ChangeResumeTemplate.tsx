@@ -61,6 +61,7 @@ const ChangeResumeTemplate = ({
         variant={variant}
         color={color}
         startIcon={StartIcon}
+        sx={{ bgcolor: "#ffff" }}
       >
         {label}
       </Button>

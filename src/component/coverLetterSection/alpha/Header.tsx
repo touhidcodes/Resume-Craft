@@ -1,6 +1,6 @@
 import { EmailOutlined, LocationCityOutlined } from "@mui/icons-material";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import HeaderEditModal from "../../Modal/coverLetter/HeaderEditModal";
+import HeaderEditModal from "../../Modal/CoverLetter/HeaderEditModal";
 
 const Header = () => {
   const personalInfo = {
