@@ -1,6 +1,6 @@
 import { Edit } from "@mui/icons-material";
 
-const HeaderCl = () => {
+const Header = () => {
   return (
     <div className="group  mb-5  border border-transparent hover:border-dashed hover:border-primary relative cursor-pointer">
       <h1 className="text-[#6E6E6E] text-[13px] leading-[19px] font-ubuntu mb-1">
@@ -17,4 +17,4 @@ const HeaderCl = () => {
   );
 };
 
-export default HeaderCl;
+export default Header;
