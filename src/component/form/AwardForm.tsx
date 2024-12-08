@@ -79,7 +79,10 @@ const AwardForm = ({
             <p className="font-medium mb-3">
               Write a description about your achievement?
             </p>
-            <TextEditor value={description} setValue={setDescription} />
+            <TextEditor
+              value={description || ""}
+              setValue={(newValue: string) => setDescription(newValue)}
+            />
           </div>
         </div>
         <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">

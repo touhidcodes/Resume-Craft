@@ -1,9 +1,6 @@
 import featureImage1 from "../../assets/images/free.png";
 import featureImage2 from "../../assets/images/data.png";
 import featureImage3 from "../../assets/images/seen.png";
-import teamImage from "../../assets/images/t.jpeg";
-import teamImage2 from "../../assets/images/t2.jpeg";
-import teamImage3 from "../../assets/images/t3.jpeg";
 import AboutUsSlider from "../../component/slider/AboutSlider";
 import { Button } from "@mui/material";
 import { Helmet } from "react-helmet-async";
@@ -63,7 +60,9 @@ const About = () => {
               alt="Feature 3"
               className="w-20 h-20 mx-auto mb-4"
             />
-            <h3 className="text-2xl font-semibold text-black">Expert Guidance</h3>
+            <h3 className="text-2xl font-semibold text-black">
+              Expert Guidance
+            </h3>
             <p className="text-base mt-2 font-normal">
               With your resume ready for top employers, easily share with
               millions of interested employers on Indeed, the world’s #1 job
@@ -139,12 +138,13 @@ const About = () => {
                 <h3 className="text-2xl font-semibold text-black">
                   Touhidur Zaman
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Team Leader & GitHub Manager
+                <p className="text-gray-600 font-medium mb-4">
+                  Team Leader & GitHub Manager
                 </p>
-                <p className="text-gray-600 font-medium">touhidcodes@gmail.com
+                <p className="text-gray-600 font-medium">
+                  touhidcodes@gmail.com
                 </p>
-                <p className="text-gray-600 font-medium mb-4">01939924424
-                </p>
+                <p className="text-gray-600 font-medium mb-4">01939924424</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
@@ -156,11 +156,13 @@ const About = () => {
                   alt="Team Member"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-[#feebe4] mb-6"
                 /> */}
-                <h3 className="text-2xl font-semibold text-black">
-                  MD Rifat
-                </h3>
-                <p className="text-gray-600 font-medium mb-4">Co-Leader & Backend Developer</p>
-                <p className="text-gray-600 font-medium">md.rifat.taluckdar@gmail.com</p>
+                <h3 className="text-2xl font-semibold text-black">MD Rifat</h3>
+                <p className="text-gray-600 font-medium mb-4">
+                  Co-Leader & Backend Developer
+                </p>
+                <p className="text-gray-600 font-medium">
+                  md.rifat.taluckdar@gmail.com
+                </p>
                 <p className="text-gray-600 font-medium mb-4">01755481526</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
@@ -176,18 +178,18 @@ const About = () => {
                 <h3 className="text-2xl font-semibold text-black">
                   Imtiaz Tamim
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Backend Developer
+                <p className="text-gray-600 font-medium mb-4">
+                  Backend Developer
                 </p>
-                <p className="text-gray-600 font-medium">itamim12202@gmail.com
+                <p className="text-gray-600 font-medium">
+                  itamim12202@gmail.com
                 </p>
-                <p className="text-gray-600 font-medium mb-4">01799664358
-                </p>
+                <p className="text-gray-600 font-medium mb-4">01799664358</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
                 </p> */}
               </div>
-
 
               {/* Team Member Card */}
               <div className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-2 transition duration-300">
@@ -205,9 +207,7 @@ const About = () => {
                 <p className="text-gray-600 font-medium">
                   imonshomon@gmail.com
                 </p>
-                <p className="text-gray-600 font-medium mb-4">
-                  01731106500
-                </p>
+                <p className="text-gray-600 font-medium mb-4">01731106500</p>
                 {/* <p className="text-base	font-normal	">
                   Emily's creativity ensures our products are intuitive and
                   visually stunning.
@@ -224,12 +224,13 @@ const About = () => {
                 <h3 className="text-2xl font-semibold text-black">
                   Rakib Ahmed
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Frontend Developer
+                <p className="text-gray-600 font-medium mb-4">
+                  Frontend Developer
                 </p>
-                <p className="text-gray-600 font-medium">sujonahmed45a4@gmail.com
+                <p className="text-gray-600 font-medium">
+                  sujonahmed45a4@gmail.com
                 </p>
-                <p className="text-gray-600 font-medium mb-4">01829218489
-                </p>
+                <p className="text-gray-600 font-medium mb-4">01829218489</p>
                 {/* <p className="text-base	font-normal	">
                   James provides expert career advice and helps our users
                   succeed.
@@ -245,15 +246,18 @@ const About = () => {
                 <h3 className="text-2xl font-semibold text-black">
                   Nur Muhammad
                 </h3>
-                <p className="text-gray-600 font-medium mb-4">Frontend Developer</p>
-                <p className="text-gray-600 font-medium">nurmuhammadd2003@gmail.com</p>
+                <p className="text-gray-600 font-medium mb-4">
+                  Frontend Developer
+                </p>
+                <p className="text-gray-600 font-medium">
+                  nurmuhammadd2003@gmail.com
+                </p>
                 <p className="text-gray-600 font-medium mb-4">01741119114</p>
                 {/* <p className="text-base	font-normal	">
                   With years of experience in leadership, John brings vision and
                   passion to our team.
                 </p> */}
               </div>
-
             </div>
           </div>
         </section>
@@ -273,8 +277,12 @@ const About = () => {
               Start Building Now
             </button> */}
 
-            <Button component={Link}
-              to="/user/resumes" variant="contained" size="large">
+            <Button
+              component={Link}
+              to="/user/resumes"
+              variant="contained"
+              size="large"
+            >
               Start Building Now
             </Button>
           </div>

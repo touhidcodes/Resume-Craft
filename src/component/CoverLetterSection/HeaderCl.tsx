@@ -1,9 +1,3 @@
-import { useDeleteCertificateMutation } from "../../redux/features/resume/resumeApi";
-import { toast } from "sonner";
-import DeleteModal from "../Modal/DeleteModal/DeleteModal";
-import CertificateEditModal from "../Modal/EditModal/CertificateEditModal";
-import { useAppSelector } from "../../redux/hooks";
-import Certificates from "../TemplateSection/Apollo/Certificates";
 import { Edit } from "@mui/icons-material";
 
 const HeaderCl = () => {

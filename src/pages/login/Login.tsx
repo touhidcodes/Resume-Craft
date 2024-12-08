@@ -17,7 +17,7 @@ import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [statics] = useState([
-    "Alawys free",
+    "Always free",
     "Access to professional templates",
     "Job specific tips and examples",
     "Unlimited resume downloads",

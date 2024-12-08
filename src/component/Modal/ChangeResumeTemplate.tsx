@@ -14,7 +14,7 @@ import { useGetAllTemplatesQuery } from "../../redux/features/template/templateA
 import { useUpdateResumeMutation } from "../../redux/features/resume/resumeApi";
 import { useAppSelector } from "../../redux/hooks";
 import ButtonSpinner from "../shared/ButtonSpinner";
-import { BuildTwoTone, Done } from "@mui/icons-material";
+import { Done } from "@mui/icons-material";
 
 type TChooseResumeTemplateProps = {
   label: string;

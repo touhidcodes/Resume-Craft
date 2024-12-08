@@ -8,11 +8,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
-import { useAppSelector } from "../../redux/hooks";
-import { userCurrentToken } from "../../redux/features/auth/authSlice";
 
 type TChooseCoverLetterTemplateProps = {
   label: string;
@@ -38,10 +35,8 @@ const ChooseCoverLetterTemplate = ({
   variant = "contained",
   startIcon: StartIcon,
 }: TChooseCoverLetterTemplateProps) => {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
-  const token = useAppSelector(userCurrentToken);
 
   const handleClickOpen = () => {
     setOpen(true);

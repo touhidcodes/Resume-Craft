@@ -5,21 +5,16 @@ import Login from "../pages/login/Login";
 import Singup from "../pages/singup/Singup";
 import About from "../pages/about/about";
 import DashboardLayout from "../component/layout/DashboardLayout";
-import { routerGenerator } from "../utils/routesGeneroter";
+import { routerGenerator } from "../utils/routesGenerator";
 import { adminPath } from "./AdminRoute";
 import { userPath } from "./UserRoute";
-
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
-
 import NotFound from "../pages/notFound/NotFound";
 import Orion from "../pages/Template/Orion";
-
 import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
-import Pinguin from "../pages/Template/Pinguin";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
 import SunsideCover from "../pages/CoverLetter/SunsideCover";
-
 
 const router = createBrowserRouter([
   {

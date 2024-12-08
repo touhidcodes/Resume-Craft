@@ -3,11 +3,7 @@ import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import MultipleSelect from "../../builder/MultipleSelect";
-import ResumeEditBtn from "../../shared/ResumeEditBtn";
-import {
-  useAddSkillMutation,
-  useUpdateSkillMutation,
-} from "../../../redux/features/resume/resumeApi";
+import { useAddSkillMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 import ResumeAddBtn from "../../shared/ResumeAddBtn";

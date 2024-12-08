@@ -1,10 +1,10 @@
-import { Button, CircularProgress } from "@mui/material";
+import { Button } from "@mui/material";
 import ResumeActionButton from "./ResumeActionButton";
 import { Key } from "react";
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 
 const UserCoverLetters = () => {
-  const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("")
+  const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
 
   return (
     <div>
@@ -14,15 +14,17 @@ const UserCoverLetters = () => {
           View All
         </Button>
       </div>
-      {
-        isLoading ?
-          <div className="flex justify-center items-center h-64">
-            <div className="loader border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
-          </div>
-          :
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
-            {allTemplates?.data?.map((template: { image: string | undefined; }, index: Key | null | undefined) => (
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="loader border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
+          {allTemplates?.data?.map(
+            (
+              template: { image: string | undefined },
+              index: Key | null | undefined
+            ) => (
               <div key={index}>
                 <div className="bg-[#E6EBF1] p-5 mb-3">
                   <img
@@ -39,9 +41,10 @@ const UserCoverLetters = () => {
                   <ResumeActionButton />
                 </div>
               </div>
-            ))}
-          </div>
-      }
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 };
