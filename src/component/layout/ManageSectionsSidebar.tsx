@@ -14,6 +14,7 @@ const ManageSectionsSidebar = () => {
         color="secondary"
         variant="outlined"
         startIcon={<TuneIcon />}
+        sx={{ bgcolor: "#ffff" }}
       >
         Manage Section
       </Button>
