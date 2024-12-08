@@ -5,8 +5,8 @@ import TextEditor from "../shared/TextEditor";
 type TAwardFormProps = {
   register: any;
   errors: any;
-  description: string | undefined;
-  setDescription: Dispatch<React.SetStateAction<string | undefined>>;
+  description: string;
+  setDescription: Dispatch<React.SetStateAction<string>>;
 };
 
 const AwardForm = ({
@@ -79,10 +79,7 @@ const AwardForm = ({
             <p className="font-medium mb-3">
               Write a description about your achievement?
             </p>
-            <TextEditor
-              value={description || ""}
-              setValue={(newValue: string) => setDescription(newValue)}
-            />
+            <TextEditor value={description || ""} setValue={setDescription} />
           </div>
         </div>
         <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">

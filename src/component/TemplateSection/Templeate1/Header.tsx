@@ -1,11 +1,7 @@
-import HeaderEditModal from "../../Modal/HeaderEditModal";
-
 const Header = () => {
   return (
     <div className="font-roboto hover:bg-[#f8f9fa] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
-      <div className="hidden w-[40px] h-[40px] bg-[#FFFF] shadow-sm  group-hover:flex justify-center items-center rounded-[10px] absolute  top-1 right-1 duration-100 ease-in-out transition-all">
-        <HeaderEditModal />
-      </div>
+      <div className="hidden w-[40px] h-[40px] bg-[#FFFF] shadow-sm  group-hover:flex justify-center items-center rounded-[10px] absolute  top-1 right-1 duration-100 ease-in-out transition-all"></div>
 
       <h1 className="text-[20px] leading-[30px] font-semibold ">
         {" "}

@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import router from "./routes/Routes.tsx";
 import { RouterProvider } from "react-router-dom";
 import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
@@ -9,6 +8,7 @@ import "./index.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { PersistGate } from "redux-persist/integration/react";
 import { HelmetProvider } from "react-helmet-async";
+import router from "./routes/routes.tsx";
 
 const theme = createTheme({
   breakpoints: {

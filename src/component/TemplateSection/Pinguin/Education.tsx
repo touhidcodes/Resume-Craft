@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../redux/hooks";
 import AddEducationModal from "../../Modal/AddModal/AddEducationModal";
-import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
+// import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import EducationEditModal from "../../Modal/EditModal/EducationEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
@@ -29,11 +29,17 @@ const Education = () => {
               <span>-</span>
               <span> {education.endDate ? education.endDate : "Present"}</span>
             </div>
-            <HtmlRenderer text={`<p>${education.description}</p>`} />
+            <HtmlRenderer text={`${education.description}`} />
             <div className="hidden group-hover:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <EducationEditModal education={education} />
               <AddEducationModal />
-              <DeleteModal handleDelete={() => {}} />
+              {/* {educations.length > 1 && (
+                <DeleteModal
+                  id={education.id}
+                  isLoading={isLoading}
+                  handleDelete={(id) => handleDeleteEducation(id)}
+                />
+              )} */}
             </div>
           </div>
         ))}

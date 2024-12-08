@@ -1,5 +1,3 @@
-import SkillEditModal from "../../Modal/SkillEditModal";
-
 const Skill = () => {
   return (
     <div className="font-roboto cursor-pointer  group  mb-5  border border-transparent hover:border-dashed hover:border-primary">
@@ -9,7 +7,7 @@ const Skill = () => {
         <p>Javascript , Html , Css</p>
 
         <div className="hidden w-[35px] h-[35px] bg-[#FFFF] shadow-sm  group-hover:flex justify-center items-center rounded-[10px] absolute  top-1 right-1 duration-100 ease-in-out transition-all">
-          <SkillEditModal />
+          {/* <SkillEditModal /> */}
         </div>
       </div>
     </div>

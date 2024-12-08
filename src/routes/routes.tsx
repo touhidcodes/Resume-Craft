@@ -6,15 +6,13 @@ import Singup from "../pages/singup/Singup";
 import About from "../pages/about/about";
 import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGenerator";
-import { adminPath } from "./AdminRoute";
-import { userPath } from "./UserRoute";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 import NotFound from "../pages/notFound/NotFound";
-import Orion from "../pages/Template/Orion";
 import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
-import SunsideCover from "../pages/CoverLetter/SunsideCover";
+import { AdminPath } from "./AdminRoute";
+import { UserPath } from "./UserRoute";
 
 const router = createBrowserRouter([
   {
@@ -41,21 +39,12 @@ const router = createBrowserRouter([
         path: "/cover-letter-builder",
         element: <CoverLetterBuilder />,
       },
-      {
-        path: "/resume",
-        element: <Orion />,
-      },
     ],
   },
   {
     path: "/login",
     element: <Login />,
   },
-  {
-    path: "/resumeb",
-    element: <SunsideCover></SunsideCover>,
-  },
-
   {
     path: "/register",
     element: <Singup />,
@@ -67,7 +56,7 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </AdminPrivet>
     ),
-    children: routerGenerator(adminPath),
+    children: routerGenerator(AdminPath),
   },
 
   {
@@ -77,7 +66,7 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivetRoute>
     ),
-    children: routerGenerator(userPath),
+    children: routerGenerator(UserPath),
   },
   {
     path: "*",

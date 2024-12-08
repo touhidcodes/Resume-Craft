@@ -1,9 +1,9 @@
-import { useAppSelector } from "../../../redux/hooks";
+// import { useAppSelector } from "../../../redux/hooks";
 import AddSkillModal from "../../Modal/AddModal/AddSkillModal";
-import SkillEditModal from "../../Modal/EditModal/SkillEditModal";
+// import SkillEditModal from "../../Modal/EditModal/SkillEditModal";
 
 const Skill = () => {
-  const skills = useAppSelector((state) => state?.resume?.resume?.Skill);
+  // const skills = useAppSelector((state) => state?.resume?.resume?.Skill);
 
   return (
     <div>

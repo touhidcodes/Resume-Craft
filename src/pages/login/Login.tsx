@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import loginStyle from "./loginStyle.css";
 import {
   useGoogleSignInBgMutation,
   useGoogleSignInWithPopupMutation,
