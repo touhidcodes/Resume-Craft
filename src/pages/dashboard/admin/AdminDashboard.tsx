@@ -95,7 +95,7 @@ const AdminDashboard = () => {
                   />
                 </div>
                 <div>
-                  <h3 className="text-base font-medium">{stat.title}</h3>
+                  <h3 className="text-[14px] font-medium">{stat.title}</h3>
                   <p className="text-2xl font-bold my-2">{stat.value}</p>
                 </div>
               </div>
@@ -168,7 +168,7 @@ const AdminDashboard = () => {
 
       {/* Right Section */}
       <div className="w-full lg:w-1/4 bg-white shadow-md rounded-lg p-4 md:p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+        <h3 className="text-[14px] leading-[24px] font-roboto font-semibold text-gray-800 mb-4">
           Popular Resume Templates
         </h3>
         <div className="flex flex-col space-y-4">

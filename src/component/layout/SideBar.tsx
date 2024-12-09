@@ -4,14 +4,16 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Box,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { adminPath } from "../../routes/AdminRoute";
 import { userPath } from "../../routes/UserRoute";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
-import { userCurrentUser } from "../../redux/features/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { userCurrentUser, logout } from "../../redux/features/auth/authSlice";
 
 type Open = {
   open: boolean;
@@ -23,9 +25,16 @@ const SideBar = ({ open }: Open) => {
     USER: "USER",
   };
 
-  let user = useAppSelector(userCurrentUser);
-  // let user = { role: "USER" };
-  let sidebarItem;
+  const user = useAppSelector(userCurrentUser);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  let sidebarItem: any[];
   switch (user.role) {
     case userRole.ADMIN:
       sidebarItem = adminPath;
@@ -34,64 +43,127 @@ const SideBar = ({ open }: Open) => {
       sidebarItem = userPath;
       break;
     default:
+      sidebarItem = [];
       break;
   }
 
   return (
-    <List>
-      {sidebarItem?.map((text, index) => (
-        <ListItem key={index} disablePadding sx={{ display: "block" }}>
-          <Link to={`${text.path}`}>
-            {" "}
-            <ListItemButton
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        justifyContent: "space-between",
+      }}
+    >
+      {/* Main Menu Items */}
+      <List>
+        {sidebarItem?.map((text, index) => (
+          <ListItem key={index} disablePadding sx={{ display: "block" }}>
+            <Link to={`${text.path}`}>
+              <ListItemButton
+                sx={[
+                  {
+                    minHeight: 48,
+                    px: 2.5,
+                  },
+                  open
+                    ? {
+                        justifyContent: "initial",
+                      }
+                    : {
+                        justifyContent: "center",
+                      },
+                ]}
+              >
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: "center",
+                    },
+                    open
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: "auto",
+                        },
+                  ]}
+                >
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText
+                  primary={text.name}
+                  sx={[
+                    open
+                      ? {
+                          opacity: 1,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+
+      {/* Logout Button */}
+      <List>
+        <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            onClick={handleLogout}
+            sx={[
+              {
+                minHeight: 48,
+                px: 2.5,
+              },
+              open
+                ? {
+                    justifyContent: "initial",
+                  }
+                : {
+                    justifyContent: "center",
+                  },
+            ]}
+          >
+            <ListItemIcon
               sx={[
                 {
-                  minHeight: 48,
-                  px: 2.5,
+                  minWidth: 0,
+                  justifyContent: "center",
                 },
                 open
                   ? {
-                    justifyContent: "initial",
-                  }
-                  : {
-                    justifyContent: "center",
-                  },
-              ]}
-            >
-              <ListItemIcon
-                sx={[
-                  {
-                    minWidth: 0,
-                    justifyContent: "center",
-                  },
-                  open
-                    ? {
                       mr: 3,
                     }
-                    : {
+                  : {
                       mr: "auto",
                     },
-                ]}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText
-                primary={text.name}
-                sx={[
-                  open
-                    ? {
+              ]}
+            >
+              <ExitToAppIcon sx={{ color: "red" }} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Logout"
+              sx={[
+                open
+                  ? {
                       opacity: 1,
+                      color: "red",
                     }
-                    : {
+                  : {
                       opacity: 0,
                     },
-                ]}
-              />
-            </ListItemButton>
-          </Link>
+              ]}
+            />
+          </ListItemButton>
         </ListItem>
-      ))}
-    </List>
+      </List>
+    </Box>
   );
 };
 

@@ -18,10 +18,21 @@ const templateApi = baseApi.injectEndpoints({
           body: templateData,
         };
       },
-      invalidatesTags:['Template']
+      invalidatesTags: ["Template"],
+    }),
+
+    deleteTemplate: builder.mutation({
+      query: (id) => ({
+        url: `/template/remove-template/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Template"],
     }),
   }),
 });
 
-export const { useGetAllTemplatesQuery, useCreateTemplatesMutation } =
-  templateApi;
+export const {
+  useGetAllTemplatesQuery,
+  useCreateTemplatesMutation,
+  useDeleteTemplateMutation,
+} = templateApi;
