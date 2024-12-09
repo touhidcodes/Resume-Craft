@@ -38,7 +38,7 @@ const AllResumes = () => {
                     <h3 className="text-sm font-semibold">Full Stack Resume</h3>
                     <p className="text-xs text-muted">Last update 2 days ago</p>
                   </div>
-                  <ResumeActionButton id={template.id} />
+                  <ResumeActionButton template={template} id={template.id} />
                 </div>
               </div>
             )
