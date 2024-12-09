@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import teamImage from "../../../assets/images/t.jpeg";
 import { Helmet } from "react-helmet-async";
 import {
@@ -8,7 +8,7 @@ import {
 import { toast } from "sonner";
 
 const UserProfile = () => {
-  const { data: usersData, isLoading, isError } = useGetUserProfileQuery("");
+  const { data: usersData } = useGetUserProfileQuery("");
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
   const [isEditingPersonalInfo, setIsEditingPersonalInfo] = useState(false);
@@ -48,8 +48,8 @@ const UserProfile = () => {
   const handleSave = async () => {
     try {
       const userData = await updateUser(userInfo).unwrap();
-      console.log(userData)
-      
+      console.log(userData);
+
       toast.success("Profile updated successfully!");
       setIsEditingPersonalInfo(false);
       setIsEditingAddress(false);
@@ -73,14 +73,18 @@ const UserProfile = () => {
             <div className="bg-gray-50 p-4 md:p-6 shadow-md rounded-lg flex flex-wrap items-center justify-between">
               <div className="flex items-center space-x-4">
                 <img
-                  src={teamImage}
+                  src={"https://avatar.iran.liara.run/public"}
                   alt="Profile"
                   className="w-16 h-16 md:w-20 md:h-20 rounded-full"
                 />
                 <div>
                   <h3 className="text-lg font-bold">{userInfo.userName}</h3>
-                  <p className="text-gray-500 text-sm md:text-base">{userInfo.bio}</p>
-                  <p className="text-gray-500 text-sm md:text-base">{userInfo.city}</p>
+                  <p className="text-gray-500 text-sm md:text-base">
+                    {userInfo.bio}
+                  </p>
+                  <p className="text-gray-500 text-sm md:text-base">
+                    {userInfo.city}
+                  </p>
                 </div>
               </div>
               <button
@@ -108,7 +112,10 @@ const UserProfile = () => {
                         type="text"
                         value={userInfo[key as keyof typeof userInfo]}
                         onChange={(e) =>
-                          handleInputChange(key as keyof typeof userInfo, e.target.value)
+                          handleInputChange(
+                            key as keyof typeof userInfo,
+                            e.target.value
+                          )
                         }
                         className="w-full border rounded-lg p-2 text-gray-800"
                       />
@@ -137,7 +144,10 @@ const UserProfile = () => {
                         type="text"
                         value={userInfo[key as keyof typeof userInfo]}
                         onChange={(e) =>
-                          handleInputChange(key as keyof typeof userInfo, e.target.value)
+                          handleInputChange(
+                            key as keyof typeof userInfo,
+                            e.target.value
+                          )
                         }
                         className="w-full border rounded-lg p-2 text-gray-800"
                       />

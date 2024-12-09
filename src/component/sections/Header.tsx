@@ -8,6 +8,7 @@ import imgSeven from "../../assets/header-img/header-img-7.webp";
 import imgEight from "../../assets/header-img/header-img-8.webp";
 import headerImg from "../../assets/header-img/header-img.webp";
 import "../../pages/login/loginStyle.css";
+import ChooseCoverLetterTemplate from "../Modal/ChooseCoverLetterTemplate";
 import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
 const Header = () => {
@@ -22,10 +23,7 @@ const Header = () => {
             </div>
             <h1 className="text-3xl md:text-[48px] leading-[58px] font-bold mt-3 title">
               The professional{" "}
-              <span
-                className=" tittel
-"
-              >
+              <span className="tittel">
                 resume builder
                 <span className="ai-powered-tag"></span>
               </span>
@@ -34,11 +32,19 @@ const Header = () => {
               Only 2% of resumes win. Yours will be one of them. Let’s build you
               a resume that works.
             </h3>
-            <ChooseResumeTemplate
-              variant="contained"
-              size="large"
-              label="Create New Resume"
-            />
+
+            <div className="space-x-6">
+              <ChooseResumeTemplate
+                variant="contained"
+                size="medium"
+                label="Create New Resume"
+              />
+              <ChooseCoverLetterTemplate
+                variant="outlined"
+                size="medium"
+                label="Create Cover Letter"
+              />
+            </div>
 
             <div className="mt-20 hidden lg:flex items-start gap-x-8">
               <div className="space-y-3 border-l pl-4">

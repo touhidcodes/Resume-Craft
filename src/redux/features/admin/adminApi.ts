@@ -8,7 +8,13 @@ const admin = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAllAnalytics: builder.query({
+      query: () => ({
+        url: "/analytics/admin-dashboard-data",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllTemplatesQuery } = admin;
+export const { useGetAllTemplatesQuery, useGetAllAnalyticsQuery } = admin;

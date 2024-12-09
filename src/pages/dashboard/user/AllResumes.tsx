@@ -22,7 +22,9 @@ const AllResumes = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
           {totalTemplates?.map(
-            (template: { image: string | undefined }, index: Key | null | undefined) => (
+            (template: {
+              id: string; image: string | undefined
+            }, index: Key | null | undefined) => (
               <div key={index}>
                 <div className="bg-[#f2f1ffcf] p-5 mb-3">
                   <img
@@ -36,7 +38,7 @@ const AllResumes = () => {
                     <h3 className="text-sm font-semibold">Full Stack Resume</h3>
                     <p className="text-xs text-muted">Last update 2 days ago</p>
                   </div>
-                  <ResumeActionButton />
+                  <ResumeActionButton template={template} id={template.id} />
                 </div>
               </div>
             )

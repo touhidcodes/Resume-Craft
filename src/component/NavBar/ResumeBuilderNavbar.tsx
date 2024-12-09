@@ -5,13 +5,13 @@ import ManageSectionsSidebar from "../layout/ManageSectionsSidebar";
 import ChangeResumeTemplate from "../Modal/ChangeResumeTemplate";
 import { UseReactToPrintFn } from "react-to-print";
 
-type TResumeBuilderNavbarProps = {
+export type TResumeBuilderNavbarProps = {
   reactToPrintFn: UseReactToPrintFn;
 };
 
 const ResumeBuilderNavbar = ({ reactToPrintFn }: TResumeBuilderNavbarProps) => {
   return (
-    <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-y-5">
+    <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-y-5 mb-6">
       <div className="flex items-center justify-between md:gap-x-5">
         <ChangeResumeTemplate
           variant="outlined"
@@ -26,7 +26,8 @@ const ResumeBuilderNavbar = ({ reactToPrintFn }: TResumeBuilderNavbarProps) => {
       <Button
         color="secondary"
         variant="outlined"
-        onClick={reactToPrintFn}
+        sx={{ bgcolor: "#fff" }}
+        onClick={() => reactToPrintFn()}
         startIcon={<DownloadOutlinedIcon />}
       >
         Download Resume

@@ -1,3 +1,13 @@
+export type Template = {
+  name: string;
+  component: React.ComponentType<any>;
+};
+
+export type TemplateRoute = {
+  id: string;
+  component: React.ComponentType<any>;
+};
+
 export type Section = {
   name: string;
   isActive: boolean;
@@ -60,6 +70,19 @@ export type Certificate = {
   issueDate: string;
   expirationDate: string;
   certificateLink: string;
+};
+
+export type SectionCompletion = {
+  Awards: boolean;
+  Certificates: boolean;
+  Education: boolean;
+  Experience: boolean;
+  Header: boolean;
+  Hobby: boolean;
+  Languages: boolean;
+  Projects: boolean;
+  Skills: boolean;
+  Summary: boolean;
 };
 
 export type ResumeInitialState = {

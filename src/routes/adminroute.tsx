@@ -2,7 +2,7 @@ import AddTemplate from "../pages/dashboard/admin/AddTemplate";
 import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
 import AllTemplates from "../pages/dashboard/admin/AllTemplates";
 
-export const adminPath = [
+export const AdminPath = [
   {
     name: "Dashboard",
     path: "dashboard",

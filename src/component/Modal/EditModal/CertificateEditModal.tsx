@@ -2,19 +2,46 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import MultipleSelect from "../../builder/MultipleSelect";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
+import CertificateForm from "../../form/CertificateForm";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { certificateValidationSchema } from "../../../zod/certificateValidationSchema";
+import { Certificate } from "../../../types/resumeTypes";
+import { useUpdateCertificateMutation } from "../../../redux/features/resume/resumeApi";
+import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
-const CertificateEditModal = () => {
+type TCertificateEditProps = {
+  certificate: Certificate;
+};
+
+type TCertificateFormData = {
+  name: string;
+  issuer: string;
+  issueDate: string;
+  expirationDate?: string;
+  certificateLink?: string;
+};
+
+const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [certificates, setCertificates] = useState<string[]>([]);
-
-  const handleRemoveCertificate = (certificate: string) => {
-    const filteredCertificate = certificates.filter(
-      (item) => item !== certificate
-    );
-    setCertificates(filteredCertificate);
-  };
+  const [updateCertificate, { isLoading }] = useUpdateCertificateMutation();
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TCertificateFormData>({
+    resolver: zodResolver(certificateValidationSchema),
+    defaultValues: {
+      name: certificate?.name,
+      issuer: certificate?.issuer,
+      issueDate: certificate.issueDate,
+      expirationDate: certificate?.expirationDate || "",
+      certificateLink: certificate?.certificateLink || "",
+    },
+  });
 
   function open() {
     setIsOpen(true);
@@ -23,6 +50,24 @@ const CertificateEditModal = () => {
   function close() {
     setIsOpen(false);
   }
+
+  // Handle form submission
+  const onSubmit: SubmitHandler<TCertificateFormData> = async (data) => {
+    try {
+      const res = await updateCertificate({
+        id: certificate.id,
+        data,
+      }).unwrap();
+
+      if (res?.success) {
+        toast.success(res.message);
+      }
+
+      close();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -47,56 +92,11 @@ const CertificateEditModal = () => {
                 <h3 className="text-xl font-semibold">Certificates</h3>
                 <Close onClick={close} sx={{ cursor: "pointer" }} />
               </DialogTitle>
-              <div className="flex-1 overflow-y-auto">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-                  <div className="p-5 col-span-7 space-y-5">
-                    <h2>
-                      Show your certificates, licenses, and training in your
-                      field.
-                    </h2>
-                    <MultipleSelect
-                      label="Select Certificate"
-                      value={certificates}
-                      setValue={setCertificates}
-                    />
-                    <div className="mt-5 flex items-center gap-4 flex-wrap">
-                      {certificates.map((certificate) => (
-                        <button className="flex items-center gap-x-3 text-sm border rounded-md py-1.5 px-3 cursor-default">
-                          <span>{certificate}</span>
-                          <Close
-                            fontSize="small"
-                            onClick={() => handleRemoveCertificate(certificate)}
-                            sx={{ cursor: "pointer" }}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
-                    <h2 className="text-lg font-semibold">Tips</h2>
-                    <div className="text-sm mt-5">
-                      <p>
-                        Professional certifications are a great way to stand out
-                        from the crowd in your job search. Some jobs require
-                        specific certifications, and including certifications
-                        can help showcase your skills and abilities with an
-                        objective measure. Extra certifications can also be a
-                        great way to show your interests and proficiencies
-                        outside of work. Press enter to save and add another.
-                        Although online courses don’t always offer
-                        certification, you can still list non-certification
-                        classes on your resume to demonstrate proficiency.
-                        Include name of certification, certifying organization
-                        and date received. List job-critical certifications at
-                        the top of the list, and consider adding them in your
-                        resume summary and work experience as well. For extra or
-                        ‘bonus’ certifications, keep them lower on the list and
-                        limit to your most impressive achievements.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CertificateForm
+                control={control}
+                register={register}
+                errors={errors}
+              />
 
               {/* Dialog footer */}
               <div className="py-4 px-5 space-x-5 flex justify-end border-t">
@@ -104,12 +104,13 @@ const CertificateEditModal = () => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  variant={isLoading ? "outlined" : "contained"}
                   color="primary"
-                  //   onClick={handleClose}
+                  disabled={isLoading}
+                  onClick={handleSubmit(onSubmit)}
                   autoFocus
                 >
-                  Save
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>
