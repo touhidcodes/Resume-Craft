@@ -109,9 +109,9 @@ const ChangeResumeTemplate = ({
 
         {/* Main Content */}
         <div className="max-w-[1170px] w-full mx-auto px-4 pt-6 pb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-3">
-          {data?.data?.map((template: TTemplate) => (
+          {data?.data?.map((template: TTemplate, index: number) => (
             <ResumeTemplate
-              key={template.id}
+              key={template.id + index}
               onClose={handleClose}
               template={template}
             />

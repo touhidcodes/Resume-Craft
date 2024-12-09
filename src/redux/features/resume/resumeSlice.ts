@@ -4,6 +4,7 @@ import resumeApi from "./resumeApi";
 
 type TInitialState = {
   resume: ResumeInitialState | null;
+  // sectionCompletion: {}
 };
 
 const initialState: TInitialState = {
@@ -36,7 +37,8 @@ const resumeSlice = createSlice({
     builder.addMatcher(
       resumeApi.endpoints.getResumeData.matchFulfilled,
       (state, action) => {
-        state.resume = action.payload.data;
+        console.log(action.payload.data);
+        state.resume = action.payload.data.resume;
       }
     );
   },

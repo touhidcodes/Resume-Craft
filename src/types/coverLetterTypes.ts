@@ -7,10 +7,9 @@ export type CoverLetterTemplate = {
   createdAt: string;
   updatedAt: string;
   isDeleted: boolean;
-  CoverLatter: CoverLetter[];
 };
 
-export type CoverLetter = {
+export type CoverLetterInitialState = {
   id: string;
   name: string;
   userId: string;
