@@ -9,8 +9,6 @@ import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDeleteTemplateMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { useCreateResumeMutation } from "../../../redux/features/resume/resumeApi";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -53,12 +51,9 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-const ResumeActionButton = ({ id, template }: { id: string; template: { id: string } }) => {
-  const [deleteTemplate] = useDeleteTemplateMutation();
+const AdminActionButton = ({ id }: { id: string }) => {
+  const [deleteTemplate] = useDeleteTemplateMutation(); // Mutation hook
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [createResume, { isLoading }] = useCreateResumeMutation();
-  const navigate = useNavigate();
-
   const open = Boolean(anchorEl);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -69,32 +64,15 @@ const ResumeActionButton = ({ id, template }: { id: string; template: { id: stri
     setAnchorEl(null);
   };
 
-  const handleDuplicate = async () => {
-    try {
-      const defaultResumeName = `Copy of Resume ${template.id}`; // Generate a default name
-      const response = await createResume({
-        templateId: template.id,
-        name: defaultResumeName,
-      }).unwrap();
-      
-      toast.success("Resume duplicated successfully!");
-      navigate(`/resume-builder/${response.data.templateId}?resume=${response.data.id}`);
-    } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to duplicate the resume.");
-    } finally {
-      handleClose();
-    }
-  };
-
   const handleDelete = async () => {
     try {
-      await deleteTemplate(id).unwrap();
-      toast.success("Template deleted successfully!");
+      const deleteTemplateData = await deleteTemplate(id).unwrap();
+      console.log(deleteTemplateData)
+      toast.success("Template deleted successfully!"); // Optional toast feedback
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to delete template.");
-    } finally {
-      handleClose();
     }
+    handleClose(); // Close the menu
   };
 
   return (
@@ -117,14 +95,14 @@ const ResumeActionButton = ({ id, template }: { id: string; template: { id: stri
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        {/* <MenuItem onClick={handleClose} disableRipple>
           <EditIcon sx={{ color: "blue" }} />
           Edit
         </MenuItem>
-        <MenuItem onClick={handleDuplicate} disableRipple>
+        <MenuItem onClick={handleClose} disableRipple>
           <FileCopyIcon sx={{ color: "#1976d2" }} />
           Duplicate
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={handleDelete} disableRipple>
           <DeleteIcon sx={{ color: "red" }} />
           Delete
@@ -134,4 +112,4 @@ const ResumeActionButton = ({ id, template }: { id: string; template: { id: stri
   );
 };
 
-export default ResumeActionButton;
+export default AdminActionButton;
