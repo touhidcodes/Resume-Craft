@@ -9,6 +9,7 @@ import {
   useSingupMutation,
 } from "../../redux/features/auth/authApi";
 import { Helmet } from "react-helmet-async";
+import logo from "../../assets/Logo.png";
 
 const Singup = () => {
   const [statics] = useState([
@@ -74,11 +75,15 @@ const Singup = () => {
         <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">
             <Link to="/">
-              <img
-                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
-                className="rounded-top mb-2 w-[45px] h-[45px] ml-2"
-                alt=""
-              />
+
+              <div className="flex items-center gap-x-2">
+                <img
+                  src={logo}
+                  className="md:cursor-pointer size-8 bg-cover object-contain"
+                  alt=""
+                />
+                <h1 className="text-2xl font-medium md:hidden lg:block lowercase">Resume Craft</h1>
+              </div>
             </Link>
 
             <h2 className="text-[30px] xl:text-4xl font-bold mb-4 text-[#0B0D58] text-center">
