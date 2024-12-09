@@ -8,7 +8,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
-import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
+import { TTemplate } from "../shared/ResumeTemplate";
+import CoverLetterNameModal from "./CoverLetterNameModal";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
 
 type TChooseCoverLetterTemplateProps = {
@@ -114,7 +115,20 @@ const ChooseCoverLetterTemplate = ({
             <h5>Create New</h5>
           </div> */}
           {data?.data?.map((template: TTemplate) => (
-            <ResumeTemplate key={template.id} template={template} />
+            <div key={template.id} className="relative group">
+              <div className="bg-white p-2.5 mb-3 cursor-pointer border border-neutral-200">
+                <img
+                  src={template.image}
+                  alt="user's resume"
+                  className="object-center h-[260px]"
+                />
+              </div>
+              <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-300">
+                <div className="flex justify-center items-center h-full px-3">
+                  <CoverLetterNameModal template={template} />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </Dialog>

@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/cover-letter-builder",
+        path: "/cover-letter-builder/*",
         element: <CoverLetterBuilder />,
       },
     ],

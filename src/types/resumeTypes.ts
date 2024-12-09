@@ -72,6 +72,19 @@ export type Certificate = {
   certificateLink: string;
 };
 
+export type SectionCompletion = {
+  Awards: boolean;
+  Certificates: boolean;
+  Education: boolean;
+  Experience: boolean;
+  Header: boolean;
+  Hobby: boolean;
+  Languages: boolean;
+  Projects: boolean;
+  Skills: boolean;
+  Summary: boolean;
+};
+
 export type ResumeInitialState = {
   id: string;
   templateId: string;

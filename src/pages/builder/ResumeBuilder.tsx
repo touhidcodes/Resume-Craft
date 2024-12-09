@@ -31,7 +31,7 @@ const ResumeBuilder = () => {
         </Helmet>
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-8 text-center">
-            {data?.data?.name}
+            {data?.data?.resume.name}
           </h1>
           <ResumeBuilderNavbar reactToPrintFn={reactToPrintFn} />
           <div ref={contentRef}>

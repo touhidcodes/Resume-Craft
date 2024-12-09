@@ -1,7 +1,7 @@
 type ProgressbarProps = {
   size: number;
   text: string;
-  percentage: number;
+  percentage: string;
 };
 
 const Progressbar = ({ size, percentage, text }: ProgressbarProps) => {
@@ -13,7 +13,7 @@ const Progressbar = ({ size, percentage, text }: ProgressbarProps) => {
   // Arc length at 100% coverage is the circle circumference
   const dashArray = radius * Math.PI * 2;
   // Scale 100% coverage overlay with the actual percent
-  const dashOffset = dashArray - (dashArray * percentage) / 100;
+  const dashOffset = dashArray - (dashArray * Number(percentage)) / 100;
 
   return (
     <div>
