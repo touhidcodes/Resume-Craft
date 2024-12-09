@@ -22,6 +22,13 @@ const templateApi = baseApi.injectEndpoints({
       invalidatesTags: ["Template"],
     }),
 
+    deleteTemplate: builder.mutation({
+      query: (id) => ({
+        url: `/template/remove-template/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Template"],
+    }),
     // Cover letter
     getAllCoverLetterTemplate: builder.query({
       query: () => ({
@@ -44,7 +51,8 @@ const templateApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllTemplatesQuery,
-  useGetAllCoverLetterTemplateQuery,
   useCreateTemplatesMutation,
+  useDeleteTemplateMutation,
+  useGetAllCoverLetterTemplateQuery,
   useCreateCoverLetterTemplateMutation,
 } = templateApi;

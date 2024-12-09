@@ -7,6 +7,8 @@ import { MouseEvent, useState } from "react";
 import { IconButton } from "@mui/material";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDeleteTemplateMutation } from "../../../redux/features/template/templateApi";
+import { toast } from "sonner";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -49,14 +51,28 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-const ResumeActionButton = () => {
+const ResumeActionButton = ({ id }: { id: string }) => {
+  const [deleteTemplate] = useDeleteTemplateMutation(); // Mutation hook
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const deleteTemplateData = await deleteTemplate(id).unwrap();
+      console.log(deleteTemplateData)
+      toast.success("Template deleted successfully!"); // Optional toast feedback
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to delete template.");
+    }
+    handleClose(); // Close the menu
   };
 
   return (
@@ -87,7 +103,7 @@ const ResumeActionButton = () => {
           <FileCopyIcon sx={{ color: "#1976d2" }} />
           Duplicate
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleDelete} disableRipple>
           <DeleteIcon sx={{ color: "red" }} />
           Delete
         </MenuItem>

@@ -41,7 +41,7 @@ const UserDashboard = () => {
         <div className="custom border flex items-center gap-x-5 p-2 cursor-pointer">
           <ArticleOutlinedIcon sx={{ fontSize: "28px", color: "#0FAC1C" }} />
           <div>
-            <h3 className="text-lg font-medium">Resign Letter</h3>
+            <h3 className="text-lg font-medium">Curriculum Vitae</h3>
             <p className="text-sm text-neutral-500">Better resume builder</p>
           </div>
         </div>

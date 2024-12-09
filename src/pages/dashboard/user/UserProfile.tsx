@@ -73,7 +73,7 @@ const UserProfile = () => {
             <div className="bg-gray-50 p-4 md:p-6 shadow-md rounded-lg flex flex-wrap items-center justify-between">
               <div className="flex items-center space-x-4">
                 <img
-                  src={teamImage}
+                  src={"https://avatar.iran.liara.run/public"}
                   alt="Profile"
                   className="w-16 h-16 md:w-20 md:h-20 rounded-full"
                 />

@@ -19,6 +19,14 @@ const resumeApi = baseApi.injectEndpoints({
       providesTags: ["Resume"],
     }),
 
+    getUserResumes: builder.query({
+      query: () => ({
+        url: `/resume/resumes`,
+        method: "GET",
+      }),
+      providesTags: ["Resume"],
+    }),
+
     addExperience: builder.mutation({
       query: (data) => ({
         url: `/resume/work-experience/create-experience`,
@@ -181,6 +189,7 @@ export const {
   useUpdateEducationMutation,
   useUpdateProfileSummaryMutation,
   useUpdateSkillMutation,
+  useGetUserResumesQuery,
   useUpdateResumeMutation,
   useUpdateCertificateMutation,
   useUpdateAwardMutation,

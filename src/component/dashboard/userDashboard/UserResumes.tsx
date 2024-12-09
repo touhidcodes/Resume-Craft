@@ -3,9 +3,12 @@ import ResumeActionButton from "./ResumeActionButton";
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 import { Key } from "react";
 import { Link } from "react-router-dom";
+import { useGetUserResumesQuery } from "../../../redux/features/resume/resumeApi";
 
 const UserResumes = () => {
+  // const { data: allTemplates, isLoading } = useGetUserResumesQuery("");
   const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
+  console.log(allTemplates)
 
   // Limit the number of templates displayed to 5
   const limitedTemplates = allTemplates?.data?.slice(0, 5);
@@ -14,7 +17,7 @@ const UserResumes = () => {
     <div>
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">Resumes</h2>
-        <Button
+        {allTemplates?.data?.length > 5 && <Button
           component={Link}
           to="/USER/resumes"
           variant="outlined"
@@ -22,7 +25,7 @@ const UserResumes = () => {
           sx={{ fontSize: "12px" }}
         >
           View All
-        </Button>
+        </Button>}
       </div>
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
@@ -31,7 +34,9 @@ const UserResumes = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
           {limitedTemplates?.map(
-            (template: { image: string | undefined }, index: Key | null | undefined) => (
+            (template: {
+              id: string; image: string | undefined
+            }, index: Key | null | undefined) => (
               <div key={index}>
                 <div className="bg-[#f2f1ffcf] p-5 mb-3">
                   <img
@@ -45,7 +50,7 @@ const UserResumes = () => {
                     <h3 className="text-sm font-semibold">Full Stack Resume</h3>
                     <p className="text-xs text-muted">Last update 2 days ago</p>
                   </div>
-                  <ResumeActionButton />
+                  <ResumeActionButton id={template.id} />
                 </div>
               </div>
             )
