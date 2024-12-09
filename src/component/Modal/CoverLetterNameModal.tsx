@@ -38,7 +38,9 @@ const CoverLetterNameModal = ({ template }: { template: TTemplate }) => {
         name: data.name,
       }).unwrap();
       console.log(res);
-      //   navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
+      navigate(
+        `/cover-letter-builder/${res.data.templateId}?cl=${res.data.id}`
+      );
     } catch (error) {
       console.log(error);
     }

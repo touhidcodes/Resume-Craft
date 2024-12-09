@@ -1,14 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ResumeInitialState } from "../../../types/resumeTypes";
+import {
+  ResumeInitialState,
+  SectionCompletion,
+} from "../../../types/resumeTypes";
 import resumeApi from "./resumeApi";
 
 type TInitialState = {
   resume: ResumeInitialState | null;
-  // sectionCompletion: {}
+  sectionCompletion: SectionCompletion | null;
 };
 
 const initialState: TInitialState = {
   resume: null,
+  sectionCompletion: null,
 };
 
 const resumeSlice = createSlice({
@@ -37,7 +41,8 @@ const resumeSlice = createSlice({
     builder.addMatcher(
       resumeApi.endpoints.getResumeData.matchFulfilled,
       (state, action) => {
-        console.log(action.payload.data);
+        state.sectionCompletion =
+          action.payload.data.resumeSectionCompletionStatus;
         state.resume = action.payload.data.resume;
       }
     );

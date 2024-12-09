@@ -4,6 +4,7 @@ import authProvier from "./features/auth/authSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import resumeSlice from "./features/resume/resumeSlice";
+import coverLetterSlice from "./features/coverLetter/coverLetterSlice";
 
 const persistConfig = {
   key: "auth",
@@ -15,6 +16,7 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedReducer,
     resume: resumeSlice,
+    coverLetter: coverLetterSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
