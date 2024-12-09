@@ -12,7 +12,7 @@ const TemplateWrapper = ({ children }: TTemplateWrapperProps) => {
     <div
       id="resumeContainer"
       ref={containerRef}
-      className="h-fit w-full py-[30px] px-[50px] rounded-[9px] border my-[20px] aspect-[210/297]"
+      className="h-fit w-full bg-white py-[30px] px-[50px] rounded-[9px] border aspect-[210/297]"
     >
       <div
         className={`${!width && "invisible"} space-y-3`}

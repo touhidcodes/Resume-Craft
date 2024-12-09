@@ -1,3 +1,13 @@
+export type Template = {
+  name: string;
+  component: React.ComponentType<any>;
+};
+
+export type TemplateRoute = {
+  id: string;
+  component: React.ComponentType<any>;
+};
+
 export type Section = {
   name: string;
   isActive: boolean;

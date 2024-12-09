@@ -2,7 +2,7 @@ import AllResumes from "../pages/dashboard/user/AllResumes";
 import UserDashboard from "../pages/dashboard/user/UserDashboard";
 import UserProfile from "../pages/dashboard/user/UserProfile";
 
-export const userPath = [
+export const UserPath = [
   {
     name: "Dashboard",
     path: "dashboard",

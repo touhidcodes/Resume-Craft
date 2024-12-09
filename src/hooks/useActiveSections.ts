@@ -18,7 +18,6 @@ const useActiveSections = (
 
   const result: Section[] = allSections.reduce(
     (acc, section) => {
-      console.log(section);
       if (resumeSections[section.name] && section.isActive) {
         acc.push(resumeSections[section.name]);
       }

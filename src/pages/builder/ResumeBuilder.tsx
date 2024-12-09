@@ -17,25 +17,29 @@ const ResumeBuilder = () => {
   // Access query parameters by name
   const resumeId = queryParams.get("resume");
 
-  const { isLoading } = useGetResumeDataQuery(resumeId);
+  const { isLoading, data } = useGetResumeDataQuery(resumeId);
 
   if (isLoading) {
     return <ResumeLoading />;
   }
 
   return (
-    <div className="max-w-[1170px] w-full mx-auto min-h-svh py-10 px-5 lg:flex gap-5">
-      <Helmet>
-        <title>Build Resume- Resume Craft</title>
-      </Helmet>
-      <div className="flex-1">
-        <h1 className="text-3xl font-bold mb-10 text-center">My Resume</h1>
-        <ResumeBuilderNavbar reactToPrintFn={reactToPrintFn} />
-        <div ref={contentRef}>
-          <TemplateRoutes />
+    <div className="bg-[#F8F8FA]">
+      <div className="max-w-[1170px] w-full mx-auto min-h-svh pb-14 pt-6 px-5 lg:flex gap-5">
+        <Helmet>
+          <title>Build Resume- Resume Craft</title>
+        </Helmet>
+        <div className="flex-1">
+          <h1 className="text-3xl font-bold mb-8 text-center">
+            {data?.data?.name}
+          </h1>
+          <ResumeBuilderNavbar reactToPrintFn={reactToPrintFn} />
+          <div ref={contentRef}>
+            <TemplateRoutes />
+          </div>
         </div>
+        <ResumeBuilderSidebar reactToPrintFn={reactToPrintFn} />
       </div>
-      <ResumeBuilderSidebar />
     </div>
   );
 };

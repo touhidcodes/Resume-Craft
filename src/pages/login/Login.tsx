@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import loginStyle from "./loginStyle.css";
 import {
   useGoogleSignInBgMutation,
   useGoogleSignInWithPopupMutation,
@@ -17,7 +16,7 @@ import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [statics] = useState([
-    "Alawys free",
+    "Always free",
     "Access to professional templates",
     "Job specific tips and examples",
     "Unlimited resume downloads",

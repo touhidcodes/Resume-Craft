@@ -10,6 +10,7 @@ import { Experience } from "../../../types/resumeTypes";
 import ExperienceForm from "../../form/ExperienceForm";
 import { useUpdateExperienceMutation } from "../../../redux/features/resume/resumeApi";
 import { toast } from "sonner";
+import ButtonSpinner from "../../shared/ButtonSpinner";
 
 type TExperienceEditModalProps = {
   experience: Experience;
@@ -57,15 +58,14 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
   }
 
   const onSubmit: SubmitHandler<ExperienceFormData> = async (data) => {
-    console.log(data);
     let toastId = toast.loading(" loading...", { duration: 1000 });
-    // updateExperience({ experienceId: experience.id, data });
     try {
       const res = await updateExperience({
         experienceId: experience.id,
         data: { ...data, responsibilities },
-      });
-      toast.success("Upadateing Complateing", { id: toastId, duration: 2000 });
+      }).unwrap();
+
+      toast.success(res?.message, { id: toastId, duration: 2000 });
 
       close();
     } catch (error) {
@@ -109,8 +109,13 @@ const ExperienceEditModal = ({ experience }: TExperienceEditModalProps) => {
                 <Button variant="outlined" autoFocus onClick={close}>
                   Cancel
                 </Button>
-                <Button variant="contained" onClick={handleSubmit(onSubmit)}>
-                  Save
+                <Button
+                  variant={isLoading ? "outlined" : "contained"}
+                  color="primary"
+                  disabled={isLoading}
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  {isLoading ? <ButtonSpinner /> : "Save"}
                 </Button>
               </div>
             </DialogPanel>

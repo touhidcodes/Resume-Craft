@@ -9,9 +9,12 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
+import { TTemplate } from "../shared/ResumeTemplate";
 import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
-import { useCreateResumeMutation } from "../../redux/features/resume/resumeApi";
+import { useUpdateResumeMutation } from "../../redux/features/resume/resumeApi";
+import { useAppSelector } from "../../redux/hooks";
+import ButtonSpinner from "../shared/ButtonSpinner";
+import { Done } from "@mui/icons-material";
 
 type TChooseResumeTemplateProps = {
   label: string;
@@ -37,10 +40,8 @@ const ChangeResumeTemplate = ({
   variant = "contained",
   startIcon: StartIcon,
 }: TChooseResumeTemplateProps) => {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllTemplatesQuery(null);
-  const [createResume, createResumeApiRes] = useCreateResumeMutation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,16 +49,6 @@ const ChangeResumeTemplate = ({
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleCreateResume = async (templateId: string) => {
-    try {
-      alert("Hello");
-      //   const res = await createResume(templateId).unwrap();
-
-      //   handleClose();
-      //   navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
-    } catch (error) {}
   };
 
   if (isLoading) return;
@@ -70,6 +61,7 @@ const ChangeResumeTemplate = ({
         variant={variant}
         color={color}
         startIcon={StartIcon}
+        sx={{ bgcolor: "#ffff" }}
       >
         {label}
       </Button>
@@ -117,23 +109,83 @@ const ChangeResumeTemplate = ({
 
         {/* Main Content */}
         <div className="max-w-[1170px] w-full mx-auto px-4 pt-6 pb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-3">
-          {/* <div
-            // onClick={() => handleCreateResume("/resume-builder/custom")}
-            className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200 flex flex-col justify-center items-center text-muted"
-          >
-            <AddIcon sx={{ fontSize: 50 }} />
-            <h5>Create New</h5>
-          </div> */}
           {data?.data?.map((template: TTemplate) => (
             <ResumeTemplate
               key={template.id}
+              onClose={handleClose}
               template={template}
-              handleCreateResume={handleCreateResume}
             />
           ))}
         </div>
       </Dialog>
     </>
+  );
+};
+
+type ResumeTemplateProps = {
+  template: TTemplate;
+  onClose: () => void;
+};
+
+const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
+  const navigate = useNavigate();
+  const resumeId = useAppSelector((state) => state.resume.resume?.id);
+  const templateId = useAppSelector((state) => state.resume.resume?.templateId);
+  const [changeResume, { isLoading }] = useUpdateResumeMutation();
+
+  const handleChangeResume = async (id: string) => {
+    if (templateId === id) return;
+
+    try {
+      const payload = { id: resumeId, data: { templateId: id } };
+      const res = await changeResume(payload).unwrap();
+
+      if (res.success) {
+        navigate(
+          `/resume-builder/${res.data.templateId}?resume=${res.data.id}`
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      onClose();
+    }
+  };
+
+  return (
+    <div
+      onClick={() => handleChangeResume(template.id)}
+      key={template.id}
+      className="relative cursor-pointer"
+    >
+      <div className="bg-white p-2.5 cursor-pointer border border-neutral-200">
+        <img
+          src={template.image}
+          alt="user's resume"
+          className="object-center h-[260px]"
+        />
+      </div>
+      <div className="bg-transparent absolute inset-0 group">
+        <div className="flex justify-center items-center h-full px-3">
+          {templateId === template.id ? (
+            <div className="bg-primary size-12 text-white rounded-full flex justify-center items-center">
+              <Done sx={{ fontSize: "900" }} />
+            </div>
+          ) : (
+            <div className="w-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <Button
+                variant={isLoading ? "outlined" : "contained"}
+                size="small"
+                fullWidth
+                sx={{ fontSize: [10, 14] }}
+              >
+                {isLoading ? <ButtonSpinner /> : "Use This Template"}
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

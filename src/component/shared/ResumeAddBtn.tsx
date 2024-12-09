@@ -11,7 +11,7 @@ const ResumeAddBtn = ({ handleClick, className }: TResumeAddBtnProps) => {
     <button
       onClick={handleClick}
       className={`${clsx(
-        "bg-white flex justify-center items-center size-10",
+        "bg-white hidden group-hover/container:flex justify-center items-center size-10 absolute top-1 right-1 custom-shadow rounded-md",
         className
       )}`}
     >
