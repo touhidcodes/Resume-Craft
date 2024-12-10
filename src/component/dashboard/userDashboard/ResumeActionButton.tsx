@@ -10,7 +10,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useDeleteTemplateMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { useCreateResumeMutation } from "../../../redux/features/resume/resumeApi";
+import {
+  useCreateResumeMutation,
+  useDeleteUserResumeMutation,
+} from "../../../redux/features/resume/resumeApi";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -53,12 +56,18 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-const ResumeActionButton = ({ id, template }: { id: string; template: { id: string } }) => {
-  const [deleteTemplate] = useDeleteTemplateMutation();
+const ResumeActionButton = ({
+  id,
+  template,
+}: {
+  id: string;
+  template: { id: string };
+}) => {
+  const [deleteTemplate] = useDeleteUserResumeMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [createResume, { isLoading }] = useCreateResumeMutation();
   const navigate = useNavigate();
-
+  console.log(template);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -76,9 +85,11 @@ const ResumeActionButton = ({ id, template }: { id: string; template: { id: stri
         templateId: template.id,
         name: defaultResumeName,
       }).unwrap();
-      
+
       toast.success("Resume duplicated successfully!");
-      navigate(`/resume-builder/${response.data.templateId}?resume=${response.data.id}`);
+      navigate(
+        `/resume-builder/${response.data.templateId}?resume=${response.data.id}`
+      );
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to duplicate the resume.");
     } finally {
@@ -89,12 +100,16 @@ const ResumeActionButton = ({ id, template }: { id: string; template: { id: stri
   const handleDelete = async () => {
     try {
       await deleteTemplate(id).unwrap();
-      toast.success("Template deleted successfully!");
+      toast.success("resume deleted successfully!");
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to delete template.");
     } finally {
       handleClose();
     }
+  };
+
+  const handleEdit = () => {
+    navigate(`/resume-builder/${template.templateId}?resume=${id}`);
   };
 
   return (
@@ -117,7 +132,7 @@ const ResumeActionButton = ({ id, template }: { id: string; template: { id: stri
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleEdit} disableRipple>
           <EditIcon sx={{ color: "blue" }} />
           Edit
         </MenuItem>

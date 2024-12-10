@@ -1,19 +1,21 @@
 import { Button } from "@mui/material";
 import ResumeActionButton from "./ResumeActionButton";
-import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
+
 import { Key } from "react";
 import { Link } from "react-router-dom";
+import { useGetUserResumesQuery } from "../../../redux/features/resume/resumeApi";
 
 interface Template {
   id: string;
-  image?: string;
   name?: string;
   lastUpdated?: string;
+  template: { image: string };
 }
 
 const UserResumes = () => {
-  const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
+  const { data: allTemplates, isLoading } = useGetUserResumesQuery("");
   const limitedTemplates = allTemplates?.data?.slice(0, 5);
+  console.log(limitedTemplates);
 
   return (
     <div>
@@ -41,9 +43,13 @@ const UserResumes = () => {
             <div key={index}>
               <div className="bg-[#f2f1ffcf] p-5 mb-3">
                 <img
-                  src={template.image || "/placeholder-image.png"}
+                  src={
+                    template?.template?.image
+                      ? template.template.image
+                      : "/placeholder-image.png"
+                  }
                   alt={`${template.name || "Resume"} image`}
-                  className="object-cover object-center"
+                  className="  h-[240px] w-full"
                 />
               </div>
               <div className="flex justify-between items-start">
@@ -52,7 +58,8 @@ const UserResumes = () => {
                     {template.name || "Untitled Resume"}
                   </h3>
                   <p className="text-xs text-muted">
-                    Last updated: {template.lastUpdated || "Unknown"}
+                    Last updated:{" "}
+                    {template.lastUpdated.split("T")[0] || "Unknown"}
                   </p>
                 </div>
                 <ResumeActionButton template={template} id={template.id} />

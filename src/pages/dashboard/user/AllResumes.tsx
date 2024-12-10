@@ -1,10 +1,11 @@
 import ResumeActionButton from "../../../component/dashboard/userDashboard/ResumeActionButton";
 import { Helmet } from "react-helmet-async";
 import { Key } from "react";
-import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
+
+import { useGetUserResumesQuery } from "../../../redux/features/resume/resumeApi";
 
 const AllResumes = () => {
-  const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
+  const { data: allTemplates, isLoading } = useGetUserResumesQuery("");
 
   const totalTemplates = allTemplates?.data;
 
@@ -22,13 +23,17 @@ const AllResumes = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
           {totalTemplates?.map(
-            (template: {
-              id: string; image: string | undefined
-            }, index: Key | null | undefined) => (
+            (
+              template: {
+                id: string;
+                image: string | undefined;
+              },
+              index: Key | null | undefined
+            ) => (
               <div key={index}>
                 <div className="bg-[#f2f1ffcf] p-5 mb-3">
                   <img
-                    src={template.image}
+                    src={template?.template.image}
                     alt="user's resume"
                     className="object-cover object-center"
                   />

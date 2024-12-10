@@ -174,6 +174,13 @@ const resumeApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Resume"],
     }),
+    deleteUserResume: builder.mutation({
+      query: (id) => ({
+        url: `/resume/delete-resume/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Resume"],
+    }),
   }),
 });
 
@@ -198,6 +205,7 @@ export const {
   useDeleteEducationMutation,
   useDeleteCertificateMutation,
   useDeleteAwardMutation,
+  useDeleteUserResumeMutation,
 } = resumeApi;
 
 export default resumeApi;
