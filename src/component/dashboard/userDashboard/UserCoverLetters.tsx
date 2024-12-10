@@ -53,9 +53,11 @@ const UserCoverLetters = () => {
                   <div>
                     <h3 className="text-sm font-semibold">{template.name}</h3>
                     <p className="text-xs text-muted">
-                      Last updated:{" "}
-                      {template.updatedAt.split("T")[0] || "Unknown"}
-                    </p>                  
+                    Last updated:{" "}
+                    {template.lastUpdated
+                      ? template.lastUpdated.split("T")[0]
+                      : "Unknown"}
+                  </p>               
                     </div>
                   <CoverLetterActionButton template={template} id={template.id} />
                 </div>

@@ -64,7 +64,7 @@ const ResumeActionButton = ({
 }) => {
   const [deleteTemplate] = useDeleteUserResumeMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [createResume, { isLoading }] = useCreateResumeMutation();
+  const [createResume] = useCreateResumeMutation();
   const navigate = useNavigate();
   console.log(template);
   const open = Boolean(anchorEl);

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import BodyEditModal from "../../Modal/CoverLetter/BodyEditModal";
+import BodyEditModal from "../../Modal/coverLetter/BodyEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
 const Body = () => {

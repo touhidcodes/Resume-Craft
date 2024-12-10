@@ -1,6 +1,7 @@
-import Body from "../../component/coverLetterSection/sunside/Body";
-import Footer from "../../component/coverLetterSection/sunside/Footer";
-import Header from "../../component/coverLetterSection/sunside/Header";
+import Body from "../../component/CoverLetterSection/alpha/Body";
+import Footer from "../../component/CoverLetterSection/sunside/Footer";
+import Header from "../../component/CoverLetterSection/sunside/Header";
+
 
 const SunsideCover = () => {
   return (

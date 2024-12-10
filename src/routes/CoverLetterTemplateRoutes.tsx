@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Template, TemplateRoute } from "../types";
-import Alpha from "../pages/coverLetter/Alpha";
 import { useGetAllCoverLetterTemplateQuery } from "../redux/features/template/templateApi";
+import Alpha from "../pages/CoverLetter/Alpha";
 
 type TemplateData = {
   id: string;
