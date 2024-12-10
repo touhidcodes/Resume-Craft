@@ -11,6 +11,10 @@ import { forwardRef, Ref, useState } from "react";
 import { TTemplate } from "../shared/ResumeTemplate";
 import CoverLetterNameModal from "./CoverLetterNameModal";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
+
+import { userCurrentToken } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { userCurrentToken } from "../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -43,8 +47,10 @@ const ChooseCoverLetterTemplate = ({
   const [open, setOpen] = useState(false);
   const token = useAppSelector(userCurrentToken);
   const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
-
+  const token = useAppSelector(userCurrentToken);
+  const navigate = useNavigate();
   const handleClickOpen = () => {
+
     if (!token) {
       navigate("/login");
     } else {
