@@ -13,6 +13,7 @@ import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { Helmet } from "react-helmet-async";
+import logo from "../../assets/Logo.png";
 
 const Login = () => {
   const [statics] = useState([
@@ -114,7 +115,7 @@ const Login = () => {
             <Link to="/">
               {" "}
               <img
-                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                src={logo}
                 className="img-fluid rounded-top mb-2 w-[45px] h-[45px] ml-2"
                 alt=""
               />

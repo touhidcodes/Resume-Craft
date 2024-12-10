@@ -11,7 +11,9 @@ import { forwardRef, Ref, useState } from "react";
 import { TTemplate } from "../shared/ResumeTemplate";
 import CoverLetterNameModal from "./CoverLetterNameModal";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
-
+import { userCurrentToken } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { useNavigate } from "react-router-dom";
 type TChooseCoverLetterTemplateProps = {
   label: string;
   color?: "primary" | "secondary";
@@ -38,12 +40,13 @@ const ChooseCoverLetterTemplate = ({
 }: TChooseCoverLetterTemplateProps) => {
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
-
+  const token = useAppSelector(userCurrentToken);
+  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
-    // if (!token) {
-    //   navigate("/login");
-    // }
+    if (!token) {
+      navigate("/login");
+    }
   };
 
   const handleClose = () => {
