@@ -30,7 +30,7 @@ const ResumeBuilderSidebar = ({
           />
           <h3 className="text-sm font-medium">Section Completion</h3>
         </div>
-        <div className="space-y-2.5 mt-8">
+        <div className="space-y-2.5 mt-5">
           {result?.map((section: Section, index: number) => (
             <div
               key={section.name + index}
