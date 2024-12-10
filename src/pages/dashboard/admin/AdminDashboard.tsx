@@ -4,22 +4,25 @@ import template from "../../../assets/admin/resume-and-cv.png";
 import popular from "../../../assets/admin/cv (1).png";
 import users from "../../../assets/admin/team.png";
 import { Helmet } from "react-helmet-async";
-import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
+import { useGetAllCoverLetterTemplateQuery, useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 import { useGetAllUsersQuery } from "../../../redux/features/user/userApi";
 import { useGetAllAnalyticsQuery } from "../../../redux/features/admin/adminApi";
 
 const AdminDashboard = () => {
   const { data: analytics } = useGetAllAnalyticsQuery("");
-  const { data: allTemplates } = useGetAllTemplatesQuery("");
+  const { data: allResumes } = useGetAllTemplatesQuery("");
+  const { data: allCoverLetters } = useGetAllCoverLetterTemplateQuery("");
   const { data: allUsers } = useGetAllUsersQuery("");
 
-  const totalTemplates = allTemplates?.data?.length;
+  // Handle possible undefined values
+  const totalResumes = allResumes?.data?.length ?? 0;
+  const totalCoverLetters = allCoverLetters?.data?.length ?? 0;
+  const totalTemplates = totalResumes + totalCoverLetters;
   const popularTemplates = analytics?.data?.popularTemplates || [];
-  const totalUsers = allUsers?.data?.length;
+  const totalUsers = allUsers?.data?.length ?? 0;
 
   // Map monthlyResumeCount data for the chart
   const monthlyResumeData = analytics?.data?.monthlyResumeCount || [];
-  // console.log(monthlyResumeData)
   const labels = [
     "Jan",
     "Feb",

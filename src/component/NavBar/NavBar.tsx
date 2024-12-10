@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Close, KeyboardArrowDown } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -9,18 +9,19 @@ import logo from "../../assets/Logo.png";
 import { toast } from "sonner";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const user = useAppSelector(userCurrentUser);
   const dispatch = useAppDispatch();
   let role = user?.role;
-  console.log(role)
-
+  
   const handleLogout = () => {
     toast.success("Logout successful", {
       duration: 2000,
     });
     dispatch(logout());
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const NavBar = () => {
   }, []);
   return (
     <nav
-      className={`z-50 sticky top-0  w-full transition-all duration-300 ${
+      className={`z-50 sticky top-0  w-full py-4 transition-all duration-300 ${
         isScrolled
           ? "border-b border-gray-300 bg-white"
           : "border-none bg-[#F7F9FC]"
@@ -71,7 +72,7 @@ const NavBar = () => {
         <div className="flex items-center gap-x-10">
           <ul className="md:flex hidden  items-center gap-4 lg:gap-5">
             <li className="group relative ">
-              <p className="py-2 px-5 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer">
+              <p className="py-2 px-3 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer">
                 Resume <KeyboardArrowDown />
               </p>
               <div className=" invisible hover:visible group-hover:visible top-12 duration-300 ease-in-out transition-all py-2 absolute  w-[380px] shadow-lg  px-2 opacity-0 group-hover:opacity-100 bg-white rounded-[10px]">
@@ -100,13 +101,21 @@ const NavBar = () => {
               </div>
             </li>
             <li>
-              <Link to="/about" className="py-7 px-3 inline-block">
+              <Link
+                to="/about"
+                className="py-2 px-5 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer"
+              >
                 About us
               </Link>
             </li>
             {user ? (
               <li>
-                <Link to={`/${role}/dashboard`}>Dashboard</Link>
+                <Link
+                  className="py-2 px-5 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer"
+                  to={`/${role}/dashboard`}
+                >
+                  Dashboard
+                </Link>
               </li>
             ) : (
               ""

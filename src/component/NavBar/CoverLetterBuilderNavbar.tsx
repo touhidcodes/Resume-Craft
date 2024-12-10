@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
-import ChangeResumeTemplate from "../Modal/ChangeResumeTemplate";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import ChangeCoverLetterTemplate from "../Modal/ChangeCoverLetterTemplate";
 
 const CoverLetterBuilderNavbar = () => {
   return (
@@ -13,6 +12,8 @@ const CoverLetterBuilderNavbar = () => {
         color="secondary"
         startIcon={<GridViewOutlinedIcon />}
       /> */}
+
+      <ChangeCoverLetterTemplate />
 
       <Button
         color="secondary"

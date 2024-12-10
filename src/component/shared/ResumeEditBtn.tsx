@@ -15,7 +15,7 @@ const ResumeEditBtn = ({ handleClick, className }: TResumeEditBtnProps) => {
         className
       )}`}
     >
-      <div className="size-[32px] hover:bg-neutral-100 rounded flex justify-center items-center text-black">
+      <div className="size-[32px] hover:bg-neutral-100 rounded-= flex justify-center items-center text-black">
         <MdOutlineEdit size={22} />
       </div>
     </button>

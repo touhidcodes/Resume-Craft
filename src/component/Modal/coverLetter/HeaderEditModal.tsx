@@ -7,10 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { headerValidationSchema } from "../../../zod/headerValidationSchema";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
 import { PersonalInfo } from "../../../types/resumeTypes";
-import { useUpdateResumeMutation } from "../../../redux/features/resume/resumeApi";
+
 import { useAppSelector } from "../../../redux/hooks";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
+import { useUpadateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 
 type THeaderProps = {
   personalInfo: PersonalInfo | undefined;
@@ -23,15 +24,12 @@ type FormData = {
   email: string;
   phone: string;
   location: string;
-  website: string;
-  linkedin: string;
-  github: string;
 };
 
 const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const resumeId = useAppSelector((state) => state.resume.resume?.id);
-  const [updatePersonal, { isLoading }] = useUpdateResumeMutation();
+  const id = useAppSelector((state) => state.coverLetter.coverLetter?.id);
+  const [updatePersonal, { isLoading }] = useUpadateCoverLetterMutation();
 
   // Use the correct type for useForm
   const {
@@ -46,9 +44,6 @@ const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
       jobTitle: personalInfo?.jobTitle,
       phone: personalInfo?.phone,
       location: personalInfo?.location,
-      website: personalInfo?.website,
-      linkedin: personalInfo?.linkedin,
-      github: personalInfo?.github,
     },
   });
 
@@ -64,7 +59,7 @@ const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const res = await updatePersonal({
-        id: resumeId,
+        id: id,
         data: { personalInfo: data },
       }).unwrap();
 
@@ -191,62 +186,25 @@ const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
                           {errors?.location?.message as string}
                         </p>
                       </div>
-                      <div className="w-full md:w-1/2">
-                        <p className="mb-3">Website</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="Website link"
-                          fullWidth
-                          variant="outlined"
-                          {...register("website")}
-                        />
-                      </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row gap-5">
-                      <div className="w-full md:w-1/2">
-                        <p className="mb-3">Linkedin</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="Linkedin profile link"
-                          fullWidth
-                          variant="outlined"
-                          {...register("linkedin")}
-                        />
-                      </div>
-                      <div className="w-full md:w-1/2">
-                        <p className="mb-3">Github</p>
-                        <TextField
-                          id="outlined-basic"
-                          label="Github link"
-                          fullWidth
-                          variant="outlined"
-                          {...register("github")}
-                        />
-                      </div>
-                    </div>
+                    <div className="flex flex-col md:flex-row gap-5"></div>
                   </div>
                   <div className="p-5 bg-primary/[0.03] hidden md:block col-span-5">
                     <h2 className="text-lg font-semibold">Tips</h2>
                     <div className="text-sm mt-5 space-y-6">
                       <p>
-                        The difference is in the details. More than 80% of
-                        employers think that a phone number must always be
-                        present on a resume.* Make sure that you add your
-                        contact information so that employers can contact you
-                        for a job interview!
+                        You may want to use the same header you use on your
+                        resume (name, contact information) on your cover letter
+                        for consistency.
                       </p>
                       <p>
-                        Employers usually want to know the city and state you
-                        currently live in, even if you plan to move soon. If
-                        you’re applying for a position that is located far away,
-                        share a little about why you’re applying in your cover
-                        letter to help the employer better understand why you’re
-                        still a great fit for the job.
-                      </p>
-                      <p>
-                        *Indeed survey conducted with Lucid, N=2661 employers
-                        among 10 industries.
+                        Don’t simply summarize or rehash your resume. Rather,
+                        provide some additional detail about what you bring to
+                        the table. For example, you might discuss personal
+                        qualities (soft skills), how your values align with the
+                        company’s, what motivates you (and how that will drive
+                        you to succeed at the company), etc.
                       </p>
                     </div>
                   </div>
