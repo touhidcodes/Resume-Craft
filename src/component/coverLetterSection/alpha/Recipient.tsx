@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import RecipientEditModal from "../../Modal/coverLetter/RecipientEditModal";
+import RecipientEditModal from "../../Modal/CoverLetter/RecipientEditModal";
 
 const Recipient = () => {
   const recipient = useAppSelector(

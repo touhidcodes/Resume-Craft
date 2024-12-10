@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../redux/hooks";
-import FooterEditModal from "../../Modal/coverLetter/FooterEditModal";
+import FooterEditModal from "../../Modal/CoverLetter/FooterEditModal";
 import HtmlRenderer from "../../shared/HtmlRenderer";
 
 const Closing = () => {

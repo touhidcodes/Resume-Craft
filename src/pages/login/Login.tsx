@@ -30,13 +30,14 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState<{
+  const [, setCredentials] = useState<{
     email: string;
     password: string;
   }>({
     email: "",
     password: "",
   });
+
   const [googleSign] = useGoogleSignInWithPopupMutation();
 
   const [google] = useGoogleSignInBgMutation();
@@ -46,18 +47,14 @@ const Login = () => {
       const firebaseRes = await googleSign(null);
       const userCredential = firebaseRes?.data;
 
-      console.log(userCredential);
       const userData = {
         email: userCredential?.email,
         password: "123456", // Provide a default password or let the backend handle it
         userName: userCredential?.displayName,
       };
-      console.log(userData);
+
       const backendRes = await google(userData).unwrap();
-
       const accessToken = backendRes?.data?.accessToken;
-      console.log(backendRes);
-
       const verifiedUser = verifyToken(backendRes?.data?.accessToken);
 
       dispatch(setUser({ user: verifiedUser, token: accessToken }));
@@ -93,12 +90,11 @@ const Login = () => {
     let toastId = toast.loading("Logging in");
     try {
       const res = await login({ ...data, identifier: data.email }).unwrap();
-      // console.log(res);
       const user = verifyToken(res.data.accessToken);
-      // console.log(user);
+
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("login successfully", { id: toastId, duration: 2000 });
-      navigate(location?.state ? location.state.from.pathname : "/");
+      navigate("/");
     } catch (error) {
       console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });

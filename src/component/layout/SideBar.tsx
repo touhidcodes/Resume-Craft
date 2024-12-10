@@ -12,8 +12,8 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { userCurrentUser, logout } from "../../redux/features/auth/authSlice";
-import { AdminPath } from "../../routes/adminroute";
-import { UserPath } from "../../routes/userroute";
+import { AdminPath } from "../../routes/AdminRoute";
+import { UserPath } from "../../routes/UserRoute";
 
 type Open = {
   open: boolean;
