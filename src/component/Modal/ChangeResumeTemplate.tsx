@@ -153,26 +153,18 @@ const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
   };
 
   return (
-    <div
-      onClick={() => handleChangeResume(template.id)}
-      key={template.id}
-      className="relative cursor-pointer"
-    >
-      <div>
-        <div className="bg-[#F4F4FF] p-5 mb-3 cursor-pointer border border-neutral-200">
-          <img
-            src={template.image}
-            alt="user's resume"
-            className="object-center h-[240px]"
-          />
-        </div>
-        <h3 className="font-medium">{template.name}</h3>
-        <p className="text-xs text-neutral-500">
-          ({template.usageCount}) users use this
-        </p>
-      </div>
-      <div className="bg-transparent absolute inset-0 group">
-        <div className="flex justify-center items-center h-full px-3">
+    <div>
+      <div
+        onClick={() => handleChangeResume(template.id)}
+        className="bg-[#F4F4FF] p-5 mb-3 border border-neutral-200 relative cursor-pointer"
+      >
+        <img
+          src={template.image}
+          alt="user's resume"
+          className="object-center h-[240px] w-full"
+        />
+
+        <div className="flex justify-center items-center h-full px-3 bg-transparent absolute inset-0 group">
           {templateId === template.id ? (
             <div className="bg-primary size-12 text-white rounded-full flex justify-center items-center">
               <Done sx={{ fontSize: "900" }} />
@@ -190,6 +182,13 @@ const ResumeTemplate = ({ template, onClose }: ResumeTemplateProps) => {
             </div>
           )}
         </div>
+      </div>
+
+      <div>
+        <h3 className="font-medium">{template.name}</h3>
+        <p className="text-xs text-neutral-500">
+          ({template.usageCount}) users use this
+        </p>
       </div>
     </div>
   );

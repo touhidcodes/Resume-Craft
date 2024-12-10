@@ -15,7 +15,7 @@ const ResumeTemplate = ({ template }: { template: TTemplate }) => {
           <img
             src={template.image}
             alt="user's resume"
-            className="object-center h-[22=40px]"
+            className="object-center h-[240px] w-full"
           />
         </div>
         <h3 className="font-medium">{template.name}</h3>
