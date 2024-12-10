@@ -11,9 +11,8 @@ import { forwardRef, Ref, useState } from "react";
 import { TTemplate } from "../shared/ResumeTemplate";
 import CoverLetterNameModal from "./CoverLetterNameModal";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
-
-import { useAppSelector } from "../../redux/hooks";
 import { userCurrentToken } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 
 type TChooseCoverLetterTemplateProps = {
