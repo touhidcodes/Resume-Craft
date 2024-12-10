@@ -1,6 +1,6 @@
-import { Key } from "react";
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
-import ResumeActionButton from "../../../component/dashboard/userDashboard/ResumeActionButton";
+import AdminActionButton from "../../../component/dashboard/adminDashboard/AdminActionButoon";
+import { Key } from "react";
 
 const AllTemplates = () => {
   const { data: allTemplates, isLoading, } = useGetAllTemplatesQuery("");
@@ -15,10 +15,9 @@ const AllTemplates = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
           {allTemplates?.data?.map(
-            (
-              template,
-              index
-            ) => (
+            (template: {
+              id: string; image: string | undefined
+            }, index: Key | null | undefined) => (
               <div key={index}>
                 <div className="bg-[#f2f1ffcf] p-5 mb-3">
                   <img
@@ -27,11 +26,11 @@ const AllTemplates = () => {
                     className="object-cover object-center"
                   />
                 </div>
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-center">
                   <div>
                     <h3 className="text-sm font-semibold">Full Stack Resume</h3>
                   </div>
-                  <ResumeActionButton id={template.id}/>
+                  <AdminActionButton id={template.id} />
                 </div>
               </div>
             )
