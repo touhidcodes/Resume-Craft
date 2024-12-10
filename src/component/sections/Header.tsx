@@ -13,7 +13,7 @@ import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
 const Header = () => {
   return (
-    <div className="bg-[#F7F9FC] min-h-[calc(100svh_-_80px)] xl:min-h-[calc(100svh-400px)] flex flex-col justify-center items-center ">
+    <div className="bg-[#F7F9FC] min-h-[calc(100svh_-_80px)] flex flex-col justify-center items-center ">
       <div className="max-w-[1170px] mx-auto px-5 xl:px-0 sm:py-10 md:py-0 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-5">
           <div>
@@ -33,7 +33,7 @@ const Header = () => {
               a resume that works.
             </h3>
 
-            <div className="space-x-6">
+            <div className="sm:space-x-6 space-y-5 sm:space-y-0">
               <ChooseResumeTemplate
                 variant="contained"
                 size="medium"

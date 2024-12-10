@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { userCurrentUser, logout } from "../../redux/features/auth/authSlice";
 import { AdminPath } from "../../routes/adminroute";
-import { UserPath } from "../../routes/userroute";
+import { UserPath } from "../../routes/userRoute";
 
 type Open = {
   open: boolean;
