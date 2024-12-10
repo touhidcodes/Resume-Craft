@@ -15,7 +15,7 @@ const NavBar = () => {
   const user = useAppSelector(userCurrentUser);
   const dispatch = useAppDispatch();
   let role = user?.role;
-
+  
   const handleLogout = () => {
     toast.success("Logout successful", {
       duration: 2000,

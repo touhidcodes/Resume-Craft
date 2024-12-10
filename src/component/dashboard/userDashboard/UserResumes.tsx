@@ -49,7 +49,7 @@ const UserResumes = () => {
                       : "/placeholder-image.png"
                   }
                   alt={`${template.name || "Resume"} image`}
-                  className="  h-[240px] w-full"
+                  className="h-[240px] w-full"
                 />
               </div>
               <div className="flex justify-between items-start">
@@ -59,7 +59,9 @@ const UserResumes = () => {
                   </h3>
                   <p className="text-xs text-muted">
                     Last updated:{" "}
-                    {template.lastUpdated.split("T")[0] || "Unknown"}
+                    {template.lastUpdated
+                      ? template.lastUpdated.split("T")[0]
+                      : "Unknown"}
                   </p>
                 </div>
                 <ResumeActionButton template={template} id={template.id} />

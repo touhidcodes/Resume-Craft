@@ -11,8 +11,8 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {
   useCreateResumeMutation,
-  useDeleteUserResumeMutation,
 } from "../../../redux/features/resume/resumeApi";
+import { useDeleteUserCoverLettersMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -55,14 +55,14 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-const ResumeActionButton = ({
+const CoverLetterActionButton = ({
   id,
   template,
 }: {
   id: string;
   template: { id: string };
 }) => {
-  const [deleteTemplate] = useDeleteUserResumeMutation();
+  const [deleteCoverLetter] = useDeleteUserCoverLettersMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [createResume, { isLoading }] = useCreateResumeMutation();
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ const ResumeActionButton = ({
 
   const handleDelete = async () => {
     try {
-      await deleteTemplate(id).unwrap();
+      await deleteCoverLetter(id).unwrap();
       toast.success("resume deleted successfully!");
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to delete template.");
@@ -148,4 +148,4 @@ const ResumeActionButton = ({
   );
 };
 
-export default ResumeActionButton;
+export default CoverLetterActionButton;
