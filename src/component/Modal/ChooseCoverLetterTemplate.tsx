@@ -40,6 +40,7 @@ const ChooseCoverLetterTemplate = ({
   startIcon: StartIcon,
 }: TChooseCoverLetterTemplateProps) => {
   const [open, setOpen] = useState(false);
+
   const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
   const token = useAppSelector(userCurrentToken);
   const navigate = useNavigate();
