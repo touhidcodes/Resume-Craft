@@ -14,6 +14,7 @@ import logo from "../../assets/Logo.png";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { verifyToken } from "../../utils/verifyToken";
+
 const Singup = () => {
   const [statics] = useState([
     "Alawys free",
@@ -29,6 +30,7 @@ const Singup = () => {
   const [singup] = useSingupMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -43,23 +45,20 @@ const Singup = () => {
       const firebaseRes = await googleSign(null);
       const userCredential = firebaseRes?.data;
 
-      console.log(userCredential);
       const userData = {
         email: userCredential?.email,
         password: "123456", // Provide a default password or let the backend handle it
         userName: userCredential?.displayName,
       };
-      console.log(userData);
+
       const backendRes = await google(userData).unwrap();
-
       const accessToken = backendRes?.data?.accessToken;
-      console.log(backendRes);
-
       const verifiedUser = verifyToken(backendRes?.data?.accessToken);
 
       dispatch(setUser({ user: verifiedUser, token: accessToken }));
+      navigate("/");
+
       toast.success("Login successful", { id: toastId, duration: 2000 });
-      navigate(location?.state?.from?.pathname || "/");
     } catch (error) {
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
@@ -74,14 +73,12 @@ const Singup = () => {
         email: data?.email,
         password: data?.password,
       };
-      console.log(userData);
-      const res = await singup(userData).unwrap();
-      console.log(res);
+
+      await singup(userData).unwrap();
 
       toast.success("singup successfully", { id: toastId, duration: 2000 });
       navigate("/login");
     } catch (error) {
-      console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
   };

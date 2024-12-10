@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useUpadateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 import { recipientValidation } from "../../../zod/RecipientValidationSchema";
 import ButtonSpinner from "../../shared/ButtonSpinner";
+import { Recipient } from "../../../types/coverLetterTypes";
 
 type FormData = {
   name: string;
@@ -23,7 +24,7 @@ type FormData = {
   address: string;
 };
 type THeaderProps = {
-  recipient: FormData | undefined;
+  recipient: Recipient | undefined;
 };
 
 const RecipientEditModal = ({ recipient }: THeaderProps) => {

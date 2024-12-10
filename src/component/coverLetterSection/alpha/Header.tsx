@@ -2,7 +2,7 @@ import { EmailOutlined, LocationCityOutlined } from "@mui/icons-material";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 import { useAppSelector } from "../../../redux/hooks";
-import HeaderEditModal from "../../Modal/coverLetter/HeaderEditModal";
+import HeaderEditModal from "../../Modal/CoverLetter/HeaderEditModal";
 
 const Header = () => {
   const personalInfo = useAppSelector(

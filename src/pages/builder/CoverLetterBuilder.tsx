@@ -2,9 +2,13 @@ import { useLocation } from "react-router-dom";
 import CoverLetterBuilderNavbar from "../../component/NavBar/CoverLetterBuilderNavbar";
 import { useGetCoverLetterQuery } from "../../redux/features/coverLetter/coverLetterApi";
 import CoverLetterTemplateRoutes from "../../routes/CoverLetterTemplateRoutes";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const CoverLetterBuilder = () => {
   const location = useLocation();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
   const queryParams = new URLSearchParams(location.search);
   // Access query parameters by name
   const coverLetterId = queryParams.get("cl");
@@ -18,8 +22,10 @@ const CoverLetterBuilder = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">
         {data?.data?.name}
       </h1>
-      <CoverLetterBuilderNavbar />
-      <CoverLetterTemplateRoutes />
+      <CoverLetterBuilderNavbar reactToPrintFn={reactToPrintFn} />
+      <div ref={contentRef}>
+        <CoverLetterTemplateRoutes />
+      </div>
     </div>
   );
 };
