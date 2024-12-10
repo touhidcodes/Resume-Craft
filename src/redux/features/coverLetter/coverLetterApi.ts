@@ -50,7 +50,7 @@ export const {
   useCreateCoverLetterMutation,
   useUpadateCoverLetterMutation,
   useGetUserCoverLettersQuery,
-  useDeleteUserCoverLettersMutation
+  useDeleteUserCoverLettersMutation,
 } = coverLetterApi;
 
 export default coverLetterApi;

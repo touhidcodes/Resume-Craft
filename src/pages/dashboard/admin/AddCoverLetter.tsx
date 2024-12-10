@@ -3,7 +3,7 @@ import { Button, TextField, Box, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useDropzone } from "react-dropzone";
-import { useCreateCoverLetterTemplateMutation, useCreateTemplatesMutation } from "../../../redux/features/template/templateApi";
+import { useCreateCoverLetterTemplateMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
