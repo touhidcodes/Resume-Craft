@@ -25,7 +25,7 @@ const ResumeBuilder = () => {
 
   return (
     <div className="bg-[#F8F8FA]">
-      <div className="max-w-[1170px] w-full mx-auto min-h-svh pb-14 pt-6 px-5 lg:flex gap-5">
+      <div className="max-w-[1170px] w-full mx-auto min-h-svh pb-14 pt-6 px-5 lg:px-0 lg:flex gap-5">
         <Helmet>
           <title>Build Resume- Resume Craft</title>
         </Helmet>
