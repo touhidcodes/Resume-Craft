@@ -9,19 +9,11 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
 import { TTemplate } from "../shared/ResumeTemplate";
-import CoverLetterNameModal from "./CoverLetterNameModal";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
+import ButtonSpinner from "../shared/ButtonSpinner";
 import { useAppSelector } from "../../redux/hooks";
-import { userCurrentToken } from "../../redux/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
-
-type TChooseCoverLetterTemplateProps = {
-  label: string;
-  color?: "primary" | "secondary";
-  size: "small" | "large" | "medium";
-  variant?: "text" | "outlined" | "contained";
-  startIcon?: JSX.Element;
-};
+import { Done } from "@mui/icons-material";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -32,24 +24,15 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ChooseCoverLetterTemplate = ({
-  size,
-  label,
-  color = "primary",
-  variant = "contained",
-  startIcon: StartIcon,
-}: TChooseCoverLetterTemplateProps) => {
-  const navigate = useNavigate();
+const ChangeCoverLetterTemplate = () => {
   const [open, setOpen] = useState(false);
-  const token = useAppSelector(userCurrentToken);
+  const templateId = useAppSelector(
+    (state) => state.coverLetter.coverLetter?.templateId
+  );
   const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
 
   const handleClickOpen = () => {
-    if (!token) {
-      navigate("/login");
-    } else {
-      setOpen(true);
-    }
+    setOpen(true);
   };
 
   const handleClose = () => {
@@ -62,12 +45,11 @@ const ChooseCoverLetterTemplate = ({
     <>
       <Button
         onClick={handleClickOpen}
-        size={size}
-        variant={variant}
-        color={color}
-        startIcon={StartIcon}
+        variant="outlined"
+        color="secondary"
+        startIcon={<GridViewOutlinedIcon />}
       >
-        {label}
+        Change Template
       </Button>
       <Dialog
         fullScreen
@@ -135,9 +117,24 @@ const ChooseCoverLetterTemplate = ({
                   ({template.usageCount}) users use this
                 </p>
               </div>
-              <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-300">
+              <div className="bg-transparent absolute inset-0">
                 <div className="flex justify-center items-center h-full px-3">
-                  <CoverLetterNameModal template={template} />
+                  {templateId === template.id ? (
+                    <div className="bg-primary size-12 text-white rounded-full flex justify-center items-center">
+                      <Done sx={{ fontSize: "900" }} />
+                    </div>
+                  ) : (
+                    <div className="w-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <Button
+                        variant={isLoading ? "outlined" : "contained"}
+                        size="small"
+                        fullWidth
+                        sx={{ fontSize: [10, 14] }}
+                      >
+                        {isLoading ? <ButtonSpinner /> : "Use This Template"}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -148,4 +145,4 @@ const ChooseCoverLetterTemplate = ({
   );
 };
 
-export default ChooseCoverLetterTemplate;
+export default ChangeCoverLetterTemplate;
