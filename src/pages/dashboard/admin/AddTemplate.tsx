@@ -6,6 +6,7 @@ import { useDropzone } from "react-dropzone";
 import { useCreateTemplatesMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddTemplate = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -96,6 +97,9 @@ const AddTemplate = () => {
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow-md rounded-lg">
+      <Helmet>
+        <title>Add Template - Resume Craft</title>
+      </Helmet>
       <h1 className="text-xl font-bold mb-4">Add Template</h1>
       <div className="mb-4">
         <TextField

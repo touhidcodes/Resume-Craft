@@ -1,6 +1,7 @@
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 import AdminActionButton from "../../../component/dashboard/adminDashboard/AdminActionButoon";
 import { Key } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AllTemplates = () => {
   const { data: allTemplates, isLoading, } = useGetAllTemplatesQuery("");
@@ -8,6 +9,9 @@ const AllTemplates = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All Templates - Resume Craft</title>
+      </Helmet>
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
           <div className="loader border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>

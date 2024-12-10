@@ -3,6 +3,7 @@ import ResumeActionButton from "./ResumeActionButton";
 import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 import { Key } from "react";
 import { Link } from "react-router-dom";
+import { useGetUserResumesQuery } from "../../../redux/features/resume/resumeApi";
 
 interface Template {
   id: string;
@@ -12,7 +13,9 @@ interface Template {
 }
 
 const UserResumes = () => {
-  const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
+  const { data: allTemplates, isLoading } = useGetUserResumesQuery("");
+  console.log(allTemplates)
+  // const { data: allTemplates, isLoading } = useGetAllTemplatesQuery("");
   const limitedTemplates = allTemplates?.data?.slice(0, 5);
 
   return (
