@@ -30,7 +30,8 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState<{
+
+  const [, setCredentials] = useState<{
     email: string;
     password: string;
   }>({
