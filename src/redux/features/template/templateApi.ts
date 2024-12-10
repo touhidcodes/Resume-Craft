@@ -35,7 +35,7 @@ const templateApi = baseApi.injectEndpoints({
         url: "/cover-letter-template/templates",
         method: "GET",
       }),
-      providesTags: ["CL Template"],
+      providesTags: ["CLTemplate"],
     }),
 
     createCoverLetterTemplate: builder.mutation({
@@ -44,7 +44,7 @@ const templateApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["CL Template"],
+      invalidatesTags: ["CLTemplate"],
     }),
   }),
 });

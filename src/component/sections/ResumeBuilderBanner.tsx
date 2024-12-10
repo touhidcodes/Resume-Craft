@@ -2,7 +2,8 @@ import dublin from "../../assets/resume-builder-banner/dublin-resume-templates.j
 import amsterdam from "../../assets/resume-builder-banner/amsterdam-resume-templates.jpg";
 import stockholm from "../../assets/resume-builder-banner/stockholm-resume-templates.jpg";
 import Layout from "../shared/Layout";
-import { Button } from "@mui/material";
+import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
+import ChooseCoverLetterTemplate from "../Modal/ChooseCoverLetterTemplate";
 
 const ResumeBuilderBanner = () => {
   return (
@@ -35,9 +36,17 @@ const ResumeBuilderBanner = () => {
               block or formatting difficulties in Word. Rapidly make a perfect
               resume employers love.
             </p>
-            <div className="mt-7 flex flex-col sm:flex-row gap-5">
-              <Button variant="contained">Create My Resume</Button>
-              <Button variant="outlined">Create My Resume</Button>
+            <div className="space-y-5 sm:space-y-0 sm:space-x-6 mt-6">
+              <ChooseResumeTemplate
+                variant="contained"
+                size="medium"
+                label="Create New Resume"
+              />
+              <ChooseCoverLetterTemplate
+                variant="outlined"
+                size="medium"
+                label="Create Cover Letter"
+              />
             </div>
           </div>
         </div>

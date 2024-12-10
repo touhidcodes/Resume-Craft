@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import teamImage from "../../../assets/images/t.jpeg";
 import { Helmet } from "react-helmet-async";
 import {
   useGetUserProfileQuery,

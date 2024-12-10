@@ -11,6 +11,9 @@ import { forwardRef, Ref, useState } from "react";
 import { TTemplate } from "../shared/ResumeTemplate";
 import CoverLetterNameModal from "./CoverLetterNameModal";
 import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
+import { userCurrentToken } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { useNavigate } from "react-router-dom";
 
 type TChooseCoverLetterTemplateProps = {
   label: string;
@@ -37,13 +40,16 @@ const ChooseCoverLetterTemplate = ({
   startIcon: StartIcon,
 }: TChooseCoverLetterTemplateProps) => {
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
 
+  const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
+  const token = useAppSelector(userCurrentToken);
+  const navigate = useNavigate();
   const handleClickOpen = () => {
-    setOpen(true);
-    // if (!token) {
-    //   navigate("/login");
-    // }
+    if (!token) {
+      navigate("/login");
+    } else {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -116,12 +122,18 @@ const ChooseCoverLetterTemplate = ({
           </div> */}
           {data?.data?.map((template: TTemplate) => (
             <div key={template.id} className="relative group">
-              <div className="bg-white p-2.5 mb-3 cursor-pointer border border-neutral-200">
-                <img
-                  src={template.image}
-                  alt="user's resume"
-                  className="object-center h-[260px]"
-                />
+              <div>
+                <div className="bg-[#F4F4FF] p-5 mb-3 cursor-pointer border border-neutral-200">
+                  <img
+                    src={template.image}
+                    alt="user's resume"
+                    className="object-center h-[240px] w-full"
+                  />
+                </div>
+                <h3 className="font-medium">{template.name}</h3>
+                <p className="text-xs text-neutral-500">
+                  ({template.usageCount}) users use this
+                </p>
               </div>
               <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-300">
                 <div className="flex justify-center items-center h-full px-3">

@@ -5,6 +5,7 @@ import UserResumes from "../../../component/dashboard/userDashboard/UserResumes"
 import { Helmet } from "react-helmet-async";
 import { useGetUserProfileQuery } from "../../../redux/features/user/userApi";
 import { CircularProgress } from "@mui/material";
+import UserCoverLetters from "../../../component/dashboard/userDashboard/UserCoverLetters";
 
 const UserDashboard = () => {
   const { data: usersData, isLoading } = useGetUserProfileQuery("");
@@ -48,6 +49,7 @@ const UserDashboard = () => {
       </div>
 
       <UserResumes />
+      <UserCoverLetters></UserCoverLetters>
     </div>
   );
 };

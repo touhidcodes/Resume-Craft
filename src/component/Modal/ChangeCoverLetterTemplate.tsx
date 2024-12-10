@@ -8,19 +8,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, Ref, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
-import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
+import { TTemplate } from "../shared/ResumeTemplate";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
+import ButtonSpinner from "../shared/ButtonSpinner";
 import { useAppSelector } from "../../redux/hooks";
-import { userCurrentToken } from "../../redux/features/auth/authSlice";
-
-type TChooseResumeTemplateProps = {
-  label: string;
-  color?: "primary" | "secondary";
-  size: "small" | "large" | "medium";
-  variant?: "text" | "outlined" | "contained";
-  startIcon?: JSX.Element;
-};
+import { Done } from "@mui/icons-material";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -31,22 +24,15 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ChooseResumeTemplate = ({
-  size,
-  label,
-  color = "primary",
-  variant = "contained",
-  startIcon: StartIcon,
-}: TChooseResumeTemplateProps) => {
-  const navigate = useNavigate();
+const ChangeCoverLetterTemplate = () => {
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useGetAllTemplatesQuery(null);
-  const token = useAppSelector(userCurrentToken);
+  const templateId = useAppSelector(
+    (state) => state.coverLetter.coverLetter?.templateId
+  );
+  const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
+
   const handleClickOpen = () => {
     setOpen(true);
-    if (!token) {
-      navigate("/login");
-    }
   };
 
   const handleClose = () => {
@@ -55,18 +41,15 @@ const ChooseResumeTemplate = ({
 
   if (isLoading) return;
 
-  console.log(data);
-
   return (
     <>
       <Button
         onClick={handleClickOpen}
-        size={size}
-        variant={variant}
-        color={color}
-        startIcon={StartIcon}
+        variant="outlined"
+        color="secondary"
+        startIcon={<GridViewOutlinedIcon />}
       >
-        {label}
+        Change Template
       </Button>
       <Dialog
         fullScreen
@@ -97,7 +80,7 @@ const ChooseResumeTemplate = ({
               variant="h6"
               component="div"
             >
-              Choose Resume Template
+              Choose Cover Letter Template
             </Typography>
             <IconButton
               edge="start"
@@ -120,7 +103,44 @@ const ChooseResumeTemplate = ({
             <h5>Create New</h5>
           </div> */}
           {data?.data?.map((template: TTemplate) => (
-            <ResumeTemplate key={template.id} template={template} />
+            <div>
+              <div
+                // onClick={() => handleChangeResume(template.id)}
+                className="bg-[#F4F4FF] p-5 mb-3 border border-neutral-200 relative cursor-pointer"
+              >
+                <img
+                  src={template.image}
+                  alt="user's resume"
+                  className="object-center h-[240px] w-full"
+                />
+
+                <div className="flex justify-center items-center h-full px-3 bg-transparent absolute inset-0 group">
+                  {templateId === template.id ? (
+                    <div className="bg-primary size-12 text-white rounded-full flex justify-center items-center">
+                      <Done sx={{ fontSize: "900" }} />
+                    </div>
+                  ) : (
+                    <div className="w-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <Button
+                        variant={isLoading ? "outlined" : "contained"}
+                        size="small"
+                        fullWidth
+                        sx={{ fontSize: [10, 14] }}
+                      >
+                        {isLoading ? <ButtonSpinner /> : "Use This Template"}
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-medium">{template.name}</h3>
+                <p className="text-xs text-neutral-500">
+                  ({template.usageCount}) users use this
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </Dialog>
@@ -128,4 +148,4 @@ const ChooseResumeTemplate = ({
   );
 };
 
-export default ChooseResumeTemplate;
+export default ChangeCoverLetterTemplate;

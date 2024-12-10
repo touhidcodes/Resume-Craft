@@ -5,10 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
+  useGoogleSignInBgMutation,
   useGoogleSignInWithPopupMutation,
   useSingupMutation,
 } from "../../redux/features/auth/authApi";
 import { Helmet } from "react-helmet-async";
+import logo from "../../assets/Logo.png";
+import { setUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { verifyToken } from "../../utils/verifyToken";
 
 const Singup = () => {
   const [statics] = useState([
@@ -23,7 +28,9 @@ const Singup = () => {
   const [visible, setVisible] = useState(false);
   const [googleSign] = useGoogleSignInWithPopupMutation();
   const [singup] = useSingupMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -31,17 +38,30 @@ const Singup = () => {
     formState: { errors },
   } = useForm();
 
+  const [google] = useGoogleSignInBgMutation();
   const handleGoogleSignIn = async () => {
-    const res = await googleSign(null);
-    console.log(res);
+    let toastId = toast.loading("Logging in");
+    try {
+      const firebaseRes = await googleSign(null);
+      const userCredential = firebaseRes?.data;
 
-    // googleSignIn().then((result: any) => {
-    //   const userInfo = {
-    //     email: result.user?.email,
-    //     name: result.user?.displayName,
-    //   };
-    //   console.log(userInfo);
-    // });
+      const userData = {
+        email: userCredential?.email,
+        password: "123456", // Provide a default password or let the backend handle it
+        userName: userCredential?.displayName,
+      };
+
+      const backendRes = await google(userData).unwrap();
+      const accessToken = backendRes?.data?.accessToken;
+      const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+
+      dispatch(setUser({ user: verifiedUser, token: accessToken }));
+      navigate("/");
+
+      toast.success("Login successful", { id: toastId, duration: 2000 });
+    } catch (error) {
+      toast.error("Something wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   const onSubmit = async (data: FieldValues) => {
@@ -49,24 +69,22 @@ const Singup = () => {
 
     try {
       const userData = {
-        userName: "cheaksss",
+        userName: data?.email,
         email: data?.email,
         password: data?.password,
       };
-      console.log(userData);
-      const res = await singup(userData).unwrap();
-      console.log(res);
+
+      await singup(userData).unwrap();
 
       toast.success("singup successfully", { id: toastId, duration: 2000 });
       navigate("/login");
     } catch (error) {
-      console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
   };
 
   return (
-    <section className="py-[60px]">
+    <section className="py-[30px]">
       <Helmet>
         <title>Sign Up - Resume Craft</title>
       </Helmet>
@@ -75,7 +93,7 @@ const Singup = () => {
           <div className="w-full md:w-1/2">
             <Link to="/">
               <img
-                src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
+                src={logo}
                 className="rounded-top mb-2 w-[45px] h-[45px] ml-2"
                 alt=""
               />
@@ -134,6 +152,30 @@ const Singup = () => {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex flex-col max-w-[500px] mb-8 mx-auto relative">
+                <label
+                  className="text-[16px] font-normal text-[#6644D3] mb-2"
+                  htmlFor="email"
+                >
+                  {" "}
+                  User Name
+                </label>
+                <input
+                  className="w-full py-[10px] px-[20px]  rounded-[20px] border-2 border-[#6644D3] focus:border-[#ae95ff]   focus:outline-none "
+                  placeholder="Enter Your userName"
+                  type="text"
+                  id="email"
+                  {...register("userName", { required: true })}
+                />
+
+                <label className="absolute bottom-[-25px]">
+                  {errors.userName && (
+                    <span className="text-red-500 text-sm">
+                      userName is required
+                    </span>
+                  )}
+                </label>
+              </div>
               <div className="flex flex-col max-w-[500px] mb-8 mx-auto relative">
                 <label
                   className="text-[16px] font-normal text-[#6644D3] mb-2"

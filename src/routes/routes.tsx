@@ -11,8 +11,8 @@ import NotFound from "../pages/notFound/NotFound";
 import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
-import { AdminPath } from "./AdminRoute";
-import { UserPath } from "./UserRoute";
+import { AdminPath } from "./adminroute";
+import { UserPath } from "./userroute";
 
 const router = createBrowserRouter([
   {
@@ -75,4 +75,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-/// solve rakib bhai error

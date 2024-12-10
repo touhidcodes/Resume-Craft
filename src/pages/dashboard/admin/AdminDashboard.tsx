@@ -4,18 +4,22 @@ import template from "../../../assets/admin/resume-and-cv.png";
 import popular from "../../../assets/admin/cv (1).png";
 import users from "../../../assets/admin/team.png";
 import { Helmet } from "react-helmet-async";
-import { useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
+import { useGetAllCoverLetterTemplateQuery, useGetAllTemplatesQuery } from "../../../redux/features/template/templateApi";
 import { useGetAllUsersQuery } from "../../../redux/features/user/userApi";
 import { useGetAllAnalyticsQuery } from "../../../redux/features/admin/adminApi";
 
 const AdminDashboard = () => {
   const { data: analytics } = useGetAllAnalyticsQuery("");
-  const { data: allTemplates } = useGetAllTemplatesQuery("");
+  const { data: allResumes } = useGetAllTemplatesQuery("");
+  const { data: allCoverLetters } = useGetAllCoverLetterTemplateQuery("");
   const { data: allUsers } = useGetAllUsersQuery("");
 
-  const totalTemplates = allTemplates?.data?.length;
+  // Handle possible undefined values
+  const totalResumes = allResumes?.data?.length ?? 0;
+  const totalCoverLetters = allCoverLetters?.data?.length ?? 0;
+  const totalTemplates = totalResumes + totalCoverLetters;
   const popularTemplates = analytics?.data?.popularTemplates || [];
-  const totalUsers = allUsers?.data?.length;
+  const totalUsers = allUsers?.data?.length ?? 0;
 
   // Map monthlyResumeCount data for the chart
   const monthlyResumeData = analytics?.data?.monthlyResumeCount || [];
@@ -34,14 +38,25 @@ const AdminDashboard = () => {
     "Dec",
   ];
 
-  // Generate data for the chart
+  interface MonthlyData {
+    month: string; // Format: "YYYY-MM"
+    count: number;
+  }
+
   const resumeCounts = Array(12).fill(0); // Initialize counts for 12 months
-  monthlyResumeData.forEach(({ month, count }) => {
-    const [year, monthIndex] = month.split("-").map(Number);
-    if (!isNaN(monthIndex) && monthIndex >= 1 && monthIndex <= 12) {
-      resumeCounts[monthIndex - 1] = count; // Populate count at the correct month index
-    }
-  });
+
+  const populateResumeCounts = (data: MonthlyData[]) => {
+    data.forEach(({ month, count }) => {
+      const [, monthIndex] = month?.split("-").map(Number);
+
+      // Validate the extracted values
+      if (!isNaN(monthIndex) && monthIndex >= 1 && monthIndex <= 12) {
+        resumeCounts[monthIndex - 1] = count; // Assign count to the correct month index
+      }
+    });
+  };
+
+  populateResumeCounts(monthlyResumeData);
 
   const revenueChartData = {
     labels,
@@ -143,7 +158,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {analytics?.data?.lastFiveUsers?.map((user:any, index:any) => (
+                {analytics?.data?.lastFiveUsers?.map((user: any, index: any) => (
                   <tr
                     key={index}
                     className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
@@ -172,7 +187,7 @@ const AdminDashboard = () => {
           Popular Resume Templates
         </h3>
         <div className="flex flex-col space-y-4">
-          {popularTemplates.map((template:any) => (
+          {popularTemplates.map((template: any) => (
             <div key={template.id} className="flex flex-col items-center">
               <img
                 src={template.image}
