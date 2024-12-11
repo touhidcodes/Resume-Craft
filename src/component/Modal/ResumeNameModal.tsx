@@ -23,7 +23,7 @@ const ResumeNameModal = ({ template }: { template: TTemplate }) => {
   const [createResume, { isLoading }] = useCreateResumeMutation();
 
   function open() {
-    console.log("hello");
+    // console.log("hello");
     setIsOpen(true);
   }
 
@@ -39,7 +39,7 @@ const ResumeNameModal = ({ template }: { template: TTemplate }) => {
       }).unwrap();
       navigate(`/resume-builder/${res.data.templateId}?resume=${res.data.id}`);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

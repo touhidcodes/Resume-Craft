@@ -10,9 +10,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {
-  useCreateResumeMutation,
-} from "../../../redux/features/resume/resumeApi";
-import { useDeleteUserCoverLettersMutation } from "../../../redux/features/coverLetter/coverLetterApi";
+  useCreateCoverLetterDuplicateMutation,
+  useDeleteUserCoverLettersMutation,
+} from "../../../redux/features/coverLetter/coverLetterApi";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -57,16 +57,15 @@ const StyledMenu = styled((props: MenuProps) => (
 
 const CoverLetterActionButton = ({
   id,
-  template,
+  coverLetterId,
 }: {
   id: string;
-  template: { id: string };
+  coverLetterId: string;
 }) => {
   const [deleteCoverLetter] = useDeleteUserCoverLettersMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [createResume] = useCreateResumeMutation();
+  const [CoverLetterDuplicate] = useCreateCoverLetterDuplicateMutation();
   const navigate = useNavigate();
-  console.log(template);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -79,18 +78,16 @@ const CoverLetterActionButton = ({
 
   const handleDuplicate = async () => {
     try {
-      const defaultResumeName = `Copy of Resume ${template.id}`; // Generate a default name
-      const response = await createResume({
-        templateId: template.id,
-        name: defaultResumeName,
-      }).unwrap();
+      const response = await CoverLetterDuplicate(coverLetterId).unwrap();
 
-      toast.success("Resume duplicated successfully!");
+      toast.success("Cover Letter duplicated successfully!");
       navigate(
-        `/resume-builder/${response.data.templateId}?resume=${response.data.id}`
+        `/cover-letter-builder/${response.data.templateId}?cl=${response.data.id}`
       );
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to duplicate the resume.");
+      toast.error(
+        error?.data?.message || "Failed to duplicate the Cover Letter."
+      );
     } finally {
       handleClose();
     }
@@ -98,17 +95,17 @@ const CoverLetterActionButton = ({
 
   const handleDelete = async () => {
     try {
-      await deleteCoverLetter(id).unwrap();
-      toast.success("resume deleted successfully!");
+      await deleteCoverLetter(coverLetterId).unwrap();
+      toast.success("Cover Letter deleted successfully!");
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to delete template.");
+      toast.error(error?.data?.message || "Failed to delete Cover Letter.");
     } finally {
       handleClose();
     }
   };
 
   const handleEdit = () => {
-    navigate(`/resume-builder/${template.id}?resume=${id}`);
+    navigate(`/cover-letter-builder/${id}?cl=${coverLetterId}`);
   };
 
   return (

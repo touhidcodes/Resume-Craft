@@ -96,7 +96,7 @@ const Login = () => {
       toast.success("login successfully", { id: toastId, duration: 2000 });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
   };

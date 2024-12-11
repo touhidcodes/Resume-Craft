@@ -11,7 +11,7 @@ import { PersonalInfo } from "../../../types/resumeTypes";
 import { useAppSelector } from "../../../redux/hooks";
 import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
-import { useUpadateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
+import { useUpdateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 
 type THeaderProps = {
   personalInfo: PersonalInfo | undefined;
@@ -29,7 +29,7 @@ type FormData = {
 const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const id = useAppSelector((state) => state.coverLetter.coverLetter?.id);
-  const [updatePersonal, { isLoading }] = useUpadateCoverLetterMutation();
+  const [updatePersonal, { isLoading }] = useUpdateCoverLetterMutation();
 
   // Use the correct type for useForm
   const {
@@ -69,7 +69,7 @@ const HeaderEditModal = ({ personalInfo }: THeaderProps) => {
 
       close();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

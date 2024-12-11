@@ -63,7 +63,7 @@ const AwardEditModal = ({ award }: TAwardEditProps) => {
 
       close();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
