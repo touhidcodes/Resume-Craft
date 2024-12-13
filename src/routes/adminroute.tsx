@@ -1,3 +1,4 @@
+import AddCoverLetter from "../pages/dashboard/admin/AddCoverLetter";
 import AddTemplate from "../pages/dashboard/admin/AddTemplate";
 import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
 import AllTemplates from "../pages/dashboard/admin/AllTemplates";
@@ -14,8 +15,13 @@ export const AdminPath = [
     element: <AllTemplates />,
   },
   {
-    name: "Add Template",
+    name: "Add Resume",
     path: "addTemplate",
     element: <AddTemplate />,
+  },
+  {
+    name: "Add Cover Letter",
+    path: "addCoverLetter",
+    element: <AddCoverLetter />,
   },
 ];

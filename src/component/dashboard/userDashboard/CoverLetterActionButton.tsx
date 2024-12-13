@@ -1,12 +1,18 @@
 import { styled, alpha } from "@mui/material/styles";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import EditIcon from "@mui/icons-material/Edit";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 import { MouseEvent, useState } from "react";
 import { IconButton } from "@mui/material";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useDeleteTemplateMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import {
+  useCreateResumeMutation,
+} from "../../../redux/features/resume/resumeApi";
+import { useDeleteUserCoverLettersMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -49,9 +55,18 @@ const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-const AdminActionButton = ({ id }: { id: string }) => {
-  const [deleteTemplate] = useDeleteTemplateMutation(); // Mutation hook
+const CoverLetterActionButton = ({
+  id,
+  template,
+}: {
+  id: string;
+  template: { id: string };
+}) => {
+  const [deleteCoverLetter] = useDeleteUserCoverLettersMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [createResume] = useCreateResumeMutation();
+  const navigate = useNavigate();
+  console.log(template);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -62,15 +77,38 @@ const AdminActionButton = ({ id }: { id: string }) => {
     setAnchorEl(null);
   };
 
+  const handleDuplicate = async () => {
+    try {
+      const defaultResumeName = `Copy of Resume ${template.id}`; // Generate a default name
+      const response = await createResume({
+        templateId: template.id,
+        name: defaultResumeName,
+      }).unwrap();
+
+      toast.success("Resume duplicated successfully!");
+      navigate(
+        `/resume-builder/${response.data.templateId}?resume=${response.data.id}`
+      );
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to duplicate the resume.");
+    } finally {
+      handleClose();
+    }
+  };
+
   const handleDelete = async () => {
     try {
-      const deleteTemplateData = await deleteTemplate(id).unwrap();
-      console.log(deleteTemplateData)
-      toast.success("Template deleted successfully!"); // Optional toast feedback
+      await deleteCoverLetter(id).unwrap();
+      toast.success("resume deleted successfully!");
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to delete template.");
+    } finally {
+      handleClose();
     }
-    handleClose(); // Close the menu
+  };
+
+  const handleEdit = () => {
+    navigate(`/resume-builder/${template.id}?resume=${id}`);
   };
 
   return (
@@ -93,14 +131,14 @@ const AdminActionButton = ({ id }: { id: string }) => {
         open={open}
         onClose={handleClose}
       >
-        {/* <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleEdit} disableRipple>
           <EditIcon sx={{ color: "blue" }} />
           Edit
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleDuplicate} disableRipple>
           <FileCopyIcon sx={{ color: "#1976d2" }} />
           Duplicate
-        </MenuItem> */}
+        </MenuItem>
         <MenuItem onClick={handleDelete} disableRipple>
           <DeleteIcon sx={{ color: "red" }} />
           Delete
@@ -110,4 +148,4 @@ const AdminActionButton = ({ id }: { id: string }) => {
   );
 };
 
-export default AdminActionButton;
+export default CoverLetterActionButton;

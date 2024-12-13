@@ -3,19 +3,19 @@ import { Button, TextField, Box, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useDropzone } from "react-dropzone";
-import { useCreateTemplatesMutation } from "../../../redux/features/template/templateApi";
+import { useCreateCoverLetterTemplateMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-const AddTemplate = () => {
+const AddCoverLetter = () => {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const [createTemplate] = useCreateTemplatesMutation();
+  const [createTemplate] = useCreateCoverLetterTemplateMutation();
 
   const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
@@ -100,7 +100,7 @@ const AddTemplate = () => {
       <Helmet>
         <title>Add Template - Resume Craft</title>
       </Helmet>
-      <h1 className="text-xl font-bold mb-4">Add Resume Template</h1>
+      <h1 className="text-xl font-bold mb-4">Add Cover Letter Template</h1>
       <div className="mb-4">
         <TextField
           label="Template Name"
@@ -177,4 +177,4 @@ const AddTemplate = () => {
   );
 };
 
-export default AddTemplate;
+export default AddCoverLetter;

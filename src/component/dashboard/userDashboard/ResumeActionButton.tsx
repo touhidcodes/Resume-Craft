@@ -7,7 +7,6 @@ import { MouseEvent, useState } from "react";
 import { IconButton } from "@mui/material";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useDeleteTemplateMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {
@@ -65,7 +64,7 @@ const ResumeActionButton = ({
 }) => {
   const [deleteTemplate] = useDeleteUserResumeMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [createResume, { isLoading }] = useCreateResumeMutation();
+  const [createResume] = useCreateResumeMutation();
   const navigate = useNavigate();
   console.log(template);
   const open = Boolean(anchorEl);
@@ -109,7 +108,7 @@ const ResumeActionButton = ({
   };
 
   const handleEdit = () => {
-    navigate(`/resume-builder/${template.templateId}?resume=${id}`);
+    navigate(`/resume-builder/${template.id}?resume=${id}`);
   };
 
   return (

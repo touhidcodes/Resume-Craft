@@ -26,6 +26,22 @@ const coverLetterApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["CLTemplate"],
     }),
+
+    getUserCoverLetters: builder.query({
+      query: () => ({
+        url: `/cover-letter/cover-letters`,
+        method: "GET",
+      }),
+      providesTags: ["CLTemplate"],
+    }),
+
+    deleteUserCoverLetters: builder.mutation({
+      query: (id) => ({
+        url: `/cover-letter/delete-cover-letter/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["CLTemplate"],
+    }),
   }),
 });
 
@@ -33,6 +49,8 @@ export const {
   useGetCoverLetterQuery,
   useCreateCoverLetterMutation,
   useUpadateCoverLetterMutation,
+  useGetUserCoverLettersQuery,
+  useDeleteUserCoverLettersMutation,
 } = coverLetterApi;
 
 export default coverLetterApi;
