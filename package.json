@@ -9,6 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@dnd-kit/core": "^6.2.0",
     "@dnd-kit/sortable": "^9.0.0",

@@ -12,7 +12,7 @@ import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
 import { AdminPath } from "./adminroute";
-import { UserPath } from "./userroute";
+import { UserPath } from "./userRoute";
 
 const router = createBrowserRouter([
   {

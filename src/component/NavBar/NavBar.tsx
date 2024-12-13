@@ -15,8 +15,8 @@ const NavBar = () => {
   const user = useAppSelector(userCurrentUser);
   const dispatch = useAppDispatch();
   let role = user?.role;
-  console.log(role)
-  
+  // console.log(role)
+
   const handleLogout = () => {
     toast.success("Logout successful", {
       duration: 2000,
@@ -58,7 +58,7 @@ const NavBar = () => {
                 alt="logo"
                 className="md:cursor-pointer size-8 bg-cover object-contain"
               />
-              <h1 className="text-2xl font-medium md:hidden lg:block lowercase">
+              <h1 className="text-2xl font-medium md:hidden lg:block">
                 Resume Craft
               </h1>
             </div>

@@ -8,12 +8,12 @@ interface Template {
   id: string;
   name?: string;
   lastUpdated?: string;
-  template: { image: string };
+  image: string;
 }
 
 const UserCoverLetters = () => {
   const { data: allCoverLetters, isLoading } = useGetUserCoverLettersQuery("");
-  console.log(allCoverLetters?.data)
+  // console.log("cover letter of user", allCoverLetters?.data);
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -37,29 +37,44 @@ const UserCoverLetters = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-3 cursor-pointer">
           {allCoverLetters?.data?.map(
-            (template: Template, index: Key) => (
+            (
+              {
+                template,
+                name,
+                updatedAt,
+                id,
+              }: {
+                template: Template;
+                name: string;
+                updatedAt: string;
+                id: string;
+              },
+              index: Key
+            ) => (
               <div key={index}>
                 <div className="bg-[#E6EBF1] p-5 mb-3">
                   <img
                     src={
-                      template?.template?.image
-                        ? template.template.image
+                      template?.image
+                        ? template.image
                         : "/placeholder-image.png"
-                    } alt="user's resume"
+                    }
+                    alt="user's resume"
                     className="object-cover object-center"
                   />
                 </div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-sm font-semibold">{template.name}</h3>
+                    <h3 className="text-sm font-semibold">{name}</h3>
                     <p className="text-xs text-muted">
-                    Last updated:{" "}
-                    {template.lastUpdated
-                      ? template.lastUpdated.split("T")[0]
-                      : "Unknown"}
-                  </p>               
-                    </div>
-                  <CoverLetterActionButton template={template} id={template.id} />
+                      Last updated:{" "}
+                      {updatedAt ? updatedAt.split("T")[0] : "Unknown"}
+                    </p>
+                  </div>
+                  <CoverLetterActionButton
+                    coverLetterId={id}
+                    id={template.id}
+                  />
                 </div>
               </div>
             )

@@ -9,7 +9,7 @@ import { useAppSelector } from "../../../redux/hooks";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useUpadateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
+import { useUpdateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 import { recipientValidation } from "../../../zod/RecipientValidationSchema";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 import { Recipient } from "../../../types/coverLetterTypes";
@@ -30,7 +30,7 @@ type THeaderProps = {
 const RecipientEditModal = ({ recipient }: THeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const id = useAppSelector((state) => state.coverLetter.coverLetter?.id);
-  const [recipientPersonal, { isLoading }] = useUpadateCoverLetterMutation();
+  const [recipientPersonal, { isLoading }] = useUpdateCoverLetterMutation();
 
   // Use the correct type for useForm
   const {
@@ -72,7 +72,7 @@ const RecipientEditModal = ({ recipient }: THeaderProps) => {
       close();
     } catch (error) {
       toast.error("Something went wrong", { duration: 2000 });
-      console.log(error);
+      // console.log(error);
     }
   };
 

@@ -2,21 +2,18 @@ import { toast } from "sonner";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import ResumeEditBtn from "../../shared/ResumeEditBtn";
-
 import { Close } from "@mui/icons-material";
-
 import ButtonSpinner from "../../shared/ButtonSpinner";
-
 import { Button } from "@mui/material";
 import CloseForm from "../../form/CloseForm";
-import { useUpadateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
+import { useUpdateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 import { useAppSelector } from "../../../redux/hooks";
 
 const FooterEditModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [closeCover, setCloseCover] = useState("");
   const id = useAppSelector((state) => state.coverLetter.coverLetter?.id);
-  const [updateClose, { isLoading }] = useUpadateCoverLetterMutation();
+  const [updateClose, { isLoading }] = useUpdateCoverLetterMutation();
 
   function open() {
     setIsOpen(true);

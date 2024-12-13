@@ -67,7 +67,7 @@ const EducationEditModal = ({ education }: TEducationEditProps) => {
 
       close();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
