@@ -1,20 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { Button, TextField, Box, Typography } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Box,
+  Typography,
+  LinearProgress,
+} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { useCreateTemplatesMutation } from "../../../redux/features/template/templateApi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { FileCopy } from "@mui/icons-material";
 
 const AddTemplate = () => {
   const [image, setImage] = useState<File | null>(null);
+  const [images, setImages] = useState<any>([]);
+  const [, setUploadProgress] = useState<number | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [createTemplate] = useCreateTemplatesMutation();
 
   const onDrop = (acceptedFiles: File[]) => {
@@ -55,15 +65,21 @@ const AddTemplate = () => {
       const formData = new FormData();
       formData.append("image", image);
 
-      const response = await fetch(
+      const response = await axios.post(
         `https://api.imgbb.com/1/upload?key=68c40fc46fe61300befd1b168543a8b7`,
+        formData,
         {
-          method: "POST",
-          body: formData,
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total!
+            ) as number;
+            setImages([...images, { image, progress }]);
+          },
         }
       );
+      console.log(images);
 
-      const data = await response.json();
+      const data = await response.data;
 
       if (!data.success) {
         throw new Error("Image upload failed. Please try again.");
@@ -85,8 +101,9 @@ const AddTemplate = () => {
       setName("");
       setImage(null);
       setImagePreview(null);
+      setUploadProgress(null);
       toast.success("Template uploaded successfully!");
-      navigate("/ADMIN/allTemplates");
+      // navigate("/ADMIN/allTemplates");
     } catch (error) {
       console.error(error);
       setErrorMessage("Failed to upload image or submit the template.");
@@ -96,66 +113,109 @@ const AddTemplate = () => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white shadow-md rounded-lg">
+    <div className="p-6 max-w-[1024px] mx-auto bg-white shadow-md rounded-lg font-roboto mt-5 border">
       <Helmet>
         <title>Add Template - Resume Craft</title>
       </Helmet>
-      <h1 className="text-xl font-bold mb-4">Add Resume Template</h1>
-      <div className="mb-4">
-        <TextField
-          label="Template Name"
-          variant="outlined"
-          fullWidth
-          value={name}
-          onChange={handleNameChange}
-          sx={{ mb: 2 }}
-        />
+      <div className="flex flex-col lg:flex-row gap-x-10">
+        <div className="w-full lg:w-[60%]">
+          <h1 className="text-[30px] leading-[40px] font-bold mb-4 text-primary ">
+            {" "}
+            Upload Template
+          </h1>
+          <div className="mb-4">
+            <TextField
+              label="Template Name"
+              variant="outlined"
+              fullWidth
+              value={name}
+              onChange={handleNameChange}
+              sx={{ mb: 2 }}
+            />
 
-        <Box
-          {...getRootProps()}
-          sx={{
-            border: "2px dashed #ccc",
-            borderRadius: "8px",
-            padding: "20px",
-            textAlign: "center",
-            cursor: "pointer",
-            backgroundColor: isDragActive ? "#f0f0f0" : "transparent",
-            position: "relative",
-          }}
-        >
-          <input {...getInputProps()} />
-          {imagePreview ? (
-            <Box>
-              <img
-                src={imagePreview}
-                alt="Preview"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "150px",
-                  marginBottom: "10px",
-                }}
-              />
-              <Typography
-                color="primary"
-                variant="body2"
-                sx={{ display: "flex", alignItems: "center", gap: 1 }}
-              >
-                <CheckCircleIcon color="success" /> Image Selected: {image?.name}
-              </Typography>
+            <Box
+              {...getRootProps()}
+              sx={{
+                border: "2px dashed #ccc",
+                borderRadius: "8px",
+                // padding: "20px",
+                width: "100%",
+                height: "300px",
+                textAlign: "center",
+                cursor: "pointer",
+                backgroundColor: isDragActive ? "#f0f0f0" : "transparent",
+                position: "relative",
+              }}
+            >
+              <input {...getInputProps()} />
+              {imagePreview ? (
+                <Box
+                  sx={{
+                    padding: "9px",
+                    position: "absolute",
+                    height: "300px",
+                    width: "100%",
+                  }}
+                >
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="object-cover rounded-[5px] "
+                    style={{
+                      width: "100%",
+                      height: "100%",
+
+                      marginBottom: "10px",
+                    }}
+                  />
+                  {/* <Typography
+                    color="primary"
+                    variant="body2"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <CheckCircleIcon color="success" /> Image Selected:{" "}
+                    {image?.name}
+                  </Typography> */}
+                </Box>
+              ) : (
+                <Box>
+                  <CloudUploadIcon
+                    style={{ fontSize: 40, color: "#ccc", marginBottom: 8 }}
+                  />
+                  <Typography>
+                    {isDragActive
+                      ? "Drop the file here..."
+                      : "Drag and drop an image here, or click to select one"}
+                  </Typography>
+                </Box>
+              )}
             </Box>
-          ) : (
-            <Box>
-              <CloudUploadIcon
-                style={{ fontSize: 40, color: "#ccc", marginBottom: 8 }}
-              />
-              <Typography>
-                {isDragActive
-                  ? "Drop the file here..."
-                  : "Drag and drop an image here, or click to select one"}
-              </Typography>
-            </Box>
-          )}
-        </Box>
+          </div>
+        </div>
+
+        <div className="w-full lg:w-[40%]">
+          <h3 className="text-green-400 ">Uploaded Image Progress </h3>
+          {images.map((ima: any, index: string) => (
+            <div key={index} className="mb-4">
+              <div className="flex items-center gap-4">
+                <FileCopy />
+                <div className="w-full">
+                  <h4>{ima?.image?.name}</h4>
+                  <div className="">
+                    <LinearProgress
+                      variant="buffer"
+                      value={ima.progress}
+                      valueBuffer={ima.progress + 2}
+                    />
+                  </div>
+                  <p className="text-sm text-gray-600 text-right">
+                    {ima.progress}%
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {errorMessage && (
@@ -163,16 +223,17 @@ const AddTemplate = () => {
           {errorMessage}
         </Typography>
       )}
-
-      <Button
-        variant="contained"
-        fullWidth
-        onClick={handleSubmit}
-        disabled={isSubmitting}
-        sx={{ textTransform: "none", mt: 2 }}
-      >
-        {isSubmitting ? "Submitting..." : "Submit Template"}
-      </Button>
+      <div>
+        <Button
+          variant="contained"
+          className="w-full lg:w-[60%]"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          sx={{ textTransform: "none", mt: 2 }}
+        >
+          {isSubmitting ? "Submitting..." : "Submit Template"}
+        </Button>
+      </div>
     </div>
   );
 };
