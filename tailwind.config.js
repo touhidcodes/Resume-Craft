@@ -6,7 +6,7 @@ export default {
       fontFamily: {
         ubuntu: ["Ubuntu", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
-
+        lato: ["Lato", "sans-serif"],
       },
       colors: {
         primary: "#1222FE",
@@ -22,9 +22,7 @@ export default {
         container: "1170px",
       },
 
-      fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
-      },
+
     },
     keyframes: {
       scroll: {

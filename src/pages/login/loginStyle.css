@@ -77,3 +77,19 @@
     }
   }
 }
+@media (max-width: 430px) {
+  .ai-powered-tag {
+    animation: slideAnimationExtraSmall 4s ease-in-out infinite;
+  }
+
+  @keyframes slideAnimationExtraSmall {
+    0% {
+      transform: translateX(-210px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+  }
+}

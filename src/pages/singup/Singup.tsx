@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -40,7 +41,7 @@ const Singup = () => {
 
   const [google] = useGoogleSignInBgMutation();
   const handleGoogleSignIn = async () => {
-    let toastId = toast.loading("Logging in");
+    const toastId = toast.loading("Logging in");
     try {
       const firebaseRes = await googleSign(null);
       const userCredential = firebaseRes?.data;
@@ -51,15 +52,16 @@ const Singup = () => {
         userName: userCredential?.displayName,
       };
 
-      const backendRes = await google(userData).unwrap();
-      const accessToken = backendRes?.data?.accessToken;
-      const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+      if (userCredential) {
+        const backendRes = await google(userData).unwrap();
+        const accessToken = backendRes?.data?.accessToken;
+        const verifiedUser = verifyToken(backendRes?.data?.accessToken);
 
-      dispatch(setUser({ user: verifiedUser, token: accessToken }));
-      navigate("/");
-
-      toast.success("Login successful", { id: toastId, duration: 2000 });
-    } catch (error) {
+        dispatch(setUser({ user: verifiedUser, token: accessToken }));
+        toast.success("Login successful", { id: toastId, duration: 2000 });
+        navigate("/");
+      }
+    } catch (error: any) {
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
   };
@@ -78,7 +80,7 @@ const Singup = () => {
 
       toast.success("singup successfully", { id: toastId, duration: 2000 });
       navigate("/login");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
   };
@@ -250,7 +252,7 @@ const Singup = () => {
               </p>
             </div>
           </div>
-          <div className="bg-[url('https://www.resume.com/static/siwi-left-bg-2775bb16ee97d03f578d52c38329ccbf.webp')] bg-cover bg-no-repeat w-full md:w-1/2 object-cover h-[87vh] md:h-[70vh] lg:h-[600px] rounded-[9px]">
+          <div className="bg-[url('https://www.resume.com/static/siwi-left-bg-2775bb16ee97d03f578d52c38329ccbf.webp')] bg-cover bg-no-repeat w-full md:w-1/2 object-cover h-[80vh] md:h-[80vh] lg:h-[600px] rounded-[9px]">
             <div className=" max-w-[400px] mx-auto py-10 px-5 lg:px-0">
               <p className="text-white  text-[24px] mb-3 font-semibold">
                 An Our Partner

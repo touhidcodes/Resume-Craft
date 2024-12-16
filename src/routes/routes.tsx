@@ -13,6 +13,7 @@ import AdminPrivet from "./AdminPrivate";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
 import { AdminPath } from "./adminroute";
 import { UserPath } from "./userRoute";
+import Emon from "../pages/Template/Emon";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Singup />,
   },
+  // {
+  //   path: "/resumes",
+  //   element: <Emon />,
+  // },,
   {
     path: "admin",
     element: (

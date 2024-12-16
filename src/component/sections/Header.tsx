@@ -13,27 +13,27 @@ import ChooseResumeTemplate from "../Modal/ChooseResumeTemplate";
 
 const Header = () => {
   return (
-    <div className="bg-[#F7F9FC] min-h-[calc(100svh_-_80px)] flex flex-col justify-center items-center ">
-      <div className="max-w-[1170px] mx-auto px-5 xl:px-0 sm:py-10 md:py-0 py-10">
+    <div className="bg-[#F7F9FC] sm:py-6   py-8  flex flex-col justify-center items-center ">
+      <div className="max-w-[1170px] mx-auto px-5 xl:px-0  font-roboto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-5">
           <div>
             <div className="flex items-center gap-x-3">
               <span className="size-1.5 bg-green-500 rounded-full animate-pulse"></span>
               <p>35,330 resumes created today</p>
             </div>
-            <h1 className="text-3xl md:text-[48px] leading-[58px] font-bold mt-3 title">
+            <h1 className="text-3xl  md:text-[48px] md:leading-[58px] font-bold mt-3 title">
               The professional{" "}
               <span className="tittel">
                 resume builder
                 <span className="ai-powered-tag"></span>
               </span>
             </h1>
-            <h3 className="md:text-xl my-7">
+            <p className="md:text-xl my-5 md:my-7">
               Only 2% of resumes win. Yours will be one of them. Let’s build you
               a resume that works.
-            </h3>
+            </p>
 
-            <div className="sm:space-x-6 space-y-5 sm:space-y-0">
+            <div className="flex  flex-col w-[64%] sm:w-full gap-3  sm:flex-row ">
               <ChooseResumeTemplate
                 variant="contained"
                 size="medium"
@@ -46,7 +46,7 @@ const Header = () => {
               />
             </div>
 
-            <div className="mt-20 hidden lg:flex items-start gap-x-8">
+            <div className="mt-20 hidden lg:flex items-start gap-x-8 ">
               <div className="space-y-3 border-l pl-4">
                 <span className="bg-green-100 text-green-600 inline-block text-3xl px-2 py-1">
                   39%
@@ -75,7 +75,7 @@ const Header = () => {
             <img
               src={imgEight}
               alt="header image"
-              className="absolute w-[98px] right-0 sm:left-[350px] md:left-[418px] top-[168px] "
+              className="absolute w-[98px] right-0 sm:left-[350px] md:left[400px] xl:left-[418px] top-[168px] "
             />
             <img
               src={imgSix}
@@ -95,12 +95,12 @@ const Header = () => {
             <img
               src={imgFive}
               alt="header image"
-              className="absolute w-[198px] right-0 sm:left-[250px] md:left-[355px] top-[280px] "
+              className="absolute w-[198px] right-0 sm:left-[250px] md:left-[298px] xl:left-[355px] top-[280px] "
             />
             <img
               src={imgFour}
               alt="header image"
-              className="absolute w-[350px] right-0 sm:left-[120px] md:left-[200px] top-[0px] "
+              className="absolute w-[350px] right-0 sm:left-[110px] md:left-[144px] xl:left-[200px] top-[0px] "
             />
             <img
               src={imgThree}
@@ -115,7 +115,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[1170px] mx-auto px-5 xl:px-0 py-10 flex justify-center items-center lg:hidden mt-28 lg:mt-0">
+      <div className="max-w-[1170px] mx-auto px-5 xl:px-0  flex justify-center items-center lg:hidden mt-44 md:mt-24 lg:mt-0 pb-5 ">
         <div className="flex items-start gap-x-8">
           <div className="space-y-3 border-l pl-4">
             <span className="bg-green-100 text-green-600 inline-block text-3xl px-2 py-1">
