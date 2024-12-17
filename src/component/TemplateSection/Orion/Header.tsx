@@ -6,7 +6,7 @@ const Header = () => {
     (state) => state?.resume?.resume?.personalInfo
   );
   return (
-    <div className="font-roboto hover:bg-[#f8f9fa] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
+    <div className="font-oswald hover:bg-[#f8f9fa] cursor-pointer relative group duration-100 ease-in-out transition-all mb-5">
       <h1 className="text-[20px] leading-[30px] font-semibold ">
         {personalInfo?.fullName}
       </h1>

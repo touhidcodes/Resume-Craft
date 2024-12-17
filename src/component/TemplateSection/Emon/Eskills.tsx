@@ -31,7 +31,7 @@ const Eskills = () => {
       {skills?.map((skill) => (
         <div
           key={skill.id}
-          className="text-[#6E6E6E] text-[13px] py-0.5 hover:bg-primary/[.05] cursor-pointer relative duration-100 ease-in-out transition-all group break-inside-avoid"
+          className="text-[#000] text-[13px] py-0.5 hover:bg-primary/[.05] cursor-pointer relative duration-100 ease-in-out transition-all group break-inside-avoid"
         >
           <p>
             <span className="font-semibold mr-3 text-[#000]">

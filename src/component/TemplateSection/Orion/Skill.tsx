@@ -21,9 +21,9 @@ const Skill = () => {
   };
 
   return (
-    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container">
+    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container font-oswald mb-5">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1"> Skills</h1>
-      <div className="w-[100%] h-[2px] bg-gray-400 mb-1"></div>
+
       {skills?.map((skill) => (
         <div
           key={skill.id}

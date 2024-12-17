@@ -24,7 +24,7 @@ const EExperience = () => {
   };
 
   return (
-    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container font-lato">
+    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container font-lato mb-5">
       <div className="flex items-end mb-3">
         <h1 className="text-[20px] leading-[25px] font-semibold mb-1">
           Experience
@@ -62,7 +62,7 @@ const EExperience = () => {
               </div>
             </div>
 
-            <HtmlRenderer text={exp.responsibilities} />
+            <HtmlRenderer text={exp.responsibilities} textColor={"#000"} />
 
             <div className="hidden group-hover/experience:flex items-center absolute top-1 right-1 duration-100 ease-in-out transition-all custom-shadow rounded-md p-[1px] bg-white">
               <ExperienceEditModal experience={exp} />

@@ -8,7 +8,7 @@ const Summary = () => {
   );
 
   return (
-    <div className="cursor-pointer group mb-5 border border-transparent hover:border-dashed hover:border-primary relative">
+    <div className="cursor-pointer group mb-5 border border-transparent hover:border-dashed hover:border-primary relative font-oswald">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">Summary</h1>
 
       <div className=" text-[#6E6E6E] text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative  duration-100 ease-in-out transition-all ">

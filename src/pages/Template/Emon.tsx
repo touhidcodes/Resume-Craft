@@ -1,10 +1,11 @@
 import TemplateWrapper from "../../component/shared/TemplateWrapper";
+import Ecertificates from "../../component/TemplateSection/Emon/Ecertificates";
+import EEducation from "../../component/TemplateSection/Emon/EEducation";
 import Experience from "../../component/TemplateSection/Emon/EExperience";
 import EHeader from "../../component/TemplateSection/Emon/EHeader";
+import ELanguages from "../../component/TemplateSection/Emon/ELanguages";
 import Eskills from "../../component/TemplateSection/Emon/Eskills";
 import Esummery from "../../component/TemplateSection/Emon/Esummery";
-import Education from "../../component/TemplateSection/Orion/Education";
-import Languages from "../../component/TemplateSection/Orion/Languages";
 
 import useActiveSections, {
   TResumeSections,
@@ -26,11 +27,15 @@ const Emon = () => {
 
     Education: {
       name: "Education",
-      component: Education,
+      component: EEducation,
     },
     Language: {
       name: "Language",
-      component: Languages,
+      component: ELanguages,
+    },
+    Certificate: {
+      name: "Certificate",
+      component: Ecertificates,
     },
   };
 
