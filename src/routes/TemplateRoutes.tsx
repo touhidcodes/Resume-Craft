@@ -3,6 +3,7 @@ import { useGetAllTemplatesQuery } from "../redux/features/template/templateApi"
 import Apollo from "../pages/Template/Apollo";
 import Orion from "../pages/Template/Orion";
 import { Template, TemplateRoute } from "../types";
+import Emon from "../pages/Template/Emon";
 
 type TemplateData = {
   id: string;
@@ -12,6 +13,7 @@ type TemplateData = {
 const templates: Template[] = [
   { name: "Apollo", component: Apollo },
   { name: "Orion", component: Orion },
+  { name: "Emon", component: Emon },
 ];
 
 const TemplateRoutes = () => {

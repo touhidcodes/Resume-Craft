@@ -49,6 +49,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Singup />,
   },
+  // {
+  //   path: "/resumes",
+  //   element: <Emon />,
+  // },,
   {
     path: "admin",
     element: (

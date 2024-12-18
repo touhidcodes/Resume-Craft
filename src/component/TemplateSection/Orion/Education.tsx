@@ -22,11 +22,11 @@ const Education = () => {
   };
 
   return (
-    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container">
+    <div className="cursor-pointer border border-transparent hover:border-dashed hover:border-primary relative group/container font-oswald">
       <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
         Education
       </h1>
-      <div className="w-[100%] h-0.5 bg-gray-400 mb-1"></div>
+
       <div className=" text-[#6E6E6E] text-[13px] space-y-2">
         {educations?.map((education, index) => (
           <div

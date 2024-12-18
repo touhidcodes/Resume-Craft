@@ -14,6 +14,7 @@ const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const user = useAppSelector(userCurrentUser);
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line prefer-const
   let role = user?.role;
   // console.log(role)
 
@@ -140,30 +141,48 @@ const NavBar = () => {
         {/* Mobile nav */}
         <ul
           className={`
-      md:hidden bg-white fixed  z-[99] w-[300px] top-0 overflow-y-auto bottom-0 pt-5 pl-4
+      md:hidden bg-white fixed  z-[99] w-[300px] top-0 overflow-y-auto bottom-0 pt-5 px-4
       duration-500 ${open ? "left-0" : "left-[-100%] "}
       `}
         >
-          <img
-            src="https://i.ibb.co.com/Z1FrPZh/Logo-4x.png"
-            alt="logo"
-            className="md:cursor-pointer h-9"
-          />
-          <li>
-            <Link to="/" className="pt-6 pb-3 px-3 inline-block">
-              Resume Create
-            </Link>
+          <div className="flex gap-x-1 justify-start">
+            <img
+              src={logo}
+              alt="logo"
+              className="md:cursor-pointer w-9 h-9 mb-5"
+            />
+            <span className="text-[18px] font-semibold">Resume Craft</span>
+          </div>
+          <li className="py-2 px-5 rounded-[9px]  hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer ">
+            <Link to="/">Resume Create</Link>
           </li>
 
+          <li className="py-2 px-5 rounded-[9px]  hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer">
+            {" "}
+            <Link to="/about">About us</Link>
+          </li>
+          {user ? (
+            <li className="py-2 px-5 rounded-[9px]  hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer ">
+              <Link to={`/${role}/dashboard`}>Dashboard</Link>
+            </li>
+          ) : (
+            ""
+          )}
           <li>
             {" "}
-            <Link to="/about" className="py-3 px-3 inline-block">
-              About us
-            </Link>
+            <div className="md:hidden gap-x-2 block  mt-5">
+              {user ? (
+                <Button variant="contained" onClick={handleLogout} size="large">
+                  Logout
+                </Button>
+              ) : (
+                <Button variant="contained" size="large">
+                  <Link to="/login">Login</Link>
+                </Button>
+              )}
+            </div>
           </li>
-          <li></li>
           {/* <NavLinks /> */}
-          <div className="py-3"></div>
         </ul>
       </div>
     </nav>
