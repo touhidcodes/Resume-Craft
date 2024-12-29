@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {
-  useCreateResumeMutation,
+  useCreateResumeDuplicateMutation,
   useDeleteUserResumeMutation,
 } from "../../../redux/features/resume/resumeApi";
 
@@ -57,33 +57,27 @@ const StyledMenu = styled((props: MenuProps) => (
 
 const ResumeActionButton = ({
   id,
-  template,
+  resumeId,
 }: {
   id: string;
-  template: { id: string };
+  resumeId: string;
 }) => {
   const [deleteTemplate] = useDeleteUserResumeMutation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [createResume] = useCreateResumeMutation();
+  const [CreateResumeDuplicate] = useCreateResumeDuplicateMutation();
   const navigate = useNavigate();
-  console.log(template);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   const handleDuplicate = async () => {
     try {
-      const defaultResumeName = `Copy of Resume ${template.id}`; // Generate a default name
-      const response = await createResume({
-        templateId: template.id,
-        name: defaultResumeName,
-      }).unwrap();
+      const response = await CreateResumeDuplicate(resumeId).unwrap();
 
       toast.success("Resume duplicated successfully!");
       navigate(
@@ -98,17 +92,17 @@ const ResumeActionButton = ({
 
   const handleDelete = async () => {
     try {
-      await deleteTemplate(id).unwrap();
+      await deleteTemplate(resumeId).unwrap();
       toast.success("resume deleted successfully!");
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to delete template.");
+      toast.error(error?.data?.message || "Failed to delete resume.");
     } finally {
       handleClose();
     }
   };
 
   const handleEdit = () => {
-    navigate(`/resume-builder/${template.id}?resume=${id}`);
+    navigate(`/resume-builder/${id}?resume=${resumeId}`);
   };
 
   return (

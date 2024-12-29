@@ -31,7 +31,7 @@ const DeleteModal = ({ id, isLoading, handleDelete }: TDeleteModalProps) => {
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-black/45">
           <DialogPanel className="w-[90%] sm:w-96 min-h-40 space-y-4 p-5 border bg-white rounded-lg flex flex-col justify-center items-center">
-            <p>Are you sure want to download this?</p>
+            <p>Are you sure want to delete this?</p>
 
             <div className="flex gap-7">
               <Button variant="contained" onClick={() => setIsOpen(false)}>

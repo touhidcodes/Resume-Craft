@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useGetAllTemplatesQuery } from "../redux/features/template/templateApi";
 import Apollo from "../pages/Template/Apollo";
 import Orion from "../pages/Template/Orion";
+import Delta from "../pages/Template/Delta";
 import { Template, TemplateRoute } from "../types";
 
 type TemplateData = {
@@ -12,6 +13,7 @@ type TemplateData = {
 const templates: Template[] = [
   { name: "Apollo", component: Apollo },
   { name: "Orion", component: Orion },
+  { name: "Delta", component: Delta },
 ];
 
 const TemplateRoutes = () => {
