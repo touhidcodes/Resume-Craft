@@ -65,7 +65,7 @@ const AdminActionButton = ({ id }: { id: string }) => {
   const handleDelete = async () => {
     try {
       const deleteTemplateData = await deleteTemplate(id).unwrap();
-      console.log(deleteTemplateData)
+      console.log(deleteTemplateData);
       toast.success("Template deleted successfully!"); // Optional toast feedback
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to delete template.");

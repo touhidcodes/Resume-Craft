@@ -1,9 +1,7 @@
-
 import Body from "../../component/CoverLetterSection/alpha/Body";
 import Closing from "../../component/CoverLetterSection/alpha/Closing";
 import Header from "../../component/CoverLetterSection/alpha/Header";
 import Recipient from "../../component/CoverLetterSection/alpha/Recipient";
-
 import TemplateWrapper from "../../component/shared/TemplateWrapper";
 
 const Alpha = () => {
@@ -12,7 +10,7 @@ const Alpha = () => {
       <Header />
       <Recipient />
       <Body />
-      <Closing/>
+      <Closing />
     </TemplateWrapper>
   );
 };

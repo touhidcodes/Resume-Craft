@@ -6,13 +6,13 @@ import { toast } from "sonner";
 import ButtonSpinner from "../../shared/ButtonSpinner";
 import BodyForm from "../../form/BodyForm";
 import { Button } from "@mui/material";
-import { useUpadateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
+import { useUpdateCoverLetterMutation } from "../../../redux/features/coverLetter/coverLetterApi";
 
 const BodyEditModal = ({ id }: { id: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [body, setBody] = useState("");
 
-  const [updateBody, { isLoading }] = useUpadateCoverLetterMutation();
+  const [updateBody, { isLoading }] = useUpdateCoverLetterMutation();
 
   function open() {
     setIsOpen(true);

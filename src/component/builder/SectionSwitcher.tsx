@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormControlLabel } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -50,7 +51,7 @@ const SectionSwitcher = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

@@ -4,6 +4,7 @@ import Apollo from "../pages/Template/Apollo";
 import Orion from "../pages/Template/Orion";
 import Delta from "../pages/Template/Delta";
 import { Template, TemplateRoute } from "../types";
+import Emon from "../pages/Template/Emon";
 
 type TemplateData = {
   id: string;
@@ -14,6 +15,7 @@ const templates: Template[] = [
   { name: "Apollo", component: Apollo },
   { name: "Orion", component: Orion },
   { name: "Delta", component: Delta },
+  { name: "Emon", component: Emon },
 ];
 
 const TemplateRoutes = () => {

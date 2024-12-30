@@ -89,7 +89,7 @@ const LanguagesEditModal = () => {
           toast.success(res?.message);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       } finally {
         close();
       }

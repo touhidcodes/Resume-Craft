@@ -65,7 +65,7 @@ const CertificateEditModal = ({ certificate }: TCertificateEditProps) => {
 
       close();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

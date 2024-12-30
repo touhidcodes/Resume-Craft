@@ -36,7 +36,7 @@ const ResumeBuilderBanner = () => {
               block or formatting difficulties in Word. Rapidly make a perfect
               resume employers love.
             </p>
-            <div className="space-y-5 sm:space-y-0 sm:space-x-6 mt-6">
+            <div className="flex  flex-col w-[64%] sm:w-full gap-3  sm:flex-row mt-6">
               <ChooseResumeTemplate
                 variant="contained"
                 size="medium"

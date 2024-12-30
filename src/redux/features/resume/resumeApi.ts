@@ -14,7 +14,6 @@ const resumeApi = baseApi.injectEndpoints({
       query: (id) => ({
         url: `/resume/create-resume-duplicate/${id}`,
         method: "POST",
-
       }),
       invalidatesTags: ["Resume"],
     }),
@@ -214,6 +213,7 @@ export const {
   useDeleteCertificateMutation,
   useDeleteAwardMutation,
   useDeleteUserResumeMutation,
+  useCreateResumeDuplicateMutation,
 } = resumeApi;
 
 export default resumeApi;

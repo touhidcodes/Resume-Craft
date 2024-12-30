@@ -57,7 +57,7 @@ const AddSkillModal = () => {
 
       close();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

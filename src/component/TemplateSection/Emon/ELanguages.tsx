@@ -1,20 +1,23 @@
 import { useAppSelector } from "../../../redux/hooks";
 import LanguagesEditModal from "../../Modal/EditModal/LanguagesEditModel";
 
-const Languages = () => {
+const ELanguages = () => {
   const languages = useAppSelector((state) => state?.resume?.resume?.language);
 
   return (
-    <div className="cursor-pointer group border border-transparent hover:border-dashed hover:border-primary relative break-inside-avoid font-oswald mb-5">
-      <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
-        Languages
-      </h1>
+    <div className="cursor-pointer group border border-transparent hover:border-dashed hover:border-primary relative break-inside-avoid font-lato">
+      <div className="flex items-end mb-3">
+        <h1 className="text-[20px] leading-[25px] font-semibold mb-1">
+          Languages
+        </h1>
+        <div className="w-[100%] h-[0.5px] bg-[#000] "></div>
+      </div>
 
       <div className="space-x-10 flex items-center">
         {languages?.map((language) => (
           <div
             key={language.name}
-            className="break-inside-avoid text-neutral-700 text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative duration-100 ease-in-out transition-all"
+            className="break-inside-avoid text-[#000] text-[13px]  group-hover:bg-[#f8f9fa] cursor-pointer relative duration-100 ease-in-out transition-all"
           >
             <p>
               <span className="font-semibold">{language.name} : </span>
@@ -30,4 +33,4 @@ const Languages = () => {
   );
 };
 
-export default Languages;
+export default ELanguages;

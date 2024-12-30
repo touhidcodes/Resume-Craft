@@ -19,14 +19,13 @@ const coverLetterApi = baseApi.injectEndpoints({
       invalidatesTags: ["CLTemplate"],
     }),
     createCoverLetterDuplicate: builder.mutation({
-        query: (id) => ({
-          url: `/cover-letter/create-cover-letter-duplicate/${id}`,
-          method: "POST",
-  
-        }),
-        invalidatesTags: ["CLTemplate"],
+      query: (id) => ({
+        url: `/cover-letter/create-cover-letter-duplicate/${id}`,
+        method: "POST",
       }),
-    UpadateCoverLetter: builder.mutation({
+      invalidatesTags: ["CLTemplate"],
+    }),
+    UpdateCoverLetter: builder.mutation({
       query: ({ id, data }) => ({
         url: `/cover-letter/update-cover-letter/${id}`,
         method: "PATCH",
@@ -57,7 +56,7 @@ export const {
   useGetCoverLetterQuery,
   useCreateCoverLetterDuplicateMutation,
   useCreateCoverLetterMutation,
-  useUpadateCoverLetterMutation,
+  useUpdateCoverLetterMutation,
   useGetUserCoverLettersQuery,
   useDeleteUserCoverLettersMutation,
 } = coverLetterApi;

@@ -1,4 +1,5 @@
 import TemplateWrapper from "../../component/shared/TemplateWrapper";
+import Certificates from "../../component/TemplateSection/Orion/Certificates";
 import Education from "../../component/TemplateSection/Orion/Education";
 import Experience from "../../component/TemplateSection/Orion/Experience";
 import Header from "../../component/TemplateSection/Orion/Header";
@@ -29,6 +30,10 @@ const resumeSections: TResumeSections = {
   Language: {
     name: "Language",
     component: Languages,
+  },
+  Certificate: {
+    name: "Certificate",
+    component: Certificates,
   },
 };
 

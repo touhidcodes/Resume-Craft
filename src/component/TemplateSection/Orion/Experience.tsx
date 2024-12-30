@@ -24,8 +24,8 @@ const Experience = () => {
   };
 
   return (
-    <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative group/container">
-      <h1 className="text-[20px] leading-[30px] font-semibold mb-1">
+    <div className="cursor-pointer mb-5 border border-transparent hover:border-dashed hover:border-primary relative group/container font-oswald">
+      <h1 className="text-[20px] leading-[30px] font-semibold mb-1 ">
         Experience
       </h1>
 

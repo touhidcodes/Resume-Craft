@@ -9,6 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@dnd-kit/core": "^6.2.0",
     "@dnd-kit/sortable": "^9.0.0",
@@ -23,6 +26,7 @@
     "@mui/x-charts": "^7.23.0",
     "@mui/x-date-pickers": "^7.22.3",
     "@reduxjs/toolkit": "^2.3.0",
+    "axios": "^1.7.9",
     "chart.js": "^4.4.6",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",

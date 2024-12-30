@@ -4,9 +4,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        ubuntu: ["Ubuntu", "sans - serif"],
-        roboto: ["Roboto", "sans - serif"],
-
+        ubuntu: ["Ubuntu", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        lato: ["Lato", "sans-serif"],
+        oswald: ["Oswald", "sans-serif"],
       },
       colors: {
         primary: "#1222FE",
@@ -22,9 +23,7 @@ export default {
         container: "1170px",
       },
 
-      fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
-      },
+
     },
     keyframes: {
       scroll: {

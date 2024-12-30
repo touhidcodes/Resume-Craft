@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -41,6 +43,7 @@ const Login = () => {
   const [googleSign] = useGoogleSignInWithPopupMutation();
 
   const [google] = useGoogleSignInBgMutation();
+
   const handleGoogleSignIn = async () => {
     let toastId = toast.loading("Logging in");
     try {
@@ -52,15 +55,18 @@ const Login = () => {
         password: "123456", // Provide a default password or let the backend handle it
         userName: userCredential?.displayName,
       };
+      console.log("out", userCredential);
+      if (userCredential) {
+        console.log("in", userCredential);
+        const backendRes = await google(userData).unwrap();
+        const accessToken = backendRes?.data?.accessToken;
+        const verifiedUser = verifyToken(backendRes?.data?.accessToken);
 
-      const backendRes = await google(userData).unwrap();
-      const accessToken = backendRes?.data?.accessToken;
-      const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+        dispatch(setUser({ user: verifiedUser, token: accessToken }));
 
-      dispatch(setUser({ user: verifiedUser, token: accessToken }));
-
-      toast.success("Login successful", { id: toastId, duration: 2000 });
-      navigate(location?.state?.from?.pathname || "/");
+        toast.success("Login successful", { id: toastId, duration: 2000 });
+        navigate(location?.state?.from?.pathname || "/");
+      }
     } catch (error) {
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
@@ -96,7 +102,7 @@ const Login = () => {
       toast.success("login successfully", { id: toastId, duration: 2000 });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });
     }
   };
@@ -295,7 +301,7 @@ const Login = () => {
               <p className="text-white  text-[24px] mb-3 font-semibold">
                 An Our Partner
               </p>
-              <div className="grid grid-cols-1 gap-y-10  ">
+              <div className="grid grid-cols-1 gap-y-8 md:gap-y-10 ">
                 {statics.map((st) => (
                   <div className="flex gap-2  items-center">
                     <svg

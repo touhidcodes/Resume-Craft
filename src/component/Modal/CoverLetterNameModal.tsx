@@ -31,18 +31,18 @@ const CoverLetterNameModal = ({ template }: { template: TTemplate }) => {
   }
 
   const onSubmit: SubmitHandler<TCoverLetterName> = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       const res = await createCoverLetter({
         templateId: template.id,
         name: data.name,
       }).unwrap();
-      console.log(res);
+      // console.log(res);
       navigate(
         `/cover-letter-builder/${res.data.templateId}?cl=${res.data.id}`
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
