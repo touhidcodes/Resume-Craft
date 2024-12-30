@@ -72,7 +72,7 @@ const NavBar = () => {
         </div>
         <div className="flex items-center gap-x-10">
           <ul className="md:flex hidden  items-center gap-4 lg:gap-5">
-            <li className="group relative ">
+            {/* <li className="group relative ">
               <p className="py-2 px-3 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer">
                 Resume <KeyboardArrowDown />
               </p>
@@ -100,7 +100,7 @@ const NavBar = () => {
                   </Link>
                 </p>
               </div>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/about"

@@ -103,10 +103,10 @@ const Singup = () => {
               {" "}
               Get Started With Resume.Craft
             </h2>
-            <p className="text-gray-600 mb-8  text-center">
-              You may use Socail logins for more-fuild experience
-            </p>
-            <div className="flex justify-center  mb-5">
+            {/* <p className="text-gray-600 mb-8  text-center">
+              You may use Social logins for more-fluid experience
+            </p> */}
+            {/* <div className="flex justify-center  mb-5">
               <button
                 onClick={handleGoogleSignIn}
                 className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
@@ -149,7 +149,7 @@ const Singup = () => {
             </div>
             <div className="max-w-[500px] text-gray-400 text-[14px]  mb-5 mx-auto">
               <Divider>OR SING UP MAIL</Divider>
-            </div>
+            </div> */}
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col max-w-[500px] mb-8 mx-auto relative">
