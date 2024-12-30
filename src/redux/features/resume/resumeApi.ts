@@ -213,7 +213,6 @@ export const {
   useDeleteCertificateMutation,
   useDeleteAwardMutation,
   useDeleteUserResumeMutation,
-  useCreateResumeDuplicateMutation,
 } = resumeApi;
 
 export default resumeApi;
