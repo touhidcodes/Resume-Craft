@@ -127,9 +127,9 @@ const Login = () => {
               {" "}
               Get Started With Resume.Craft
             </h2>
-            <p className="text-gray-600 mb-8  text-center">
-              You may use Socail logins for more-fuild experience
-            </p>
+            {/* <p className="text-gray-600 mb-8  text-center">
+              You may use Social logins for more-fluid experience
+            </p> */}
             <div className="flex justify-center  mb-5 gap-x-3">
               <button
                 onClick={() => handleCredentials("user")}
@@ -150,7 +150,7 @@ const Login = () => {
                 User
               </button>
 
-              <button
+              {/* <button
                 onClick={handleGoogleSignIn}
                 className="flex w-full items-center justify-center gap-3.5 rounded-[20px] border border-stroke bg-gray p-2 hover:bg-opacity-50  max-w-[150px] shadow shadow-[#F4F6FB]"
               >
@@ -188,7 +188,7 @@ const Login = () => {
                   </svg>
                 </span>
                 Google
-              </button>
+              </button> */}
 
               <button
                 onClick={() => handleCredentials("admin")}

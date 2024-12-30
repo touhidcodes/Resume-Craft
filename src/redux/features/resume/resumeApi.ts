@@ -192,6 +192,7 @@ const resumeApi = baseApi.injectEndpoints({
 
 export const {
   useCreateResumeMutation,
+  useCreateResumeDuplicateMutation,
   useGetResumeDataQuery,
   useAddSkillMutation,
   useAddExperienceMutation,

@@ -13,7 +13,6 @@ interface Template {
 
 const UserCoverLetters = () => {
   const { data: allCoverLetters, isLoading } = useGetUserCoverLettersQuery("");
-  // console.log("cover letter of user", allCoverLetters?.data);
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -72,8 +71,7 @@ const UserCoverLetters = () => {
                     </p>
                   </div>
                   <CoverLetterActionButton
-                    coverLetterId={id}
-                    id={template.id}
+                    coverLetterId={id} id={template.id}
                   />
                 </div>
               </div>

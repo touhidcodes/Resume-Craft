@@ -140,7 +140,7 @@ const DashboardLayout = () => {
               My Dashboard
             </Typography>
             <div className="hidden sm:flex items-center gap-x-8">
-              <NotificationsNoneIcon fontSize="medium" />
+              {/* <NotificationsNoneIcon fontSize="medium" /> */}
               <ChooseResumeTemplate size="small" label="Create New" />
               {/* <Button variant="contained" size="small">
                 Create New

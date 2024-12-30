@@ -4,6 +4,7 @@ import { Key } from "react";
 import { Link } from "react-router-dom";
 import { useGetUserResumesQuery } from "../../../redux/features/resume/resumeApi";
 
+
 interface Template {
   id: string;
   name?: string;
@@ -13,8 +14,6 @@ interface Template {
 const UserResumes = () => {
   const { data: allResume, isLoading } = useGetUserResumesQuery("");
   const limitedResume = allResume?.data?.slice(0, 5);
-  // console.log("limitedResume", limitedResume);
-
   return (
     <div>
       <div className="flex items-center justify-between">

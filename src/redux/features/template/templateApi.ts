@@ -46,6 +46,13 @@ const templateApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["CLTemplate"],
     }),
+    deleteCoverLetterTemplate: builder.mutation({
+      query: (id) => ({
+        url: `/cover-letter-template/remove-template/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["CLTemplate"],
+    }),
   }),
 });
 
@@ -55,4 +62,5 @@ export const {
   useDeleteTemplateMutation,
   useGetAllCoverLetterTemplateQuery,
   useCreateCoverLetterTemplateMutation,
+  useDeleteCoverLetterTemplateMutation,
 } = templateApi;
