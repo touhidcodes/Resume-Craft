@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import logo from "../../assets/Logo.png";
 import { toast } from "sonner";
 import useAuthUser from "../../hooks/useAuthUser";
+import { deleteCookies } from "../../utils/cookies";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -20,13 +21,12 @@ const NavBar = () => {
   let role = user?.role;
   // console.log(role)
 
-  console.log("isAuthenticated", isAuthenticated);
-
   const handleLogout = () => {
+    dispatch(logout());
+    deleteCookies();
     toast.success("Logout successful", {
       duration: 2000,
     });
-    dispatch(logout());
     navigate("/login");
   };
 
@@ -114,7 +114,7 @@ const NavBar = () => {
                 About us
               </Link>
             </li>
-            {user ? (
+            {isAuthenticated ? (
               <li>
                 <Link
                   className="py-2 px-5 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer"
@@ -131,7 +131,7 @@ const NavBar = () => {
           </ul>
           <div className="w-[1px] h-6 bg-[#EEEEEE]"></div>
           <div className="md:flex gap-x-2 hidden ">
-            {user ? (
+            {isAuthenticated ? (
               <Button variant="contained" onClick={handleLogout} size="large">
                 Logout
               </Button>

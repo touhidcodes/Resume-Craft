@@ -16,6 +16,7 @@ import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { Helmet } from "react-helmet-async";
 import logo from "../../assets/Logo.png";
+import { setCookie } from "../../utils/cookies";
 
 const Login = () => {
   const [statics] = useState([
@@ -97,12 +98,15 @@ const Login = () => {
     try {
       const res = await login({ ...data, identifier: data.email }).unwrap();
       console.log(res);
-      const user = verifyToken(res.data.accessToken);
-
-      dispatch(setUser({ user: user, token: res.data.accessToken }));
-
-      toast.success("login successfully", { id: toastId, duration: 2000 });
-      navigate("/");
+      if (res?.data?.accessToken) {
+        setCookie("accessToken", res?.data?.accessToken);
+        const user = verifyToken(res.data.accessToken);
+        dispatch(setUser({ user: user, token: res.data.accessToken }));
+        toast.success("login successfully", { id: toastId, duration: 2000 });
+        navigate("/");
+      } else {
+        toast.error("Something wrong", { id: toastId, duration: 2000 });
+      }
     } catch (error) {
       // console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });
