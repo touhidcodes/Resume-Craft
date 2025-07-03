@@ -3,11 +3,11 @@
 import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
-  useGoogleSignInBgMutation,
-  useGoogleSignInWithPopupMutation,
+  // useGoogleSignInBgMutation,
+  // useGoogleSignInWithPopupMutation,
   useLoginMutation,
 } from "../../redux/features/auth/authApi";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -16,6 +16,7 @@ import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { Helmet } from "react-helmet-async";
 import logo from "../../assets/Logo.png";
+import { setCookie } from "../../utils/cookies";
 
 const Login = () => {
   const [statics] = useState([
@@ -30,7 +31,7 @@ const Login = () => {
 
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
   const [, setCredentials] = useState<{
     email: string;
@@ -40,37 +41,37 @@ const Login = () => {
     password: "",
   });
 
-  const [googleSign] = useGoogleSignInWithPopupMutation();
+  // const [googleSign] = useGoogleSignInWithPopupMutation();
 
-  const [google] = useGoogleSignInBgMutation();
+  // const [google] = useGoogleSignInBgMutation();
 
-  const handleGoogleSignIn = async () => {
-    let toastId = toast.loading("Logging in");
-    try {
-      const firebaseRes = await googleSign(null);
-      const userCredential = firebaseRes?.data;
+  // const handleGoogleSignIn = async () => {
+  //   let toastId = toast.loading("Logging in");
+  //   try {
+  //     const firebaseRes = await googleSign(null);
+  //     const userCredential = firebaseRes?.data;
 
-      const userData = {
-        email: userCredential?.email,
-        password: "123456", // Provide a default password or let the backend handle it
-        userName: userCredential?.displayName,
-      };
-      console.log("out", userCredential);
-      if (userCredential) {
-        console.log("in", userCredential);
-        const backendRes = await google(userData).unwrap();
-        const accessToken = backendRes?.data?.accessToken;
-        const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+  //     const userData = {
+  //       email: userCredential?.email,
+  //       password: "123456", // Provide a default password or let the backend handle it
+  //       userName: userCredential?.displayName,
+  //     };
+  //     console.log("out", userCredential);
+  //     if (userCredential) {
+  //       console.log("in", userCredential);
+  //       const backendRes = await google(userData).unwrap();
+  //       const accessToken = backendRes?.data?.accessToken;
+  //       const verifiedUser = verifyToken(backendRes?.data?.accessToken);
 
-        dispatch(setUser({ user: verifiedUser, token: accessToken }));
+  //       dispatch(setUser({ user: verifiedUser, token: accessToken }));
 
-        toast.success("Login successful", { id: toastId, duration: 2000 });
-        navigate(location?.state?.from?.pathname || "/");
-      }
-    } catch (error) {
-      toast.error("Something wrong", { id: toastId, duration: 2000 });
-    }
-  };
+  //       toast.success("Login successful", { id: toastId, duration: 2000 });
+  //       navigate(location?.state?.from?.pathname || "/");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Something wrong", { id: toastId, duration: 2000 });
+  //   }
+  // };
 
   const [login] = useLoginMutation();
   const {
@@ -96,11 +97,16 @@ const Login = () => {
     let toastId = toast.loading("Logging in");
     try {
       const res = await login({ ...data, identifier: data.email }).unwrap();
-      const user = verifyToken(res.data.accessToken);
-
-      dispatch(setUser({ user: user, token: res.data.accessToken }));
-      toast.success("login successfully", { id: toastId, duration: 2000 });
-      navigate("/");
+      console.log(res);
+      if (res?.data?.accessToken) {
+        setCookie("accessToken", res?.data?.accessToken);
+        const user = verifyToken(res.data.accessToken);
+        dispatch(setUser({ user: user, token: res.data.accessToken }));
+        toast.success("login successfully", { id: toastId, duration: 2000 });
+        navigate("/");
+      } else {
+        toast.error("Something wrong", { id: toastId, duration: 2000 });
+      }
     } catch (error) {
       // console.log(error);
       toast.error("Something wrong", { id: toastId, duration: 2000 });

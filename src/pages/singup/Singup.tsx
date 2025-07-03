@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Divider } from "@mui/material";
+// import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
-  useGoogleSignInBgMutation,
-  useGoogleSignInWithPopupMutation,
+  // useGoogleSignInBgMutation,
+  // useGoogleSignInWithPopupMutation,
   useSingupMutation,
 } from "../../redux/features/auth/authApi";
 import { Helmet } from "react-helmet-async";
 import logo from "../../assets/Logo.png";
-import { setUser } from "../../redux/features/auth/authSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import { verifyToken } from "../../utils/verifyToken";
+// import { setUser } from "../../redux/features/auth/authSlice";
+// import { useAppDispatch } from "../../redux/hooks";
+// import { verifyToken } from "../../utils/verifyToken";
 
 const Singup = () => {
   const [statics] = useState([
@@ -27,9 +27,9 @@ const Singup = () => {
     "Link resume with Indeed",
   ]);
   const [visible, setVisible] = useState(false);
-  const [googleSign] = useGoogleSignInWithPopupMutation();
+  // const [googleSign] = useGoogleSignInWithPopupMutation();
   const [singup] = useSingupMutation();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const {
@@ -39,32 +39,33 @@ const Singup = () => {
     formState: { errors },
   } = useForm();
 
-  const [google] = useGoogleSignInBgMutation();
-  const handleGoogleSignIn = async () => {
-    const toastId = toast.loading("Logging in");
-    try {
-      const firebaseRes = await googleSign(null);
-      const userCredential = firebaseRes?.data;
+  // const [google] = useGoogleSignInBgMutation();
 
-      const userData = {
-        email: userCredential?.email,
-        password: "123456", // Provide a default password or let the backend handle it
-        userName: userCredential?.displayName,
-      };
+  // const handleGoogleSignIn = async () => {
+  //   const toastId = toast.loading("Logging in");
+  //   try {
+  //     const firebaseRes = await googleSign(null);
+  //     const userCredential = firebaseRes?.data;
 
-      if (userCredential) {
-        const backendRes = await google(userData).unwrap();
-        const accessToken = backendRes?.data?.accessToken;
-        const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+  //     const userData = {
+  //       email: userCredential?.email,
+  //       password: "123456", // Provide a default password or let the backend handle it
+  //       userName: userCredential?.displayName,
+  //     };
 
-        dispatch(setUser({ user: verifiedUser, token: accessToken }));
-        toast.success("Login successful", { id: toastId, duration: 2000 });
-        navigate("/");
-      }
-    } catch (error: any) {
-      toast.error("Something wrong", { id: toastId, duration: 2000 });
-    }
-  };
+  //     if (userCredential) {
+  //       const backendRes = await google(userData).unwrap();
+  //       const accessToken = backendRes?.data?.accessToken;
+  //       const verifiedUser = verifyToken(backendRes?.data?.accessToken);
+
+  //       dispatch(setUser({ user: verifiedUser, token: accessToken }));
+  //       toast.success("Login successful", { id: toastId, duration: 2000 });
+  //       navigate("/");
+  //     }
+  //   } catch (error: any) {
+  //     toast.error("Something wrong", { id: toastId, duration: 2000 });
+  //   }
+  // };
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("singup");

@@ -6,10 +6,10 @@ import EHeader from "../../component/TemplateSection/Emon/EHeader";
 import ELanguages from "../../component/TemplateSection/Emon/ELanguages";
 import Eskills from "../../component/TemplateSection/Emon/Eskills";
 import Esummery from "../../component/TemplateSection/Emon/Esummery";
-
 import useActiveSections, {
   TResumeSections,
 } from "../../hooks/useActiveSections";
+
 const Emon = () => {
   const resumeSections: TResumeSections = {
     Summary: {
