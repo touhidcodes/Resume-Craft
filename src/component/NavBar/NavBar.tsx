@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Close, KeyboardArrowDown } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, userCurrentUser } from "../../redux/features/auth/authSlice";
 import { Button } from "@mui/material";
 import logo from "../../assets/Logo.png";
 import { toast } from "sonner";
+import useAuthUser from "../../hooks/useAuthUser";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const user = useAppSelector(userCurrentUser);
+  const { isAuthenticated } = useAuthUser();
   const dispatch = useAppDispatch();
   // eslint-disable-next-line prefer-const
   let role = user?.role;
   // console.log(role)
+
+  console.log("isAuthenticated", isAuthenticated);
 
   const handleLogout = () => {
     toast.success("Logout successful", {

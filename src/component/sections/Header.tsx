@@ -22,9 +22,9 @@ const Header = () => {
               <p>35,330 resumes created today</p>
             </div>
             <h1 className="text-3xl  md:text-[48px] md:leading-[58px] font-bold mt-3 title">
-              The professional{" "}
-              <span className="tittel">
-                resume builder
+              The Professional{" "}
+              <span className="title">
+                Resume Builder
                 <span className="ai-powered-tag"></span>
               </span>
             </h1>

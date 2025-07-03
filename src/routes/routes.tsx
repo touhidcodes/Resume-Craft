@@ -8,11 +8,11 @@ import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGenerator";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 import NotFound from "../pages/notFound/NotFound";
-import PrivetRoute from "./PrivateRoute";
 import AdminPrivet from "./AdminPrivate";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
 import { AdminPath } from "./adminroute";
 import { UserPath } from "./userRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,9 +30,9 @@ const router = createBrowserRouter([
       {
         path: "/resume-builder/*",
         element: (
-          <PrivetRoute>
+          <PrivateRoute>
             <ResumeBuilder />
-          </PrivetRoute>
+          </PrivateRoute>
         ),
       },
       {
@@ -66,9 +66,9 @@ const router = createBrowserRouter([
   {
     path: "user",
     element: (
-      <PrivetRoute>
+      <PrivateRoute>
         <DashboardLayout />
-      </PrivetRoute>
+      </PrivateRoute>
     ),
     children: routerGenerator(UserPath),
   },
