@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CheckCircle, Sparkles, Wand2, Flame, Stars } from "lucide-react";
 import { Divider } from "@mui/material";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -113,12 +114,18 @@ const Login = () => {
     }
   };
   return (
-    <section className="py-[60px]">
+    <section className="relative min-h-screen bg-white font-roboto">
       <Helmet>
         <title>Login - Resume Craft</title>
       </Helmet>
-      <div className="max-w-[1240px] mx-auto px-5  font-roboto">
-        <div className="flex  gap-10  xl:gap-20 justify-center items-center flex-col md:flex-row">
+
+      {/* Right half gradient background */}
+      <div className="hidden md:block absolute right-0 top-0 h-full w-1/2 bg-gradient-to-tr from-pink-200 via-blue-100 to-purple-200 z-0" />
+
+      {/* Main content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-10">
+        <div className="flex flex-col md:flex-row items-stretch gap-10 xl:gap-20">
+          {/* Left: Login Form */}
           <div className="w-full md:w-1/2">
             <Link to="/">
               {" "}
@@ -302,9 +309,10 @@ const Login = () => {
               </p>
             </div>
           </div>
-          <div className="bg-[url('https://www.resume.com/static/siwi-left-bg-2775bb16ee97d03f578d52c38329ccbf.webp')] bg-cover bg-no-repeat w-full md:w-1/2 object-cover h-[500px] md:h-[600px] lg:h-[600px] rounded-[9px]">
+
+          {/* <div className="bg-[url('https://www.resume.com/static/siwi-left-bg-2775bb16ee97d03f578d52c38329ccbf.webp')] bg-cover bg-no-repeat w-full md:w-1/2 object-cover h-[500px] md:h-[600px] lg:h-[600px] rounded-[9px]">
             <div className=" max-w-[400px] mx-auto py-10 px-5 lg:px-0">
-              <p className="text-white  text-[24px] mb-3 font-semibold">
+              <p className="text-black  text-[24px] mb-3 font-semibold">
                 An Our Partner
               </p>
               <div className="grid grid-cols-1 gap-y-8 md:gap-y-10 ">
@@ -325,11 +333,52 @@ const Login = () => {
                         fill="white"
                       ></path>
                     </svg>
-                    <p className="text-white">{st}</p>
+                    <p className="text-black">{st}</p>
                   </div>
                 ))}
               </div>
             </div>
+          </div> */}
+
+          {/* Right: Feature Highlights */}
+          <div className="w-full md:w-1/2 flex items-center justify-center relative z-10">
+            <div className="max-w-[400px] px-6 py-10">
+              <h3 className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
+                <Stars className="w-6 h-6 text-yellow-500 animate-ping" />
+                Why Resume.Craft?
+              </h3>
+              <div className="grid grid-cols-1 gap-6 text-indigo-800 font-medium text-[16px]">
+                {statics.map((item, index) => {
+                  const icons = [CheckCircle, Sparkles, Wand2, Flame];
+                  const Icon = icons[index % icons.length];
+                  const animations = [
+                    "animate-bounce",
+                    "animate-pulse",
+                    "animate-spin",
+                    "animate-bounce",
+                  ];
+                  const colors = [
+                    "text-green-500",
+                    "text-blue-500",
+                    "text-purple-500",
+                    "text-pink-500",
+                  ];
+                  return (
+                    <div key={index} className="flex items-center gap-3">
+                      <Icon
+                        className={`${colors[index % colors.length]} ${
+                          animations[index % animations.length]
+                        }`}
+                      />
+                      {item}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Floating animation icon */}
+            <Sparkles className="absolute top-5 right-5 text-yellow-400 animate-spin-slow w-10 h-10 opacity-30 z-0" />
           </div>
         </div>
       </div>
