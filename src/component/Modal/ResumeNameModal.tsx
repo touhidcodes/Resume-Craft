@@ -12,7 +12,13 @@ type TResumeName = {
   resumeName: string;
 };
 
-const ResumeNameModal = ({ template }: { template: TTemplate }) => {
+const ResumeNameModal = ({
+  template,
+  disabled = false,
+}: {
+  template: TTemplate;
+  disabled?: boolean;
+}) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -46,6 +52,7 @@ const ResumeNameModal = ({ template }: { template: TTemplate }) => {
   return (
     <>
       <Button
+        disabled={disabled}
         onClick={open}
         variant={"contained"}
         size="small"
