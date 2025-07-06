@@ -8,7 +8,6 @@ import DashboardLayout from "../component/layout/DashboardLayout";
 import { routerGenerator } from "../utils/routesGenerator";
 import ResumeBuilder from "../pages/builder/ResumeBuilder";
 import NotFound from "../pages/notFound/NotFound";
-import AdminPrivet from "./AdminPrivate";
 import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
 import { AdminPath } from "./adminroute";
 import { UserPath } from "./userRoute";
@@ -16,6 +15,8 @@ import PrivateRoute from "./PrivateRoute";
 import TeamsPage from "../pages/teams/TeamsPage";
 import ChooseCoverLetterTemplatePage from "../pages/TestTemplates/ChooseCoverLetterTestPage/ChooseCoverLetterTestPage";
 import ChooseResumeTemplatesTestPage from "../pages/TestTemplates/ChooseResumeTemplateTestPage/ChooseResumeTemplateTestPage";
+import PricingPage from "../pages/pricing/pricingPage";
+import AdminPrivate from "./AdminPrivate";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         element: <TeamsPage />,
       },
       {
+        path: "/pricing",
+        element: <PricingPage />,
+      },
+      {
         path: "/resume-builder/*",
         element: (
           <PrivateRoute>
@@ -44,15 +49,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/cover-letter-builder/*",
-        element: <CoverLetterBuilder />,
+        element: (
+          <PrivateRoute>
+            <CoverLetterBuilder />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/templates/resume",
-        element: <ChooseResumeTemplatesTestPage />,
+        element: (
+          <PrivateRoute>
+            <ChooseResumeTemplatesTestPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/templates/cover-letter",
-        element: <ChooseCoverLetterTemplatePage />,
+        element: (
+          <PrivateRoute>
+            <ChooseCoverLetterTemplatePage />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -71,9 +88,9 @@ const router = createBrowserRouter([
   {
     path: "admin",
     element: (
-      <AdminPrivet>
+      <AdminPrivate>
         <DashboardLayout />
-      </AdminPrivet>
+      </AdminPrivate>
     ),
     children: routerGenerator(AdminPath),
   },
