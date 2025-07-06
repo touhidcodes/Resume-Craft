@@ -14,6 +14,8 @@ import { AdminPath } from "./adminroute";
 import { UserPath } from "./userRoute";
 import PrivateRoute from "./PrivateRoute";
 import TeamsPage from "../pages/teams/TeamsPage";
+import ChooseCoverLetterTemplatePage from "../pages/TestTemplates/ChooseCoverLetterTestPage/ChooseCoverLetterTestPage";
+import ChooseResumeTemplatesTestPage from "../pages/TestTemplates/ChooseResumeTemplateTestPage/ChooseResumeTemplateTestPage";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
       {
         path: "/cover-letter-builder/*",
         element: <CoverLetterBuilder />,
+      },
+      {
+        path: "/templates/resume",
+        element: <ChooseResumeTemplatesTestPage />,
+      },
+      {
+        path: "/templates/cover-letter",
+        element: <ChooseCoverLetterTemplatePage />,
       },
     ],
   },

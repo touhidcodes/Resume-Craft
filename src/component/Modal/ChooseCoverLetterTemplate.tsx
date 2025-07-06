@@ -2,18 +2,19 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
-import { forwardRef, Ref, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
+import { userCurrentToken } from "../../redux/features/auth/authSlice";
+import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
+import { useGetUserCoverLettersQuery } from "../../redux/features/coverLetter/coverLetterApi";
 import { TTemplate } from "../shared/ResumeTemplate";
 import CoverLetterNameModal from "./CoverLetterNameModal";
-import { useGetAllCoverLetterTemplateQuery } from "../../redux/features/template/templateApi";
-import { userCurrentToken } from "../../redux/features/auth/authSlice";
-import { useAppSelector } from "../../redux/hooks";
-import { useNavigate } from "react-router-dom";
+import useAuthUser from "../../hooks/useAuthUser";
 
 type TChooseCoverLetterTemplateProps = {
   label: string;
@@ -23,28 +24,31 @@ type TChooseCoverLetterTemplateProps = {
   startIcon?: JSX.Element;
 };
 
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<unknown>;
-  },
-  ref: Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 const ChooseCoverLetterTemplate = ({
-  size,
   label,
+  size,
   color = "primary",
   variant = "contained",
   startIcon: StartIcon,
 }: TChooseCoverLetterTemplateProps) => {
+  const navigate = useNavigate();
+  const { user } = useAuthUser();
   const [open, setOpen] = useState(false);
 
-  const { data, isLoading } = useGetAllCoverLetterTemplateQuery(null);
   const token = useAppSelector(userCurrentToken);
-  const navigate = useNavigate();
-  const handleClickOpen = () => {
+
+  const { data: templatesData, isLoading: isLoadingTemplates } =
+    useGetAllCoverLetterTemplateQuery(null);
+  const { data: coverLettersData, isLoading: isLoadingUsage } =
+    useGetUserCoverLettersQuery(null);
+
+  const loading = isLoadingTemplates || isLoadingUsage;
+  const createdCount = coverLettersData?.data?.length || 0;
+  const limit = 10;
+  const canCreate = createdCount < limit;
+  const remaining = limit - createdCount;
+
+  const handleOpen = () => {
     if (!token) {
       navigate("/login");
     } else {
@@ -52,16 +56,26 @@ const ChooseCoverLetterTemplate = ({
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = () => setOpen(false);
+
+  const handleNavigateDashboard = () => {
+    if (user?.role === "ADMIN") navigate("/admin/dashboard");
+    else if (user?.role === "USER") navigate("/user/dashboard");
+    else navigate("/login");
   };
 
-  if (isLoading) return;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-32">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <>
       <Button
-        onClick={handleClickOpen}
+        onClick={handleOpen}
         size={size}
         variant={variant}
         color={color}
@@ -69,12 +83,8 @@ const ChooseCoverLetterTemplate = ({
       >
         {label}
       </Button>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
+
+      <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar
           elevation={0}
           sx={{
@@ -82,7 +92,6 @@ const ChooseCoverLetterTemplate = ({
             bgcolor: "#fff",
             color: "#000",
             borderBottom: "1px solid #ddd",
-            pr: 0,
           }}
         >
           <Toolbar
@@ -90,16 +99,20 @@ const ChooseCoverLetterTemplate = ({
               maxWidth: "1170px",
               width: "100%",
               margin: "0 auto",
-              pr: 0,
             }}
           >
-            <Typography
-              sx={{ flex: 1, fontSize: [16, 20] }}
-              variant="h6"
-              component="div"
-            >
+            <Typography sx={{ flex: 1, fontSize: [16, 20] }}>
               Choose Cover Letter Template
             </Typography>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={() => navigate("/templates/cover-letter")}
+              sx={{ mr: 2 }}
+            >
+              Test Cover Letter Builder
+            </Button>
             <IconButton
               edge="start"
               color="inherit"
@@ -111,22 +124,51 @@ const ChooseCoverLetterTemplate = ({
           </Toolbar>
         </AppBar>
 
-        {/* Main Content */}
+        {/* Usage Info */}
+        <div className="bg-yellow-50 text-yellow-800 px-4 py-2 text-center text-sm font-medium">
+          {canCreate ? (
+            <span>
+              You have created <strong>{createdCount}</strong> out of{" "}
+              <strong>{limit}</strong> cover letters.{" "}
+              <strong>{remaining}</strong> cover letter(s) left.
+            </span>
+          ) : (
+            <div className="space-y-1">
+              <p>
+                <strong>Cover letter limit reached.</strong> You've created the
+                maximum of <strong>{limit}</strong> cover letters allowed in the
+                free version.
+              </p>
+              <p>
+                Please go to your{" "}
+                <span
+                  className="underline cursor-pointer text-blue-600 hover:text-blue-800"
+                  onClick={handleNavigateDashboard}
+                >
+                  dashboard
+                </span>{" "}
+                to edit existing ones or{" "}
+                <span
+                  className="underline cursor-pointer text-blue-600 hover:text-blue-800"
+                  onClick={() => navigate("/pricing")}
+                >
+                  upgrade to premium
+                </span>{" "}
+                for unlimited cover letter creation.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Template Grid */}
         <div className="max-w-[1170px] w-full mx-auto px-4 pt-6 pb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-3">
-          {/* <div
-            // onClick={() => handleCreateResume("/resume-builder/custom")}
-            className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200 flex flex-col justify-center items-center text-muted"
-          >
-            <AddIcon sx={{ fontSize: 50 }} />
-            <h5>Create New</h5>
-          </div> */}
-          {data?.data?.map((template: TTemplate) => (
+          {templatesData?.data?.map((template: TTemplate) => (
             <div key={template.id} className="relative group">
               <div>
                 <div className="bg-[#F4F4FF] p-5 mb-3 cursor-pointer border border-neutral-200">
                   <img
                     src={template.image}
-                    alt="user's resume"
+                    alt="cover letter template"
                     className="object-center h-[240px] w-full"
                   />
                 </div>
@@ -135,9 +177,12 @@ const ChooseCoverLetterTemplate = ({
                   ({template.usageCount}) users use this
                 </p>
               </div>
-              <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-300">
+              <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300">
                 <div className="flex justify-center items-center h-full px-3">
-                  <CoverLetterNameModal template={template} />
+                  <CoverLetterNameModal
+                    template={template}
+                    disabled={!canCreate}
+                  />
                 </div>
               </div>
             </div>

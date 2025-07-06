@@ -13,6 +13,9 @@ import ResumeTemplate, { TTemplate } from "../shared/ResumeTemplate";
 import { useGetAllTemplatesQuery } from "../../redux/features/template/templateApi";
 import { useAppSelector } from "../../redux/hooks";
 import { userCurrentToken } from "../../redux/features/auth/authSlice";
+import { useGetUserResumesQuery } from "../../redux/features/resume/resumeApi";
+import useAuthUser from "../../hooks/useAuthUser";
+import { CircularProgress } from "@mui/material";
 
 type TChooseResumeTemplateProps = {
   label: string;
@@ -23,9 +26,7 @@ type TChooseResumeTemplateProps = {
 };
 
 const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<unknown>;
-  },
+  props: TransitionProps & { children: React.ReactElement },
   ref: Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -39,23 +40,47 @@ const ChooseResumeTemplate = ({
   startIcon: StartIcon,
 }: TChooseResumeTemplateProps) => {
   const navigate = useNavigate();
+  const { user } = useAuthUser();
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useGetAllTemplatesQuery(null);
+  const { data: templatesData, isLoading: isLoadingTemplates } =
+    useGetAllTemplatesQuery(null);
   const token = useAppSelector(userCurrentToken);
+  const { data: resumeData, isLoading: isLoadingUsage } =
+    useGetUserResumesQuery(null);
+
+  const createdResumesCount = resumeData?.data?.length || 0;
+  const resumeLimit = 10;
+  const canCreate = createdResumesCount < resumeLimit;
+  const remaining = resumeLimit - createdResumesCount;
+  const loading = isLoadingTemplates || isLoadingUsage;
+
   const handleClickOpen = () => {
-    setOpen(true);
     if (!token) {
+      navigate("/login");
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const handleClose = () => setOpen(false);
+
+  const handleNavigate = () => {
+    if (user?.role === "ADMIN") {
+      navigate("/admin/dashboard");
+    } else if (user?.role === "USER") {
+      navigate("/user/dashboard");
+    } else {
       navigate("/login");
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  if (isLoading) return;
-
-  // console.log(data);
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-32">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -68,12 +93,14 @@ const ChooseResumeTemplate = ({
       >
         {label}
       </Button>
+
       <Dialog
         fullScreen
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
+        {/* AppBar */}
         <AppBar
           elevation={0}
           sx={{
@@ -81,7 +108,6 @@ const ChooseResumeTemplate = ({
             bgcolor: "#fff",
             color: "#000",
             borderBottom: "1px solid #ddd",
-            pr: 0,
           }}
         >
           <Toolbar
@@ -89,16 +115,24 @@ const ChooseResumeTemplate = ({
               maxWidth: "1170px",
               width: "100%",
               margin: "0 auto",
-              pr: 0,
             }}
           >
-            <Typography
-              sx={{ flex: 1, fontSize: [16, 20] }}
-              variant="h6"
-              component="div"
-            >
+            <Typography sx={{ flex: 1, fontSize: [16, 20] }}>
               Choose Resume Template
             </Typography>
+
+            {/* Test Resume Builder Button */}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={() => navigate("/templates/resume")}
+              sx={{ mr: 2 }}
+            >
+              Test Resume Builder
+            </Button>
+
+            {/* Close Button */}
             <IconButton
               edge="start"
               color="inherit"
@@ -110,17 +144,50 @@ const ChooseResumeTemplate = ({
           </Toolbar>
         </AppBar>
 
-        {/* Main Content */}
+        {/* Usage Info */}
+        <div className="bg-yellow-50 text-yellow-800 px-4 py-2 text-center text-sm font-medium">
+          {canCreate ? (
+            <span>
+              You have created <strong>{createdResumesCount}</strong> out of{" "}
+              <strong>{resumeLimit}</strong> resumes.{" "}
+              <strong>{remaining}</strong> resume(s) left.
+            </span>
+          ) : (
+            <div className="bg-yellow-50 text-yellow-800 px-4 py-3 text-center text-sm font-medium space-y-1">
+              <p>
+                <strong>Resume limit reached.</strong> You've created the
+                maximum of <strong>{resumeLimit}</strong> resumes allowed in the
+                free version.
+              </p>
+              <p>
+                Please go to your{" "}
+                <span
+                  className="underline cursor-pointer text-blue-600 hover:text-blue-800"
+                  onClick={handleNavigate}
+                >
+                  dashboard
+                </span>{" "}
+                to edit your existing resumes or{" "}
+                <span
+                  className="underline cursor-pointer text-blue-600 hover:text-blue-800"
+                  onClick={() => navigate("/pricing")}
+                >
+                  upgrade to premium
+                </span>{" "}
+                for unlimited resume creation.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Templates */}
         <div className="max-w-[1170px] w-full mx-auto px-4 pt-6 pb-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-3">
-          {/* <div
-            // onClick={() => handleCreateResume("/resume-builder/custom")}
-            className="bg-white p-5 mb-3 cursor-pointer border border-neutral-200 flex flex-col justify-center items-center text-muted"
-          >
-            <AddIcon sx={{ fontSize: 50 }} />
-            <h5>Create New</h5>
-          </div> */}
-          {data?.data?.map((template: TTemplate) => (
-            <ResumeTemplate key={template.id} template={template} />
+          {templatesData?.data?.map((template: TTemplate) => (
+            <ResumeTemplate
+              key={template.id}
+              template={template}
+              canCreate={canCreate}
+            />
           ))}
         </div>
       </Dialog>

@@ -7,9 +7,15 @@ export type TTemplate = {
   usageCount: number;
 };
 
-const ResumeTemplate = ({ template }: { template: TTemplate }) => {
+type ResumeTemplateProps = {
+  template: TTemplate;
+  canCreate: boolean;
+};
+
+const ResumeTemplate = ({ template, canCreate }: ResumeTemplateProps) => {
   return (
     <div className="relative group">
+      {/* Resume Template Preview */}
       <div>
         <div className="bg-[#F4F4FF] p-5 mb-3 cursor-pointer border border-neutral-200">
           <img
@@ -23,9 +29,13 @@ const ResumeTemplate = ({ template }: { template: TTemplate }) => {
           ({template.usageCount}) users use this
         </p>
       </div>
+
+      {/* Hover Button Section */}
       <div className="bg-transparent absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-300">
-        <div className="flex justify-center items-center h-full px-3">
-          <ResumeNameModal template={template} />
+        <div className="flex flex-col justify-center items-center h-full px-3">
+          {/* Check if user can create more resumes */}
+
+          <ResumeNameModal template={template} disabled={!canCreate} />
         </div>
       </div>
     </div>

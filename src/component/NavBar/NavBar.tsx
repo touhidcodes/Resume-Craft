@@ -126,7 +126,7 @@ const NavBar = () => {
               <li>
                 <Link
                   className="py-2 px-5 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer"
-                  to={`/${role}/dashboard`}
+                  to={`/${role.toLowerCase()}/dashboard`}
                 >
                   Dashboard
                 </Link>

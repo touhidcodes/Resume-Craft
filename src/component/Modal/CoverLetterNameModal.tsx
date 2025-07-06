@@ -12,7 +12,13 @@ type TCoverLetterName = {
   name: string;
 };
 
-const CoverLetterNameModal = ({ template }: { template: TTemplate }) => {
+const CoverLetterNameModal = ({
+  template,
+  disabled = false,
+}: {
+  template: TTemplate;
+  disabled?: boolean;
+}) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -49,6 +55,7 @@ const CoverLetterNameModal = ({ template }: { template: TTemplate }) => {
   return (
     <>
       <Button
+        disabled={disabled}
         onClick={open}
         variant={"contained"}
         size="small"
