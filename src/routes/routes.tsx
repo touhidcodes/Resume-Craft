@@ -13,6 +13,7 @@ import CoverLetterBuilder from "../pages/builder/CoverLetterBuilder";
 import { AdminPath } from "./adminroute";
 import { UserPath } from "./userRoute";
 import PrivateRoute from "./PrivateRoute";
+import TeamsPage from "../pages/teams/TeamsPage";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/teams",
+        element: <TeamsPage />,
       },
       {
         path: "/resume-builder/*",

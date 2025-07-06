@@ -114,6 +114,14 @@ const NavBar = () => {
                 About us
               </Link>
             </li>
+            <li>
+              <Link
+                to="/teams"
+                className="py-2 px-5 rounded-[9px] inline-block hover:bg-[#efefef] transition-all ease-in-out duration-100 cursor-pointer"
+              >
+                Teams
+              </Link>
+            </li>
             {isAuthenticated ? (
               <li>
                 <Link
