@@ -5,8 +5,8 @@ import { RootState } from "../store";
 
 export const baseQuery = fetchBaseQuery({
   // TODO: change the prod url in baseapi
-  baseUrl: "http://localhost:5000/api",
-  // baseUrl: "https://resume-craft-api.vercel.app/api",
+  // baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://resume-craft-api.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
