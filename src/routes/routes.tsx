@@ -15,8 +15,8 @@ import PrivateRoute from "./PrivateRoute";
 import TeamsPage from "../pages/teams/TeamsPage";
 import ChooseCoverLetterTemplatePage from "../pages/TestTemplates/ChooseCoverLetterTestPage/ChooseCoverLetterTestPage";
 import ChooseResumeTemplatesTestPage from "../pages/TestTemplates/ChooseResumeTemplateTestPage/ChooseResumeTemplateTestPage";
-import PricingPage from "../pages/pricing/pricingPage";
 import AdminPrivate from "./AdminPrivate";
+import PricingPage from "../pages/pricing/PricingPage";
 
 const router = createBrowserRouter([
   {
