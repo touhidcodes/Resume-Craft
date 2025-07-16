@@ -1,20 +1,20 @@
-import featureImage1 from "../../assets/images/free.png";
-import featureImage2 from "../../assets/images/data.png";
-import featureImage3 from "../../assets/images/seen.png";
-import AboutUsSlider from "../../component/slider/AboutSlider";
 import { Button, Chip } from "@mui/material";
-import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import {
-  TrendingUpIcon,
-  ShieldCheckIcon,
-  UsersIcon,
-  StarIcon,
   CheckCircleIcon,
   DownloadIcon,
   EditIcon,
   ShareIcon,
+  ShieldCheckIcon,
+  StarIcon,
+  TrendingUpIcon,
+  UsersIcon,
 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import featureImage2 from "../../assets/images/data.png";
+import featureImage1 from "../../assets/images/free.png";
+import featureImage3 from "../../assets/images/seen.png";
+import AboutUsSlider from "../../component/slider/AboutSlider";
 
 const About = () => {
   const features = [
@@ -83,7 +83,7 @@ const About = () => {
 
       <div className="bg-gray-50 font-roboto">
         {/* Hero Section */}
-        <section className="py-10 lg:py-12 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <section className="py-10 lg:py-[90px] bg-gradient-to-br from-blue-50 via-white to-purple-50">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
               Why build your resume with{" "}
@@ -116,7 +116,7 @@ const About = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-10 lg:py-12 bg-white">
+        <section className="py-10 lg:py-[90px] bg-white">
           <div className="max-w-6xl mx-auto px-6 lg:px-0">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -164,7 +164,7 @@ const About = () => {
         </section>
 
         {/* Mission & Vision Section */}
-        <section className="py-10 lg:py-12 bg-gradient-to-br from-blue-50 to-purple-50">
+        <section className="py-10 lg:py-[90px] bg-gradient-to-br from-blue-50 to-purple-50">
           <div className="max-w-6xl mx-auto px-6 lg:px-0">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -226,7 +226,7 @@ const About = () => {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-10 lg:py-12 bg-gray-50">
+        <section className="py-10 lg:py-[90px] bg-gray-50">
           <div className="max-w-6xl mx-auto px-6 lg:px-0">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

@@ -1,16 +1,16 @@
 import { Button } from "@mui/material";
 import {
-  Code,
-  Users,
-  Rocket,
-  Lightbulb,
-  Handshake,
-  Target,
-  Crown,
-  Terminal,
-  Palette,
-  Shield,
   Cloud,
+  Code,
+  Crown,
+  Handshake,
+  Lightbulb,
+  Palette,
+  Rocket,
+  Shield,
+  Target,
+  Terminal,
+  Users,
   Zap,
 } from "lucide-react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
@@ -62,13 +62,17 @@ const TeamsPage = () => {
       name: "Emon Ahmed",
       role: "Frontend Developer",
       email: "imonshomon@gmail.com",
-      phone: "01731106500",
-      expertise: ["React.js", "UI/UX Design", "Mobile Development"],
+      phone: "01921837900",
+      expertise: ["React.js", "UI/UX Design", "Next Js"],
       color: "bg-gradient-to-br from-orange-500 to-orange-600",
       description:
         "Creating intuitive user experiences with modern frontend technologies and responsive design.",
       icon: <Palette className="text-2xl" />,
-      achievements: ["UI/UX Expert", "React Specialist", "Mobile Developer"],
+      achievements: [
+        "UI/UX Expert",
+        "React Specialist",
+        "Performance Optimizer",
+      ],
     },
     {
       name: "Rakib Ahmed",
@@ -145,7 +149,7 @@ const TeamsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="py-8 lg:py-12 bg-gradient-to-br from-blue-50 to-purple-50 text-black">
+      <section className="py-8 lg:py-[90px] bg-gradient-to-br from-blue-50 to-purple-50 text-black">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Meet Our <span className="text-blue-600">Expert Team</span>
@@ -169,7 +173,7 @@ const TeamsPage = () => {
       </section>
 
       {/* Team Values Section */}
-      <section className="py-8 lg:py-10 bg-white">
+      <section className="py-8 lg:py-[90px] bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -200,7 +204,7 @@ const TeamsPage = () => {
       </section>
 
       {/* Team Members Section */}
-      <section className="py-8 lg:py-12 bg-gray-50">
+      <section className="py-8 lg:py-[90px] bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -301,7 +305,7 @@ const TeamsPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-8 lg:py-12 bg-gradient-to-br from-blue-50 to-purple-50 text-black">
+      <section className="py-8 lg:py-[120px] bg-gradient-to-br from-blue-50 to-purple-50 text-black">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Work With Us?

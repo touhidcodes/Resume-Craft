@@ -1,19 +1,18 @@
 import {
-  Check,
-  Palette,
-  Zap,
+  BarChart3,
   Bot,
-  Smartphone,
-  Shield,
-  Star,
+  Check,
+  Crown,
   Download,
   Mail,
-  Crown,
-  Users,
-  BarChart3,
+  Palette,
+  Shield,
+  Smartphone,
   Sparkles,
+  Star,
+  Users,
+  Zap,
 } from "lucide-react";
-
 const PricingPage = () => {
   const plans = [
     {
@@ -106,10 +105,16 @@ const PricingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
+    <div className="m  bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 lg:py-[90px] px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+
+        <div className="flex  justify-center  absolute left-0 top-[100px] right-0">
+          <span className=" animate-bounce px-3 py-1 bg-red-100 text-red-800  rounded-full text-sm font-medium">
+            Coming Soon ...
+          </span>
+        </div>
+        <div className="text-center mb-16 lg:mb-24">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 drop-shadow-sm">
             Choose Your Plan
           </h1>
@@ -120,7 +125,8 @@ const PricingPage = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 lg:mb-24">
           {plans.map((plan, index) => (
             <div
               key={index}
@@ -176,7 +182,7 @@ const PricingPage = () => {
               </div>
 
               <button
-                className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 ${plan.buttonStyle}`}
+                className={`w-full py-4 px-6  cursor-not-allowed  rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 ${plan.buttonStyle}   `}
               >
                 {plan.buttonText}
               </button>
@@ -186,7 +192,7 @@ const PricingPage = () => {
 
         {/* Features Section */}
         <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12 lg:mb-24">
             Why Choose Our Resume Builder?
           </h2>
 

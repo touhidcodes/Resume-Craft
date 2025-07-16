@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState } from "react";
 import { Close } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
+import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { TTemplate } from "../shared/ResumeTemplate";
 import { useNavigate } from "react-router-dom";
-import ButtonSpinner from "../shared/ButtonSpinner";
 import { useCreateCoverLetterMutation } from "../../redux/features/coverLetter/coverLetterApi";
+import ButtonSpinner from "../shared/ButtonSpinner";
+import { TTemplate } from "../shared/ResumeTemplate";
 
 type TCoverLetterName = {
   name: string;
