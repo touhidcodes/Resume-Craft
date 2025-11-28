@@ -40,10 +40,12 @@ Summarize the project objectives, key metrics, and any relevant statistics.
 
 #### 1. **Resume Builder**  
 - Effortlessly create professional resumes in minutes.  
-- Access **5+ customizable templates** to suit various industries and roles.  
+- Access **5+ customizable templates** to suit various industries and roles.
 - **Live Preview**: See your resume update in real-time as you edit.  
 - Add, edit, and rearrange sections like work experience, skills, and education with ease.  
-- Export resumes in **PDF** format, ensuring compatibility across job application platforms.  
+- Export resumes in **PDF** format, ensuring compatibility across job application platforms.
+- **Usage Limit:** Free users can create a limited number of resumes and cover letters.
+- **Subscription Available:** Unlock unlimited resume & cover letter creation, premium templates, and advanced features through our subscription plans.
 
 #### 2. **Cover Letter Builder**  
 - Craft tailored cover letters to complement your resume.  
@@ -84,7 +86,8 @@ Summarize the project objectives, key metrics, and any relevant statistics.
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB, Prisma ORM  
 - **Authentication:** Firebase, JWT  
-- **Deployment:** Vercel  
+- **Deployment:** Vercel
+
 ## Installation ⚙️
 
 Clone the repo and install dependencies:
