@@ -2,7 +2,7 @@
 
 **Build your resume. Tell your story.**
 
-[Live demo](https://resume-craft-nine.vercel.app/) · [Report an issue](https://github.com/touhidcodes/Resume-Craft/issues)
+[Live demo](https://resume-craft-web.vercel.app/) · [Report an issue](https://github.com/touhidcodes/Resume-Craft/issues)
 
 ## Table of contents
 
