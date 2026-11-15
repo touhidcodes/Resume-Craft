@@ -1,148 +1,182 @@
+# Resume Craft
 
-# Resume Craft 🌟
+**Build your resume. Tell your story.**
 
-Craft your future, one professional resume at a time with Resume Craft.
+[Live demo](https://resume-craft-nine.vercel.app/) · [Report an issue](https://github.com/touhidcodes/Resume-Craft/issues)
 
+## Table of contents
 
-## Table of Contents 📖
-
-- [About the Project](#about-the-project)
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Tech Stack](#tech-stack)
+- [Project overview](#project-overview)
+- [MVP and key features](#mvp-and-key-features)
+  - [Free Plan and Pricing](#free-plan-and-pricing)
+- [Technology stack](#technology-stack)
 - [Installation](#installation)
-- [Team Overview](#team-overview)
+  - [Prerequisites](#prerequisites)
+  - [Start the frontend](#start-the-frontend)
+  - [API configuration](#api-configuration)
+  - [Available scripts](#available-scripts)
+- [Development challenges](#development-challenges)
 - [Contributing](#contributing)
+  - [Pull request workflow](#pull-request-workflow)
+  - [Commit message format](#commit-message-format)
+- [Future direction](#future-direction)
+- [Team and contact](#team-and-contact)
 - [License](#license)
-- [Contact](#contact)
 
-## About the Project 📃
+## Project overview
 
-Resume Craft is your ultimate partner in building standout resumes effortlessly. This advanced yet user-friendly platform empowers individuals to create visually appealing, professional resumes tailored to their unique career aspirations. With an array of customizable templates and seamless functionality, Resume Craft transforms resume creation into a quick and enjoyable experience.
+- **Objective:** Build a feature-rich, easy-to-use online resume builder that helps people create professional, visually appealing application documents.
+- **Target Audience:** Job seekers, students, and professionals across industries.
 
-Designed for both users and admins, the platform integrates smart features that simplify every step of the process, from design to delivery. Whether you're a job seeker striving for that perfect first impression or an admin managing applications, Resume Craft ensures a hassle-free, efficient journey to success.
+| Problem                                                                     | How Resume Craft addresses it                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Starting from a blank page makes it hard to structure a resume.             | Templates provide editable sections for experience, education, skills, and more.              |
+| Tailoring a resume for each role can mean reformatting the entire document. | Live previews, template switching, and section reordering let users see changes as they work. |
+| Application files become difficult to track and reuse.                      | A dashboard keeps saved resumes and cover letters together for editing and duplication.       |
 
+**Unique selling point (USP)** — Users can build both documents, reuse a saved version for a new application, and export PDFs from the same workspace.
 
-## Project Overview 📊
+## MVP and key features
 
-Summarize the project objectives, key metrics, and any relevant statistics.
+### Resume Builder
 
-- **Objective:** Build an advanced yet user-friendly online resume builder platform to empower individuals in creating professional, visually appealing resumes effortlessly.
-- **Target Audience:** Job seekers, students, and professionals across diverse industries.
-- **Key Metrics:**  
-  - Resume Creation Time: <5 minutes
-  - Template Customization Options: 5+
-  - User Satisfaction Rate: 95%
-  - Daily Active Users: 10+ 
-- **Deployment:** Hosted on Vercel with a CI/CD pipeline.
+- Create a professional resume in minutes with **5+ customizable templates** for different roles and industries.
+- Use **Live Preview** to see changes as you add, edit, or rearrange sections such as work experience, education, and skills.
+- Export your resume as a **PDF** using the browser’s **Save as PDF** option.
 
-## ✨ Key Features  
+### Cover Letter Builder
 
-#### 1. **Resume Builder**  
-- Effortlessly create professional resumes in minutes.  
-- Access **5+ customizable templates** to suit various industries and roles.
-- **Live Preview**: See your resume update in real-time as you edit.  
-- Add, edit, and rearrange sections like work experience, skills, and education with ease.  
-- Export resumes in **PDF** format, ensuring compatibility across job application platforms.
-- **Usage Limit:** Free users can create a limited number of resumes and cover letters.
-- **Subscription Available:** Unlock unlimited resume & cover letter creation, premium templates, and advanced features through our subscription plans.
+- Start with a customizable cover letter template.
+- Tailor the recipient details, letter body, and closing to each role.
+- Export your cover letter as a **PDF** using the browser’s **Save as PDF** option.
 
-#### 2. **Cover Letter Builder**  
-- Craft tailored cover letters to complement your resume.  
-- Choose from **modern templates** designed for professional use. 
+### User Dashboard
 
-#### 3. **User Dashboard**  
-- Manage all your resumes and cover letters in one place.  
-- Track and update existing documents with ease.  
-- **Resume History**: Access previously created resumes for quick edits.  
+- Keep saved resumes and cover letters in one place.
+- Reopen and edit documents as your experience or application changes.
+- Duplicate a saved document to tailor a copy for another role.
 
-#### 4. **Admin Dashboard**  
-- Full control over platform management with a **role-based system**.  
-- View, approve, or manage user-generated resumes and cover letters.  
-- **User Management**: Add, edit, or deactivate user accounts.  
+### Admin Dashboard
 
+- Restrict access to administrators through role-based routing.
+- Manage resume and cover letter templates.
+- Review user and document totals, popular templates, and monthly resume activity.
 
-#### 5. **Analytics and Insights**  
-- **Comprehensive Admin Analytics**:  
-  - Track platform usage, active users, and template popularity.  
-  - Monitor export counts and user engagement metrics.  
-- **Charts and Visual Data**:  
-  - Visualize user activity trends with real-time charts and graphs.  
-  - Identify growth opportunities with actionable insights.  
+### Free Plan and Pricing
 
-#### 6. **User-Created Resumes**  
-- Maintain a library of user-created resumes for easy duplication or reference.  
-- Quick-start options for users to build resumes based on their saved preferences.  
+- The intended free allowance is **up to 3 resumes and 3 cover letters per account**.
+- The template pickers in this checkout currently use a limit of **10 per document type**.
+- The pricing page shows free and planned paid tiers. Subscription checkout is marked **Coming Soon**.
 
-#### 7. **Additional Features**  
-- **Fully Responsive**: Accessible on desktop, tablet, and mobile devices.    
-- **Data Security**: Ensures user data is encrypted and stored securely.  
-- **Scalable Infrastructure**: Hosted on Vercel for reliability and speed.  
-- **Continuous Updates**: Regularly adding new templates and features to stay ahead of industry trends.  
- 
-## Tech Stack 🛠️
+## Technology stack
 
-- **Frontend:** React.js, Next.js, TypeScript  
-- **Backend:** Node.js, Express.js  
-- **Database:** MongoDB, Prisma ORM  
-- **Authentication:** Firebase, JWT  
-- **Deployment:** Vercel
+| Technology                   | Why we use it                                                                                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| React, TypeScript, and Vite  | React supports reusable editors and templates. TypeScript defines shared document shapes, and Vite provides the development server and frontend build. |
+| React Router                 | Organizes public pages, document builders, and role-based dashboard routes.                                                                            |
+| Redux Toolkit and RTK Query  | Redux Toolkit keeps document state available to the editor and preview. RTK Query manages requests to the hosted API.                                  |
+| Tailwind CSS and Material UI | Tailwind supports responsive layouts, and Material UI provides reusable interface controls.                                                            |
+| Firebase and JWT             | Firebase supports authentication integration, and the frontend sends the session token with API requests.                                              |
+| dnd-kit and react-to-print   | dnd-kit handles resume section reordering. react-to-print opens the browser print dialog for export.                                                   |
+| Vercel                       | Hosts the frontend and serves client-side routes on direct visits.                                                                                     |
 
-## Installation ⚙️
+## Installation
 
-Clone the repo and install dependencies:
+### Prerequisites
+
+- Git
+- Node.js 20.x, as specified in `package.json`, with npm
+
+### Start the frontend
 
 ```bash
-git clone https://github.com/touhidcodes/Resume-Craft
-cd resume-craft
-npm install
-```
-
-Set up environment variables by creating a `.env` file in the root directory:
-
-```env
-DATABASE_URL=your_database_url
-JWT_SECRET=your_jwt_secret
-```
-
-Run the application:
-
-```bash
+git clone https://github.com/touhidcodes/Resume-Craft.git
+cd Resume-Craft
+npm ci
 npm run dev
 ```
-## Team Overview 👥
 
-Our team is a passionate group of innovators dedicated to building Resume Craft, combining our unique skills to deliver a seamless resume-building experience. 
+Open [http://localhost:5173](http://localhost:5173/) or the URL printed by Vite. Create an account or sign in to try the document workflow.
 
-| Name            | Role                | Contributions                                        |  
-|---------------------|--------------------------|------------------------------------------------------------|  
-| Touhidur Zaman     | Team Leader & GitHub Manager | Led the team, managed GitHub repository, ensured project coordination. |  
-| MD Rifat           | Co-Leader & Backend Developer | Designed and implemented backend APIs and system architecture. |  
-| Imtiaz Tamim       | Backend Developer          | Contributed to API development and database management.     |  
-| Emon Ahmed         | Frontend Developer         | Built responsive UI components and optimized frontend performance. |  
-| Rakib Ahmed        | Frontend Developer         | Developed user-facing features and ensured cross-platform compatibility. |  
-| Nur Muhammad       | Frontend Developer         | Implemented core frontend functionality and styled components. |  
+### API configuration
 
-## Contributing 🤝
+The frontend uses the hosted Resume Craft API by default. The default setup requires no local API server, database, or environment variables. Sign-in, saved documents, and dashboard data depend on the hosted services being reachable.
 
-Contributions are what make the open-source community an amazing place! 
+For a separate API instance, set `baseUrl` in [`src/redux/api/baseApi.ts`](src/redux/api/baseApi.ts) to that instance’s API root. The API must allow requests with credentials from your local Vite URL.
 
-### Steps to contribute:
-  - Fork the Project
-  - Create a branch (`git checkout -b feature/AmazingFeature`)
-  - Commit changes (`git commit -m 'Add some AmazingFeature'`)
-  - Push the branch (`git push origin feature/AmazingFeature`)
-  - Open a Pull Request
+### Available scripts
 
-## License 📜
+| Command           | What it does                                                      |
+| ----------------- | ----------------------------------------------------------------- |
+| `npm run dev`     | Start the Vite development server.                                |
+| `npm run lint`    | Check the project with ESLint.                                    |
+| `npm run build`   | Run TypeScript checks and create a production build in `dist/`.   |
+| `npm run preview` | Serve the production build locally after running `npm run build`. |
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+## Development challenges
 
+| Challenge                                             | Solution                                                                                     |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Keeping editable fields and the live preview in sync  | The editor and templates read shared document state so changes are reflected as users type.  |
+| Handling edits and duplicates for both document types | The dashboard offers separate actions for updating an existing document and creating a copy. |
 
-## Contact 📬
+## Contributing
 
-**🔗 Live URL:** [Resume Craft](https://resume-craft-nine.vercel.app/)
+### Pull request workflow
 
-Touhidur Zaman - [@touhidcodes](https://www.linkedin.com/in/touhidur-zaman/) - touhidcodes@gmail.com  
+1. If you find a bug or another problem, [submit a GitHub issue](https://github.com/touhidcodes/Resume-Craft/issues/new). Include steps to reproduce it, what you expected, and what happened.
+2. Fork the [repository](https://github.com/touhidcodes/Resume-Craft), clone your fork, and create a branch from upstream `dev`. Replace `YOUR_GITHUB_USERNAME` with your GitHub username.
 
-Project Link: [Resume Craft](https://github.com/touhidcodes/Resume-Craft)
+   ```bash
+   git clone https://github.com/YOUR_GITHUB_USERNAME/Resume-Craft.git
+   cd Resume-Craft
+   git remote add upstream https://github.com/touhidcodes/Resume-Craft.git
+   git fetch upstream
+   git switch -c docs/improve-readme upstream/dev
+   npm ci
+   ```
+
+3. Make a focused change. Run `npm run lint` and `npm run build`. For UI changes, try the affected flow locally and capture screenshots when they help the reviewer.
+4. Stage the files for your change, commit, and push the branch. For a README-only change, use the following commands.
+
+   ```bash
+   git add README.md
+   git commit -m "docs: clarify local setup"
+   git push -u origin docs/improve-readme
+   ```
+
+5. Open a pull request from your fork against `touhidcodes/Resume-Craft:dev`. Describe what changed, how you verified it, and any issue it resolves.
+
+### Commit message format
+
+Use `type(scope): short imperative summary`. The scope is optional. Common types include `feat`, `fix`, `docs`, `refactor`, and `chore`.
+
+```text
+feat(resume): add a skills section
+fix(export): preserve PDF margins
+docs: clarify local setup
+```
+
+## Future direction
+
+- Add role-specific templates and test how applicant tracking systems parse exported PDFs.
+- Add autosave and version history so users can recover earlier drafts.
+- Improve keyboard navigation and small-screen editing.
+- Add subscription checkout for the plans shown on the pricing page.
+
+## Team and contact
+
+| Contributor    | Role                          | Contribution                                                               |
+| -------------- | ----------------------------- | -------------------------------------------------------------------------- |
+| Touhidur Zaman | Team lead and GitHub manager  | Coordinated the project and managed the repository.                        |
+| MD Rifat       | Co-lead and backend developer | Designed the backend APIs and system architecture.                         |
+| Imtiaz Tamim   | Backend developer             | Contributed to API development and database management.                    |
+| Emon Ahmed     | Frontend developer            | Built responsive components and optimized frontend performance.            |
+| Rakib Ahmed    | Frontend developer            | Developed user-facing features and worked on cross-platform compatibility. |
+| Nur Muhammad   | Frontend developer            | Implemented frontend functionality and styled components.                  |
+
+[LinkedIn](https://www.linkedin.com/in/touhidur-zaman/) · [Email Touhidur Zaman](mailto:touhidcodes@gmail.com)
+
+## License
+
+Resume Craft is licensed under the [MIT License](LICENSE.txt).
