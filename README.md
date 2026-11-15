@@ -1,7 +1,6 @@
-# Resume Craft
-**Build your resume. Tell your story.**
+# Resume Craft 🌟
 
-[Live demo](https://resume-craft-nine.vercel.app/) · [Report an issue](https://github.com/touhidcodes/Resume-Craft/issues)
+Craft your future, one professional resume at a time with Resume Craft.
 
 ## Table of Contents 📖
 
@@ -10,36 +9,20 @@
 - [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Start the frontend](#start-the-frontend)
-  - [API configuration](#api-configuration)
-  - [Available scripts](#available-scripts)
-- [Development challenges](#development-challenges)
+- [Team Overview](#team-overview)
 - [Contributing](#contributing)
-  - [Pull request workflow](#pull-request-workflow)
-  - [Commit message format](#commit-message-format)
-- [Future direction](#future-direction)
-- [Team and contact](#team-and-contact)
 - [License](#license)
+- [Contact](#contact)
 
-## Project overview
+## About the Project 📃
 
-- **Objective:** Build a feature-rich, easy-to-use online resume builder that helps people create professional, visually appealing application documents.
-- **Target Audience:** Job seekers, students, and professionals across industries.
+Resume Craft is your ultimate partner in building standout resumes effortlessly. This advanced yet user-friendly platform empowers individuals to create visually appealing, professional resumes tailored to their unique career aspirations. With an array of customizable templates and seamless functionality, Resume Craft transforms resume creation into a quick and enjoyable experience.
 
-| Problem                                                                     | How Resume Craft addresses it                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Starting from a blank page makes it hard to structure a resume.             | Templates provide editable sections for experience, education, skills, and more.              |
-| Tailoring a resume for each role can mean reformatting the entire document. | Live previews, template switching, and section reordering let users see changes as they work. |
-| Application files become difficult to track and reuse.                      | A dashboard keeps saved resumes and cover letters together for editing and duplication.       |
-
-**Unique selling point (USP)** — Users can build both documents, reuse a saved version for a new application, and export PDFs from the same workspace.
-
-## MVP and key features
+Designed for both users and admins, the platform integrates smart features that simplify every step of the process, from design to delivery. Whether you're a job seeker striving for that perfect first impression or an admin managing applications, Resume Craft ensures a hassle-free, efficient journey to success.
 
 ## Project Overview 📊
 
-### Cover Letter Builder
+Summarize the project objectives, key metrics, and any relevant statistics.
 
 - **Objective:** Build an advanced yet user-friendly online resume builder platform to empower individuals in creating professional, visually appealing resumes effortlessly.
 - **Target Audience:** Job seekers, students, and professionals across diverse industries.
@@ -108,23 +91,24 @@
 - **Authentication:** Firebase, JWT
 - **Deployment:** Vercel
 
-- Git
-- Node.js 20.x, as specified in `package.json`, with npm
+## Installation ⚙️
 
-### Start the frontend
+Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/touhidcodes/Resume-Craft.git
-cd Resume-Craft
-npm ci
-npm run dev
+git clone https://github.com/touhidcodes/Resume-Craft
+cd resume-craft
+npm install
 ```
 
-Open [http://localhost:5173](http://localhost:5173/) or the URL printed by Vite. Create an account or sign in to try the document workflow.
+Set up environment variables by creating a `.env` file in the root directory:
 
-### API configuration
+```env
+DATABASE_URL=your_database_url
+JWT_SECRET=your_jwt_secret
+```
 
-The frontend uses the hosted Resume Craft API by default. The default setup requires no local API server, database, or environment variables. Sign-in, saved documents, and dashboard data depend on the hosted services being reachable.
+Run the application:
 
 ```bash
 npm run dev
@@ -143,10 +127,7 @@ Our team is a passionate group of innovators dedicated to building Resume Craft,
 | Rakib Ahmed    | Frontend Developer            | Developed user-facing features and ensured cross-platform compatibility. |
 | Nur Muhammad   | Frontend Developer            | Implemented core frontend functionality and styled components.           |
 
-| Challenge                                             | Solution                                                                                     |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Keeping editable fields and the live preview in sync  | The editor and templates read shared document state so changes are reflected as users type.  |
-| Handling edits and duplicates for both document types | The dashboard offers separate actions for updating an existing document and creating a copy. |
+## Contributing 🤝
 
 Contributions are what make the open-source community an amazing place!
 
@@ -158,17 +139,14 @@ Contributions are what make the open-source community an amazing place!
 - Push the branch (`git push origin feature/AmazingFeature`)
 - Open a Pull Request
 
-## Future direction
+## License 📜
 
-- Add role-specific templates and test how applicant tracking systems parse exported PDFs.
-- Add autosave and version history so users can recover earlier drafts.
-- Improve keyboard navigation and small-screen editing.
-- Add subscription checkout for the plans shown on the pricing page.
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact 📬
 
-[LinkedIn](https://www.linkedin.com/in/touhidur-zaman/) · [Email Touhidur Zaman](mailto:touhidcodes@gmail.com)
+**🔗 Live URL:** [Resume Craft](https://resume-craft-nine.vercel.app/)
 
 Touhidur Zaman - [@touhidcodes](https://www.linkedin.com/in/touhidur-zaman/) - touhidcodes@gmail.com
 
-Resume Craft is licensed under the [MIT License](LICENSE.txt).
+Project Link: [Resume Craft](https://github.com/touhidcodes/Resume-Craft)
