@@ -2,7 +2,11 @@
 
 **Build your resume. Tell your story.**
 
-[Live demo](https://resume-craft-web.vercel.app/) · [Report an issue](https://github.com/touhidcodes/Resume-Craft/issues)
+![Resume Craft banner](docs/images/resume-craft-banner.png)
+
+[![Live Demo](docs/images/badges/live-demo.svg)](https://resume-craft-web.vercel.app/)
+[![Report an Issue](docs/images/badges/report-an-issue.svg)](https://github.com/touhidcodes/Resume-Craft/issues)
+[![MIT License](docs/images/badges/mit-license.svg)](LICENSE.txt)
 
 ## Table of contents
 
@@ -10,6 +14,7 @@
 - [MVP and key features](#mvp-and-key-features)
 - [Technology stack](#technology-stack)
 - [Installation](#installation)
+- [API reference](#api-reference)
 - [Development challenges](#development-challenges)
 - [Contributing](#contributing)
 - [Future direction](#future-direction)
@@ -27,15 +32,17 @@
 | Tailoring a resume for each role can mean reformatting the entire document. | Live previews, template switching, and section reordering let users see changes as they work. |
 | Application files become difficult to track and reuse.                      | A dashboard keeps saved resumes and cover letters together for editing and duplication.       |
 
-**Unique selling point (USP)** — Users can build both documents, reuse a saved version for a new application, and export PDFs from the same workspace.
+**Unique selling point (USP):** Users can build both documents, reuse a saved version for a new application, and export PDFs from the same workspace.
 
 ## MVP and key features
 
 ### Resume Builder
 
 - Create a professional resume in minutes with **5+ customizable templates** for different roles and industries.
-- Use **Live Preview** to see changes as you add, edit, or rearrange sections such as work experience, education, and skills.
+- Add and edit sections such as work experience, education, and skills, then **drag and drop** them to change their order. See updates instantly in **Live Preview**.
 - Export your resume as a **PDF** using the browser’s **Save as PDF** option.
+
+![Drag Education above Experience and see the resume preview update](docs/images/resume-section-reordering.gif)
 
 ### Cover Letter Builder
 
@@ -57,9 +64,9 @@
 
 ### Free Plan and Pricing
 
-- The intended free allowance is **up to 3 resumes and 3 cover letters per account**.
+- The intended free allowance is **up to 10 resumes and cover letters per account**.
 - The template pickers in this checkout currently use a limit of **10 per document type**.
-- The pricing page shows free and planned paid tiers. Subscription checkout is marked **Coming Soon**.
+- The [pricing page](https://resume-craft-web.vercel.app/pricing) shows free and planned paid tiers. Subscription checkout is marked **Coming Soon**.
 
 ## Technology stack
 
@@ -93,7 +100,7 @@ Open [http://localhost:5173](http://localhost:5173/) or the URL printed by Vite.
 
 ### API configuration
 
-The frontend uses the hosted Resume Craft API by default. The default setup requires no local API server, database, or environment variables. Sign-in, saved documents, and dashboard data depend on the hosted services being reachable.
+The frontend uses the hosted Resume Craft API by default. See the [API reference](#api-reference) for endpoints. The default setup requires no local API server, database, or environment variables. Sign-in, saved documents, and dashboard data depend on the hosted services being reachable.
 
 For a separate API instance, set `baseUrl` in [`src/redux/api/baseApi.ts`](src/redux/api/baseApi.ts) to that instance’s API root. The API must allow requests with credentials from your local Vite URL.
 
@@ -105,6 +112,63 @@ For a separate API instance, set `baseUrl` in [`src/redux/api/baseApi.ts`](src/r
 | `npm run lint`    | Check the project with ESLint.                                    |
 | `npm run build`   | Run TypeScript checks and create a production build in `dist/`.   |
 | `npm run preview` | Serve the production build locally after running `npm run build`. |
+
+## API reference
+
+[Backend repository · Resume Craft Server](https://github.com/touhidcodes/Resume-Craft-Server)
+
+**Base URL:** `https://resume-craft-api.vercel.app/api`. Append the paths below to this URL. The [frontend API client](src/redux/api/baseApi.ts) sends the session token as `Authorization: <token>` when one is available. Path parameters such as `{id}` refer to the resource being requested.
+
+<details>
+<summary>Auth, profile, resume, cover letter, and template endpoints</summary>
+
+| Area          | Method   | Path                                               | Purpose                                        |
+| ------------- | -------- | -------------------------------------------------- | ---------------------------------------------- |
+| Auth          | `POST`   | `/auth/login`                                      | Sign in with account credentials               |
+| Auth          | `POST`   | `/user/register`                                   | Register an account                            |
+| Auth          | `POST`   | `/user/register-google`                            | Submit Google sign-in details to the API       |
+| Profile       | `GET`    | `/user/profile`                                    | Get the signed-in profile                      |
+| Profile       | `PUT`    | `/user/profile`                                    | Update the signed-in profile                   |
+| Resumes       | `GET`    | `/resume/resumes`                                  | List saved resumes                             |
+| Resumes       | `GET`    | `/resume/resume/{id}`                              | Get a resume and its section completion status |
+| Resumes       | `POST`   | `/resume/create-resume`                            | Create a resume                                |
+| Resumes       | `POST`   | `/resume/create-resume-duplicate/{id}`             | Duplicate a resume                             |
+| Resumes       | `PATCH`  | `/resume/update-resume/{id}`                       | Update a resume, including its section order   |
+| Resumes       | `DELETE` | `/resume/delete-resume/{id}`                       | Delete a resume                                |
+| Cover letters | `GET`    | `/cover-letter/cover-letters`                      | List saved cover letters                       |
+| Cover letters | `GET`    | `/cover-letter/{id}`                               | Get a cover letter                             |
+| Cover letters | `POST`   | `/cover-letter/create-cover-letter`                | Create a cover letter                          |
+| Cover letters | `POST`   | `/cover-letter/create-cover-letter-duplicate/{id}` | Duplicate a cover letter                       |
+| Cover letters | `PATCH`  | `/cover-letter/update-cover-letter/{id}`           | Update a cover letter                          |
+| Cover letters | `DELETE` | `/cover-letter/delete-cover-letter/{id}`           | Delete a cover letter                          |
+| Templates     | `GET`    | `/template/templates`                              | List resume templates                          |
+| Templates     | `GET`    | `/cover-letter-template/templates`                 | List cover letter templates                    |
+
+</details>
+
+<details>
+<summary>Resume section and admin endpoints</summary>
+
+| Resume section  | Create (`POST`)                              | Update (`PATCH`)                                  | Delete (`DELETE`)                                 |
+| --------------- | -------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| Work experience | `/resume/work-experience/create-experience`  | `/resume/work-experience/update-experience/{id}`  | `/resume/work-experience/remove-experience/{id}`  |
+| Skills          | `/resume/skill/create-skill`                 | `/resume/skill/update-skill/{id}`                 | `/resume/skill/remove-skill/{id}`                 |
+| Education       | `/resume/education/create-education`         | `/resume/education/update-education/{id}`         | `/resume/education/remove-education/{id}`         |
+| Certifications  | `/resume/certification/create-certification` | `/resume/certification/update-certification/{id}` | `/resume/certification/remove-certification/{id}` |
+| Awards          | `/resume/award/create-award`                 | `/resume/award/update-award/{id}`                 | `/resume/award//remove-award/{id}`                |
+
+The awards deletion path includes a double slash in the current client.
+
+| Method   | Admin path                                    | Purpose                        |
+| -------- | --------------------------------------------- | ------------------------------ |
+| `GET`    | `/user/all-profile`                           | List user profiles             |
+| `GET`    | `/analytics/admin-dashboard-data`             | Get dashboard analytics        |
+| `POST`   | `/template/create-template`                   | Create a resume template       |
+| `DELETE` | `/template/remove-template/{id}`              | Delete a resume template       |
+| `POST`   | `/cover-letter-template/create-template`      | Create a cover letter template |
+| `DELETE` | `/cover-letter-template/remove-template/{id}` | Delete a cover letter template |
+
+</details>
 
 ## Development challenges
 
